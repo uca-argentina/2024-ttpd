@@ -1,8 +1,14 @@
 Class {
 	#name : #DummyTest,
 	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests'
 }
+
+{ #category : #tests }
+DummyTest >> testBanana [
+
+	^true
+]
 
 { #category : #tests }
 DummyTest >> testBananaJuani [
