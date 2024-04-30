@@ -17,6 +17,12 @@ DummyTest >> testBananaJuani [
 ]
 
 { #category : #tests }
+DummyTest >> testBananaMartu [
+
+^true
+]
+
+{ #category : #tests }
 DummyTest >> testBananaTrini [
 
 ^true
