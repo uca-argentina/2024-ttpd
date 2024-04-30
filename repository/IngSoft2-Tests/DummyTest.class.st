@@ -1,29 +1,34 @@
 Class {
-	#name : 'DummyTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #DummyTest,
+	#superclass : #TestCase,
+	#category : #'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 DummyTest >> testBanana [
 
 	^true
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 DummyTest >> testBananaJuani [
 
 ^true
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 DummyTest >> testBananaTrini [
 
 ^true
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
+DummyTest >> testBananaTrini2 [
+
+^true
+]
+
+{ #category : #tests }
 DummyTest >> testDummy [
 
 	self assert: Dummy new isDummy
