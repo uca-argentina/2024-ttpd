@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #tests }
-DummyTest >> testBanana [
-
-	^true
-]
-
-{ #category : #tests }
 DummyTest >> testBananaJuani [
 
 ^true
