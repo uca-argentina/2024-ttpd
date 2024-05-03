@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #tests }
+ABoardGameTest >> testABoardGameIsCreatedWithAShip [
+
+ | aBoardGame aShip |
+aShip := Ship inPosition: 0.
+aBoardGame := BoardGame withShip: aShip.
+self assert: aBoardGame start.  
+
+
+]
+
+{ #category : #tests }
 ABoardGameTest >> testABoardGameStarts [
 
  | aBoardGame |
