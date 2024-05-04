@@ -13,8 +13,10 @@ Board class >> withABox: aBox [
 ]
 
 { #category : #testing }
-Board >> hasABox [
-	^true
+Board >> hasBoxes [
+
+	box isEmpty ifTrue: [ ^false. ].
+	^true.
 ]
 
 { #category : #initialization }
