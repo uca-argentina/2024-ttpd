@@ -8,8 +8,9 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Board class >> withABox: aBox [ 
-	^self new initializeWithBox: aBox.
+Board class >> withACollectionOfBoxes: aCollectionOfBoxes [
+
+	^ self new initializeWithBox: aCollectionOfBoxes
 ]
 
 { #category : #testing }

@@ -9,7 +9,7 @@ ABoardTest >> testWhenABoardHasABoxThenIsCreated [
 
 | aBoard aBox |
 aBox:= Box new.
-aBoard:= Board withABox: aBox.
+aBoard:= Board withACollectionOfBoxes: aBox.
 self assert: aBoard hasBoxes.
 ]
 
@@ -21,7 +21,7 @@ ABoardTest >> testWhenABoardHasTwoBoxesThenItIsABoardWithTwoBoxes [
 	aBox2 := Box new.
 	aCollectionOfBoxes := OrderedCollection new.
 	aCollectionOfBoxes addAll: #( aBox1 aBox2 ).
-	aBoard := Board withABox: aCollectionOfBoxes.
+	aBoard := Board withACollectionOfBoxes: aCollectionOfBoxes.
 	self assert: aBoard hasBoxes
 ]
 
