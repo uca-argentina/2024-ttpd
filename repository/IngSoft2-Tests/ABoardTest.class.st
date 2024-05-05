@@ -5,6 +5,22 @@ Class {
 }
 
 { #category : #tests }
+ABoardTest >> testABoardIsCreatedWithOneBox [ 
+
+| aBoard |
+aBoard := Board withNumberOfBoxes: 1.
+self assert: aBoard hasBoxes  .
+]
+
+{ #category : #tests }
+ABoardTest >> testABoardIsCreatedWithThreeBoxes [ 
+
+| aBoard |
+aBoard := Board withNumberOfBoxes: 3.
+self assert: aBoard hasBoxes  .
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardHasABoxThenIsCreated [ 
 
 | aBoard aBox |
