@@ -24,3 +24,25 @@ self assert: aBoardGame start.
 
 
 ]
+
+{ #category : #tests }
+ABoardGameTest >> testABoardGameStartsWithTwoShips [
+
+ | aBoardGame |
+aBoardGame := BoardGame new.
+aBoardGame initializeWithShip:   2.
+self assert: aBoardGame start.
+
+
+]
+
+{ #category : #tests }
+ABoardGameTest >> testABordGameStartsWithOneShip [
+
+ | aBoardGame |
+aBoardGame := BoardGame new.
+aBoardGame initializeWithShip:   1.
+self assert: aBoardGame start.
+
+
+]
