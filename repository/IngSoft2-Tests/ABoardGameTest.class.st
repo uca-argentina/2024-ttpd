@@ -63,6 +63,15 @@ self assert: aBoardGame start.
 ]
 
 { #category : #tests }
+ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [ 
+
+
+self should: [BoardGame withShip: 2 andBoard: (Board withNumberOfBoxes: 0)] raise: Error withMessage: 'A Board must have at least 1 box to be created'.
+
+
+]
+
+{ #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip [
 
 self should: [BoardGame withShip: 0] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
@@ -84,16 +93,6 @@ ABoardGameTest >> testAGameWillNotStartWhenCreatedWithCeroShipsAndABoard [
  | aBoard |
 aBoard := Board withNumberOfBoxes: 2.
 self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
-
-
-]
-
-{ #category : #tests }
-ABoardGameTest >> testBanana [ 
-
- | aBoard |
-aBoard := Board withNumberOfBoxes: 0.
-self should: [BoardGame withShip: 2 andBoard: aBoard] raise: Error withMessage: 'A Board must have at least 1 box to be created'.
 
 
 ]
