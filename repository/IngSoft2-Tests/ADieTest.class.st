@@ -4,28 +4,32 @@ Class {
 	#category : #'IngSoft2-Tests'
 }
 
-{ #category : #tests }
-ADieTest >> testWhenDieHasFiveFacesThenValuesIsFive [
-
-	| aDie |
-	aDie := Die of: 5.
-
-	self assert: aDie throw equals: 5
+{ #category : #asserting }
+ADieTest >> should: aErrorBlock raise: anErrorClass withMessage: anErrorMessage [ 
+	self should: aErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: anErrorMessage ]
 ]
 
 { #category : #tests }
-ADieTest >> testWhenDieIsThrownThenValuesIsTheAmountOfFaces [
+ADieTest >> testADieIsCreatedWithAnAmountOfFacesThenThrowsFaces [
+
+	| aDie |
+	aDie := Die of:3.
+	self assert: ((aDie throw) between: 1 and: 3)
+]
+
+{ #category : #tests }
+ADieTest >> testDieCannotBeCreatedWithLessThan3Faces [
+
+	self
+		should: [ Die of: 1 ]
+		raise: Error
+		withMessage: 'Faces should be more than 1'
+]
+
+{ #category : #tests }
+ADieTest >> testWhenDieIsThrownThenValueIsBetween1AndNumberOfFaces [
 
 	| aDie |
 	aDie := Die of: 3.
-
-	self assert: aDie throw equals: 3
-]
-
-{ #category : #tests }
-ADieTest >> testWhenThrowingADieThenReturnsOne [
-
-	| aDie |
-	aDie := Die new.
-	self assert: aDie throw equals: 1
+	self assert: (aDie throw between: 1 and: 3)
 ]

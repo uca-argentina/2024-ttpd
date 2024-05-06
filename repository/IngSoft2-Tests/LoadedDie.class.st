@@ -1,27 +1,27 @@
 Class {
-	#name : #Die,
+	#name : #LoadedDie,
 	#superclass : #Object,
 	#instVars : [
 		'faces'
 	],
-	#category : #'IngSoft2-Model'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #'instance creation' }
-Die class >> of: anAmountOfFaces [
+LoadedDie class >> of: anAmountOfFaces [
 
-	anAmountOfFaces < 3 ifTrue: [
+	anAmountOfFaces < 2 ifTrue: [
 		Error signal: 'Faces should be more than 1' ].
 	^ self new initializeOf: anAmountOfFaces
 ]
 
 { #category : #initialization }
-Die >> initializeOf: anAmountOfFaces [ 
-	faces:= anAmountOfFaces.
+LoadedDie >> initializeOf: anAmountOfFaces [
+	faces:=  anAmountOfFaces.
 ]
 
 { #category : #'as yet unclassified' }
-Die >> throw [
+LoadedDie >> throw [
 
-	^ faces atRandom
+	^ faces
 ]
