@@ -22,7 +22,6 @@ BoardGame >> initializeWithShip: aNumberOfShips [
 	[ number ~= 0 ] whileTrue: [
 		aCollectionOfShips add: (Ship inPosition: 0).
 		number := number - 1.].
-	^ aCollectionOfShips
 ]
 
 { #category : #accessing }
