@@ -31,6 +31,28 @@ self assert: aBoardGame start.
 ]
 
 { #category : #tests }
+ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
+
+ | aBoardGame aBoard |
+aBoard := Board withNumberOfBoxes: 3.
+aBoardGame := BoardGame withShip: 4 andBoard: aBoard.
+self assert: aBoardGame start.
+
+
+]
+
+{ #category : #tests }
+ABoardGameTest >> testABoardGameStartsWhenCreatedWithOneShipAndABoard [
+
+ | aBoardGame aBoard |
+aBoard := Board withNumberOfBoxes: 1.
+aBoardGame := BoardGame withShip: 1 andBoard: aBoard.
+self assert: aBoardGame start.
+
+
+]
+
+{ #category : #tests }
 ABoardGameTest >> testABoardGameStartsWithTwoShips [
 
  | aBoardGame |
@@ -52,6 +74,16 @@ ABoardGameTest >> testABordGameStartsWithOneShip [
  | aBoardGame |
 aBoardGame := BoardGame withShip: 1.
 self assert: aBoardGame start.
+
+
+]
+
+{ #category : #tests }
+ABoardGameTest >> testAGameWillNotStartWhenCreatedWithCeroShips [
+
+ | aBoardGame aBoard |
+aBoard := Board withNumberOfBoxes: 3.
+self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
 
 
 ]
