@@ -12,6 +12,11 @@ Ship class >> inPosition: aPosition [
 	^self new initializeInPosition: aPosition.
 ]
 
+{ #category : #'as yet unclassified' }
+Ship >> getPosition [
+	^position.
+]
+
 { #category : #initialization }
 Ship >> initializeInPosition: aPosition [ 
 	position := aPosition.
@@ -19,7 +24,8 @@ Ship >> initializeInPosition: aPosition [
 
 { #category : #'as yet unclassified' }
 Ship >> moves: aNumber [
-	^aNumber.
+	position := position + aNumber.
+	^(position + aNumber).
 ]
 
 { #category : #'as yet unclassified' }

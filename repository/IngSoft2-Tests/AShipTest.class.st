@@ -34,6 +34,34 @@ self assert: ((aShip throwDice: aCollectionOfDice) = 7).
 ]
 
 { #category : #tests }
+AShipTest >> testWhenMoreThanOneDieIsThrownThePositionOfTheShipIsUpdated [
+
+| aShip aCollectionOfDice aDie positionsToMove anotherDie |
+aCollectionOfDice := OrderedCollection new.
+aDie := LoadedDie of: 3.
+anotherDie := LoadedDie of: 4.
+aCollectionOfDice add: aDie.
+aCollectionOfDice add: anotherDie.
+aShip := Ship inPosition: 0.
+positionsToMove := aShip throwDice: aCollectionOfDice.
+aShip moves: positionsToMove.
+self assert: ((aShip getPosition) = 7).
+]
+
+{ #category : #tests }
+AShipTest >> testWhenOneDieIsThrownThePositionOfTheShipIsUpdated [
+
+| aShip aCollectionOfDice aDie positionsToMove |
+aCollectionOfDice := OrderedCollection new.
+aDie := LoadedDie of: 3.
+aCollectionOfDice add: aDie.
+aShip := Ship inPosition: 0.
+positionsToMove := aShip throwDice: aCollectionOfDice.
+aShip moves: positionsToMove.
+self assert: ((aShip getPosition) = 3).
+]
+
+{ #category : #tests }
 AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThrowDiceReturnsThree [
 
 | aShip aCollectionOfDice aDie |
