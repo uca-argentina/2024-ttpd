@@ -10,6 +10,16 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
+ABoardTest >> testABoardCannotBeCreatedWithAWormHoleStartingIn0 [
+
+	self
+		should: [
+		Board withNumberOfBoxes: 5 withWormHoleStaringIn: 0 andEndingIn: 3 ]
+		raise: Error
+		withMessage: 'A WormHole must Start in box 1 or more'
+]
+
+{ #category : #tests }
 ABoardTest >> testABoardCannotBeCreatedWithLEssThanOneBox [
 
 	self
@@ -32,6 +42,17 @@ ABoardTest >> testABoardIsCreatedWithThreeBoxes [
 | aBoard |
 aBoard := Board withNumberOfBoxes: 3.
 self assert: aBoard hasBoxes  .
+]
+
+{ #category : #tests }
+ABoardTest >> testAWormHoleIsCreated [
+
+	| aBoard |
+	aBoard := Board
+		          withNumberOfBoxes: 5
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	self assert: aBoard hasWormHole = (OrderedCollection with: 1 with: 2)
 ]
 
 { #category : #tests }
@@ -61,4 +82,20 @@ ABoardTest >> testWhenABoardIsCreatedThenHasABox [
 | aBoard |
 aBoard:= Board new.
 self assert: aBoard hasBoxes.
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedWith1Box [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 1.
+	self assert: aBoard hasBoxes equals: 1
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedWith5Boxes [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 5.
+	self assert: aBoard hasBoxes equals: 5
 ]

@@ -2,17 +2,11 @@ Class {
 	#name : #Board,
 	#superclass : #Object,
 	#instVars : [
-		'box',
-		'aCollectionOfBoxes'
+		'boxes',
+		'wormHole'
 	],
 	#category : #'IngSoft2-Model'
 }
-
-{ #category : #'as yet unclassified' }
-Board class >> withACollectionOfBoxes: aCollectionOfBoxes [
-
-	^ self new initializeWithBox: aCollectionOfBoxes
-]
 
 { #category : #'as yet unclassified' }
 Board class >> withNumberOfBoxes: aNumberOfBoxes [ 
@@ -22,22 +16,18 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes [
 
 { #category : #testing }
 Board >> hasBoxes [
+	^boxes.
+]
 
-	(aCollectionOfBoxes isEmpty )  ifTrue: [ ^false ] ifFalse: [ ^true ]
+{ #category : #testing }
+Board >> hasWormHole [
+	^wormHole 
 ]
 
 { #category : #'as yet unclassified' }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [ 
-	|number|
-	number := aNumberOfBoxes.
-	aCollectionOfBoxes := OrderedCollection new.
-	[ number > 0 ] whileTrue: [ aCollectionOfBoxes add: (Box inPlace: number). number := number - 1.].
 	
+	boxes:= aNumberOfBoxes.
 	
-]
-
-{ #category : #initialization }
-Board >> initializeWithBox: aBox [ 
-	box:= aBox.
 	
 ]
