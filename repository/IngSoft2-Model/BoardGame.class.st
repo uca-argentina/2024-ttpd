@@ -16,6 +16,7 @@ BoardGame class >> withShip: aNumberOfShips [
 
 { #category : #'as yet unclassified' }
 BoardGame class >> withShip: aNumberOfShips andBoard: aBoard [ 
+	aNumberOfShips < 1 ifTrue: [ Error signal: 'A Board Game should have at least 1 ship to start' ]. 
 	^self new initializeWithANumberOfShips: aNumberOfShips andBoard: aBoard.
 ]
 
@@ -23,7 +24,6 @@ BoardGame class >> withShip: aNumberOfShips andBoard: aBoard [
 BoardGame >> initializeWithANumberOfShips: aNumberOfShips andBoard: aBoard [ 
 	| numberOfShips |
 	numberOfShips := aNumberOfShips.
-	numberOfShips < 1 ifTrue: [ Error signal: 'A Board Game should have at least 1 ship to start' ]. 
 	aCollectionOfShips := OrderedCollection new.
 	[ numberOfShips ~= 0 ] whileTrue: [
 		aCollectionOfShips add: (Ship inPosition: 0).
