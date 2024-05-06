@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'aCollectionOfShips',
 		'board',
-		'dice'
+		'dice',
+		'aCollectionOfBoxes'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -22,11 +23,11 @@ BoardGame class >> withShip: aNumberOfShips andBoard: aBoard [
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame class >> withShip: aNumberOfShips withBoard: aBoard andWithDice: aCollection [
+BoardGame class >> withShip: aNumberOfShips withBox: aNumberOfBoxes andWithDice: aCollectionOfDice [ 
 	aNumberOfShips < 1 ifTrue: [
 		Error signal: 'A Board Game should have at least 1 ship to start' ].
 	^ self new
-		  initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andWithDice: aCollection
+		  initializeWithANumberOfShips: aNumberOfShips withBox: aNumberOfBoxes andWithDice: aCollectionOfDice
 ]
 
 { #category : #initialization }
@@ -41,15 +42,19 @@ BoardGame >> initializeWithANumberOfShips: aNumberOfShips andBoard: aBoard [
 ]
 
 { #category : #initialization }
-BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andWithDice: aCollection [ 
-		| numberOfShips |
+BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBox: aNumberOfBoxes andWithDice: aCollectionOfDice [ 
+	| numberOfShips numberOfBoxes |
 	numberOfShips := aNumberOfShips.
+	numberOfBoxes := aNumberOfBoxes.
 	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfBoxes := OrderedCollection new.
 	[ numberOfShips ~= 0 ] whileTrue: [
 		aCollectionOfShips add: (Ship inPosition: 0).
 		numberOfShips := numberOfShips - 1.].
-	board := aBoard.
-	dice := aCollection 
+	[ numberOfBoxes ~= 0 ] whileTrue: [
+		aCollectionOfBoxes add: (Ship inPosition: 0).
+		numberOfBoxes := numberOfBoxes - 1.].
+	dice := aCollectionOfDice.  
 ]
 
 { #category : #initialization }
@@ -66,9 +71,4 @@ BoardGame >> initializeWithShip: aNumberOfShips [
 { #category : #accessing }
 BoardGame >> start [
 	(aCollectionOfShips size = 0)  ifTrue: [ ^false ] ifFalse: [ ^true ]
-]
-
-{ #category : #'as yet unclassified' }
-BoardGame >> withBoard: aBoard [ 
-	self shouldBeImplemented.
 ]
