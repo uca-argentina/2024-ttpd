@@ -10,7 +10,7 @@ Class {
 { #category : #'instance creation' }
 LoadedDie class >> of: anAmountOfFaces [
 
-	anAmountOfFaces < 2 ifTrue: [
+	anAmountOfFaces < 3 ifTrue: [
 		Error signal: 'Faces should be more than 1' ].
 	^ self new initializeOf: anAmountOfFaces
 ]

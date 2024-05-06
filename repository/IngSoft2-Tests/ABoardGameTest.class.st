@@ -31,6 +31,21 @@ self assert: aBoardGame start.
 ]
 
 { #category : #tests }
+ABoardGameTest >> testABoardGameStartsWhenCreatedWith4ShipsABoardAndACollectionOfDice [
+
+ | aBoardGame aBoard aCollectionOfDice aDie anotherDie |
+aBoard := Board withNumberOfBoxes: 3.
+aCollectionOfDice := OrderedCollection new.
+aDie := LoadedDie of: 4.
+anotherDie := LoadedDie of: 3.
+aCollectionOfDice addAll: #(aDie anotherDie ).
+aBoardGame := BoardGame withShip: 4 withBoard: aBoard andWithDice: aCollectionOfDice.
+self assert: aBoardGame start.
+
+
+]
+
+{ #category : #tests }
 ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
 
  | aBoardGame aBoard |
