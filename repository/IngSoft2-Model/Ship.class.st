@@ -21,3 +21,12 @@ Ship >> initializeInPosition: aPosition [
 Ship >> moves: aNumber [
 	^aNumber.
 ]
+
+{ #category : #'as yet unclassified' }
+Ship >> throwDice: aCollectionOfDice [ 
+	| positionsToMove |
+	positionsToMove := 0.
+	aCollectionOfDice do: [ :die |
+	 positionsToMove := positionsToMove + (die throw). ].	
+	^positionsToMove.
+]
