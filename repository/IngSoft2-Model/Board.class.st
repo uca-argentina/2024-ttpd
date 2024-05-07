@@ -21,8 +21,8 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 		Error signal: 'A Board must have at least 1 box to be created' ].
 	wormHoleStartPosition < 1 ifTrue: [
 		Error signal: 'A WormHole must Start in box 1 or more' ].
-	wormHoleEndPosition < 2 ifTrue: [
-		Error signal: 'A WormHole must End in box 2 or more' ].
+	wormHoleEndPosition > aNumberOfBoxes ifTrue: [
+		Error signal: 'The ending position of the wormHole must be lower than the number of boxes of the board' ].
 	wormHoleStartPosition > wormHoleEndPosition ifTrue: [
 		Error signal:
 			'A WormHole starting position must be less than the ending position' ].
