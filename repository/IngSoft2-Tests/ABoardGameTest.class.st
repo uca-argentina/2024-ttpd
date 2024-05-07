@@ -90,6 +90,24 @@ self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 
 ]
 
 { #category : #tests }
+ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [ 
+
+	| aBoardGame aBoard aCollectionOfDice aDie |
+	aBoard := Board
+		          withNumberOfBoxes: 3
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+	aBoardGame := BoardGame
+		              withShip: 1
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice.
+	self assert: aBoardGame start equals: 1 
+]
+
+{ #category : #tests }
 ABoardGameTest >> testWhenABoardGameHasTwoShipThenGameBoardEnd [
 
 	| aBoardGame aBoard aCollectionOfDice aDie |
