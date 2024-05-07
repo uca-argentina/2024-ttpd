@@ -57,7 +57,7 @@ ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [
 
 	| aBoardGame aBoard aCollectionOfDice aDie |
 	aBoard := Board
-		          withNumberOfBoxes: 1
+		          withNumberOfBoxes: 3
 		          withWormHoleStaringIn: 1
 		          andEndingIn: 2.
 	aCollectionOfDice := OrderedCollection new.
