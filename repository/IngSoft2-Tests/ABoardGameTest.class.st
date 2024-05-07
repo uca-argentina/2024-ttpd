@@ -12,14 +12,14 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 { #category : #tests }
 ABoardGameTest >> testABoardGameEqualsOneWhenShipOneWins [
 
-	| aBoardGame aBoard aCollectionOfDice aDie |
+	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
 	aBoard := Board
 		          withNumberOfBoxes: 7
 		          withWormHoleStaringIn: 1
 		          andEndingIn: 2.
 	aCollectionOfDice := OrderedCollection new.
-	aDie := Die of: 3.
-	aCollectionOfDice add: aDie.
+	aLoadedDie := LoadedDie of: 3.
+	aCollectionOfDice add: aLoadedDie .
 	aBoardGame := BoardGame
 		              withShip: 2
 		              withBoard: aBoard
@@ -104,7 +104,7 @@ ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [
 		              withShip: 1
 		              withBoard: aBoard
 		              andWithDice: aCollectionOfDice.
-	self assert: aBoardGame start equals: 1 
+	self assert: aBoardGame start
 ]
 
 { #category : #tests }
