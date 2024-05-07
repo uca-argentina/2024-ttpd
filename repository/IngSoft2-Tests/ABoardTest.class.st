@@ -33,7 +33,7 @@ ABoardTest >> testABoardIsCreatedWithOneBox [
 
 | aBoard |
 aBoard := Board withNumberOfBoxes: 1.
-self assert: aBoard hasBoxes  .
+self assert: aBoard hasBoxes equals: 1.
 ]
 
 { #category : #tests }
@@ -41,7 +41,7 @@ ABoardTest >> testABoardIsCreatedWithThreeBoxes [
 
 | aBoard |
 aBoard := Board withNumberOfBoxes: 3.
-self assert: aBoard hasBoxes  .
+self assert: aBoard hasBoxes equals: 3 .
 ]
 
 { #category : #tests }
@@ -53,35 +53,6 @@ ABoardTest >> testAWormHoleIsCreated [
 		          withWormHoleStaringIn: 1
 		          andEndingIn: 2.
 	self assert: aBoard hasWormHole = (OrderedCollection with: 1 with: 2)
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardHasABoxThenIsCreated [ 
-
-| aBoard aBox |
-aBox:= Box new.
-aBoard:= Board withACollectionOfBoxes: aBox.
-self assert: aBoard hasBoxes.
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardHasTwoBoxesThenItIsABoardWithTwoBoxes [
-
-	| aBoard aBox1 aBox2 aCollectionOfBoxes |
-	aBox1 := Box new.
-	aBox2 := Box new.
-	aCollectionOfBoxes := OrderedCollection new.
-	aCollectionOfBoxes addAll: #( aBox1 aBox2 ).
-	aBoard := Board withACollectionOfBoxes: aCollectionOfBoxes.
-	self assert: aBoard hasBoxes
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedThenHasABox [ 
-
-| aBoard |
-aBoard:= Board new.
-self assert: aBoard hasBoxes.
 ]
 
 { #category : #tests }

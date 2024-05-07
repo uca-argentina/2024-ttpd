@@ -37,11 +37,3 @@ ALoadedDieTest >> testWhenDieIsThrownThenValuesIsTheAmountOfFaces [
 
 	self assert: aDie throw equals: 3
 ]
-
-{ #category : #tests }
-ALoadedDieTest >> testWhenThrowingADieThenReturnsOne [
-
-	| aDie |
-	aDie := LoadedDie new.
-	self assert: aDie throw equals: 1
-]

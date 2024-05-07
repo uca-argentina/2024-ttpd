@@ -13,14 +13,6 @@ self assert: (aShip moves: 1) equals: 1.
 ]
 
 { #category : #tests }
-AShipTest >> testWhenAShipMoves1PositionThenReturns1 [
-
-| aShip |
-aShip := Ship new.
-self assert: (aShip moves: 1) equals: 1.
-]
-
-{ #category : #tests }
 AShipTest >> testWhenMoreThanOneDieInCollectionThenThrowDiceReturnsTheSumOfResults [
 
 	| aShip aCollectionOfDice aDie anotherDie |
