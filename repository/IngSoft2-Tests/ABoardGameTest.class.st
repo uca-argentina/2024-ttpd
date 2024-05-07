@@ -90,7 +90,7 @@ self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 
 ]
 
 { #category : #tests }
-ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [
+ABoardGameTest >> testWhenABoardGameHasTwoShipThenGameBoardEnd [
 
 	| aBoardGame aBoard aCollectionOfDice aDie |
 	aBoard := Board
@@ -101,7 +101,7 @@ ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [
 	aDie := Die of: 3.
 	aCollectionOfDice add: aDie.
 	aBoardGame := BoardGame
-		              withShip: 1
+		              withShip: 2
 		              withBoard: aBoard
 		              andWithDice: aCollectionOfDice.
 	self assert: aBoardGame start 
