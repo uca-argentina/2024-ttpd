@@ -10,6 +10,25 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
+ABoardGameTest >> testABoardGameEqualsOneWhenShipOneWins [
+
+	| aBoardGame aBoard aCollectionOfDice aDie |
+	aBoard := Board
+		          withNumberOfBoxes: 7
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice.
+	aBoardGame start.
+	self assert: aBoardGame winnerIs equals: 1.
+]
+
+{ #category : #tests }
 ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
 
 	| aBoardGame aBoard aCollectionOfDice aDie |
@@ -24,7 +43,7 @@ ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
 		              withShip: 4
 		              withBoard: aBoard
 		              andWithDice: aCollectionOfDice.
-	self assert: aBoardGame start equals: 1.
+	self assert: aBoardGame start 
 ]
 
 { #category : #tests }
@@ -40,6 +59,24 @@ self should: [BoardGame withShip: 2 andBoard: (Board withNumberOfBoxes: 0)] rais
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip [
 
 self should: [BoardGame withShip: 0] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
+]
+
+{ #category : #tests }
+ABoardGameTest >> testAGameEndWhenSomeoneWin [ 
+
+	| aBoardGame aBoard aCollectionOfDice aDie |
+	aBoard := Board
+		          withNumberOfBoxes: 5
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice.
+	self assert: aBoardGame start  
 ]
 
 { #category : #tests }
@@ -67,5 +104,5 @@ ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [
 		              withShip: 1
 		              withBoard: aBoard
 		              andWithDice: aCollectionOfDice.
-	self assert: aBoardGame start equals: 1
+	self assert: aBoardGame start 
 ]

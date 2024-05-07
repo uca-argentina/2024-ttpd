@@ -33,6 +33,19 @@ BoardGame class >> withShip: aNumberOfShips withBoard: aBoard andWithDice: aColl
 		  andWithDice: aCollectionOfDice
 ]
 
+{ #category : #accessing }
+BoardGame >> CutIfSomeoneWin [
+
+	1 to: aCollectionOfShips size do:[:i | |ship| ship:=aCollectionOfShips at:i. (ship getPosition >= board hasBoxes) ifTrue: [ ^false] ].
+	^true
+]
+
+{ #category : #accessing }
+BoardGame >> CutIfSomeoneWin: playerTurn [
+
+	^ (aCollectionOfShips at: playerTurn) getPosition >= board hasBoxes
+]
+
 { #category : #initialization }
 BoardGame >> initializeWithANumberOfShips: aNumberOfShips andBoard: aBoard [ 
 	| numberOfShips |
@@ -72,14 +85,29 @@ BoardGame >> initializeWithShip: aNumberOfShips [
 { #category : #accessing }
 BoardGame >> start [
 
-	| player totalPlayers positionToMove |
-	totalPlayers := aCollectionOfShips size.
-	player := 1.
+	| playerTurn lastPlayer positionToMove |
+	lastPlayer := aCollectionOfShips size.
+	playerTurn := 1.
 
-	[ (aCollectionOfShips at: player) getPosition >= board hasBoxes ]
-		whileFalse: [
-			positionToMove := (aCollectionOfShips at: player) throwDice: dice.
-			(aCollectionOfShips at: player) moves: positionToMove ].
+	[ self CutIfSomeoneWin: playerTurn ] whileFalse: [
+		positionToMove := (aCollectionOfShips at: playerTurn) throwDice:
+			                  dice.
+		(aCollectionOfShips at: playerTurn) moves: positionToMove.
+		playerTurn = lastPlayer
+			ifTrue: [ playerTurn := 1 ]
+			ifFalse: [ playerTurn := playerTurn + 1 ] ].
 
-	^ player
+
+	^self CutIfSomeoneWin: playerTurn
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> winnerIs [
+	|winner|
+	winner :=aCollectionOfShips at:1.
+	
+	2 to: aCollectionOfShips size do:[:i | |shipActual| shipActual:= aCollectionOfShips at: i.
+		(winner getPosition < shipActual getPosition)ifTrue: [ winner :=shipActual]
+		]. 
+	^ aCollectionOfShips indexOf: winner.
 ]
