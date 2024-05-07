@@ -23,14 +23,14 @@ self assert: (aShip moves: 1) equals: 1.
 { #category : #tests }
 AShipTest >> testWhenMoreThanOneDieInCollectionThenThrowDiceReturnsTheSumOfResults [
 
-| aShip aCollectionOfDice aDie anotherDie |
-aCollectionOfDice := OrderedCollection new.
-aDie := LoadedDie of: 3.
-anotherDie := LoadedDie of: 4.
-aCollectionOfDice add: aDie.
-aCollectionOfDice add: anotherDie.
-aShip := Ship inPosition: 0.
-self assert: ((aShip throwDice: aCollectionOfDice) = 7).
+	| aShip aCollectionOfDice aDie anotherDie |
+	aCollectionOfDice := OrderedCollection new.
+	aDie := LoadedDie of: 3.
+	anotherDie := LoadedDie of: 4.
+	aCollectionOfDice add: aDie.
+	aCollectionOfDice add: anotherDie.
+	aShip := Ship inPosition: 0.
+	self assert: (aShip throwDice: aCollectionOfDice) equals: 7
 ]
 
 { #category : #tests }

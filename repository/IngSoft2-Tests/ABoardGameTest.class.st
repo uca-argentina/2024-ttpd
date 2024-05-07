@@ -35,10 +35,10 @@ ABoardGameTest >> testABoardGameStartsWhenCreatedWith4ShipsABoardAndACollectionO
 
  | aBoardGame aCollectionOfDice aDie anotherDie |
 aCollectionOfDice := OrderedCollection new.
-aDie := LoadedDie of: 4.
-anotherDie := LoadedDie of: 3.
+aDie := Die of: 4.
+anotherDie := Die of: 3.
 aCollectionOfDice addAll: #(aDie anotherDie ).
-aBoardGame := BoardGame withShip: 4 withBox: 3 andWithDice: aCollectionOfDice.
+aBoardGame := BoardGame withShip: 4 withBoard: 3 andWithDice: aCollectionOfDice.
 self assert: aBoardGame start.
 
 
@@ -47,12 +47,19 @@ self assert: aBoardGame start.
 { #category : #tests }
 ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
 
- | aBoardGame aBoard |
-aBoard := Board withNumberOfBoxes: 3.
-aBoardGame := BoardGame withShip: 4 andBoard: aBoard.
-self assert: aBoardGame start.
-
-
+	| aBoardGame aBoard aCollectionOfDice aDie |
+	aBoard := Board
+		          withNumberOfBoxes: 3
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+	aBoardGame := BoardGame
+		              withShip: 4
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice.
+	self assert: aBoardGame start equals: 1.
 ]
 
 { #category : #tests }
@@ -109,4 +116,22 @@ aBoard := Board withNumberOfBoxes: 2.
 self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
 
 
+]
+
+{ #category : #tests }
+ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [
+
+	| aBoardGame aBoard aCollectionOfDice aDie |
+	aBoard := Board
+		          withNumberOfBoxes: 1
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+	aBoardGame := BoardGame
+		              withShip: 1
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice.
+	self assert: aBoardGame start equals: 1
 ]
