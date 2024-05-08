@@ -2,17 +2,11 @@ Class {
 	#name : #Board,
 	#superclass : #Object,
 	#instVars : [
-		'box',
-		'aCollectionOfBoxes'
+		'boxes',
+		'wormHole'
 	],
 	#category : #'IngSoft2-Model'
 }
-
-{ #category : #'as yet unclassified' }
-Board class >> withACollectionOfBoxes: aCollectionOfBoxes [
-
-	^ self new initializeWithBox: aCollectionOfBoxes
-]
 
 { #category : #'as yet unclassified' }
 Board class >> withNumberOfBoxes: aNumberOfBoxes [ 
@@ -20,24 +14,48 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes [
 	^self new initialiceWithANumberOfBoxes: aNumberOfBoxes.
 ]
 
+{ #category : #'as yet unclassified' }
+Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
+
+	aNumberOfBoxes < 1 ifTrue: [
+		Error signal: 'A Board must have at least 1 box to be created' ].
+	wormHoleStartPosition < 1 ifTrue: [
+		Error signal: 'A WormHole must Start in box 1 or more' ].
+	wormHoleEndPosition > aNumberOfBoxes ifTrue: [
+		Error signal: 'The ending position of the wormHole must be lower than the number of boxes of the board' ].
+	wormHoleStartPosition > wormHoleEndPosition ifTrue: [
+		Error signal:
+			'A WormHole starting position must be less than the ending position' ].
+	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
+]
+
+{ #category : #testing }
+Board >> exitWormHole [
+	^wormHole at:2.
+]
+
 { #category : #testing }
 Board >> hasBoxes [
+	^boxes.
+]
 
-	(aCollectionOfBoxes isEmpty )  ifTrue: [ ^false ] ifFalse: [ ^true ]
+{ #category : #testing }
+Board >> hasWormHole [
+	^wormHole 
 ]
 
 { #category : #'as yet unclassified' }
-Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [ 
-	|number|
-	number := aNumberOfBoxes.
-	aCollectionOfBoxes := OrderedCollection new.
-	[ number > 0 ] whileTrue: [ aCollectionOfBoxes add: (Box inPlace: number). number := number - 1.].
-	
-	
+Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
+
+	boxes := aNumberOfBoxes.
+
+	wormHole := OrderedCollection new.
+
+	wormHole add: wormHoleStartPosition.
+	wormHole add: wormHoleEndPosition.
 ]
 
-{ #category : #initialization }
-Board >> initializeWithBox: aBox [ 
-	box:= aBox.
-	
+{ #category : #testing }
+Board >> inputWormHole [
+	^wormHole at:1.
 ]
