@@ -30,6 +30,11 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 ]
 
 { #category : #testing }
+Board >> exitWormHole [
+	^wormHole at:2.
+]
+
+{ #category : #testing }
 Board >> hasBoxes [
 	^boxes.
 ]
@@ -56,4 +61,9 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wor
 
 	wormHole add: wormHoleStartPosition.
 	wormHole add: wormHoleEndPosition.
+]
+
+{ #category : #testing }
+Board >> inputWormHole [
+	^wormHole at:1.
 ]

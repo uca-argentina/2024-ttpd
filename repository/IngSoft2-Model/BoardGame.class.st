@@ -48,8 +48,8 @@ lastPlayer :=aCollectionOfShips size.
 { #category : #accessing }
 BoardGame >> cutIfSomeoneWin [
 
-	1 to: aCollectionOfShips size do:[:i | |ship| ship:=(aCollectionOfShips at:i). (ship getPosition >= board hasBoxes) ifTrue: [ ^false] ].
-	^true
+	1 to: aCollectionOfShips size do:[:i | |ship| ship:=(aCollectionOfShips at:i). (ship getPosition >= board hasBoxes) ifTrue: [ ^true] ].
+	^false
 ]
 
 { #category : #initialization }
@@ -91,14 +91,15 @@ BoardGame >> initializeWithShip: aNumberOfShips [
 { #category : #accessing }
 BoardGame >> movesShipInTheBoard: playerTurn [
 
-	| positionToMove actualPosition|
-	positionToMove := (aCollectionOfShips at: playerTurn) throwDice: dice.
-	
-	actualPosition := (aCollectionOfShips at: playerTurn) moves: positionToMove .
+	| positionToMove actualPosition ship |
+	ship := aCollectionOfShips at: playerTurn.
+	positionToMove := ship throwDice: dice.
+	actualPosition := (aCollectionOfShips at: playerTurn) moves:
+		                  positionToMove.
 
-	
-	
-	
+	(board hasWormHole indexOf: actualPosition) ~= 0 ifTrue: [
+		(board exitWormHole = actualPosition)ifTrue: [ship initializeInPosition: board inputWormHole]  ifFalse: [ ship initializeInPosition: board exitWormHole  ]
+		 ]
 ]
 
 { #category : #accessing }
@@ -108,13 +109,13 @@ BoardGame >> start [
 
 	playerTurn := 1.
 
-[ self cutIfSomeoneWin ] whileFalse: [
+[ self cutIfSomeoneWin ] whileFalse:  [
     (self movesShipInTheBoard: playerTurn).
 	(playerTurn:=(self changeTurn:playerTurn)).
     
 ].
 
-	^self cutIfSomeoneWin
+	^self cutIfSomeoneWin 
 
 
 ]

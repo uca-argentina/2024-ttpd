@@ -115,16 +115,17 @@ ABoardGameTest >> testBanana20 [
 	aBoard := Board
 		          withNumberOfBoxes: 7
 		          withWormHoleStaringIn: 3
-		          andEndingIn: 6.
+		          andEndingIn: 7.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 3.
 	aCollectionOfDice add: aLoadedDie .
 	aBoardGame := BoardGame
-		              withShip: 2
+		              withShip: 6
 		              withBoard: aBoard
 		              andWithDice: aCollectionOfDice.
 
-	self assert: aBoardGame start 
+
+	self assert: aBoardGame winnerIs   equals: 1.
 ]
 
 { #category : #tests }
