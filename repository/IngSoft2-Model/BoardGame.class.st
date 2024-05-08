@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'aCollectionOfShips',
 		'board',
-		'dice',
-		'aCollectionOfBoxes'
+		'dice'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -63,17 +62,6 @@ BoardGame >> getPositionOfShipAt: anIndexOfShip [
 ]
 
 { #category : #initialization }
-BoardGame >> initializeWithANumberOfShips: aNumberOfShips andBoard: aBoard [ 
-	| numberOfShips |
-	numberOfShips := aNumberOfShips.
-	aCollectionOfShips := OrderedCollection new.
-	[ numberOfShips ~= 0 ] whileTrue: [
-		aCollectionOfShips add: (Ship inPosition: 0).
-		numberOfShips := numberOfShips - 1.].
-	board := aBoard. 
-]
-
-{ #category : #initialization }
 BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andWithDice: aCollectionOfDice [
 
 	| numberOfShips numberOfBoxes |
@@ -85,17 +73,6 @@ BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andW
 		numberOfShips := numberOfShips - 1 ].
 	board:= aBoard.
 	dice := aCollectionOfDice
-]
-
-{ #category : #initialization }
-BoardGame >> initializeWithShip: aNumberOfShips [
-	| number |
-	number := aNumberOfShips.
-	number < 1 ifTrue: [ Error signal: 'A Board Game should have at least 1 ship to start' ]. 
-	aCollectionOfShips := OrderedCollection new.
-	[ number ~= 0 ] whileTrue: [
-		aCollectionOfShips add: (Ship inPosition: 0).
-		number := number - 1.].
 ]
 
 { #category : #accessing }

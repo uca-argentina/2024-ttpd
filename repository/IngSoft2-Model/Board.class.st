@@ -45,14 +45,6 @@ Board >> hasWormHole [
 ]
 
 { #category : #'as yet unclassified' }
-Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [ 
-	
-	boxes:= aNumberOfBoxes.
-	
-	
-]
-
-{ #category : #'as yet unclassified' }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
 
 	boxes := aNumberOfBoxes.
