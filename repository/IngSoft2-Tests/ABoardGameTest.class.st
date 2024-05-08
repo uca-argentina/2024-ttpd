@@ -10,7 +10,7 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
-playingGame
+
 ABoardGameTest >> testABoardGameEqualsOneWhenShipOneWins [
 
 	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
@@ -51,7 +51,7 @@ ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [ 
 
 
-develop
+
 
 self should: [BoardGame withShip: 2 andBoard: (Board withNumberOfBoxes: 0)] raise: Error withMessage: 'A Board must have at least 1 box to be created'.
 

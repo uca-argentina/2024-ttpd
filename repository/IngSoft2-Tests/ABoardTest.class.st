@@ -43,7 +43,6 @@ ABoardTest >> testABoardIsCreatedWithThreeBoxes [
 aBoard := Board withNumberOfBoxes: 3.
 self assert: aBoard hasBoxes equals: 3 .
 ]
-playingGame
 
 { #category : #tests }
 ABoardTest >> testAWormHoleEndingPositionMustBeLowerThanTheNumberOfBoxesOfTheBoard [
@@ -76,4 +75,3 @@ ABoardTest >> testWhenABoardIsCreatedWith5Boxes [
 	aBoard := Board withNumberOfBoxes: 5.
 	self assert: aBoard hasBoxes equals: 5
 ]
-develop
