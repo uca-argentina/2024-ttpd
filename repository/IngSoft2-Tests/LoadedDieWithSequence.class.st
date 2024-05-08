@@ -2,10 +2,16 @@ Class {
 	#name : #LoadedDieWithSequence,
 	#superclass : #Object,
 	#instVars : [
-		'faces'
+		'faces',
+		'sequence'
 	],
 	#category : #'IngSoft2-Tests'
 }
+
+{ #category : #'as yet unclassified' }
+LoadedDieWithSequence class >> loadedWithSequence: aSequence [
+    ^ self new initializeSequence: aSequence
+]
 
 { #category : #'instance creation' }
 LoadedDieWithSequence class >> of: aNumberOfFaces [ 
@@ -19,14 +25,16 @@ LoadedDieWithSequence >> initializeOf: aNumberOfFaces [
 	faces := aNumberOfFaces.
 ]
 
+{ #category : #initialization }
+LoadedDieWithSequence >> initializeSequence: aSequence [
+    sequence := aSequence
+]
+
 { #category : #'as yet unclassified' }
 LoadedDieWithSequence >> throw [
 
-	| sequence numToAdd |
-	sequence := OrderedCollection new.
-	numToAdd := 1.
-	[numToAdd <= faces] whileTrue: [
-		sequence add: numToAdd.
-		numToAdd := numToAdd + 1. ].
-	^ sequence
+	| currentFace |
+	currentFace := sequence first.
+	sequence:= sequence allButFirst. 
+	^ currentFace
 ]

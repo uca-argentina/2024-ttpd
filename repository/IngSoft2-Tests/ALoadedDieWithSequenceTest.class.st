@@ -16,42 +16,35 @@ ALoadedDieWithSequenceTest >> should: aErrorBlock raise: anErrorClass withMessag
 { #category : #tests }
 ALoadedDieWithSequenceTest >> testALoadedDieOf4FacesReturnsASequenceFrom1To4WhenThrown [
 
-| aLoadedDieWithSequence aSequence|
-aLoadedDieWithSequence := LoadedDieWithSequence of: 4.
-aSequence := OrderedCollection new.
-aSequence add: 1.
-aSequence add: 2.
-aSequence add: 3.
-aSequence add: 4.
-self assert: aLoadedDieWithSequence throw equals: aSequence.
+| aLoadedDieWithSequence |
+aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence:#(1 2 3 4).
+self assert: aLoadedDieWithSequence throw equals: 1.
+self assert: aLoadedDieWithSequence throw equals: 2.
+self assert: aLoadedDieWithSequence throw equals: 3.
+self assert: aLoadedDieWithSequence throw equals: 4.
 ]
 
 { #category : #tests }
 ALoadedDieWithSequenceTest >> testALoadedDieOf5FacesReturnsASequenceFrom1To5WhenThrown [
 
-| aLoadedDieWithSequence aSequence|
-aLoadedDieWithSequence := LoadedDieWithSequence of: 5.
-aSequence := OrderedCollection new.
-aSequence add: 1.
-aSequence add: 2.
-aSequence add: 3.
-aSequence add: 4.
-self deny: aLoadedDieWithSequence throw equals: aSequence.
+| aLoadedDieWithSequence |
+aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence: #(1 2 3 4 5).
+self assert: aLoadedDieWithSequence throw equals: 1.
+self assert: aLoadedDieWithSequence throw equals: 2.
+self assert: aLoadedDieWithSequence throw equals: 3.
+self assert: aLoadedDieWithSequence throw equals: 4.
+self assert: aLoadedDieWithSequence throw equals: 5.
 ]
 
 { #category : #tests }
 ALoadedDieWithSequenceTest >> testALoadedDieOfNFacesReturnsASequenceFrom1ToNWhenThrown [
 
-| aLoadedDieWithSequence aSequence|
-aLoadedDieWithSequence := LoadedDieWithSequence of: 6.
-aSequence := OrderedCollection new.
-aSequence add: 1.
-aSequence add: 2.
-aSequence add: 3.
-aSequence add: 4.
-aSequence add: 5.
-aSequence add: 6.
-self assert: aLoadedDieWithSequence throw equals: aSequence.
+| aLoadedDieWithSequence |
+aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence: #(1 2 3).
+
+self assert: aLoadedDieWithSequence throw equals: 1.
+self assert: aLoadedDieWithSequence throw equals: 2.
+self assert: aLoadedDieWithSequence throw equals: 3.
 ]
 
 { #category : #tests }
@@ -59,4 +52,16 @@ ALoadedDieWithSequenceTest >> testALoadedDieWithSequenceCannotBeCreatedWithLessT
 
 | aLoadedDieWithSequence |
 self should: [aLoadedDieWithSequence := LoadedDieWithSequence of: 2] raise: Error withMessage: 'A Die cannot be createdWith less of 3 faces'.
+]
+
+{ #category : #tests }
+ALoadedDieWithSequenceTest >> testALoadedDieWithSequenceIsInitializedWithASequenceThenItThrowsTheSequence [
+
+	| aLoadedDieWithSequence |
+	aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence:
+		                          #( 1 2 3 ).
+
+	self assert: aLoadedDieWithSequence throw equals: 1.
+	self assert: aLoadedDieWithSequence throw equals: 2.
+	self assert: aLoadedDieWithSequence throw equals: 3
 ]
