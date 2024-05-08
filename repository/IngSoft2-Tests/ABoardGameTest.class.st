@@ -80,6 +80,27 @@ ABoardGameTest >> testAGameEndWhenSomeoneWin [
 ]
 
 { #category : #tests }
+ABoardGameTest >> testAGameStarsWith4ShipsAndASequenceDiceThen4ShipWins [
+
+	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence aSequence |
+	aBoard := Board
+		          withNumberOfBoxes: 4
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aSequence := #( 1 2 3 4 ).
+	aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence:
+		                          aSequence.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aLoadedDieWithSequence.
+	aBoardGame := BoardGame
+		              withShip: 4
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice.
+	aBoardGame start.
+	self assert: aBoardGame winnerIs equals: 4
+]
+
+{ #category : #tests }
 ABoardGameTest >> testAGameWillNotStartWhenCreatedWithCeroShipsAndABoard [
 
  | aBoard |
@@ -87,25 +108,6 @@ aBoard := Board withNumberOfBoxes: 2.
 self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
 
 
-]
-
-{ #category : #tests }
-ABoardGameTest >> testBanana [
-
-	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence aSequence |
-	aBoard := Board
-		          withNumberOfBoxes: 4
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence: #(1 2 3 4).
-	aCollectionOfDice add: aLoadedDieWithSequence.
-	aBoardGame := BoardGame
-		              withShip: 4
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
-	aBoardGame start.
-	self assert: aBoardGame winnerIs equals: 4.
 ]
 
 { #category : #tests }
