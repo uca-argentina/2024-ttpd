@@ -48,8 +48,9 @@ lastPlayer :=aCollectionOfShips size.
 { #category : #accessing }
 BoardGame >> cutIfSomeoneWin [
 
-	1 to: aCollectionOfShips size do:[:i | |ship| ship:=(aCollectionOfShips at:i). (ship getPosition >= board hasBoxes) ifTrue: [ ^false] ].
-	^true
+	aCollectionOfShips collect: [ :ship |
+		ship getPosition >= board hasBoxes ifTrue: [ ^ true ] ].
+	^ false
 ]
 
 { #category : #initialization }
