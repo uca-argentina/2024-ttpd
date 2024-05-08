@@ -9,6 +9,8 @@ Class {
 
 { #category : #'instance creation' }
 LoadedDieWithSequence class >> of: aNumberOfFaces [ 
+	aNumberOfFaces < 3 ifTrue: [
+		Error signal: 'A Die cannot be createdWith less of 3 faces' ].
 	^self new initializeOf: aNumberOfFaces.
 ]
 
@@ -19,17 +21,12 @@ LoadedDieWithSequence >> initializeOf: aNumberOfFaces [
 
 { #category : #'as yet unclassified' }
 LoadedDieWithSequence >> throw [
-	| sequence |
+
+	| sequence numToAdd |
 	sequence := OrderedCollection new.
-	faces = 4 ifTrue: [ 
-	sequence add: 1.
-	sequence add: 2.
-	sequence add: 3.
-	sequence add: 4.]
-	ifFalse: [ sequence add: 1.
-	sequence add: 2.
-	sequence add: 3.
-	sequence add: 4. 
-	sequence add: 5.].
-	^sequence.	
+	numToAdd := 1.
+	[numToAdd <= faces] whileTrue: [
+		sequence add: numToAdd.
+		numToAdd := numToAdd + 1. ].
+	^ sequence
 ]
