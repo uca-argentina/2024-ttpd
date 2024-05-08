@@ -52,6 +52,16 @@ BoardGame >> cutIfSomeoneWin [
 	^false
 ]
 
+{ #category : #accessing }
+BoardGame >> getPositionOfShipAt: anIndexOfShip [ 
+	| position |
+	position:= ( aCollectionOfShips at: anIndexOfShip) getPosition.
+	
+	^position.
+
+
+]
+
 { #category : #initialization }
 BoardGame >> initializeWithANumberOfShips: aNumberOfShips andBoard: aBoard [ 
 	| numberOfShips |
