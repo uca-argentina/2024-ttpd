@@ -18,7 +18,7 @@ self assert: (aBox getPosition) equals: 1.
 ]
 
 { #category : #tests }
-ABoxTest >> testWhenABoxIsCreatedWithAShipThenBoxHasACollectionOfShips [
+ABoxTest >> testWhenABoxIsCreatedWithAShipThenBoxHasACollectionOfShips_05 [
 
 	| aBox aShip collectionShips |
 	collectionShips := OrderedCollection new.
