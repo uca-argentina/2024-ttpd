@@ -69,7 +69,7 @@ BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andW
 	numberOfBoxes := aBoard.
 	aCollectionOfShips := OrderedCollection new.
 	[ numberOfShips ~= 0 ] whileTrue: [
-		aCollectionOfShips add: (Ship inPosition: 0).
+		aCollectionOfShips add: (Ship create).
 		numberOfShips := numberOfShips - 1 ].
 	board:= aBoard.
 	dice := aCollectionOfDice
@@ -85,7 +85,7 @@ BoardGame >> movesShipInTheBoard: playerTurn [
 		                  positionToMove.
 
 	(board hasWormHole indexOf: actualPosition) ~= 0 ifTrue: [
-		(board exitWormHole = actualPosition)ifTrue: [ship initializeInPosition: board inputWormHole]  ifFalse: [ ship initializeInPosition: board exitWormHole  ]
+		(board exitWormHole = actualPosition)ifTrue: [ship movesTo: board inputWormHole]  ifFalse: [ ship movesTo: board exitWormHole  ]
 		 ]
 ]
 

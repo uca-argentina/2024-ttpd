@@ -7,9 +7,9 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
-Ship class >> inPosition: aPosition [ 
-	^self new initializeInPosition: aPosition.
+{ #category : #operations }
+Ship class >> create [
+	^self new initializeShip.
 ]
 
 { #category : #'as yet unclassified' }
@@ -18,14 +18,19 @@ Ship >> getPosition [
 ]
 
 { #category : #initialization }
-Ship >> initializeInPosition: aPosition [ 
-	position := aPosition.
+Ship >> initializeShip [
+	position := 0
 ]
 
 { #category : #'as yet unclassified' }
 Ship >> moves: aNumber [
 	position := position + aNumber.
 	^(position).
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> movesTo: aPosition [ 
+	position := aPosition.
 ]
 
 { #category : #'as yet unclassified' }

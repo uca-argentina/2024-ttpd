@@ -8,7 +8,7 @@ Class {
 AShipTest >> testShipIsCreatedWithAPosition [
 
 | aShip |
-aShip := Ship inPosition: 0.
+aShip := Ship create.
 self assert: (aShip moves: 1) equals: 1.
 ]
 
@@ -21,7 +21,7 @@ aDie := LoadedDie of: 3.
 anotherDie := LoadedDie of: 4.
 aCollectionOfDice add: aDie.
 aCollectionOfDice add: anotherDie.
-aShip := Ship inPosition: 0.
+aShip := Ship create.
 positionsToMove := aShip throwDice: aCollectionOfDice.
 aShip moves: positionsToMove.
 self assert: ((aShip getPosition) = 7).
@@ -36,7 +36,7 @@ AShipTest >> testWhenMoreThanOneLoadedDieAreThrownThenThrowDiceReturnsTheSumOfRe
 	anotherDie := LoadedDie of: 4.
 	aCollectionOfDice add: aDie.
 	aCollectionOfDice add: anotherDie.
-	aShip := Ship inPosition: 0.
+	aShip := Ship create.
 	self assert: (aShip throwDice: aCollectionOfDice) equals: 7
 ]
 
@@ -47,7 +47,7 @@ AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdat
 aCollectionOfDice := OrderedCollection new.
 aDie := LoadedDie of: 3.
 aCollectionOfDice add: aDie.
-aShip := Ship inPosition: 0.
+aShip := Ship create.
 positionsToMove := aShip throwDice: aCollectionOfDice.
 aShip moves: positionsToMove.
 self assert: ((aShip getPosition) = 3).
@@ -60,6 +60,6 @@ AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
 aCollectionOfDice := OrderedCollection new.
 aDie := LoadedDie of: 3.
 aCollectionOfDice add: aDie.
-aShip := Ship inPosition: 0.
+aShip := Ship create.
 self assert: ((aShip throwDice: aCollectionOfDice) = 3).
 ]
