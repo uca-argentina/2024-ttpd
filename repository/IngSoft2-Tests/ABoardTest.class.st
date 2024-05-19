@@ -42,9 +42,9 @@ ABoardTest >> testWhenABoardIsCreatedWithAWormHoleThenWormHoleExists [
 ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
 	self
-		should: [Board withNumberOfBoxes: 0]
+		should: [ Board withNumberOfBoxes: 0 ]
 		raise: Error
-		withMessage: 'A Board must have at least 1 box to be created'.
+		withMessage: 'A Board must have at least 1 box to be created'
 ]
 
 { #category : #tests }

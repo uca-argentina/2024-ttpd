@@ -17,7 +17,10 @@ ALoadedDieTest >> should: aErrorBlock raise: anErrorClass withMessage: anErrorMe
 { #category : #tests }
 ALoadedDieTest >> testADieCantBeCreatedWithLessThanTwoFaces [
 
-self should: [ LoadedDie of: 1 ] raise: Error withMessage: 'Faces should be more than 1'
+	self
+		should: [ LoadedDie of: 1 ]
+		raise: Error
+		withMessage: 'Faces should be more than 1'
 ]
 
 { #category : #tests }
@@ -27,13 +30,4 @@ ALoadedDieTest >> testWhenDieHasFiveFacesThenValuesIsFive [
 	aDie := LoadedDie of: 5.
 
 	self assert: aDie throw equals: 5
-]
-
-{ #category : #tests }
-ALoadedDieTest >> testWhenDieIsThrownThenValuesIsTheAmountOfFaces [
-
-	| aDie |
-	aDie := LoadedDie of: 3.
-
-	self assert: aDie throw equals: 3
 ]

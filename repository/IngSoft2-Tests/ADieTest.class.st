@@ -13,8 +13,8 @@ ADieTest >> should: aErrorBlock raise: anErrorClass withMessage: anErrorMessage 
 ADieTest >> testADieIsCreatedWithAnAmountOfFacesThenThrowsFaces [
 
 	| aDie |
-	aDie := Die of:3.
-	self assert: ((aDie throw) between: 1 and: 3)
+	aDie := Die of: 3.
+	self assert: (aDie throw between: 1 and: 3)
 ]
 
 { #category : #tests }
