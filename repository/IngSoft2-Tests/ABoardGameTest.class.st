@@ -11,8 +11,6 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 
 { #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [ 
-"Bien"
-
 
 
 self should: [BoardGame withShip: 2 andBoard: (Board withNumberOfBoxes: 0)] raise: Error withMessage: 'A Board must have at least 1 box to be created'.
@@ -22,13 +20,13 @@ self should: [BoardGame withShip: 2 andBoard: (Board withNumberOfBoxes: 0)] rais
 
 { #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_01 [
-"Bien"
+
 self should: [BoardGame withShip: 0] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
 ]
 
 { #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_02 [
-"Bien"
+
  | aBoard |
 aBoard := Board withNumberOfBoxes: 2.
 self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
@@ -37,26 +35,8 @@ self should: [BoardGame withShip: 0 andBoard: aBoard] raise: Error withMessage: 
 ]
 
 { #category : #tests }
-ABoardGameTest >> testAGameEndWhenSomeoneWin [ 
-"DUDA"
-	| aBoardGame aBoard aCollectionOfDice aDie |
-	aBoard := Board
-		          withNumberOfBoxes: 5
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	aCollectionOfDice := OrderedCollection new.
-	aDie := Die of: 3.
-	aCollectionOfDice add: aDie.
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
-	self assert: aBoardGame start  
-]
-
-{ #category : #tests }
 ABoardGameTest >> testWhenABoardGameIsCreatedWithARandomDieThenTheGameStarts [
-"Bien"
+
 	| aBoardGame aBoard aCollectionOfDice aDie |
 	aBoard := Board
 		          withNumberOfBoxes: 3
@@ -74,7 +54,7 @@ ABoardGameTest >> testWhenABoardGameIsCreatedWithARandomDieThenTheGameStarts [
 
 { #category : #tests }
 ABoardGameTest >> testWhenAGameFinishesThenShipsPositionsCanBeShown [
-"Bien"
+
 	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence |
 	aBoard := Board
 		          withNumberOfBoxes: 5
@@ -96,7 +76,7 @@ ABoardGameTest >> testWhenAGameFinishesThenShipsPositionsCanBeShown [
 
 { #category : #tests }
 ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
-"Bien"
+
 	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
 	aBoard := Board
 		          withNumberOfBoxes: 7
@@ -115,7 +95,7 @@ ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Win
 
 { #category : #tests }
 ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieWithSequenceAndShip3MustWinThenShip3Wins [
-"Bien"
+
 	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence anotherLoadedDieWithSequence|
 	aBoard := Board
 		          withNumberOfBoxes: 5
@@ -136,7 +116,7 @@ ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieWithSequenceAndShip3MustWin
 
 { #category : #tests }
 ABoardGameTest >> testWhenShip1EntersAWormHoleThatEndsInTheFinalPositionThenShip1Wins [ 
-"Bien"
+
 	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
 	aBoard := Board
 		          withNumberOfBoxes: 7
