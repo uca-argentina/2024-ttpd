@@ -13,20 +13,7 @@ self assert: (aShip moves: 1) equals: 1.
 ]
 
 { #category : #tests }
-AShipTest >> testWhenMoreThanOneDieInCollectionThenThrowDiceReturnsTheSumOfResults [
-
-	| aShip aCollectionOfDice aDie anotherDie |
-	aCollectionOfDice := OrderedCollection new.
-	aDie := LoadedDie of: 3.
-	anotherDie := LoadedDie of: 4.
-	aCollectionOfDice add: aDie.
-	aCollectionOfDice add: anotherDie.
-	aShip := Ship inPosition: 0.
-	self assert: (aShip throwDice: aCollectionOfDice) equals: 7
-]
-
-{ #category : #tests }
-AShipTest >> testWhenMoreThanOneDieIsThrownThePositionOfTheShipIsUpdated [
+AShipTest >> testWhen2LoadedDieOf3And4FacesAreThrownThenThePositionOfTheShipIsUpdatedTo7 [
 
 | aShip aCollectionOfDice aDie positionsToMove anotherDie |
 aCollectionOfDice := OrderedCollection new.
@@ -41,7 +28,20 @@ self assert: ((aShip getPosition) = 7).
 ]
 
 { #category : #tests }
-AShipTest >> testWhenOneDieIsThrownThePositionOfTheShipIsUpdated [
+AShipTest >> testWhenMoreThanOneLoadedDieAreThrownThenThrowDiceReturnsTheSumOfResults [
+
+	| aShip aCollectionOfDice aDie anotherDie |
+	aCollectionOfDice := OrderedCollection new.
+	aDie := LoadedDie of: 3.
+	anotherDie := LoadedDie of: 4.
+	aCollectionOfDice add: aDie.
+	aCollectionOfDice add: anotherDie.
+	aShip := Ship inPosition: 0.
+	self assert: (aShip throwDice: aCollectionOfDice) equals: 7
+]
+
+{ #category : #tests }
+AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdatedTo3 [
 
 | aShip aCollectionOfDice aDie positionsToMove |
 aCollectionOfDice := OrderedCollection new.
@@ -54,7 +54,7 @@ self assert: ((aShip getPosition) = 3).
 ]
 
 { #category : #tests }
-AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThrowDiceReturnsThree [
+AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
 
 | aShip aCollectionOfDice aDie |
 aCollectionOfDice := OrderedCollection new.
