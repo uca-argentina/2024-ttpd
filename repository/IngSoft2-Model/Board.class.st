@@ -36,7 +36,8 @@ Board >> exitWormHole [
 
 { #category : #testing }
 Board >> hasBoxes [
-	^boxes.
+
+	^ boxes size
 ]
 
 { #category : #testing }
@@ -44,15 +45,16 @@ Board >> hasWormHole [
 	^wormHole 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialize }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
 
-	boxes := aNumberOfBoxes.
+	boxes := OrderedCollection new: aNumberOfBoxes.
+	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
 
 	wormHole := OrderedCollection new.
 
 	wormHole add: wormHoleStartPosition.
-	wormHole add: wormHoleEndPosition.
+	wormHole add: wormHoleEndPosition
 ]
 
 { #category : #testing }

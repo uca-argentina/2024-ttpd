@@ -46,7 +46,13 @@ self assert: aBoard hasBoxes equals: 3 .
 
 { #category : #tests }
 ABoardTest >> testAWormHoleEndingPositionMustBeLowerThanTheNumberOfBoxesOfTheBoard [
-	self should: [Board withNumberOfBoxes: 5 withWormHoleStaringIn: 1 andEndingIn: 6] raise: Error withMessage: 'The ending position of the wormHole must be lower than the number of boxes of the board' .
+
+	self
+		should: [
+		Board withNumberOfBoxes: 5 withWormHoleStaringIn: 1 andEndingIn: 6 ]
+		raise: Error
+		withMessage:
+		'The ending position of the wormHole must be lower than the number of boxes of the board'
 ]
 
 { #category : #tests }
