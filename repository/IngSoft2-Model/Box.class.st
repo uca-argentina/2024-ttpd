@@ -10,6 +10,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 Box class >> inPlace: aPlace [ 
+	aPlace < 1 ifTrue: [ Error signal: 'The position of the box must be greater or equal to 1' ].
 	^self new initializeInPlace: aPlace.
 ]
 
@@ -40,7 +41,7 @@ Box >> initializeWithShips: aCollectionOfShips [
 
 { #category : #'as yet unclassified' }
 Box >> moveShipTo [
-	^1
+	^place
 ]
 
 { #category : #accessing }
