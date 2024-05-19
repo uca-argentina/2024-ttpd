@@ -10,25 +10,8 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
-ABoardTest >> testABoardCannotBeCreatedWithLEssThanOneBox [
-
-	self
-		should: [Board withNumberOfBoxes: 0]
-		raise: Error
-		withMessage: 'A Board must have at least 1 box to be created'.
-]
-
-{ #category : #tests }
-ABoardTest >> testABoardIsCreatedWithOneBox [ 
-
-| aBoard |
-aBoard := Board withNumberOfBoxes: 1.
-self assert: aBoard hasBoxes equals: 1.
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
-"bien"
+
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 5.
 	self assert: aBoard hasBoxes equals: 5
@@ -36,7 +19,7 @@ ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
 
 { #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWithAWormHoleStartingPostition0ThenBoardIsNotCreated [
-"bien"
+
 	self
 		should: [
 		Board withNumberOfBoxes: 5 withWormHoleStaringIn: 0 andEndingIn: 3 ]
@@ -46,7 +29,7 @@ ABoardTest >> testWhenABoardIsCreatedWithAWormHoleStartingPostition0ThenBoardIsN
 
 { #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWithAWormHoleThenWormHoleExists [
-"Bien"
+
 	| aBoard |
 	aBoard := Board
 		          withNumberOfBoxes: 5
@@ -56,8 +39,17 @@ ABoardTest >> testWhenABoardIsCreatedWithAWormHoleThenWormHoleExists [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
+
+	self
+		should: [Board withNumberOfBoxes: 0]
+		raise: Error
+		withMessage: 'A Board must have at least 1 box to be created'.
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenTheEndingPositionOfTheHoleIsBiggerThanNumberOfBoxesThenBoardNotCreated [
-"Bien"
+
 	self
 		should: [
 		Board withNumberOfBoxes: 5 withWormHoleStaringIn: 1 andEndingIn: 6 ]
