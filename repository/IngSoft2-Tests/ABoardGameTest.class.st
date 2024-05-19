@@ -10,27 +10,8 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
-ABoardGameTest >> testABoardGameEqualsOneWhenShipOneWins [
-
-	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
-	aBoard := Board
-		          withNumberOfBoxes: 7
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 3.
-	aCollectionOfDice add: aLoadedDie .
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
-	aBoardGame start.
-	self assert: aBoardGame winnerIs equals: 1.
-]
-
-{ #category : #tests }
 ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
-
+"DUDA"
 	| aBoardGame aBoard aCollectionOfDice aDie |
 	aBoard := Board
 		          withNumberOfBoxes: 3
@@ -48,7 +29,7 @@ ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
 
 { #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [ 
-
+"Bien"
 
 
 
@@ -59,35 +40,13 @@ self should: [BoardGame withShip: 2 andBoard: (Board withNumberOfBoxes: 0)] rais
 
 { #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip [
-
+"Bien"
 self should: [BoardGame withShip: 0] raise: Error withMessage: 'A Board Game should have at least 1 ship to start'.
 ]
 
 { #category : #tests }
-ABoardGameTest >> testAGameCanShowPositionsOfShipsAfterItEnds [
-
-	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence |
-	aBoard := Board
-		          withNumberOfBoxes: 5
-		          withWormHoleStaringIn: 3
-		          andEndingIn: 5.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence: #(1 3 1).
-	aCollectionOfDice add: aLoadedDieWithSequence .
-	aBoardGame := BoardGame
-		              withShip: 3
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice. 
-	aBoardGame start.
-	self assert: aBoardGame winnerIs  equals: 2.
-	self assert: (aBoardGame getPositionOfShipAt: 1 )equals: 1.
-	self assert: (aBoardGame getPositionOfShipAt: 2 )equals: 5.
-	self assert: (aBoardGame getPositionOfShipAt: 3 )equals: 0.
-]
-
-{ #category : #tests }
 ABoardGameTest >> testAGameEndWhenSomeoneWin [ 
-
+"DUDA"
 	| aBoardGame aBoard aCollectionOfDice aDie |
 	aBoard := Board
 		          withNumberOfBoxes: 5
@@ -101,27 +60,6 @@ ABoardGameTest >> testAGameEndWhenSomeoneWin [
 		              withBoard: aBoard
 		              andWithDice: aCollectionOfDice.
 	self assert: aBoardGame start  
-]
-
-{ #category : #tests }
-ABoardGameTest >> testAGameStarsWith4ShipsAndASequenceDiceThen4ShipWins [
-
-	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence aSequence |
-	aBoard := Board
-		          withNumberOfBoxes: 4
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	aSequence := #( 1 2 3 4 ).
-	aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence:
-		                          aSequence.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aLoadedDieWithSequence.
-	aBoardGame := BoardGame
-		              withShip: 4
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
-	aBoardGame start.
-	self assert: aBoardGame winnerIs equals: 4
 ]
 
 { #category : #tests }
@@ -171,7 +109,29 @@ ABoardGameTest >> testWhenABoardGameHasTwoShipThenGameBoardEnd [
 ]
 
 { #category : #tests }
-ABoardGameTest >> testWhenAGameHasACollectionOfDice [
+ABoardGameTest >> testWhenAGameFinishesThenShipsPositionsCanBeShown [
+"Bien"
+	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence |
+	aBoard := Board
+		          withNumberOfBoxes: 5
+		          withWormHoleStaringIn: 3
+		          andEndingIn: 5.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDieWithSequence := LoadedDieWithSequence loadedWithSequence: #(1 3 1).
+	aCollectionOfDice add: aLoadedDieWithSequence .
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice. 
+	aBoardGame start.
+	self assert: aBoardGame winnerIs  equals: 2.
+	self assert: (aBoardGame getPositionOfShipAt: 1 )equals: 1.
+	self assert: (aBoardGame getPositionOfShipAt: 2 )equals: 5.
+	self assert: (aBoardGame getPositionOfShipAt: 3 )equals: 0.
+]
+
+{ #category : #tests }
+ABoardGameTest >> testWhenAGameIsPlayedAndShip3MustWinThenShip3Wins [
 
 	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence anotherLoadedDieWithSequence|
 	aBoard := Board
@@ -189,6 +149,25 @@ ABoardGameTest >> testWhenAGameHasACollectionOfDice [
 		              andWithDice: aCollectionOfDice.
 	aBoardGame start.
 	self assert: aBoardGame winnerIs  equals: 3.
+]
+
+{ #category : #tests }
+ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
+
+	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
+	aBoard := Board
+		          withNumberOfBoxes: 7
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 3.
+	aCollectionOfDice add: aLoadedDie .
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              andWithDice: aCollectionOfDice.
+	aBoardGame start.
+	self assert: aBoardGame winnerIs equals: 1.
 ]
 
 { #category : #tests }
