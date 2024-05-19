@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'place'
 	],
-	#category : #'IngSoft2-Tests'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }

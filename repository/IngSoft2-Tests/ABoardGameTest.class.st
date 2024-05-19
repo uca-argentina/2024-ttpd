@@ -10,7 +10,6 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
-
 ABoardGameTest >> testABoardGameEqualsOneWhenShipOneWins [
 
 	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
