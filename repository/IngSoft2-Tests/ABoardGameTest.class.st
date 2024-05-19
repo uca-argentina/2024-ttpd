@@ -10,24 +10,6 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
-ABoardGameTest >> testABoardGameStartsWhenCreatedWithFourShipsAndABoard [
-"DUDA"
-	| aBoardGame aBoard aCollectionOfDice aDie |
-	aBoard := Board
-		          withNumberOfBoxes: 3
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	aCollectionOfDice := OrderedCollection new.
-	aDie := Die of: 3.
-	aCollectionOfDice add: aDie.
-	aBoardGame := BoardGame
-		              withShip: 4
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
-	self assert: aBoardGame start 
-]
-
-{ #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [ 
 "Bien"
 
@@ -73,8 +55,8 @@ ABoardGameTest >> testAGameEndWhenSomeoneWin [
 ]
 
 { #category : #tests }
-ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [ 
-
+ABoardGameTest >> testWhenABoardGameIsCreatedWithARandomDieThenTheGameStarts [
+"Bien"
 	| aBoardGame aBoard aCollectionOfDice aDie |
 	aBoard := Board
 		          withNumberOfBoxes: 3
@@ -84,25 +66,7 @@ ABoardGameTest >> testWhenABoardGameHasOneShipThenItWins [
 	aDie := Die of: 3.
 	aCollectionOfDice add: aDie.
 	aBoardGame := BoardGame
-		              withShip: 1
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
-	self assert: aBoardGame start
-]
-
-{ #category : #tests }
-ABoardGameTest >> testWhenABoardGameHasTwoShipThenGameBoardEnd [
-"Igual al de 3 o 4 ships - DUDA"
-	| aBoardGame aBoard aCollectionOfDice aDie |
-	aBoard := Board
-		          withNumberOfBoxes: 3
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	aCollectionOfDice := OrderedCollection new.
-	aDie := Die of: 3.
-	aCollectionOfDice add: aDie.
-	aBoardGame := BoardGame
-		              withShip: 2
+		              withShip: 4
 		              withBoard: aBoard
 		              andWithDice: aCollectionOfDice.
 	self assert: aBoardGame start 
