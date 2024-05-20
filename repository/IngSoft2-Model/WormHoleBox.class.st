@@ -1,6 +1,6 @@
 Class {
 	#name : #WormHoleBox,
-	#superclass : #Object,
+	#superclass : #Box,
 	#instVars : [
 		'position'
 	],
