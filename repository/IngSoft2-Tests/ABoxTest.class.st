@@ -10,6 +10,18 @@ ABoxTest >> should: aBlockError raise: aClassError withMessage: aMessage [
 ]
 
 { #category : #tests }
+ABoxTest >> testWhenABoxAddsAShipThenItCanBeRemoved_07 [
+
+	| aBox aShip |
+	aShip := Ship create.
+	aBox := Box create.
+	aBox addShip: aShip.
+	aBox removeShip: aShip.
+
+	self assert: aBox getShips size equals: 0
+]
+
+{ #category : #tests }
 ABoxTest >> testWhenABoxIsCreatedInPlace1ThenPositionIs1_01 [ 
 
 | aBox |
@@ -27,6 +39,16 @@ ABoxTest >> testWhenABoxIsCreatedWithAShipThenBoxHasACollectionOfShips_05 [
 	aBox := Box withShips: collectionShips.
 
 	self assert: aBox getShips equals: (OrderedCollection with: aShip)
+]
+
+{ #category : #tests }
+ABoxTest >> testWhenABoxIsCreatedWithoutAShipThenAShipCanBeAddedToTheBox_06 [
+
+	| aBox |
+	aBox := Box create.
+	aBox addShip: Ship create.
+
+	self assert: aBox getShips size equals: 1
 ]
 
 { #category : #tests }

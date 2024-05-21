@@ -8,6 +8,11 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
+{ #category : #operations }
+Box class >> create [
+	^self new initializeBox.
+]
+
 { #category : #'as yet unclassified' }
 Box class >> inPlace: aPlace [ 
 	aPlace < 1 ifTrue: [ Error signal: 'The position of the box must be greater or equal to 1' ].
@@ -19,6 +24,12 @@ Box class >> withShips: aCollectionOfShips [
 	^self new initializeWithShips: aCollectionOfShips.
 ]
 
+{ #category : #adding }
+Box >> addShip: aShip [
+
+	ships add: aShip
+]
+
 { #category : #'as yet unclassified' }
 Box >> getPosition [
 	^place.
@@ -27,6 +38,12 @@ Box >> getPosition [
 { #category : #'as yet unclassified' }
 Box >> getShips [
 	^ships.
+]
+
+{ #category : #initialization }
+Box >> initializeBox [
+
+	ships := OrderedCollection new
 ]
 
 { #category : #initialization }
@@ -47,4 +64,9 @@ Box >> moveShipTo [
 { #category : #accessing }
 Box >> place [
 	^ place
+]
+
+{ #category : #removing }
+Box >> removeShip: aShip [ 
+	ships remove: aShip ifAbsent: [ ]
 ]
