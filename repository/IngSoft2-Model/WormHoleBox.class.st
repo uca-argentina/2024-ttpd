@@ -18,8 +18,10 @@ WormHoleBox >> getPosition [
 ]
 
 { #category : #initialization }
-WormHoleBox >> initializeInPlace: aPosition [ 
-	position := aPosition.
+WormHoleBox >> initializeInPlace: aPosition [
+
+	super initializeBox.
+	position := aPosition
 ]
 
 { #category : #'as yet unclassified' }
