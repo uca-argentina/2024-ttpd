@@ -10,6 +10,17 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [ 
+
+	| aBoard |
+	aBoard := Board
+		          withNumberOfBoxes: 5
+		          withWormHoleStaringIn: 3
+		          andEndingIn: 4.
+	self assert: (aBoard isWormHoleAt: 3) equals: true
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
 
 	| aBoard |

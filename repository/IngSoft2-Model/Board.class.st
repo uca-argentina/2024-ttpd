@@ -29,6 +29,11 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
 ]
 
+{ #category : #accessing }
+Board >> boxAt: position [ 
+	^boxes at: position
+]
+
 { #category : #testing }
 Board >> exitWormHole [
 	^wormHole at:2.
@@ -51,10 +56,8 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wor
 	boxes := OrderedCollection new: aNumberOfBoxes.
 	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
 
-	wormHole := OrderedCollection new.
-
-	wormHole add: wormHoleStartPosition.
-	wormHole add: wormHoleEndPosition
+	boxes at: wormHoleStartPosition put: (WormHoleBox inPlace:  wormHoleEndPosition).
+	boxes at: wormHoleEndPosition put: (WormHoleBox inPlace: wormHoleStartPosition)
 ]
 
 { #category : #testing }
