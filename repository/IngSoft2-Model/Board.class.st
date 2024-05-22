@@ -29,6 +29,11 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
 ]
 
+{ #category : #accessing }
+Board >> boxAt: position [ 
+	^boxes at: position
+]
+
 { #category : #testing }
 Board >> exitWormHole [
 	^wormHole at:2.
@@ -36,7 +41,8 @@ Board >> exitWormHole [
 
 { #category : #testing }
 Board >> hasBoxes [
-	^boxes.
+
+	^ boxes size
 ]
 
 { #category : #testing }
@@ -44,18 +50,35 @@ Board >> hasWormHole [
 	^wormHole 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialize }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
 
-	boxes := aNumberOfBoxes.
+	boxes := OrderedCollection new: aNumberOfBoxes.
+	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
 
-	wormHole := OrderedCollection new.
-
-	wormHole add: wormHoleStartPosition.
-	wormHole add: wormHoleEndPosition.
+	boxes at: wormHoleStartPosition put: (WormHoleBox inPlace:  wormHoleEndPosition).
+	boxes at: wormHoleEndPosition put: (WormHoleBox inPlace: wormHoleStartPosition)
 ]
 
 { #category : #testing }
 Board >> inputWormHole [
 	^wormHole at:1.
+]
+
+{ #category : #accessing }
+Board >> isWormHoleAt: position [
+
+	^ (self boxAt: position) isKindOf: WormHoleBox
+]
+
+{ #category : #accessing }
+Board >> move: aShip withDiceResult: aDiceResult [
+
+	| actualPosition |
+	actualPosition := aShip moves: aDiceResult.
+
+	actualPosition < boxes size ifFalse: [
+		actualPosition := boxes size ].
+	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
+		aShip movesTo: (boxes at: actualPosition) effectsOn ].
 ]

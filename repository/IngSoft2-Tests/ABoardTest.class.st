@@ -10,7 +10,26 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
-ABoardTest >> testABoardCannotBeCreatedWithAWormHoleStartingIn0 [
+ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [ 
+
+	| aBoard |
+	aBoard := Board
+		          withNumberOfBoxes: 5
+		          withWormHoleStaringIn: 3
+		          andEndingIn: 4.
+	self assert: (aBoard isWormHoleAt: 3) equals: true
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 5.
+	self assert: aBoard hasBoxes equals: 5
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedWithAWormHoleStartingPostition0ThenBoardIsNotCreated [
 
 	self
 		should: [
@@ -20,58 +39,21 @@ ABoardTest >> testABoardCannotBeCreatedWithAWormHoleStartingIn0 [
 ]
 
 { #category : #tests }
-ABoardTest >> testABoardCannotBeCreatedWithLEssThanOneBox [
+ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
 	self
-		should: [Board withNumberOfBoxes: 0]
+		should: [ Board withNumberOfBoxes: 0 ]
 		raise: Error
-		withMessage: 'A Board must have at least 1 box to be created'.
+		withMessage: 'A Board must have at least 1 box to be created'
 ]
 
 { #category : #tests }
-ABoardTest >> testABoardIsCreatedWithOneBox [ 
+ABoardTest >> testWhenTheEndingPositionOfTheHoleIsBiggerThanNumberOfBoxesThenBoardNotCreated [
 
-| aBoard |
-aBoard := Board withNumberOfBoxes: 1.
-self assert: aBoard hasBoxes equals: 1.
-]
-
-{ #category : #tests }
-ABoardTest >> testABoardIsCreatedWithThreeBoxes [ 
-
-| aBoard |
-aBoard := Board withNumberOfBoxes: 3.
-self assert: aBoard hasBoxes equals: 3 .
-]
-
-{ #category : #tests }
-ABoardTest >> testAWormHoleEndingPositionMustBeLowerThanTheNumberOfBoxesOfTheBoard [
-	self should: [Board withNumberOfBoxes: 5 withWormHoleStaringIn: 1 andEndingIn: 6] raise: Error withMessage: 'The ending position of the wormHole must be lower than the number of boxes of the board' .
-]
-
-{ #category : #tests }
-ABoardTest >> testAWormHoleIsCreated [
-
-	| aBoard |
-	aBoard := Board
-		          withNumberOfBoxes: 5
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	self assert: aBoard hasWormHole = (OrderedCollection with: 1 with: 2)
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedWith1Box [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 1.
-	self assert: aBoard hasBoxes equals: 1
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedWith5Boxes [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 5.
-	self assert: aBoard hasBoxes equals: 5
+	self
+		should: [
+		Board withNumberOfBoxes: 5 withWormHoleStaringIn: 1 andEndingIn: 6 ]
+		raise: Error
+		withMessage:
+		'The ending position of the wormHole must be lower than the number of boxes of the board'
 ]

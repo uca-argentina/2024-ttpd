@@ -51,6 +51,13 @@ BoardGame >> cutIfSomeoneWin [
 	^false
 ]
 
+{ #category : #'as yet unclassified' }
+BoardGame >> cutIfSomeoneWin: playerTurn [
+
+	^(aCollectionOfShips at: playerTurn) getPosition >= board hasBoxes.
+
+]
+
 { #category : #accessing }
 BoardGame >> getPositionOfShipAt: anIndexOfShip [ 
 	| position |
@@ -69,42 +76,28 @@ BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andW
 	numberOfBoxes := aBoard.
 	aCollectionOfShips := OrderedCollection new.
 	[ numberOfShips ~= 0 ] whileTrue: [
-		aCollectionOfShips add: (Ship inPosition: 0).
+		aCollectionOfShips add: (Ship create).
 		numberOfShips := numberOfShips - 1 ].
 	board:= aBoard.
 	dice := aCollectionOfDice
 ]
 
 { #category : #accessing }
-BoardGame >> movesShipInTheBoard: playerTurn [
-
-	| positionToMove actualPosition ship |
-	ship := aCollectionOfShips at: playerTurn.
-	positionToMove := ship throwDice: dice.
-	actualPosition := (aCollectionOfShips at: playerTurn) moves:
-		                  positionToMove.
-
-	(board hasWormHole indexOf: actualPosition) ~= 0 ifTrue: [
-		(board exitWormHole = actualPosition)ifTrue: [ship initializeInPosition: board inputWormHole]  ifFalse: [ ship initializeInPosition: board exitWormHole  ]
-		 ]
-]
-
-{ #category : #accessing }
 BoardGame >> start [
 
-	| playerTurn |
-
+	| playerTurn play |
 	playerTurn := 1.
+	play := self cutIfSomeoneWin: playerTurn.
 
-[ self cutIfSomeoneWin ] whileFalse:  [
-    (self movesShipInTheBoard: playerTurn).
-	(playerTurn:=(self changeTurn:playerTurn)).
-    
-].
+	[ play ] whileFalse: [
+		board
+			move: (aCollectionOfShips at: playerTurn)
+			withDiceResult:
+			((aCollectionOfShips at: playerTurn) throwDice: dice).
+		play := self cutIfSomeoneWin: playerTurn.
+		playerTurn := self changeTurn: playerTurn ].
 
-	^self cutIfSomeoneWin 
-
-
+	^ self cutIfSomeoneWin
 ]
 
 { #category : #'as yet unclassified' }
