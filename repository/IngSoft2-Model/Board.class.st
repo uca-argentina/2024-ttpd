@@ -29,25 +29,9 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
 ]
 
-{ #category : #accessing }
-Board >> boxAt: position [ 
-	^boxes at: position
-]
-
-{ #category : #testing }
-Board >> exitWormHole [
-	^wormHole at:2.
-]
-
 { #category : #testing }
 Board >> hasBoxes [
-
-	^ boxes size
-]
-
-{ #category : #testing }
-Board >> hasWormHole [
-	^wormHole 
+	^boxes size.
 ]
 
 { #category : #initialize }
@@ -60,15 +44,10 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wor
 	boxes at: wormHoleEndPosition put: (WormHoleBox inPlace: wormHoleStartPosition)
 ]
 
-{ #category : #testing }
-Board >> inputWormHole [
-	^wormHole at:1.
-]
-
 { #category : #accessing }
 Board >> isWormHoleAt: position [
 
-	^ (self boxAt: position) isKindOf: WormHoleBox
+	^ (boxes at: position) isKindOf: WormHoleBox
 ]
 
 { #category : #accessing }
