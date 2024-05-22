@@ -29,9 +29,3 @@ WormHoleBox >> initializeInPlace: aPosition [
 	super initializeBox.
 	position := aPosition
 ]
-
-{ #category : #'as yet unclassified' }
-WormHoleBox >> moveShipTo [
-
-	^position
-]
