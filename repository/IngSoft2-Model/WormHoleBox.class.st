@@ -13,6 +13,12 @@ WormHoleBox class >> inPlace: aPosition [
 ]
 
 { #category : #'as yet unclassified' }
+WormHoleBox >> effectsOn [
+
+	^position
+]
+
+{ #category : #'as yet unclassified' }
 WormHoleBox >> getPosition [
 	^position.
 ]
@@ -26,5 +32,6 @@ WormHoleBox >> initializeInPlace: aPosition [
 
 { #category : #'as yet unclassified' }
 WormHoleBox >> moveShipTo [
-	^2.
+
+	^position
 ]

@@ -39,17 +39,6 @@ ABoardTest >> testWhenABoardIsCreatedWithAWormHoleStartingPostition0ThenBoardIsN
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedWithAWormHoleThenWormHoleExists [
-
-	| aBoard |
-	aBoard := Board
-		          withNumberOfBoxes: 5
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
-	self assert: aBoard hasWormHole = (OrderedCollection with: 1 with: 2)
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
 	self

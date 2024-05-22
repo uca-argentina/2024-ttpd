@@ -64,3 +64,21 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wor
 Board >> inputWormHole [
 	^wormHole at:1.
 ]
+
+{ #category : #accessing }
+Board >> isWormHoleAt: position [
+
+	^ (self boxAt: position) isKindOf: WormHoleBox
+]
+
+{ #category : #accessing }
+Board >> move: aShip withDiceResult: aDiceResult [
+
+	| actualPosition |
+	actualPosition := aShip moves: aDiceResult.
+
+	actualPosition < boxes size ifFalse: [
+		actualPosition := boxes size ].
+	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
+		aShip movesTo: (boxes at: actualPosition) effectsOn ].
+]

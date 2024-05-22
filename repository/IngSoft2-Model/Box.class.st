@@ -31,6 +31,12 @@ Box >> addShip: aShip [
 ]
 
 { #category : #'as yet unclassified' }
+Box >> effectsOn [
+
+	^0
+]
+
+{ #category : #'as yet unclassified' }
 Box >> getPosition [
 	^place.
 ]

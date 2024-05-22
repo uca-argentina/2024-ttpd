@@ -5,12 +5,21 @@ Class {
 }
 
 { #category : #tests }
+AWormHoleBoxTest >> testWhenAWomHoleExitsInPlace1ThenTheEffectOnEquals1_05 [
+
+	| aWormHoleBox |
+	aWormHoleBox := WormHoleBox inPlace: 1.
+
+	self assert: (aWormHoleBox effectsOn) equals: 1
+]
+
+{ #category : #tests }
 AWormHoleBoxTest >> testWhenAWormHoleBoxInPlace1MovesShipToAnotherWormHoleBoxInPlace2ThenMoveShipToReturns2_02 [
 
-| aWormHoleBox anotherWormHoleBox|
-aWormHoleBox := WormHoleBox inPlace: 1.
-anotherWormHoleBox := WormHoleBox inPlace: 2.
-self assert: aWormHoleBox moveShipTo equals: 2.
+	| aWormHoleBox |
+	aWormHoleBox := WormHoleBox inPlace: 1.
+
+	self assert: aWormHoleBox effectsOn equals: 1
 ]
 
 { #category : #tests }

@@ -22,6 +22,15 @@ ABoxTest >> testWhenABoxAddsAShipThenItCanBeRemoved_07 [
 ]
 
 { #category : #tests }
+ABoxTest >> testWhenABoxHasNoEffectOnThenItReturnsNoEffect_08 [
+
+	| aBox |
+	aBox := Box create.
+
+	self assert: aBox effectsOn equals: 0
+]
+
+{ #category : #tests }
 ABoxTest >> testWhenABoxIsCreatedInPlace1ThenPositionIs1_01 [ 
 
 | aBox |
