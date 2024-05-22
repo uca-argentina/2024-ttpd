@@ -62,16 +62,6 @@ Box >> initializeWithShips: aCollectionOfShips [
 	ships := aCollectionOfShips
 ]
 
-{ #category : #'as yet unclassified' }
-Box >> moveShipTo [
-	^place
-]
-
-{ #category : #accessing }
-Box >> place [
-	^ place
-]
-
 { #category : #removing }
 Box >> removeShip: aShip [ 
 	ships remove: aShip ifAbsent: [ ]
