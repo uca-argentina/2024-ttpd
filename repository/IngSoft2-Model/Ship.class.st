@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'position',
-		'fuel'
+		'fuel',
+		'maxFuel'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -11,6 +12,11 @@ Class {
 { #category : #operations }
 Ship class >> create [
 	^self new initializeShip.
+]
+
+{ #category : #'as yet unclassified' }
+Ship class >> createWithMaxFuel: maxFuel [ 
+	^self new intitializeWithMaxFuel: maxFuel.
 ]
 
 { #category : #'as yet unclassified' }
@@ -37,6 +43,13 @@ Ship >> initializeShip [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> intitializeWithMaxFuel: amountMaxFuel [ 
+	position:= 0.
+	fuel:= amountMaxFuel.
+	maxFuel:= amountMaxFuel.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> moves: aNumber [
 	position := position + aNumber.
 	^(position).
@@ -45,6 +58,11 @@ Ship >> moves: aNumber [
 { #category : #'as yet unclassified' }
 Ship >> movesTo: aPosition [ 
 	position := aPosition.
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> restartFuel [
+	fuel:= maxFuel .
 ]
 
 { #category : #'as yet unclassified' }

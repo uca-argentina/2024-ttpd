@@ -37,12 +37,35 @@ AShipTest >> testWhenAShipConsumesFuelThenTheFuelReduces_02 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipCreatesWithAnAmountOfMaxFuelThenTheFuelIsMaxFuel_03 [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 10.
+
+	self assert: aShip getFuel equals: 10
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipHasFuelThenGetFuelReturnsIt_01 [
 	| aShip |
 	aShip := Ship create.
 	
 	
 	self assert: (aShip getFuel) equals: 100
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipRestartsTheFuelThenFuelIsMaxFuel_04 [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 100.
+	aShip consumeFuel: 50.
+	
+	self assert: aShip getFuel equals: 50.
+	
+	aShip restartFuel.
+
+	self assert: aShip getFuel equals: 100
 ]
 
 { #category : #tests }
