@@ -22,6 +22,16 @@ BoardGame class >> withShip: aNumberOfShips andBoard: aBoard [
 ]
 
 { #category : #'as yet unclassified' }
+BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollectionOfDice andwithNumberOfLaps: numberOfLaps [
+
+	^ self new
+		  initializeWithShips: aNumberOfShips
+		  whithBoard: aBoard
+		  withDice: aCollectionOfDice
+		  andwithNumberOfLaps: numberOfLaps
+]
+
+{ #category : #'as yet unclassified' }
 BoardGame class >> withShip: aNumberOfShips withBoard: aBoard andWithDice: aCollectionOfDice [
 
 	aNumberOfShips < 1 ifTrue: [
@@ -79,6 +89,23 @@ BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andW
 		aCollectionOfShips add: (Ship create).
 		numberOfShips := numberOfShips - 1 ].
 	board:= aBoard.
+	dice := aCollectionOfDice
+]
+
+{ #category : #initialization }
+BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
+
+	| numberOfShips numberOfBoxes maxFuel |
+	numberOfShips := aNumberOfShips.
+	numberOfBoxes := aBoard.
+	maxFuel := 0.
+	aCollectionOfDice do: [ :die | maxFuel := maxFuel + die maximumValue ].
+	maxFuel := maxFuel * 2.
+	aCollectionOfShips := OrderedCollection new.
+	[ numberOfShips ~= 0 ] whileTrue: [
+		aCollectionOfShips add: (Ship createWithMaxFuel: maxFuel).
+		numberOfShips := numberOfShips - 1 ].
+	board := aBoard.
 	dice := aCollectionOfDice
 ]
 

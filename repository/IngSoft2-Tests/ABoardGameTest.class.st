@@ -81,6 +81,25 @@ ABoardGameTest >> testWhenAGameFinishesThenShipsPositionsCanBeShown [
 ]
 
 { #category : #tests }
+ABoardGameTest >> testWhenAGameHasANumberOfLapsThenTheGameStarts_03 [
+
+	| aBoardGame aBoard aCollectionOfDice aDie |
+	aBoard := Board
+		          withNumberOfBoxes: 3
+		          withWormHoleStaringIn: 1
+		          andEndingIn: 2.
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+	aBoardGame := BoardGame
+		              withShip: 4
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 1.
+	self assert: aBoardGame start.
+]
+
+{ #category : #tests }
 ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
 
 	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
