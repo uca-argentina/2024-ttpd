@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'position',
 		'fuel',
-		'maxFuel'
+		'maxFuel',
+		'laps'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -31,6 +32,11 @@ Ship >> getFuel [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> getLaps [
+	^laps
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> getPosition [
 	^position.
 ]
@@ -47,6 +53,7 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	position:= 0.
 	fuel:= amountMaxFuel.
 	maxFuel:= amountMaxFuel.
+	laps:= 1.
 ]
 
 { #category : #'as yet unclassified' }

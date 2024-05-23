@@ -46,6 +46,15 @@ AShipTest >> testWhenAShipCreatesWithAnAmountOfMaxFuelThenTheFuelIsMaxFuel_03 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipHasAnAmountOfLapsThenGetLapsReturnsLaps_05 [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 100.
+	
+	self assert: aShip getLaps equals: 1
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipHasFuelThenGetFuelReturnsIt_01 [
 	| aShip |
 	aShip := Ship create.
