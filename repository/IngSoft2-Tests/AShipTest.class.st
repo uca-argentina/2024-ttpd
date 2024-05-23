@@ -28,6 +28,24 @@ AShipTest >> testWhen2LoadedDieOf3And4FacesAreThrownThenThePositionOfTheShipIsUp
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipConsumesFuelThenTheFuelReduces_02 [
+	| aShip |
+	aShip := Ship create.
+	aShip consumeFuel: 50.
+	
+	self assert: (aShip getFuel) equals: 50
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipHasFuelThenGetFuelReturnsIt_01 [
+	| aShip |
+	aShip := Ship create.
+	
+	
+	self assert: (aShip getFuel) equals: 100
+]
+
+{ #category : #tests }
 AShipTest >> testWhenMoreThanOneLoadedDieAreThrownThenThrowDiceReturnsTheSumOfResults [
 
 	| aShip aCollectionOfDice aDie anotherDie |

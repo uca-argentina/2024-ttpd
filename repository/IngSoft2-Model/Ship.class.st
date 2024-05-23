@@ -2,7 +2,8 @@ Class {
 	#name : #Ship,
 	#superclass : #Object,
 	#instVars : [
-		'position'
+		'position',
+		'fuel'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -13,13 +14,26 @@ Ship class >> create [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> consumeFuel: amount [
+
+	fuel := fuel - amount
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> getFuel [
+	^fuel
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> getPosition [
 	^position.
 ]
 
 { #category : #initialization }
 Ship >> initializeShip [
-	position := 0
+
+	position := 0.
+	fuel := 100
 ]
 
 { #category : #'as yet unclassified' }
