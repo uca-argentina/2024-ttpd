@@ -78,6 +78,15 @@ AShipTest >> testWhenAShipRestartsTheFuelThenFuelIsMaxFuel_04 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipRunsOutOfFuelThenFuelIsRestoredToMax_09 [
+	| aShip aBoard |
+	aShip := Ship createWithMaxFuel: 10.
+	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aBoard move: aShip withDiceResult: 15.
+	self assert: aShip getFuel equals: 10.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenMoreThanOneLoadedDieAreThrownThenThrowDiceReturnsTheSumOfResults [
 
 	| aShip aCollectionOfDice aDie anotherDie |
@@ -101,6 +110,15 @@ AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdat
 	positionsToMove := aShip throwDice: aCollectionOfDice.
 	aShip moves: positionsToMove.
 	self assert: aShip getPosition = 3
+]
+
+{ #category : #tests }
+AShipTest >> testWhenShipIsOutOfFuelThenPositionIsUpdatedTo1_08 [
+	| aShip aBoard |
+	aShip := Ship createWithMaxFuel: 10.
+	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aBoard move: aShip withDiceResult: 15.
+	self assert: aShip getPosition equals: 1.
 ]
 
 { #category : #tests }

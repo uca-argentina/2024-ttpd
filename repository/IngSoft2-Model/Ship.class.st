@@ -22,8 +22,8 @@ Ship class >> createWithMaxFuel: maxFuel [
 
 { #category : #'as yet unclassified' }
 Ship >> consumeFuel: amount [
-
-	fuel := fuel - amount
+	fuel - amount > 0 ifTrue: [ fuel := fuel - amount ] ifFalse: [ fuel := maxFuel. position := 1 ]
+	
 ]
 
 { #category : #'as yet unclassified' }
