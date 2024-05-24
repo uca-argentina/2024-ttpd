@@ -104,6 +104,24 @@ AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdat
 ]
 
 { #category : #tests }
+AShipTest >> testWhenShipMoves4PositionsThenPositionIsUpdatedTo5_07 [
+	| aShip aBoard |
+	aShip := Ship createWithMaxFuel: 100.
+	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aBoard move: aShip withDiceResult: 4.
+	self assert: aShip getPosition equals: 5.
+]
+
+{ #category : #tests }
+AShipTest >> testWhenShipMovesInBoard4PacesThenFuelIsCosumedBy4_06 [
+	| aShip aBoard |
+	aShip := Ship createWithMaxFuel: 100.
+	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aBoard move: aShip withDiceResult: 4.
+	self assert: aShip getFuel equals: 96.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
 
 	| aShip aCollectionOfDice aDie |

@@ -53,11 +53,13 @@ Board >> isWormHoleAt: position [
 { #category : #accessing }
 Board >> move: aShip withDiceResult: aDiceResult [
 
-	| actualPosition |
+	| actualPosition positionsMoved|
 	actualPosition := aShip moves: aDiceResult.
 
 	actualPosition < boxes size ifFalse: [
 		actualPosition := boxes size ].
 	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
 		aShip movesTo: (boxes at: actualPosition) effectsOn ].
+	positionsMoved := aDiceResult + (boxes at: actualPosition) effectsOn.
+	aShip consumeFuel: positionsMoved.
 ]

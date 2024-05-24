@@ -50,7 +50,7 @@ Ship >> initializeShip [
 
 { #category : #'as yet unclassified' }
 Ship >> intitializeWithMaxFuel: amountMaxFuel [ 
-	position:= 0.
+	position:= 1.
 	fuel:= amountMaxFuel.
 	maxFuel:= amountMaxFuel.
 	laps:= 1.
