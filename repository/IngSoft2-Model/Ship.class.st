@@ -80,3 +80,8 @@ Ship >> throwDice: aCollectionOfDice [
 	 positionsToMove := positionsToMove + (die throw). ].	
 	^positionsToMove.
 ]
+
+{ #category : #'as yet unclassified' }
+Ship >> updateLaps [
+	laps := laps + 1.
+]

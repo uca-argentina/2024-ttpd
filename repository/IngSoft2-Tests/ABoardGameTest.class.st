@@ -104,16 +104,13 @@ ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Win
 
 	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
 	aBoard := Board
-		          withNumberOfBoxes: 7
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
+		          withNumberOfBoxes: 6
+		          withWormHoleStaringIn: 2
+		          andEndingIn: 3.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 3.
+	aLoadedDie := LoadedDie of: 10.
 	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
+	aBoardGame := BoardGame withShip: 2 withBoard: aBoard WithDice: aCollectionOfDice andwithNumberOfLaps: 1.
 	aBoardGame start.
 	self assert: aBoardGame winnerIs equals: 1
 ]

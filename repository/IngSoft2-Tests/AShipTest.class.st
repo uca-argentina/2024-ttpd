@@ -140,6 +140,15 @@ AShipTest >> testWhenShipMovesInBoard4PacesThenFuelIsCosumedBy4_06 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenShipWantsToMoveMorePositionsThanTheAmountOfBoxesThenLapsIsUpdated_10 [
+	| aShip aBoard |
+	aShip := Ship createWithMaxFuel: 1000.
+	aBoard := Board withNumberOfBoxes: 10 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aBoard move: aShip withDiceResult: 15.
+	self assert: aShip getLaps equals: 2.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
 
 	| aShip aCollectionOfDice aDie |
