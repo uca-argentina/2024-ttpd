@@ -1,0 +1,27 @@
+Class {
+	#name : #PersonalizedBoard,
+	#superclass : #Object,
+	#instVars : [
+		'boxes'
+	],
+	#category : #'IngSoft2-Tests'
+}
+
+{ #category : #'as yet unclassified' }
+PersonalizedBoard class >> withANumberOfBoxes: aNumberOfBoxes [
+
+	aNumberOfBoxes < 1 ifTrue: [
+		Error signal: 'A Board must have at least 1 box to be created' ].
+	^ self new initializeWithNumberOfBoxes: aNumberOfBoxes
+]
+
+{ #category : #testing }
+PersonalizedBoard >> hasBoxes [
+	^boxes size.
+]
+
+{ #category : #initialization }
+PersonalizedBoard >> initializeWithNumberOfBoxes: aNumberOfBoxes [ 
+	boxes := OrderedCollection new: aNumberOfBoxes.
+	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
+]
