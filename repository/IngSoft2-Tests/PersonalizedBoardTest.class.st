@@ -15,6 +15,14 @@ PersonalizedBoardTest >> should: anErrorBlock raise: anErrorClass withMessage: a
 ]
 
 { #category : #tests }
+PersonalizedBoardTest >> testAPersonalizedBoardCanBeCreatedWith10BoxesAlways_04 [
+
+	|aPersonalizedBoard|
+aPersonalizedBoard := PersonalizedBoard createWith10Boxes.
+self assert: aPersonalizedBoard hasBoxes equals: 10.
+]
+
+{ #category : #tests }
 PersonalizedBoardTest >> testAPersonalizedBoardIsCreatedWithANumberOfBoxes_01 [
 
 | aPersonalizedBoard |

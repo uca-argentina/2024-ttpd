@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+PersonalizedBoard class >> createWith10Boxes [
+	^self new initializeWith10Boxes.
+]
+
+{ #category : #'as yet unclassified' }
 PersonalizedBoard class >> withANumberOfBoxes: aNumberOfBoxes [
 
 	aNumberOfBoxes < 1 ifTrue: [
@@ -18,6 +23,12 @@ PersonalizedBoard class >> withANumberOfBoxes: aNumberOfBoxes [
 { #category : #testing }
 PersonalizedBoard >> hasBoxes [
 	^boxes size.
+]
+
+{ #category : #initialization }
+PersonalizedBoard >> initializeWith10Boxes [
+	boxes := OrderedCollection new: 10.
+	1 to: 10 do: [ :i | boxes add: Box new ].
 ]
 
 { #category : #initialization }
