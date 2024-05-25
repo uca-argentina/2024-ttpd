@@ -30,3 +30,13 @@ PersonalizedBoardTest >> testWhenAPersonalizedBoardIsCreatedWithLessThan1BoxThen
 		raise: Error
 		withMessage: 'A Board must have at least 1 box to be created'
 ]
+
+{ #category : #tests }
+PersonalizedBoardTest >> testWhenAPersonalizedBoardMovesShipThenShipsPositionIsUpdated_03 [
+
+	| aShip aPersonalizedBoard |
+	aShip := Ship createWithMaxFuel: 1000.
+	aPersonalizedBoard := PersonalizedBoard withANumberOfBoxes: 20.
+	aPersonalizedBoard move: aShip withDiceResult: 4.
+	self assert: aShip getPosition equals: 5.
+]

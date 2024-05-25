@@ -25,3 +25,16 @@ PersonalizedBoard >> initializeWithNumberOfBoxes: aNumberOfBoxes [
 	boxes := OrderedCollection new: aNumberOfBoxes.
 	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
 ]
+
+{ #category : #accessing }
+PersonalizedBoard >> move: aShip withDiceResult: aDiceResult [ 
+	| actualPosition positionsMoved|
+	actualPosition := aShip moves: aDiceResult.
+	actualPosition > boxes size ifTrue: [
+		actualPosition := actualPosition - (boxes size). 
+		aShip updateLaps. ].
+	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
+		aShip movesTo: (boxes at: actualPosition) effectsOn ].
+	positionsMoved := aDiceResult + (boxes at: actualPosition) effectsOn.
+	aShip consumeFuel: positionsMoved.
+]
