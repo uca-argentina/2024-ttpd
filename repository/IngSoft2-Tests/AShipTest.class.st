@@ -46,6 +46,15 @@ AShipTest >> testWhenAShipCreatesWithAnAmountOfMaxFuelThenTheFuelIsMaxFuel_03 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipFinishesLapsThenVictory_13 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip updateLaps.
+	aShip checkIfWin: 2.
+	self assert: aShip victory.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipHasAnAmountOfLapsThenGetLapsReturnsLaps_05 [
 
 	| aShip |
@@ -61,6 +70,13 @@ AShipTest >> testWhenAShipHasFuelThenGetFuelReturnsIt_01 [
 	
 	
 	self assert: (aShip getFuel) equals: 100
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipIsCreatedThenNoVictory_12 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	self deny: aShip victory.
 ]
 
 { #category : #tests }
