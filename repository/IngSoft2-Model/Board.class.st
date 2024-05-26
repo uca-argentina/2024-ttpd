@@ -34,6 +34,15 @@ Board >> hasBoxes [
 	^boxes size.
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [ 
+	
+	boxes := OrderedCollection new: aNumberOfBoxes.
+	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
+	
+	
+]
+
 { #category : #initialize }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
 
