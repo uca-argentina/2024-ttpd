@@ -85,7 +85,8 @@ ABoardGameTest >> testWhenABoardGameIsCreatedWithARandomDieThenTheGameStarts [
 	aBoardGame := BoardGame
 		              withShip: 4
 		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
 	self assert: aBoardGame start
 ]
 
