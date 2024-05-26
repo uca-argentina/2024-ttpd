@@ -52,7 +52,7 @@ ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
 		              withBoard: aPersonalizedBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start.
+	self assert: aBoardGame getLapsToDo equals: 2.
 ]
 
 { #category : #tests }
