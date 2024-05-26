@@ -1,5 +1,5 @@
 Class {
 	#name : #Playing,
 	#superclass : #State,
-	#category : #'IngSoft2-Tests'
+	#category : #'IngSoft2-Model'
 }
