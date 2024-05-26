@@ -107,3 +107,8 @@ Ship >> updateLaps [
 Ship >> updateStateToWinner [
 	state:=Winner new.
 ]
+
+{ #category : #'as yet unclassified' }
+Ship >> victory [
+	^state checkPlay.
+]

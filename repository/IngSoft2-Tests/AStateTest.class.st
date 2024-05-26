@@ -5,6 +5,22 @@ Class {
 }
 
 { #category : #tests }
+AStateTest >> testAPlayingStateChecksPlay_06 [
+
+	| aState |
+	aState := Playing new.
+	self deny: aState checkPlay.
+]
+
+{ #category : #tests }
+AStateTest >> testAStateChecksPlay_05 [
+
+	| aState |
+	aState := State new.
+	self deny: aState checkPlay.
+]
+
+{ #category : #tests }
 AStateTest >> testWhenAShipIsCreatedThenItHasAState_01 [
 
 	| aShip |

@@ -121,7 +121,7 @@ BoardGame >> start [
 
 	| playerTurn play |
 	playerTurn := 1.
-	play := self cutIfSomeoneWin: playerTurn.
+	play := self cutIfSomeoneWin: playerTurn .
 
 	[ play ] whileFalse: [
 		board
