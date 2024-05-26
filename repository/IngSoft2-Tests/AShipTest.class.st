@@ -103,6 +103,14 @@ AShipTest >> testWhenAShipRunsOutOfFuelThenFuelIsRestoredToMax_09 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipRunsOutOfFuelThenNoVictory_14 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	self deny: aShip victory.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenLapsIsUpdatedAndTotalLapsToDoIs2ThenStateChangesToWinner_11 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
