@@ -100,6 +100,12 @@ Ship >> restartFuel [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> skipTurn [
+	state := CantPlay skip: 1.
+	fuel := maxFuel.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> throwDice: aCollectionOfDice [ 
 	| positionsToMove |
 	positionsToMove := 0.
