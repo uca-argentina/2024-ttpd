@@ -5,7 +5,8 @@ Class {
 		'position',
 		'fuel',
 		'maxFuel',
-		'laps'
+		'laps',
+		'state'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -41,6 +42,11 @@ Ship >> getPosition [
 	^position.
 ]
 
+{ #category : #'as yet unclassified' }
+Ship >> getState [
+	^state.
+]
+
 { #category : #initialization }
 Ship >> initializeShip [
 
@@ -54,6 +60,7 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	fuel:= amountMaxFuel.
 	maxFuel:= amountMaxFuel.
 	laps:= 1.
+	state := Playing new.
 ]
 
 { #category : #'as yet unclassified' }
