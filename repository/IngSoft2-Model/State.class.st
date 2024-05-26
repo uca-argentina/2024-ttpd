@@ -8,3 +8,8 @@ Class {
 State >> checkPlay [
 	^false.
 ]
+
+{ #category : #'as yet unclassified' }
+State >> checkTurnState: aShip [ 
+	^true.
+]

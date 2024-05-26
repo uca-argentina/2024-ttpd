@@ -22,8 +22,18 @@ Ship class >> createWithMaxFuel: maxFuel [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> changeStateToPlay [
+	state := Playing new.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> checkIfWin: aNumberOfLaps [ 
 	laps >= aNumberOfLaps ifTrue: [state:=Winner new].
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> checkTurn [
+	^state checkTurnState: self.
 ]
 
 { #category : #'as yet unclassified' }
@@ -34,7 +44,7 @@ Ship >> consumeFuel: amount [
 		ifFalse: [
 			fuel := maxFuel.
 			position := 1.
-			state := CantPlay new ]
+			state := CantPlay skip: 2 ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -90,6 +100,12 @@ Ship >> restartFuel [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> skipTurn [
+	state := CantPlay skip: 1.
+	fuel := maxFuel.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> throwDice: aCollectionOfDice [ 
 	| positionsToMove |
 	positionsToMove := 0.
@@ -106,4 +122,9 @@ Ship >> updateLaps [
 { #category : #'as yet unclassified' }
 Ship >> updateStateToWinner [
 	state:=Winner new.
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> victory [
+	^state checkPlay.
 ]

@@ -28,6 +28,15 @@ AShipTest >> testWhen2LoadedDieOf3And4FacesAreThrownThenThePositionOfTheShipIsUp
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipChangesItStateToPlayThenStateIsKindOfPlaying_18 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	aShip changeStateToPlay.
+	self assert: (aShip getState isKindOf: Playing).
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipConsumesFuelThenTheFuelReduces_02 [
 	| aShip |
 	aShip := Ship create.
@@ -43,6 +52,23 @@ AShipTest >> testWhenAShipCreatesWithAnAmountOfMaxFuelThenTheFuelIsMaxFuel_03 [
 	aShip := Ship createWithMaxFuel: 10.
 
 	self assert: aShip getFuel equals: 10
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipDecidesToSkipOneTurnThenStateChangesToCantPlay_19 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip skipTurn.
+	self assert: (aShip getState isKindOf: CantPlay).
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipFinishesLapsThenVictory_13 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip updateLaps.
+	aShip checkIfWin: 2.
+	self assert: aShip victory.
 ]
 
 { #category : #tests }
@@ -64,6 +90,20 @@ AShipTest >> testWhenAShipHasFuelThenGetFuelReturnsIt_01 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipIsCreatedThenNoVictory_12 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	self deny: aShip victory.
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipIsPlayingStateThenTheShipCanPlay_16 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	self assert: aShip checkTurn.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipRestartsTheFuelThenFuelIsMaxFuel_04 [
 
 	| aShip |
@@ -78,12 +118,28 @@ AShipTest >> testWhenAShipRestartsTheFuelThenFuelIsMaxFuel_04 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipRunsOutOfFuelThenCheckTurnReturnsFalse_17 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	self deny: aShip checkTurn.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipRunsOutOfFuelThenFuelIsRestoredToMax_09 [
 	| aShip aBoard |
 	aShip := Ship createWithMaxFuel: 10.
 	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
 	aBoard move: aShip withDiceResult: 15.
 	self assert: aShip getFuel equals: 10.
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipRunsOutOfFuelThenNoVictory_14 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	self deny: aShip victory.
 ]
 
 { #category : #tests }
@@ -122,6 +178,15 @@ AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdat
 ]
 
 { #category : #tests }
+AShipTest >> testWhenShipDecidesToSkipATurnThenFuelIsRestoresToMaxValue_20 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 200.
+	aShip skipTurn.
+	self assert: aShip getFuel equals: 1000 .
+]
+
+{ #category : #tests }
 AShipTest >> testWhenShipIsOutOfFuelThenPositionIsUpdatedTo1_08 [
 	| aShip aBoard |
 	aShip := Ship createWithMaxFuel: 10.
@@ -146,6 +211,14 @@ AShipTest >> testWhenShipMovesInBoard4PacesThenFuelIsCosumedBy4_06 [
 	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
 	aBoard move: aShip withDiceResult: 4.
 	self assert: aShip getFuel equals: 96.
+]
+
+{ #category : #tests }
+AShipTest >> testWhenShipRunsOutOfFuelThenTurnsToSkipIs2_15 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	self assert: (aShip getState) getContTurns equals: 2.
 ]
 
 { #category : #tests }
