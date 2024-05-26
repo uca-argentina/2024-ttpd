@@ -87,6 +87,15 @@ AShipTest >> testWhenAShipRunsOutOfFuelThenFuelIsRestoredToMax_09 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenLapsIsUpdatedAndTotalLapsToDoIs2ThenStateChangesToWinner_11 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip updateLaps.
+	aShip checkIfWin: 2.
+	self assert: (aShip getState isKindOf: Winner).
+]
+
+{ #category : #tests }
 AShipTest >> testWhenMoreThanOneLoadedDieAreThrownThenThrowDiceReturnsTheSumOfResults [
 
 	| aShip aCollectionOfDice aDie anotherDie |

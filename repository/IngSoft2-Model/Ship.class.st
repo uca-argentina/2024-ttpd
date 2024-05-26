@@ -22,6 +22,11 @@ Ship class >> createWithMaxFuel: maxFuel [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> checkIfWin: aNumberOfLaps [ 
+	laps >= aNumberOfLaps ifTrue: [state:=Winner new].
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> consumeFuel: amount [
 
 	fuel - amount > 0
