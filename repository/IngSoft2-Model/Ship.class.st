@@ -5,7 +5,8 @@ Class {
 		'position',
 		'fuel',
 		'maxFuel',
-		'laps'
+		'laps',
+		'state'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -21,9 +22,19 @@ Ship class >> createWithMaxFuel: maxFuel [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> checkIfWin: aNumberOfLaps [ 
+	laps >= aNumberOfLaps ifTrue: [state:=Winner new].
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> consumeFuel: amount [
-	fuel - amount > 0 ifTrue: [ fuel := fuel - amount ] ifFalse: [ fuel := maxFuel. position := 1 ]
-	
+
+	fuel - amount > 0
+		ifTrue: [ fuel := fuel - amount ]
+		ifFalse: [
+			fuel := maxFuel.
+			position := 1.
+			state := CantPlay new ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,6 +52,11 @@ Ship >> getPosition [
 	^position.
 ]
 
+{ #category : #'as yet unclassified' }
+Ship >> getState [
+	^state.
+]
+
 { #category : #initialization }
 Ship >> initializeShip [
 
@@ -54,6 +70,7 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	fuel:= amountMaxFuel.
 	maxFuel:= amountMaxFuel.
 	laps:= 1.
+	state := Playing new.
 ]
 
 { #category : #'as yet unclassified' }
@@ -84,4 +101,9 @@ Ship >> throwDice: aCollectionOfDice [
 { #category : #'as yet unclassified' }
 Ship >> updateLaps [
 	laps := laps + 1.
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> updateStateToWinner [
+	state:=Winner new.
 ]

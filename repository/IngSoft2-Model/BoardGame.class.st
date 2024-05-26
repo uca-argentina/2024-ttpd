@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'aCollectionOfShips',
 		'board',
-		'dice'
+		'dice',
+		'laps'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -68,6 +69,11 @@ BoardGame >> cutIfSomeoneWin: playerTurn [
 
 ]
 
+{ #category : #'as yet unclassified' }
+BoardGame >> getLapsToDo [
+	^laps.
+]
+
 { #category : #accessing }
 BoardGame >> getPositionOfShipAt: anIndexOfShip [ 
 	| position |
@@ -106,7 +112,8 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 		aCollectionOfShips add: (Ship createWithMaxFuel: maxFuel).
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
-	dice := aCollectionOfDice
+	dice := aCollectionOfDice.
+	laps := aNumberOfLaps.
 ]
 
 { #category : #accessing }
@@ -114,7 +121,7 @@ BoardGame >> start [
 
 	| playerTurn play |
 	playerTurn := 1.
-	play := self cutIfSomeoneWin: playerTurn.
+	play := self cutIfSomeoneWin: playerTurn .
 
 	[ play ] whileFalse: [
 		board

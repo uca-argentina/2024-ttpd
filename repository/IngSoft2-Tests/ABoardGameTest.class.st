@@ -40,6 +40,22 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_02 [
 ]
 
 { #category : #tests }
+ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
+
+	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
+	aPersonalizedBoard := PersonalizedBoard withANumberOfBoxes: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 1
+		              withBoard: aPersonalizedBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	self assert: aBoardGame getLapsToDo equals: 2.
+]
+
+{ #category : #tests }
 ABoardGameTest >> testWhenABoardGameIsCreatedWithAPersonalizedBoardThenTheGameStarts_04 [
 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
@@ -69,7 +85,8 @@ ABoardGameTest >> testWhenABoardGameIsCreatedWithARandomDieThenTheGameStarts [
 	aBoardGame := BoardGame
 		              withShip: 4
 		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
 	self assert: aBoardGame start
 ]
 
