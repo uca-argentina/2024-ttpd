@@ -6,7 +6,9 @@ Class {
 		'wormHole',
 		'blackHoleBoxes',
 		'moonWalkBoxes',
-		'hyperGravityBoxes'
+		'hyperGravityBoxes',
+		'hyperJumpBoxes',
+		'atomicBombBoxes'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -35,11 +37,7 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 { #category : #'as yet unclassified' }
 Board >> getAtomicBomb [
 
-	| cont |
-	cont := 0.
-	boxes do: [ :box |
-		(box isKindOf: AtomicBombBox ) ifTrue: [ cont := cont + 1 ] ].
-	^ cont
+	^atomicBombBoxes.
 ]
 
 { #category : #'as yet unclassified' }
@@ -56,11 +54,7 @@ Board >> getHyperGravityBoxes [
 { #category : #'as yet unclassified' }
 Board >> getHyperJumpBoxes [
 
-	| cont |
-	cont := 0.
-	boxes do: [ :box |
-		(box isKindOf: HyperJumpBox ) ifTrue: [ cont := cont + 1 ] ].
-	^ cont
+	^hyperJumpBoxes 
 ]
 
 { #category : #'as yet unclassified' }
@@ -85,7 +79,9 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 	numberOfMoonWalkBoxes := aNumberOfBoxes * 0.1.
 	moonWalkBoxes := OrderedCollection new.
 	numberOfHyperJumpBoxes := aNumberOfBoxes * 0.08.
+	hyperJumpBoxes := OrderedCollection new.
 	numberOfAtomicBombBoxes := aNumberOfBoxes * 0.02.
+	atomicBombBoxes := OrderedCollection new.
 	numberOfNormalBoxes := aNumberOfBoxes - numberOfBlackHoleBoxes
 	                       - numberOfHyperGravityBoxes
 	                       - numberOfMoonWalkBoxes
@@ -97,10 +93,10 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 	boxes add: aBox.  hyperGravityBoxes add: aBox].
 	1 to: numberOfMoonWalkBoxes do: [ :i | aBox := (MoonWalkBox inPlace: i).
 	boxes add: aBox.  moonWalkBoxes add: aBox].
-	1 to: numberOfHyperJumpBoxes do: [ :i |
-	boxes add: (HyperJumpBox inPlace: i) ].
-	1 to: numberOfAtomicBombBoxes do: [ :i |
-	boxes add: (AtomicBombBox inPlace: i) ].
+	1 to: numberOfHyperJumpBoxes do: [ :i | aBox := (HyperJumpBox inPlace: i).
+	boxes add: aBox.  hyperJumpBoxes add: aBox].
+	1 to: numberOfAtomicBombBoxes do: [ :i | aBox := (AtomicBombBox inPlace: i).
+	boxes add: aBox.  atomicBombBoxes add: aBox].
 	1 to: numberOfNormalBoxes do: [ :i | boxes add: Box new ]
 ]
 
