@@ -22,7 +22,7 @@ ABoardTest >> testWhenABoardHas10BoxesThen1OfThemAreMoonWalk_03 [
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
-	self assert: aBoard getMoonWalkBoxes equals: 1.
+	self assert: aBoard getMoonWalkBoxes size equals: 1.
 ]
 
 { #category : #tests }
@@ -30,7 +30,7 @@ ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreBlackHoles_01 [
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
-	self assert: aBoard getBlackHoleBoxes equals: 2.
+	self assert: aBoard getBlackHoleBoxes size equals: 2.
 ]
 
 { #category : #tests }
@@ -38,7 +38,7 @@ ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreHyperGravity_02 [
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
-	self assert: aBoard getHyperGravityBoxes equals: 2.
+	self assert: aBoard getHyperGravityBoxes size equals: 2.
 ]
 
 { #category : #tests }
@@ -58,6 +58,30 @@ ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [
 		          withWormHoleStaringIn: 3
 		          andEndingIn: 4.
 	self assert: (aBoard isWormHoleAt: 3) equals: true
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheBlackHoleBoxesVanBeShown_06 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 10.
+	self assert: (aBoard getBlackHoleBoxes at: 1) getPosition equals: 1.
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheMoonWalkBoxesCanBeShown_07 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 10.
+	self assert: (aBoard getMoonWalkBoxes at: 1) getPosition equals: 1.
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfTheHyperGravityBoxesCanBeShown_08 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 10.
+	self assert: (aBoard getHyperGravityBoxes at: 1) getPosition equals: 1.
 ]
 
 { #category : #tests }
