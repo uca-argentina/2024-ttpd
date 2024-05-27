@@ -135,6 +135,7 @@ Board >> move: aShip withDiceResult: aDiceResult [
 
 	actualPosition > boxes size ifTrue: [
 		actualPosition := actualPosition - (boxes size). 
+		aShip movesTo: actualPosition.
 		aShip updateLaps. ].
 	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
 		aShip movesTo: (boxes at: actualPosition) effectsOn ].

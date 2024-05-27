@@ -70,6 +70,13 @@ BoardGame >> cutIfSomeoneWin: playerTurn [
 ]
 
 { #category : #'as yet unclassified' }
+BoardGame >> cutIfSomeoneWinparttwo: playerTurn [
+
+	^(aCollectionOfShips at: playerTurn) getLaps  >= laps.
+
+]
+
+{ #category : #'as yet unclassified' }
 BoardGame >> getLapsToDo [
 	^laps.
 ]
@@ -113,7 +120,7 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
 	dice := aCollectionOfDice.
-	laps := aNumberOfLaps.
+	laps:= aNumberOfLaps.
 ]
 
 { #category : #accessing }
@@ -134,6 +141,24 @@ BoardGame >> start [
 	^ self cutIfSomeoneWin
 ]
 
+{ #category : #accessing }
+BoardGame >> startparttwo [
+
+	| playerTurn play |
+	playerTurn := 1.
+	play := self cutIfSomeoneWinparttwo:  playerTurn .
+
+	[ play ] whileFalse: [
+		board
+			move: (aCollectionOfShips at: playerTurn)
+			withDiceResult:
+			((aCollectionOfShips at: playerTurn) throwDice: dice).
+		play := self cutIfSomeoneWinparttwo:   playerTurn.
+		playerTurn := self changeTurn: playerTurn ].
+
+	^ play 
+]
+
 { #category : #'as yet unclassified' }
 BoardGame >> winnerIs [
 	|winner|
@@ -142,5 +167,14 @@ BoardGame >> winnerIs [
 	2 to: aCollectionOfShips size do:[:i | |shipActual| shipActual:= aCollectionOfShips at: i.
 		(winner getPosition < shipActual getPosition)ifTrue: [ winner :=shipActual]
 		]. 
+	^ aCollectionOfShips indexOf: winner.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> winnerIsParttwo [
+	|winner|
+	winner :=aCollectionOfShips at:1.
+	aCollectionOfShips do:[:ship| (ship getLaps >= winner getLaps )ifTrue: [ winner := ship ]].
+ 
 	^ aCollectionOfShips indexOf: winner.
 ]
