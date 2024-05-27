@@ -10,6 +10,22 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardHas100BoxesThen2OfThemIsAtomicBomb_05 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 100.
+	self assert: aBoard getAtomicBomb equals: 2.
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardHas10BoxesThen1OfThemAreMoonWalk_03 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 10.
+	self assert: aBoard getMoonWalkBoxes equals: 1.
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreBlackHoles_01 [
 
 	| aBoard |
@@ -23,6 +39,14 @@ ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreHyperGravity_02 [
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
 	self assert: aBoard getHyperGravityBoxes equals: 2.
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardHas25BoxesThen2OfThemIsHyperJump_04 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 25.
+	self assert: aBoard getHyperJumpBoxes equals: 2.
 ]
 
 { #category : #tests }
@@ -40,8 +64,8 @@ ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [
 ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
 
 	| aBoard |
-	aBoard := Board withNumberOfBoxes: 5.
-	self assert: aBoard hasBoxes equals: 5
+	aBoard := Board withNumberOfBoxes: 100.
+	self assert: aBoard hasBoxes equals: 100
 ]
 
 { #category : #tests }
