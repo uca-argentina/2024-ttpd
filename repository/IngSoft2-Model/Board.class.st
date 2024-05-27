@@ -8,7 +8,8 @@ Class {
 		'moonWalkBoxes',
 		'hyperGravityBoxes',
 		'hyperJumpBoxes',
-		'atomicBombBoxes'
+		'atomicBombBoxes',
+		'noEffectBoxes'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -32,6 +33,11 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 		Error signal:
 			'A WormHole starting position must be less than the ending position' ].
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
+]
+
+{ #category : #accessing }
+Board >> boxes [
+	^ boxes
 ]
 
 { #category : #'as yet unclassified' }
@@ -70,10 +76,11 @@ Board >> hasBoxes [
 { #category : #'as yet unclassified' }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 
-	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions |
-	positions := (1 to: aNumberOfBoxes) asOrderedCollection.
+	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes |
+	positions := (2 to: (aNumberOfBoxes)) asOrderedCollection.
 	mixPositions := positions shuffled.
-	boxes := OrderedCollection new: aNumberOfBoxes.
+	boxes := OrderedCollection new.
+	numberOfBoxes := aNumberOfBoxes-1.
 	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
 	blackHoleBoxes := OrderedCollection new.
 	numberOfHyperGravityBoxes := aNumberOfBoxes * 0.2.
@@ -84,11 +91,15 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 	hyperJumpBoxes := OrderedCollection new.
 	numberOfAtomicBombBoxes := aNumberOfBoxes * 0.02.
 	atomicBombBoxes := OrderedCollection new.
-	numberOfNormalBoxes := aNumberOfBoxes - numberOfBlackHoleBoxes
+	numberOfNormalBoxes := numberOfBoxes - numberOfBlackHoleBoxes
 	                       - numberOfHyperGravityBoxes
 	                       - numberOfMoonWalkBoxes
 	                       - numberOfHyperJumpBoxes
 	                       - numberOfAtomicBombBoxes.
+	noEffectBoxes := OrderedCollection new.
+	aBox :=  (NoEffectBox inPlace: 1).
+	noEffectBoxes add: aBox.
+	boxes add: aBox.
 	1 to: numberOfBlackHoleBoxes do: [ :i |
 		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
 		mixPositions removeFirst.
@@ -114,7 +125,11 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 		mixPositions removeFirst.
 		boxes add: aBox.
 		atomicBombBoxes add: aBox ].
-	1 to: numberOfNormalBoxes do: [ :i | boxes add: Box new ]
+	1 to: numberOfNormalBoxes do: [ :i |
+		aBox := NoEffectBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		noEffectBoxes add: aBox ]
 ]
 
 { #category : #initialize }

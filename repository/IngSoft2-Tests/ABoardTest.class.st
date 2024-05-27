@@ -61,6 +61,14 @@ ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
+
+	| aBoard|
+	aBoard := Board withNumberOfBoxes: 100.
+	self assert: ((aBoard boxes at: 1) isKindOf: NoEffectBox).
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheBlackHoleBoxesVanBeShown_06 [
 
 	| aBoard |
