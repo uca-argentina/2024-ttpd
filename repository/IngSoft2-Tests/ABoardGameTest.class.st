@@ -32,7 +32,7 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_01 [
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_02 [
 
 	| aBoard |
-	aBoard := Board withNumberOfBoxes: 2.
+	aBoard := Board withNumberOfBoxes: 10.
 	self
 		should: [ BoardGame withShip: 0 andBoard: aBoard ]
 		raise: Error

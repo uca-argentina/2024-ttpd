@@ -68,6 +68,11 @@ Board >> getMoonWalkBoxes [
 	^moonWalkBoxes.
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> getWormHolesBoxes [
+	^wormHole.
+]
+
 { #category : #testing }
 Board >> hasBoxes [
 	^boxes size.
@@ -76,11 +81,13 @@ Board >> hasBoxes [
 { #category : #'as yet unclassified' }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 
-	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes |
-	positions := (2 to: (aNumberOfBoxes)) asOrderedCollection.
+	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes numberOfWormHoles |
+	positions := (2 to: aNumberOfBoxes) asOrderedCollection.
 	mixPositions := positions shuffled.
 	boxes := OrderedCollection new.
-	numberOfBoxes := aNumberOfBoxes-1.
+	numberOfBoxes := aNumberOfBoxes - 1.
+	numberOfWormHoles := 2.
+	wormHole := OrderedCollection new.
 	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
 	blackHoleBoxes := OrderedCollection new.
 	numberOfHyperGravityBoxes := aNumberOfBoxes * 0.2.
@@ -91,15 +98,21 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 	hyperJumpBoxes := OrderedCollection new.
 	numberOfAtomicBombBoxes := aNumberOfBoxes * 0.02.
 	atomicBombBoxes := OrderedCollection new.
-	numberOfNormalBoxes := numberOfBoxes - numberOfBlackHoleBoxes
+	numberOfNormalBoxes := numberOfBoxes - numberOfWormHoles
+	                       - numberOfBlackHoleBoxes
 	                       - numberOfHyperGravityBoxes
 	                       - numberOfMoonWalkBoxes
 	                       - numberOfHyperJumpBoxes
 	                       - numberOfAtomicBombBoxes.
 	noEffectBoxes := OrderedCollection new.
-	aBox :=  (NoEffectBox inPlace: 1).
+	aBox := NoEffectBox inPlace: 1.
 	noEffectBoxes add: aBox.
 	boxes add: aBox.
+	1 to: numberOfWormHoles do: [ :i |
+		aBox := WormHoleBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		wormHole add: aBox ].
 	1 to: numberOfBlackHoleBoxes do: [ :i |
 		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
 		mixPositions removeFirst.
