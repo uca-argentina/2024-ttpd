@@ -3,7 +3,13 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'boxes',
-		'wormHole'
+		'wormHole',
+		'blackHoleBoxes',
+		'moonWalkBoxes',
+		'hyperGravityBoxes',
+		'hyperJumpBoxes',
+		'atomicBombBoxes',
+		'noEffectBoxes'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -29,9 +35,114 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
 ]
 
+{ #category : #accessing }
+Board >> boxes [
+	^ boxes
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getAtomicBomb [
+
+	^atomicBombBoxes.
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getBlackHoleBoxes [
+
+	^blackHoleBoxes.
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getHyperGravityBoxes [
+	^hyperGravityBoxes.
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getHyperJumpBoxes [
+
+	^hyperJumpBoxes 
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getMoonWalkBoxes [
+	^moonWalkBoxes.
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getWormHolesBoxes [
+	^wormHole.
+]
+
 { #category : #testing }
 Board >> hasBoxes [
 	^boxes size.
+]
+
+{ #category : #'as yet unclassified' }
+Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
+
+	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes numberOfWormHoles |
+	positions := (2 to: aNumberOfBoxes) asOrderedCollection.
+	mixPositions := positions shuffled.
+	boxes := OrderedCollection new.
+	numberOfBoxes := aNumberOfBoxes - 1.
+	numberOfWormHoles := 2.
+	wormHole := OrderedCollection new.
+	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
+	blackHoleBoxes := OrderedCollection new.
+	numberOfHyperGravityBoxes := aNumberOfBoxes * 0.2.
+	hyperGravityBoxes := OrderedCollection new.
+	numberOfMoonWalkBoxes := aNumberOfBoxes * 0.1.
+	moonWalkBoxes := OrderedCollection new.
+	numberOfHyperJumpBoxes := aNumberOfBoxes * 0.08.
+	hyperJumpBoxes := OrderedCollection new.
+	numberOfAtomicBombBoxes := aNumberOfBoxes * 0.02.
+	atomicBombBoxes := OrderedCollection new.
+	numberOfNormalBoxes := numberOfBoxes - numberOfWormHoles
+	                       - numberOfBlackHoleBoxes
+	                       - numberOfHyperGravityBoxes
+	                       - numberOfMoonWalkBoxes
+	                       - numberOfHyperJumpBoxes
+	                       - numberOfAtomicBombBoxes.
+	noEffectBoxes := OrderedCollection new.
+	aBox := NoEffectBox inPlace: 1.
+	noEffectBoxes add: aBox.
+	boxes add: aBox.
+	1 to: numberOfWormHoles do: [ :i |
+		aBox := WormHoleBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		wormHole add: aBox ].
+	1 to: numberOfBlackHoleBoxes do: [ :i |
+		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		blackHoleBoxes add: aBox ].
+	1 to: numberOfHyperGravityBoxes do: [ :i |
+		aBox := HyperGravityBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperGravityBoxes add: aBox ].
+	1 to: numberOfMoonWalkBoxes do: [ :i |
+		aBox := MoonWalkBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		moonWalkBoxes add: aBox ].
+	1 to: numberOfHyperJumpBoxes do: [ :i |
+		aBox := HyperJumpBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperJumpBoxes add: aBox ].
+	1 to: numberOfAtomicBombBoxes do: [ :i |
+		aBox := AtomicBombBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		atomicBombBoxes add: aBox ].
+	1 to: numberOfNormalBoxes do: [ :i |
+		aBox := NoEffectBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		noEffectBoxes add: aBox ]
 ]
 
 { #category : #initialize }
@@ -59,6 +170,7 @@ Board >> move: aShip withDiceResult: aDiceResult [
 
 	actualPosition > boxes size ifTrue: [
 		actualPosition := actualPosition - (boxes size). 
+		aShip movesTo: actualPosition.
 		aShip updateLaps. ].
 	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
 		aShip movesTo: (boxes at: actualPosition) effectsOn ].
