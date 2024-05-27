@@ -3,7 +3,12 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'boxes',
-		'wormHole'
+		'wormHole',
+		'blackHoleBoxes',
+		'moonWalkBoxes',
+		'hyperGravityBoxes',
+		'hyperJumpBoxes',
+		'atomicBombBoxes'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -32,49 +37,29 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 { #category : #'as yet unclassified' }
 Board >> getAtomicBomb [
 
-	| cont |
-	cont := 0.
-	boxes do: [ :box |
-		(box isKindOf: AtomicBombBox ) ifTrue: [ cont := cont + 1 ] ].
-	^ cont
+	^atomicBombBoxes.
 ]
 
 { #category : #'as yet unclassified' }
 Board >> getBlackHoleBoxes [
 
-	| cont |
-	cont := 0.
-	boxes do: [ :box |
-		(box isKindOf: BlackHoleBox) ifTrue: [ cont := cont + 1 ] ].
-	^cont
+	^blackHoleBoxes.
 ]
 
 { #category : #'as yet unclassified' }
 Board >> getHyperGravityBoxes [
-	| cont |
-	cont := 0.
-	boxes do: [ :box |
-		(box isKindOf: HyperGravityBox ) ifTrue: [ cont := cont + 1 ] ].
-	^cont
+	^hyperGravityBoxes.
 ]
 
 { #category : #'as yet unclassified' }
 Board >> getHyperJumpBoxes [
 
-	| cont |
-	cont := 0.
-	boxes do: [ :box |
-		(box isKindOf: HyperJumpBox ) ifTrue: [ cont := cont + 1 ] ].
-	^ cont
+	^hyperJumpBoxes 
 ]
 
 { #category : #'as yet unclassified' }
 Board >> getMoonWalkBoxes [
-	| cont |
-	cont := 0.
-	boxes do: [ :box |
-		(box isKindOf: MoonWalkBox ) ifTrue: [ cont := cont + 1 ] ].
-	^cont
+	^moonWalkBoxes.
 ]
 
 { #category : #testing }
@@ -85,28 +70,50 @@ Board >> hasBoxes [
 { #category : #'as yet unclassified' }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 
-	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes |
+	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions |
+	positions := (1 to: aNumberOfBoxes) asOrderedCollection.
+	mixPositions := positions shuffled.
 	boxes := OrderedCollection new: aNumberOfBoxes.
 	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
+	blackHoleBoxes := OrderedCollection new.
 	numberOfHyperGravityBoxes := aNumberOfBoxes * 0.2.
+	hyperGravityBoxes := OrderedCollection new.
 	numberOfMoonWalkBoxes := aNumberOfBoxes * 0.1.
+	moonWalkBoxes := OrderedCollection new.
 	numberOfHyperJumpBoxes := aNumberOfBoxes * 0.08.
+	hyperJumpBoxes := OrderedCollection new.
 	numberOfAtomicBombBoxes := aNumberOfBoxes * 0.02.
+	atomicBombBoxes := OrderedCollection new.
 	numberOfNormalBoxes := aNumberOfBoxes - numberOfBlackHoleBoxes
 	                       - numberOfHyperGravityBoxes
 	                       - numberOfMoonWalkBoxes
 	                       - numberOfHyperJumpBoxes
 	                       - numberOfAtomicBombBoxes.
 	1 to: numberOfBlackHoleBoxes do: [ :i |
-	boxes add: (BlackHoleBox inPlace: i) ].
+		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		blackHoleBoxes add: aBox ].
 	1 to: numberOfHyperGravityBoxes do: [ :i |
-	boxes add: (HyperGravityBox inPlace: i) ].
+		aBox := HyperGravityBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperGravityBoxes add: aBox ].
 	1 to: numberOfMoonWalkBoxes do: [ :i |
-	boxes add: (MoonWalkBox inPlace: i) ].
+		aBox := MoonWalkBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		moonWalkBoxes add: aBox ].
 	1 to: numberOfHyperJumpBoxes do: [ :i |
-	boxes add: (HyperJumpBox inPlace: i) ].
+		aBox := HyperJumpBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperJumpBoxes add: aBox ].
 	1 to: numberOfAtomicBombBoxes do: [ :i |
-	boxes add: (AtomicBombBox inPlace: i) ].
+		aBox := AtomicBombBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		atomicBombBoxes add: aBox ].
 	1 to: numberOfNormalBoxes do: [ :i | boxes add: Box new ]
 ]
 
