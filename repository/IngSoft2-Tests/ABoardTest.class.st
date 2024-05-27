@@ -65,7 +65,7 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheBlackHoleBoxesVanBeShow
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
-	self assert: (aBoard getBlackHoleBoxes at: 1) getPosition equals: 1.
+	self assert: ((aBoard getBlackHoleBoxes at: 1) getPosition between: 1 and: 10).
 ]
 
 { #category : #tests }
@@ -73,7 +73,17 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheMoonWalkBoxesCanBeShown
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
-	self assert: (aBoard getMoonWalkBoxes at: 1) getPosition equals: 1.
+	self assert: ((aBoard getMoonWalkBoxes at: 1) getPosition between: 1 and: 10).
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfDiferentBoxesShouldBeDiferent_11 [
+
+	| aBoard positionAtomicBombBox positionBlackHoleBox |
+	aBoard := Board withNumberOfBoxes: 100.
+	positionAtomicBombBox := (aBoard getAtomicBomb at: 1) getPosition.
+	positionBlackHoleBox := (aBoard getBlackHoleBoxes at: 1) getPosition.
+	self deny: positionAtomicBombBox = positionBlackHoleBox.
 ]
 
 { #category : #tests }
@@ -81,7 +91,7 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfTheAtomicBombBoxesCanBeSh
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 100.
-	self assert: (aBoard getAtomicBomb at: 1) getPosition equals: 1.
+	self assert: ((aBoard getAtomicBomb at: 1) getPosition between: 1 and: 100).
 ]
 
 { #category : #tests }
@@ -89,7 +99,7 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfTheHyperGravityBoxesCanBe
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
-	self assert: (aBoard getHyperGravityBoxes at: 1) getPosition equals: 1.
+	self assert: ((aBoard getHyperGravityBoxes at: 1) getPosition between: 1 and: 10).
 ]
 
 { #category : #tests }
@@ -97,7 +107,7 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfTheHyperJumpBoxesCanBeSho
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 100.
-	self assert: (aBoard getHyperJumpBoxes at: 1) getPosition equals: 1.
+	self assert: ((aBoard getHyperJumpBoxes at: 1) getPosition between: 1 and: 100).
 ]
 
 { #category : #tests }

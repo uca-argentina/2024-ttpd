@@ -70,7 +70,9 @@ Board >> hasBoxes [
 { #category : #'as yet unclassified' }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 
-	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox |
+	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions |
+	positions := (1 to: aNumberOfBoxes) asOrderedCollection.
+	mixPositions := positions shuffled.
 	boxes := OrderedCollection new: aNumberOfBoxes.
 	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
 	blackHoleBoxes := OrderedCollection new.
@@ -87,16 +89,31 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 	                       - numberOfMoonWalkBoxes
 	                       - numberOfHyperJumpBoxes
 	                       - numberOfAtomicBombBoxes.
-	1 to: numberOfBlackHoleBoxes do: [ :i | aBox := (BlackHoleBox inPlace: i).
-	boxes add: aBox.  blackHoleBoxes add: aBox].
-	1 to: numberOfHyperGravityBoxes do: [ :i | aBox := (HyperGravityBox inPlace: i).
-	boxes add: aBox.  hyperGravityBoxes add: aBox].
-	1 to: numberOfMoonWalkBoxes do: [ :i | aBox := (MoonWalkBox inPlace: i).
-	boxes add: aBox.  moonWalkBoxes add: aBox].
-	1 to: numberOfHyperJumpBoxes do: [ :i | aBox := (HyperJumpBox inPlace: i).
-	boxes add: aBox.  hyperJumpBoxes add: aBox].
-	1 to: numberOfAtomicBombBoxes do: [ :i | aBox := (AtomicBombBox inPlace: i).
-	boxes add: aBox.  atomicBombBoxes add: aBox].
+	1 to: numberOfBlackHoleBoxes do: [ :i |
+		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		blackHoleBoxes add: aBox ].
+	1 to: numberOfHyperGravityBoxes do: [ :i |
+		aBox := HyperGravityBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperGravityBoxes add: aBox ].
+	1 to: numberOfMoonWalkBoxes do: [ :i |
+		aBox := MoonWalkBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		moonWalkBoxes add: aBox ].
+	1 to: numberOfHyperJumpBoxes do: [ :i |
+		aBox := HyperJumpBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperJumpBoxes add: aBox ].
+	1 to: numberOfAtomicBombBoxes do: [ :i |
+		aBox := AtomicBombBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		atomicBombBoxes add: aBox ].
 	1 to: numberOfNormalBoxes do: [ :i | boxes add: Box new ]
 ]
 
