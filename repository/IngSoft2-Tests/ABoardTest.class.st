@@ -10,6 +10,22 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreBlackHoles_01 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 10.
+	self assert: aBoard getBlackHoleBoxes equals: 2.
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreHyperGravity_02 [
+
+	| aBoard |
+	aBoard := Board withNumberOfBoxes: 10.
+	self assert: aBoard getHyperGravityBoxes equals: 2.
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [ 
 
 	| aBoard |

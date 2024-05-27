@@ -29,18 +29,44 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> getBlackHoleBoxes [
+
+	| cont |
+	cont := 0.
+	boxes do: [ :box |
+		(box isKindOf: BlackHoleBox) ifTrue: [ cont := cont + 1 ] ].
+	^cont
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getHyperGravityBoxes [
+	| cont |
+	cont := 0.
+	boxes do: [ :box |
+		(box isKindOf: HyperGravityBox ) ifTrue: [ cont := cont + 1 ] ].
+	^cont
+]
+
 { #category : #testing }
 Board >> hasBoxes [
 	^boxes size.
 ]
 
 { #category : #'as yet unclassified' }
-Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [ 
-	
+Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
+
+	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes |
 	boxes := OrderedCollection new: aNumberOfBoxes.
-	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
-	
-	
+	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
+	numberOfHyperGravityBoxes := aNumberOfBoxes * 0.2.
+	numberOfNormalBoxes := aNumberOfBoxes - numberOfBlackHoleBoxes - numberOfHyperGravityBoxes.
+	1 to: numberOfBlackHoleBoxes do: [ :i |
+	boxes add: (BlackHoleBox inPlace: i) ].
+	1 to: numberOfHyperGravityBoxes do: [ :i |
+	boxes add: (HyperGravityBox inPlace: i) ].
+	1 to: numberOfNormalBoxes do: [ :i |
+	boxes add: Box new ]
 ]
 
 { #category : #initialize }
