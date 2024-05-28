@@ -92,6 +92,14 @@ AShipTest >> testWhenAShipDecidesToSkipOneTurnThenStateChangesToCantPlay_19 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipDecreasedItsLapsThenLapsIs0_24 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip decreaseLaps.
+	self assert: aShip getLaps equals: 0.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipFinishesLapsThenVictory_13 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
