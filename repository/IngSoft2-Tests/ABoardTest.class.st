@@ -61,6 +61,14 @@ ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedPersonalizedThenIrHas100Boxes_14 [
+
+	| aBoard |
+	aBoard := Board createPersonalizedBoard.
+	self assert: aBoard hasBoxes equals: 102.
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedThen2OfItsBoxesAreWormHoleKind_13 [
 
 	| aBoard |
