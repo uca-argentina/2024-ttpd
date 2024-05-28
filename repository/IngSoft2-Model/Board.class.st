@@ -198,73 +198,77 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wor
 Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
 		boxes := OrderedCollection new: aNumberOfBoxes.
 	
-		1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
+		1 to: 78 do: [ :i | boxes add: Box new ].
+		
+		79 to: aNumberOfBoxes do:[:i | boxes add: BlackHoleBox  new ].
 ]
 
 { #category : #initialization }
 Board >> initializePersonalizedBoard [
+    | positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox totalBoxes |
 
-	| positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox |
-	boxes := OrderedCollection new.
-	wormHole := OrderedCollection new.
-	blackHoleBoxes := OrderedCollection new.
-	hyperGravityBoxes := OrderedCollection new.
-	moonWalkBoxes := OrderedCollection new.
-	hyperJumpBoxes := OrderedCollection new.
-	atomicBombBoxes := OrderedCollection new.
-	noEffectBoxes := OrderedCollection new.
-	positionsForNoEffectBoxes := OrderedCollection withAll:
-		                             #( 1 11 14 17 19 20 23 24 28 30 32 33
-		                                34 35 36 39 41 42 81 45 46 47 50 51
-		                                52 54 55 56 58 60 62 64 8 66 67 69
-		                                70 72 73 75 ).
-	positionsForBlackHole := OrderedCollection withAll:
-		                         #( 76 77 78 79 80 44 82 83 84 85 86 87 88
-		                            89 90 92 93 94 95 97 ).
-	positionsForHyperGravity := OrderedCollection withAll:
-		                            #( 98 99 100 101 102 5 2 27 4 6 7 65 9 10
-		                               12 13 15 16 18 21 ).
-	positionsForMoonWalk := OrderedCollection withAll:
-		                        #( 22 25 26 3 29 31 37 38 40 43 ).
-	positionsForHyperJump :=OrderedCollection withAll:
-		                         #( 48 49 53 57 59 61 63 68 ).
-	positionsForAtomicBomb := OrderedCollection withAll: #( 71 74 ).
-	positionsForWormHole := OrderedCollection withAll: #( 91 96 ).
-	1 to: 2 do: [ :i |
-		aBox := WormHoleBox inPlace: (positionsForWormHole at: 1).
-		positionsForWormHole removeFirst.
-		boxes add: aBox.
-		wormHole add: aBox ].
-	1 to: 20 do: [ :i |
-		aBox := BlackHoleBox inPlace: (positionsForBlackHole at: 1).
-		positionsForBlackHole removeFirst.
-		boxes add: aBox.
-		blackHoleBoxes add: aBox ].
-	1 to: 20 do: [ :i |
-		aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: 1).
-		positionsForHyperGravity removeFirst.
-		boxes add: aBox.
-		hyperGravityBoxes add: aBox ].
-	1 to: 10 do: [ :i |
-		aBox := MoonWalkBox inPlace: (positionsForMoonWalk at: 1).
-		positionsForMoonWalk removeFirst.
-		boxes add: aBox.
-		moonWalkBoxes add: aBox ].
-	1 to: 8 do: [ :i |
-		aBox := HyperJumpBox inPlace: (positionsForHyperJump at: 1).
-		positionsForHyperJump removeFirst.
-		boxes add: aBox.
-		hyperJumpBoxes add: aBox ].
-	1 to: 2 do: [ :i |
-		aBox := AtomicBombBox inPlace: (positionsForAtomicBomb at: 1).
-		positionsForAtomicBomb removeFirst.
-		boxes add: aBox.
-		atomicBombBoxes add: aBox ].
-	1 to: 40 do: [ :i |
-		aBox := NoEffectBox inPlace: (positionsForNoEffectBoxes at: 1).
-		positionsForNoEffectBoxes removeFirst.
-		boxes add: aBox.
-		noEffectBoxes add: aBox ]
+    totalBoxes := 102. "Por ejemplo, ajusta esto al número total de casillas que desees en el tablero."
+    boxes := OrderedCollection new: totalBoxes.
+    1 to: totalBoxes do: [:i | boxes add: nil].
+
+    wormHole := OrderedCollection new.
+    blackHoleBoxes := OrderedCollection new.
+    hyperGravityBoxes := OrderedCollection new.
+    moonWalkBoxes := OrderedCollection new.
+    hyperJumpBoxes := OrderedCollection new.
+    atomicBombBoxes := OrderedCollection new.
+    noEffectBoxes := OrderedCollection new.
+
+    positionsForNoEffectBoxes := OrderedCollection withAll: #(1 11 14 17 19 20 23 24 28 30 32 33 34 35 36 39 41 42 81 45 46 47 50 51 52 54 55 56 58 60 62 64 8 66 67 69 70 72 73 75).
+    positionsForBlackHole := OrderedCollection withAll: #(76 77 78 79 80 44 82 83 84 85 86 87 88 89 90 92 93 94 95 97).
+    positionsForHyperGravity := OrderedCollection withAll: #(98 99 100 101 102 5 2 27 4 6 7 65 9 10 12 13 15 16 18 21).
+    positionsForMoonWalk := OrderedCollection withAll: #(22 25 26 3 29 31 37 38 40 43).
+    positionsForHyperJump := OrderedCollection withAll: #(48 49 53 57 59 61 63 68).
+    positionsForAtomicBomb := OrderedCollection withAll: #(71 74).
+    positionsForWormHole := OrderedCollection withAll: #(91 96).
+
+    1 to: positionsForWormHole size do: [ :i |
+        aBox := WormHoleBox inPlace: (positionsForWormHole at: i).
+        boxes at: (positionsForWormHole at: i) put: aBox.
+        wormHole add: aBox
+    ].
+
+    1 to: positionsForBlackHole size do: [ :i |
+        aBox := BlackHoleBox inPlace: (positionsForBlackHole at: i).
+        boxes at: (positionsForBlackHole at: i) put: aBox.
+        blackHoleBoxes add: aBox
+    ].
+
+    1 to: positionsForHyperGravity size do: [ :i |
+        aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: i).
+        boxes at: (positionsForHyperGravity at: i) put: aBox.
+        hyperGravityBoxes add: aBox
+    ].
+
+    1 to: positionsForMoonWalk size do: [ :i |
+        aBox := MoonWalkBox inPlace: (positionsForMoonWalk at: i).
+        boxes at: (positionsForMoonWalk at: i) put: aBox.
+        moonWalkBoxes add: aBox
+    ].
+
+    1 to: positionsForHyperJump size do: [ :i |
+        aBox := HyperJumpBox inPlace: (positionsForHyperJump at: i).
+        boxes at: (positionsForHyperJump at: i) put: aBox.
+        hyperJumpBoxes add: aBox
+    ].
+
+    1 to: positionsForAtomicBomb size do: [ :i |
+        aBox := AtomicBombBox inPlace: (positionsForAtomicBomb at: i).
+        boxes at: (positionsForAtomicBomb at: i) put: aBox.
+        atomicBombBoxes add: aBox
+    ].
+
+    1 to: positionsForNoEffectBoxes size do: [ :i |
+        aBox := NoEffectBox inPlace: (positionsForNoEffectBoxes at: i).
+        boxes at: (positionsForNoEffectBoxes at: i) put: aBox.
+        noEffectBoxes add: aBox
+    ].
+
 ]
 
 { #category : #accessing }

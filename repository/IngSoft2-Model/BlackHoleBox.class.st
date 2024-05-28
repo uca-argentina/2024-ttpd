@@ -13,5 +13,5 @@ BlackHoleBox >> effectShips: aCollection playing: aShip [
 { #category : #'as yet unclassified' }
 BlackHoleBox >> effectsOn [
 
-	^(place-4)
+	^1
 ]
