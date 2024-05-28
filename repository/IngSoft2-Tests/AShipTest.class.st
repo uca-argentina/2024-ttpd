@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #tests }
+AShipTest >> testAShipKnowsItsLastDieResult_21 [
+	| aShip aCollectionOfDice aLoadedDie |
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.
+	aShip throwDice: aCollectionOfDice.
+	self assert: aShip getLastDieResult equals: 5.
+]
+
+{ #category : #tests }
 AShipTest >> testShipIsCreatedWithAPosition [
 
 	| aShip |

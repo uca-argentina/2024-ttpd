@@ -6,7 +6,8 @@ Class {
 		'fuel',
 		'maxFuel',
 		'laps',
-		'state'
+		'state',
+		'lastDieResult'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -63,6 +64,11 @@ Ship >> getLaps [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> getLastDieResult [
+	^lastDieResult.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> getPosition [
 	^position.
 ]
@@ -86,6 +92,11 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	maxFuel:= amountMaxFuel.
 	laps:= 1.
 	state := Playing new.
+]
+
+{ #category : #testing }
+Ship >> isCursed [
+	state := EffectBoxState new.
 ]
 
 { #category : #'as yet unclassified' }
@@ -120,7 +131,8 @@ Ship >> throwDice: aCollectionOfDice [
 	| positionsToMove |
 	positionsToMove := 0.
 	aCollectionOfDice do: [ :die |
-	 positionsToMove := positionsToMove + (die throw). ].	
+	 positionsToMove := positionsToMove + (die throw). ].
+	lastDieResult := positionsToMove.	
 	^positionsToMove.
 ]
 

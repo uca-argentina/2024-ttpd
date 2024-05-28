@@ -9,8 +9,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 HyperGravityBox >> effectShips: aCollectionOfShips playing: aShip [
-
-	aShip resolveCurse: dieResult.
+	aShip isCursed.
 ]
 
 { #category : #'as yet unclassified' }
