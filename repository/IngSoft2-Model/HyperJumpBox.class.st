@@ -16,6 +16,7 @@ HyperJumpBox >> effectShips: aCollection playing: aShip [
 	| parsecs positionsToMove |
 	parsecs := parsecList at: self parsecsToMove.
 	positionsToMove := parsecs*parsecBoxProp. 
+	positionsToMove > 0.5 ifTrue: [ positionsToMove := positionsToMove ceiling ] ifFalse: [ positionsToMove := positionsToMove floor ].
 	aShip moves: positionsToMove.
 	aShip consumeFuel: positionsToMove.
 ]
@@ -38,7 +39,7 @@ HyperJumpBox >> parsecsList: aParsecList withBoardLenght: aBoardLength andParsec
 	parsecList := aParsecList asSortedCollection: [ :a :b | a > b ].
 	boardLength := aBoardLength.
 	parsecLength := aParsecLength.
-	parsecBoxProp := aBoardLength//aParsecLength.
+	parsecBoxProp := aBoardLength/aParsecLength.
 	parsecNumber := 0.
 ]
 

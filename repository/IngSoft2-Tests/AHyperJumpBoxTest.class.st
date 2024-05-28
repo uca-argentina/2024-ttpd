@@ -10,7 +10,7 @@ AHyperJumpBoxTest >> testAHyperJumbBoxHasAParsec_BoxProportion_02 [
 	| aHyperJump aParsecsList |
 	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := OrderedCollection with: #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 10.
+	aHyperJump parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
 	self assert: aHyperJump parsecBoxProportion equals: 10.
 ]
 
@@ -28,7 +28,7 @@ AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenTheFuelIsUpdated_04 [
 	| aHyperJump aParsecsList aCollectionOfShips aShip |
 	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 10.
+	aHyperJump parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
 	aCollectionOfShips := OrderedCollection new.
 	aShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips add: aShip.
@@ -44,7 +44,7 @@ AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenThePositionIsUpdated_0
 	| aHyperJump aParsecsList aCollectionOfShips aShip |
 	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 10.
+	aHyperJump parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
 	aCollectionOfShips := OrderedCollection new.
 	aShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips add: aShip.
@@ -52,4 +52,36 @@ AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenThePositionIsUpdated_0
 	aShip consumeFuel: 2.
 	aHyperJump effectShips: aCollectionOfShips playing: aShip.
 	self assert: aShip getPosition equals: 73.
+]
+
+{ #category : #tests }
+AHyperJumpBoxTest >> testWhenNumberOfParsecsIsBiggerThanBoardLengthThenFuelIsCosumedTheRoundedPositions_06 [
+
+	| aHyperJump aParsecsList aCollectionOfShips aShip |
+	aHyperJump := HyperJumpBox inPlace: 3.
+	aParsecsList := #(5 7 2).
+	aHyperJump parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 1000.
+	aCollectionOfShips := OrderedCollection new.
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips add: aShip.
+	aShip moves: 2.
+	aShip consumeFuel: 2.
+	aHyperJump effectShips: aCollectionOfShips playing: aShip.
+	self assert: aShip getFuel equals: 997.
+]
+
+{ #category : #tests }
+AHyperJumpBoxTest >> testWhenNumberOfParsecsIsBiggerThanBoardLengthThenPositionsToMoveIsRounded_05 [
+
+	| aHyperJump aParsecsList aCollectionOfShips aShip |
+	aHyperJump := HyperJumpBox inPlace: 3.
+	aParsecsList := #(5 7 2).
+	aHyperJump parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 1000.
+	aCollectionOfShips := OrderedCollection new.
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips add: aShip.
+	aShip moves: 2.
+	aShip consumeFuel: 2.
+	aHyperJump effectShips: aCollectionOfShips playing: aShip.
+	self assert: aShip getPosition equals: 4.
 ]
