@@ -160,7 +160,7 @@ BoardGame >> startparttwo [
 		gravity"	
 			"metodo q resuelva"
 		play := (aCollectionOfShips at: playerTurn) victory.
-		playerTurn := self changeTurn: playerTurn ].
+		playerTurn := self changeTurn: playerTurn. ].
 
 	^ play
 ]

@@ -40,22 +40,6 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_02 [
 ]
 
 { #category : #tests }
-ABoardGameTest >> testBanana_06 [
-
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := Board createPersonalizedBoard.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 70.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aPersonalizedBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame startparttwo.
-]
-
-{ #category : #tests }
 ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
@@ -75,9 +59,9 @@ ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
 ABoardGameTest >> testWhenABoardGameIsCreatedWithAPersonalizedBoardThenTheGameStarts_04 [
 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := PersonalizedBoard withANumberOfBoxes: 3.
+	aPersonalizedBoard := Board createPersonalizedBoard.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 5.
+	aLoadedDie := Die of: 60.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 1
@@ -207,4 +191,20 @@ ABoardGameTest >> testWhenShip1EntersAWormHoleThatEndsInTheFinalPositionThenShip
 	self assert: aBoardGame winnerIs equals: 1
 	
 "borrarlos"
+]
+
+{ #category : #tests }
+ABoardGameTest >> testWhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts_06 [
+
+	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
+	aPersonalizedBoard := Board createPersonalizedBoard.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := Die of: 70.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aPersonalizedBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	self assert: aBoardGame startparttwo.
 ]
