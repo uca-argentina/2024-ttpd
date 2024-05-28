@@ -27,9 +27,9 @@ HyperJumpBox >> effectShips: aCollection playing: aShip [
 	| parsecs positionsToMove |
 	parsecs := parsecList at: self parsecsToMove.
 	positionsToMove := parsecs * parsecBoxProp.
-	positionsToMove > 0.5
-		ifTrue: [ positionsToMove := positionsToMove ceiling ]
-		ifFalse: [ positionsToMove := positionsToMove floor ].
+	positionsToMove := positionsToMove > 0.5
+		                   ifTrue: [ positionsToMove ceiling ]
+		                   ifFalse: [ positionsToMove floor ].
 	aShip moves: positionsToMove.
 	aShip consumeFuel: positionsToMove
 ]

@@ -23,11 +23,6 @@ Board class >> createPersonalizedBoard [
 	^self new initializePersonalizedBoard.
 ]
 
-{ #category : #initialization }
-Board class >> initializeWithNumberOfBoxes: anInteger withParsecArray: aCollection andMaxDieResult: anInteger3 [ 
-	self shouldBeImplemented.
-]
-
 { #category : #'as yet unclassified' }
 Board class >> withNumberOfBoxes: aNumberOfBoxes [ 
 	aNumberOfBoxes < 1 ifTrue: [ Error signal: 'A Board must have at least 1 box to be created' ].
@@ -42,11 +37,6 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes andMaxDieResult: aMaxDieResult 
 { #category : #'as yet unclassified' }
 Board class >> withNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: AParsecLength andMaxDieResult: aMaxDieResult [ 
 	^self new initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: AParsecLength andMaxDieResult: aMaxDieResult .
-]
-
-{ #category : #'as yet unclassified' }
-Board class >> withNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList andMaxDieResult: aMaxDieResult [ 
-	^self initializeWithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList andMaxDieResult: aMaxDieResult.
 ]
 
 { #category : #'as yet unclassified' }
