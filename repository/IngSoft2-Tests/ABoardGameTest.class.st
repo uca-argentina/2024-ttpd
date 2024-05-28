@@ -91,6 +91,27 @@ ABoardGameTest >> testWhenABoardGameIsCreatedWithARandomDieThenTheGameStarts [
 ]
 
 { #category : #tests }
+ABoardGameTest >> testWhenAGameFinishesThenRankingIsShown_07 [
+
+	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie expectedRanking |
+	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #(3 100 5).
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aPersonalizedBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	expectedRanking := OrderedCollection new.
+	expectedRanking add: 2.
+	expectedRanking add: 1.
+	expectedRanking add: 3.
+	aBoardGame startparttwo.
+	self assert: aBoardGame showRanking equals: expectedRanking.
+]
+
+{ #category : #tests }
 ABoardGameTest >> testWhenAGameFinishesThenShipsPositionsCanBeShown [
 
 	| aBoardGame aBoard aCollectionOfDice aLoadedDieWithSequence |

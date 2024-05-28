@@ -14,6 +14,14 @@ EffectBoxStateTest >> testBanana_02 [
 ]
 
 { #category : #tests }
+EffectBoxStateTest >> testBanana_03 [
+
+	| aEffectBoxState  |
+	aEffectBoxState := EffectBoxState withExpectedDie: 2.
+	self assert: aEffectBoxState getExpectedDie equals: 2.
+]
+
+{ #category : #tests }
 EffectBoxStateTest >> testWhenAShipIsInEffectBoxStateThenTheShipHasntWonYet_01 [
 
 	| aEffectBoxState |
