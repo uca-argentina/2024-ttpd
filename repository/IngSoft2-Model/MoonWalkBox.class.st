@@ -21,6 +21,12 @@ MoonWalkBox >> getnumberOfBoxesToMove [
 	^numberOfBoxesToMove.
 ]
 
+{ #category : #initialization }
+MoonWalkBox >> initializeInPlace: aPlace [
+	place := aPlace.
+	numberOfBoxesToMove := (1 to: 100) atRandom.
+]
+
 { #category : #'as yet unclassified' }
 MoonWalkBox >> numberOfBoxesToMove: aNumberOfBoxesToMove [ 
 	numberOfBoxesToMove := aNumberOfBoxesToMove.

@@ -8,9 +8,8 @@ Class {
 AHyperJumpBoxTest >> testAHyperJumbBoxHasAParsec_BoxProportion_02 [
 
 	| aHyperJump aParsecsList |
-	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
+	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
 	self assert: aHyperJump parsecBoxProportion equals: 10.
 ]
 
@@ -18,16 +17,24 @@ AHyperJumpBoxTest >> testAHyperJumbBoxHasAParsec_BoxProportion_02 [
 AHyperJumpBoxTest >> testAHyperJumpBoxHasAParsecList_07 [
 
 	| aHyperJump aParsecsList expectedList |
-	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := #( 5 7 2 ).
-	aHyperJump
-		parsecsList: aParsecsList
+	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList
 		withBoardLenght: 100
 		andParsecLength: 100.
-
 	expectedList := #(7 5 2).
 
 	self assert: aHyperJump getParsecList equals: expectedList
+]
+
+{ #category : #tests }
+AHyperJumpBoxTest >> testWhenAHyperJumpBoxIsCreatedThenAlInformacionAboutParsecsIsToo_08 [
+
+	| aHyperJump aParsecsList |
+	aParsecsList := #( 5 7 2 ).
+	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList
+		withBoardLenght: 100
+		andParsecLength: 10.
+	self assert: aHyperJump getParsecLenght > 0.
 ]
 
 { #category : #tests }
@@ -42,9 +49,8 @@ AHyperJumpBoxTest >> testWhenAHyperJumpBoxIsCreatedThenIrHasAPlace_01 [
 AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenTheFuelIsUpdated_04 [
 
 	| aHyperJump aParsecsList aCollectionOfShips aShip |
-	aHyperJump := HyperJumpBox inPlace: 3.
-	aParsecsList := #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
+		aParsecsList := #(5 7 2).
+	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
 	aCollectionOfShips := OrderedCollection new.
 	aShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips add: aShip.
@@ -58,9 +64,8 @@ AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenTheFuelIsUpdated_04 [
 AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenThePositionIsUpdated_03 [
 
 	| aHyperJump aParsecsList aCollectionOfShips aShip |
-	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
+	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
 	aCollectionOfShips := OrderedCollection new.
 	aShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips add: aShip.
@@ -74,9 +79,8 @@ AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenThePositionIsUpdated_0
 AHyperJumpBoxTest >> testWhenNumberOfParsecsIsBiggerThanBoardLengthThenFuelIsCosumedTheRoundedPositions_06 [
 
 	| aHyperJump aParsecsList aCollectionOfShips aShip |
-	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 1000.
+	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 1000.
 	aCollectionOfShips := OrderedCollection new.
 	aShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips add: aShip.
@@ -90,9 +94,8 @@ AHyperJumpBoxTest >> testWhenNumberOfParsecsIsBiggerThanBoardLengthThenFuelIsCos
 AHyperJumpBoxTest >> testWhenNumberOfParsecsIsBiggerThanBoardLengthThenPositionsToMoveIsRounded_05 [
 
 	| aHyperJump aParsecsList aCollectionOfShips aShip |
-	aHyperJump := HyperJumpBox inPlace: 3.
 	aParsecsList := #(5 7 2).
-	aHyperJump parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 1000.
+	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList withBoardLenght: 102 andParsecLength: 1000.
 	aCollectionOfShips := OrderedCollection new.
 	aShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips add: aShip.

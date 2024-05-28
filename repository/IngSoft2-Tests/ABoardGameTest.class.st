@@ -40,6 +40,22 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_02 [
 ]
 
 { #category : #tests }
+ABoardGameTest >> testBanana_06 [
+
+	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
+	aPersonalizedBoard := Board createPersonalizedBoard.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 1
+		              withBoard: aPersonalizedBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	self assert: aBoardGame winnerIsParttwo equals: 1.
+]
+
+{ #category : #tests }
 ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |

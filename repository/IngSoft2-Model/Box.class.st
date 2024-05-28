@@ -55,6 +55,7 @@ Box >> initializeBox [
 { #category : #initialization }
 Box >> initializeInPlace: aPlace [
 	place := aPlace.
+	
 ]
 
 { #category : #initialization }
