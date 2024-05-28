@@ -45,14 +45,14 @@ ABoardGameTest >> testBanana_06 [
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
 	aPersonalizedBoard := Board createPersonalizedBoard.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 5.
+	aLoadedDie := LoadedDie of: 70.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
-		              withShip: 1
+		              withShip: 2
 		              withBoard: aPersonalizedBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame winnerIsParttwo equals: 1.
+	self assert: aBoardGame startparttwo.
 ]
 
 { #category : #tests }

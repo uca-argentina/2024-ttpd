@@ -31,6 +31,11 @@ Box >> addShip: aShip [
 ]
 
 { #category : #'as yet unclassified' }
+Box >> effectShips: aCollectionOfShips playing: aShip [ 
+	
+]
+
+{ #category : #'as yet unclassified' }
 Box >> effectsOn [
 
 	^0

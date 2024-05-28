@@ -144,25 +144,25 @@ BoardGame >> start [
 { #category : #accessing }
 BoardGame >> startparttwo [
 
-	| playerTurn play |
+	| playerTurn play dieResult |
 	playerTurn := 1.
-	play := self cutIfSomeoneWinparttwo:  playerTurn .
+	play := (aCollectionOfShips at: playerTurn) victory.
 
 	[ play ] whileFalse: [
 	"preguntar si va a tirar"
-		"a ship checkTurn"
+		((aCollectionOfShips at: playerTurn) checkTurn) ifTrue: [   
+		dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
 		board
-			move: (aCollectionOfShips at: playerTurn)
-			withDiceResult:
-			((aCollectionOfShips at: playerTurn) throwDice: dice).
+			 players: aCollectionOfShips playerTurn: playerTurn withDiceResult: dieResult andLaps: laps.
+		].
 		"cant play
 		salteo turno
 		gravity"	
 			"metodo q resuelva"
-		play := self cutIfSomeoneWinparttwo:   playerTurn.
+		play := (aCollectionOfShips at: playerTurn) victory.
 		playerTurn := self changeTurn: playerTurn ].
 
-	^ play 
+	^ play
 ]
 
 { #category : #'as yet unclassified' }

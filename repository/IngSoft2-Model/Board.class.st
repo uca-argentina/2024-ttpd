@@ -231,7 +231,7 @@ Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
 
 { #category : #initialization }
 Board >> initializePersonalizedBoard [
-    | positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox totalBoxes |
+    | positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox totalBoxes aPaesecList |
 
     totalBoxes := 102. "Por ejemplo, ajusta esto al número total de casillas que desees en el tablero."
     boxes := OrderedCollection new: totalBoxes.
@@ -266,7 +266,7 @@ Board >> initializePersonalizedBoard [
     ].
 
     1 to: positionsForHyperGravity size do: [ :i |
-        aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: i).
+        aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: i) withDieResult: 20 .
         boxes at: (positionsForHyperGravity at: i) put: aBox.
         hyperGravityBoxes add: aBox
     ].
@@ -278,7 +278,8 @@ Board >> initializePersonalizedBoard [
     ].
 
     1 to: positionsForHyperJump size do: [ :i |
-        aBox := HyperJumpBox inPlace: (positionsForHyperJump at: i).
+		aPaesecList := #(7 5 2).
+        aBox := HyperJumpBox inPlace: (positionsForHyperJump at: i) parsecsList: aPaesecList withBoardLenght: 102 andParsecLength: 1000 .
         boxes at: (positionsForHyperJump at: i) put: aBox.
         hyperJumpBoxes add: aBox
     ].
@@ -466,8 +467,23 @@ Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDi
 	actualPosition := aShip getPosition.
 	aShip consumeFuel: aDiceResult.
 	aBox := boxes at: actualPosition.
-
-	aBox effectsOn ~= 0 ifFalse: [ ^ self ].
 	aBox effectShips: aCollectionOfShips playing: aShip.
 	self checkAfterEffects: aCollectionOfShips
+]
+
+{ #category : #accessing }
+Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDiceResult andLaps: laps [
+
+	| actualPosition aShip aBox |
+	aShip := aCollectionOfShips at: aPlayerTurn.
+	aShip moves: aDiceResult.
+	self checkPositionOf: aShip.
+	actualPosition := aShip getPosition.
+	aShip consumeFuel: aDiceResult.
+	aShip checkIfWin: laps.
+	aBox := boxes at: actualPosition.
+	aShip victory ifTrue: [ ^ self ].
+	aBox effectShips: aCollectionOfShips playing: aShip.
+	self checkAfterEffects: aCollectionOfShips.
+	aShip checkIfWin: laps
 ]
