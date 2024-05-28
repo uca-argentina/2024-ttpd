@@ -54,6 +54,13 @@ Ship >> decreaseLaps [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> endCursed [
+	state := Playing new.
+	self moves: lastDieResult.
+	self consumeFuel: lastDieResult.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> getFuel [
 	^fuel
 ]

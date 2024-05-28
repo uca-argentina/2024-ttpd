@@ -14,23 +14,6 @@ AHyperGravityBoxTest >> testAHyperGravityBoxHasANumerOfDie_02 [
 ]
 
 { #category : #tests }
-AHyperGravityBoxTest >> testBananan_04 [
-
-	| aShip anotherShip aCollectionOfShips aHyperGravityBox |
-	aShip:=Ship createWithMaxFuel: 1000.
-	anotherShip :=Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:=OrderedCollection  new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: anotherShip .	
-	aHyperGravityBox := HyperGravityBox inPlace: 3.
-	aHyperGravityBox setNumber: 5.
-	aShip moves: 3.
-	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
-	self assert: (aShip getState isKindOf: EffectBoxState).
-
-]
-
-{ #category : #tests }
 AHyperGravityBoxTest >> testWhenAHyperGravityBoxIsCreatedThenIrHasAPlace_01 [
 
 	| aHyperGravity |
@@ -52,5 +35,69 @@ AHyperGravityBoxTest >> testWhenAShipLandsInAHyperGravityBoxThenItsStateChangesT
 	aShip moves: 3.
 	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
 	self assert: (aShip getState isKindOf: EffectBoxState).
+
+]
+
+{ #category : #tests }
+AHyperGravityBoxTest >> testWhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheShipCosumnesFuel_06 [
+
+	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.	
+	aHyperGravityBox := HyperGravityBox inPlace: 3.
+	aHyperGravityBox setNumber: 5.
+	aShip moves: 2.
+	aShip consumeFuel: 2.
+	aShip throwDice: aCollectionOfDice.
+	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
+	self assert: aShip getFuel equals: 993.
+
+]
+
+{ #category : #tests }
+AHyperGravityBoxTest >> testWhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheShipMoves_05 [
+
+	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.	
+	aHyperGravityBox := HyperGravityBox inPlace: 3.
+	aHyperGravityBox setNumber: 5.
+	aShip moves: 2.
+	aShip throwDice: aCollectionOfDice.
+	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
+	self assert: aShip getPosition equals: 8.
+
+]
+
+{ #category : #tests }
+AHyperGravityBoxTest >> testWhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheStateChangesToPlaying_04 [
+
+	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.	
+	aHyperGravityBox := HyperGravityBox inPlace: 3.
+	aHyperGravityBox setNumber: 5.
+	aShip moves: 2.
+	aShip throwDice: aCollectionOfDice.
+	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
+	self assert: (aShip getState isKindOf: Playing).
 
 ]
