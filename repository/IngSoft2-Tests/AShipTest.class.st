@@ -5,6 +5,35 @@ Class {
 }
 
 { #category : #tests }
+AShipTest >> testAShipEndsTheCursedTheStateChangesToPlaying_23 [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip endCursed .
+	self assert: (aShip getState isKindOf: Playing)
+]
+
+{ #category : #tests }
+AShipTest >> testAShipIsCursedThenStateChangesToEffectBoxState_22 [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip isCursed.
+	self assert: (aShip getState isKindOf: EffectBoxState)
+]
+
+{ #category : #tests }
+AShipTest >> testAShipKnowsItsLastDieResult_21 [
+	| aShip aCollectionOfDice aLoadedDie |
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.
+	aShip throwDice: aCollectionOfDice.
+	self assert: aShip getLastDieResult equals: 5.
+]
+
+{ #category : #tests }
 AShipTest >> testShipIsCreatedWithAPosition [
 
 	| aShip |
@@ -60,6 +89,14 @@ AShipTest >> testWhenAShipDecidesToSkipOneTurnThenStateChangesToCantPlay_19 [
 	aShip := Ship createWithMaxFuel: 1000.
 	aShip skipTurn.
 	self assert: (aShip getState isKindOf: CantPlay).
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipDecreasedItsLapsThenLapsIs0_24 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip decreaseLaps.
+	self assert: aShip getLaps equals: 0.
 ]
 
 { #category : #tests }

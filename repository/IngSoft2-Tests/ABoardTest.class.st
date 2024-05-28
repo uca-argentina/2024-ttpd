@@ -61,6 +61,14 @@ ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedPersonalizedThenIrHas100Boxes_14 [
+
+	| aBoard |
+	aBoard := Board createPersonalizedBoard.
+	self assert: aBoard hasBoxes equals: 102.
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedThen2OfItsBoxesAreWormHoleKind_13 [
 
 	| aBoard |
@@ -151,6 +159,56 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 		should: [ Board withNumberOfBoxes: 0 ]
 		raise: Error
 		withMessage: 'A Board must have at least 1 box to be created'
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenAPersonalizedBoardisCreateThenCheckIFTheBoxesAreInPosition_15 [
+
+	| aBoard aBox anotherBox |
+	aBoard := Board createPersonalizedBoard.
+	aBox:= aBoard boxes at:3.
+	anotherBox:= aBoard boxes at: 72.
+	
+	self assert: (aBox isKindOf:MoonWalkBox).
+	self deny: (anotherBox isKindOf:AtomicBombBox) 
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
+
+	| aBoard aShip anotherShip aCollectionOfShips aBoardtwo |
+	aBoard := Board withNumberOfBoxesNoEffect: 100.
+	aBoardtwo:= Board createPersonalizedBoard.
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .	
+	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 82.
+
+	self assert: aShip getPosition equals: 79.
+	self assert:  aShip getLaps equals: 1.
+		
+
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
+
+	| aBoard aShip anotherShip aCollectionOfShips|
+	aBoard := Board withNumberOfBoxesNoEffect: 100.
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .	
+	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 104.
+	
+	self assert: aShip getPosition equals: 5.
+	
+	self assert:  aShip getLaps equals: 2.
+		
+
 ]
 
 { #category : #tests }

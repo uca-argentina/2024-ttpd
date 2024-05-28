@@ -11,8 +11,16 @@ Class {
 		'atomicBombBoxes',
 		'noEffectBoxes'
 	],
+	#classInstVars : [
+		'boxes'
+	],
 	#category : #'IngSoft2-Model'
 }
+
+{ #category : #'as yet unclassified' }
+Board class >> createPersonalizedBoard [
+	^self new initializePersonalizedBoard.
+]
 
 { #category : #'as yet unclassified' }
 Board class >> withNumberOfBoxes: aNumberOfBoxes [ 
@@ -35,9 +43,40 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
 ]
 
+{ #category : #'as yet unclassified' }
+Board class >> withNumberOfBoxesNoEffect: aNumber [ 
+		aNumber< 1 ifTrue: [ Error signal: 'A Board must have at least 1 box to be created' ].
+	^self new initialiceWithANumberOfBoxesNoEffect: aNumber.
+]
+
 { #category : #accessing }
 Board >> boxes [
 	^ boxes
+]
+
+{ #category : #'as yet unclassified' }
+Board >> checkAfterEffects: aCollectionOfShips [
+	aCollectionOfShips do:[:aShip| self checkPositionOf: aShip.]
+]
+
+{ #category : #'as yet unclassified' }
+Board >> checkPositionOf: aShip [
+
+	| actualPosition |
+	actualPosition := aShip getPosition.
+
+	"Si la posición es mayor que el tamaño del tablero, ajustarla"
+	actualPosition > boxes size ifTrue: [
+		actualPosition := actualPosition - boxes size.
+		aShip updateLaps "Actualizar vueltas de la nave" ].
+
+	"Si la posición es menor que 1 y la nave está en la vuelta 2 o más, ajustarla"
+	actualPosition < 1 ifTrue: [
+		actualPosition := aShip getLaps >= 2
+			                  ifTrue: [ boxes size + actualPosition ]
+			                  ifFalse: [ 1 ] ].
+
+	aShip movesTo: actualPosition
 ]
 
 { #category : #'as yet unclassified' }
@@ -78,7 +117,7 @@ Board >> hasBoxes [
 	^boxes size.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialize }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 
 	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes numberOfWormHoles |
@@ -155,6 +194,83 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wor
 	boxes at: wormHoleEndPosition put: (WormHoleBox inPlace: wormHoleStartPosition)
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
+		boxes := OrderedCollection new: aNumberOfBoxes.
+	
+		1 to: 78 do: [ :i | boxes add: Box new ].
+		
+		79 to: aNumberOfBoxes do:[:i | boxes add: BlackHoleBox  new ].
+]
+
+{ #category : #initialization }
+Board >> initializePersonalizedBoard [
+    | positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox totalBoxes |
+
+    totalBoxes := 102. "Por ejemplo, ajusta esto al número total de casillas que desees en el tablero."
+    boxes := OrderedCollection new: totalBoxes.
+    1 to: totalBoxes do: [:i | boxes add: nil].
+
+    wormHole := OrderedCollection new.
+    blackHoleBoxes := OrderedCollection new.
+    hyperGravityBoxes := OrderedCollection new.
+    moonWalkBoxes := OrderedCollection new.
+    hyperJumpBoxes := OrderedCollection new.
+    atomicBombBoxes := OrderedCollection new.
+    noEffectBoxes := OrderedCollection new.
+
+    positionsForNoEffectBoxes := OrderedCollection withAll: #(1 11 14 17 19 20 23 24 28 30 32 33 34 35 36 39 41 42 81 45 46 47 50 51 52 54 55 56 58 60 62 64 8 66 67 69 70 72 73 75).
+    positionsForBlackHole := OrderedCollection withAll: #(76 77 78 79 80 44 82 83 84 85 86 87 88 89 90 92 93 94 95 97).
+    positionsForHyperGravity := OrderedCollection withAll: #(98 99 100 101 102 5 2 27 4 6 7 65 9 10 12 13 15 16 18 21).
+    positionsForMoonWalk := OrderedCollection withAll: #(22 25 26 3 29 31 37 38 40 43).
+    positionsForHyperJump := OrderedCollection withAll: #(48 49 53 57 59 61 63 68).
+    positionsForAtomicBomb := OrderedCollection withAll: #(71 74).
+    positionsForWormHole := OrderedCollection withAll: #(91 96).
+
+    1 to: positionsForWormHole size do: [ :i |
+        aBox := WormHoleBox inPlace: (positionsForWormHole at: i).
+        boxes at: (positionsForWormHole at: i) put: aBox.
+        wormHole add: aBox
+    ].
+
+    1 to: positionsForBlackHole size do: [ :i |
+        aBox := BlackHoleBox inPlace: (positionsForBlackHole at: i).
+        boxes at: (positionsForBlackHole at: i) put: aBox.
+        blackHoleBoxes add: aBox
+    ].
+
+    1 to: positionsForHyperGravity size do: [ :i |
+        aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: i).
+        boxes at: (positionsForHyperGravity at: i) put: aBox.
+        hyperGravityBoxes add: aBox
+    ].
+
+    1 to: positionsForMoonWalk size do: [ :i |
+        aBox := MoonWalkBox inPlace: (positionsForMoonWalk at: i).
+        boxes at: (positionsForMoonWalk at: i) put: aBox.
+        moonWalkBoxes add: aBox
+    ].
+
+    1 to: positionsForHyperJump size do: [ :i |
+        aBox := HyperJumpBox inPlace: (positionsForHyperJump at: i).
+        boxes at: (positionsForHyperJump at: i) put: aBox.
+        hyperJumpBoxes add: aBox
+    ].
+
+    1 to: positionsForAtomicBomb size do: [ :i |
+        aBox := AtomicBombBox inPlace: (positionsForAtomicBomb at: i).
+        boxes at: (positionsForAtomicBomb at: i) put: aBox.
+        atomicBombBoxes add: aBox
+    ].
+
+    1 to: positionsForNoEffectBoxes size do: [ :i |
+        aBox := NoEffectBox inPlace: (positionsForNoEffectBoxes at: i).
+        boxes at: (positionsForNoEffectBoxes at: i) put: aBox.
+        noEffectBoxes add: aBox
+    ].
+
+]
+
 { #category : #accessing }
 Board >> isWormHoleAt: position [
 
@@ -166,14 +282,31 @@ Board >> move: aShip withDiceResult: aDiceResult [
 
 	| actualPosition positionsMoved|
 
-	actualPosition := aShip moves: aDiceResult.
+	aShip moves: aDiceResult.
+	
+	self checkPositionOf: aShip.
+	actualPosition := aShip getPosition.
+	aShip consumeFuel: aDiceResult .
 
-	actualPosition > boxes size ifTrue: [
-		actualPosition := actualPosition - (boxes size). 
-		aShip movesTo: actualPosition.
-		aShip updateLaps. ].
 	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
+			
 		aShip movesTo: (boxes at: actualPosition) effectsOn ].
 	positionsMoved := aDiceResult + (boxes at: actualPosition) effectsOn.
-	aShip consumeFuel: positionsMoved.
+
+]
+
+{ #category : #accessing }
+Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDiceResult [
+
+	| actualPosition aShip aBox |
+	aShip := aCollectionOfShips at: aPlayerTurn.
+	aShip moves: aDiceResult.
+	self checkPositionOf: aShip.
+	actualPosition := aShip getPosition.
+	aShip consumeFuel: aDiceResult.
+	aBox := boxes at: actualPosition.
+
+	aBox effectsOn ~= 0 ifFalse: [ ^ self ].
+	aBox effectShips: aCollectionOfShips playing: aShip.
+	self checkAfterEffects: aCollectionOfShips
 ]
