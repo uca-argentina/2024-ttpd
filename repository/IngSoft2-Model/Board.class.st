@@ -11,6 +11,9 @@ Class {
 		'atomicBombBoxes',
 		'noEffectBoxes'
 	],
+	#classInstVars : [
+		'boxes'
+	],
 	#category : #'IngSoft2-Model'
 }
 
@@ -40,9 +43,40 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHole
 	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
 ]
 
+{ #category : #'as yet unclassified' }
+Board class >> withNumberOfBoxesNoEffect: aNumber [ 
+		aNumber< 1 ifTrue: [ Error signal: 'A Board must have at least 1 box to be created' ].
+	^self new initialiceWithANumberOfBoxesNoEffect: aNumber.
+]
+
 { #category : #accessing }
 Board >> boxes [
 	^ boxes
+]
+
+{ #category : #'as yet unclassified' }
+Board >> checkAfterEffects: aCollectionOfShips [
+	aCollectionOfShips do:[:aShip| self checkPositionOf: aShip.]
+]
+
+{ #category : #'as yet unclassified' }
+Board >> checkPositionOf: aShip [
+
+	| actualPosition |
+	actualPosition := aShip getPosition.
+
+	"Si la posición es mayor que el tamaño del tablero, ajustarla"
+	actualPosition > boxes size ifTrue: [
+		actualPosition := actualPosition - boxes size.
+		aShip updateLaps "Actualizar vueltas de la nave" ].
+
+	"Si la posición es menor que 1 y la nave está en la vuelta 2 o más, ajustarla"
+	actualPosition < 1 ifTrue: [
+		actualPosition := aShip getLaps >= 2
+			                  ifTrue: [ boxes size + actualPosition ]
+			                  ifFalse: [ 1 ] ].
+
+	aShip movesTo: actualPosition
 ]
 
 { #category : #'as yet unclassified' }
@@ -83,7 +117,7 @@ Board >> hasBoxes [
 	^boxes size.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialize }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 
 	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes numberOfWormHoles |
@@ -160,6 +194,13 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wor
 	boxes at: wormHoleEndPosition put: (WormHoleBox inPlace: wormHoleStartPosition)
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
+		boxes := OrderedCollection new: aNumberOfBoxes.
+	
+		1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
+]
+
 { #category : #initialization }
 Board >> initializePersonalizedBoard [
 
@@ -185,7 +226,7 @@ Board >> initializePersonalizedBoard [
 		                               12 13 15 16 18 21 ).
 	positionsForMoonWalk := OrderedCollection withAll:
 		                        #( 22 25 26 3 29 31 37 38 40 43 ).
-	positionsForHyperJump := OrderedCollection withAll:
+	positionsForHyperJump :=OrderedCollection withAll:
 		                         #( 48 49 53 57 59 61 63 68 ).
 	positionsForAtomicBomb := OrderedCollection withAll: #( 71 74 ).
 	positionsForWormHole := OrderedCollection withAll: #( 91 96 ).
@@ -237,14 +278,31 @@ Board >> move: aShip withDiceResult: aDiceResult [
 
 	| actualPosition positionsMoved|
 
-	actualPosition := aShip moves: aDiceResult.
+	aShip moves: aDiceResult.
+	
+	self checkPositionOf: aShip.
+	actualPosition := aShip getPosition.
+	aShip consumeFuel: aDiceResult .
 
-	actualPosition > boxes size ifTrue: [
-		actualPosition := actualPosition - (boxes size). 
-		aShip movesTo: actualPosition.
-		aShip updateLaps. ].
 	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
+			
 		aShip movesTo: (boxes at: actualPosition) effectsOn ].
 	positionsMoved := aDiceResult + (boxes at: actualPosition) effectsOn.
-	aShip consumeFuel: positionsMoved.
+
+]
+
+{ #category : #accessing }
+Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDiceResult [
+
+	| actualPosition aShip aBox |
+	aShip := aCollectionOfShips at: aPlayerTurn.
+	aShip moves: aDiceResult.
+	self checkPositionOf: aShip.
+	actualPosition := aShip getPosition.
+	aShip consumeFuel: aDiceResult.
+	aBox := boxes at: actualPosition.
+
+	aBox effectsOn ~= 0 ifFalse: [ ^ self ].
+	aBox effectShips: aCollectionOfShips playing: aShip.
+	self checkAfterEffects: aCollectionOfShips
 ]

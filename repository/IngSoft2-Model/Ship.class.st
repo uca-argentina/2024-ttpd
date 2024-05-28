@@ -48,6 +48,11 @@ Ship >> consumeFuel: amount [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> decreaseLaps [
+	laps := laps - 1.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> getFuel [
 	^fuel
 ]
