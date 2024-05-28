@@ -9,9 +9,25 @@ AHyperJumpBoxTest >> testAHyperJumbBoxHasAParsec_BoxProportion_02 [
 
 	| aHyperJump aParsecsList |
 	aHyperJump := HyperJumpBox inPlace: 3.
-	aParsecsList := OrderedCollection with: #(5 7 2).
+	aParsecsList := #(5 7 2).
 	aHyperJump parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
 	self assert: aHyperJump parsecBoxProportion equals: 10.
+]
+
+{ #category : #tests }
+AHyperJumpBoxTest >> testAHyperJumpBoxHasAParsecList_07 [
+
+	| aHyperJump aParsecsList expectedList |
+	aHyperJump := HyperJumpBox inPlace: 3.
+	aParsecsList := #( 5 7 2 ).
+	aHyperJump
+		parsecsList: aParsecsList
+		withBoardLenght: 100
+		andParsecLength: 100.
+
+	expectedList := #(7 5 2).
+
+	self assert: aHyperJump getParsecList equals: expectedList
 ]
 
 { #category : #tests }

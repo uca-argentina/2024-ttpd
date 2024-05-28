@@ -12,13 +12,16 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-HyperJumpBox >> effectShips: aCollection playing: aShip [ 
+HyperJumpBox >> effectShips: aCollection playing: aShip [
+
 	| parsecs positionsToMove |
 	parsecs := parsecList at: self parsecsToMove.
-	positionsToMove := parsecs*parsecBoxProp. 
-	positionsToMove > 0.5 ifTrue: [ positionsToMove := positionsToMove ceiling ] ifFalse: [ positionsToMove := positionsToMove floor ].
+	positionsToMove := parsecs * parsecBoxProp.
+	positionsToMove > 0.5
+		ifTrue: [ positionsToMove := positionsToMove ceiling ]
+		ifFalse: [ positionsToMove := positionsToMove floor ].
 	aShip moves: positionsToMove.
-	aShip consumeFuel: positionsToMove.
+	aShip consumeFuel: positionsToMove
 ]
 
 { #category : #'as yet unclassified' }
@@ -33,13 +36,11 @@ HyperJumpBox >> parsecBoxProportion [
 
 { #category : #'as yet unclassified' }
 HyperJumpBox >> parsecsList: aParsecList withBoardLenght: aBoardLength andParsecLength: aParsecLength [
-	| collection |
-	collection := aParsecList.
-	parsecList := collection sorted: [ :a :b | a > b ].
-	parsecList := aParsecList asSortedCollection: [ :a :b | a > b ].
+
+	parsecList := (aParsecList asSortedCollection: [:a :b | a > b]) asArray.
 	boardLength := aBoardLength.
 	parsecLength := aParsecLength.
-	parsecBoxProp := aBoardLength/aParsecLength.
+	parsecBoxProp := aBoardLength / aParsecLength.
 	parsecNumber := 0.
 ]
 

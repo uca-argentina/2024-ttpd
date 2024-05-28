@@ -85,7 +85,7 @@ Ship >> getState [
 	^state.
 ]
 
-{ #category : #initialization }
+{ #category : #'as yet unclassified' }
 Ship >> initializeShip [
 
 	position := 0.
