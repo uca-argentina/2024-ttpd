@@ -5,6 +5,24 @@ Class {
 }
 
 { #category : #tests }
+AShipTest >> testAShipEndsTheCursedTheStateChangesToPlaying_23 [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip endCursed .
+	self assert: (aShip getState isKindOf: Playing)
+]
+
+{ #category : #tests }
+AShipTest >> testAShipIsCursedThenStateChangesToEffectBoxState_22 [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip isCursed.
+	self assert: (aShip getState isKindOf: EffectBoxState)
+]
+
+{ #category : #tests }
 AShipTest >> testAShipKnowsItsLastDieResult_21 [
 	| aShip aCollectionOfDice aLoadedDie |
 	aShip := Ship createWithMaxFuel: 1000.
