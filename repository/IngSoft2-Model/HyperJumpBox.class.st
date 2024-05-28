@@ -40,22 +40,6 @@ HyperJumpBox >> getParsecList [
 ]
 
 { #category : #initialization }
-HyperJumpBox >> initializeInPlace: aPosition andBoardGameLength: aBoardLength [
-	| aParsecList aParsecLength aParsecListLength |
-	place := aPosition.
-	aParsecListLength := (2 to: 100) atRandom.
-	aParsecList := OrderedCollection  new.
-	
-	1 to: aParsecListLength do: [:i | aParsecList add: ((1 to: 100) atRandom)].
-	parsecList := (aParsecList asSortedCollection: [ :a :b | a > b ])
-	              asArray.
-	boardLength := aBoardLength.
-	parsecLength := (0 to: aBoardLength*2).
-	parsecBoxProp := (aBoardLength/aParsecLength).
-	parsecNumber := 0.
-]
-
-{ #category : #initialization }
 HyperJumpBox >> initializeInPlace: aPosition parsecsList: aParsecList withBoardLenght: aBoardLength andParsecLength: aParsecLength [
 	place := aPosition.
 	parsecList := (aParsecList asSortedCollection: [ :a :b | a > b ])
