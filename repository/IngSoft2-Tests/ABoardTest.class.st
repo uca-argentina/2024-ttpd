@@ -10,25 +10,6 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
-ABoardTest >> testBanana_17 [
-
-	| aBoard aShip anotherShip aCollectionOfShips aBoardtwo |
-	aBoard := Board withNumberOfBoxesNoEffect: 100.
-	aBoardtwo:= Board createPersonalizedBoard.
-	aShip:=Ship createWithMaxFuel: 1000.
-	anotherShip :=Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:=OrderedCollection  new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: anotherShip .	
-	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 82.
-
-	self assert: aShip getPosition equals: 79.
-	self assert:  aShip getLaps equals: 1.
-		
-
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardHas100BoxesThen2OfThemIsAtomicBomb_05 [
 
 	| aBoard |
@@ -190,6 +171,25 @@ ABoardTest >> testWhenAPersonalizedBoardisCreateThenCheckIFTheBoxesAreInPosition
 	
 	self assert: (aBox isKindOf:MoonWalkBox).
 	self deny: (anotherBox isKindOf:AtomicBombBox) 
+]
+
+{ #category : #tests }
+ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
+
+	| aBoard aShip anotherShip aCollectionOfShips aBoardtwo |
+	aBoard := Board withNumberOfBoxesNoEffect: 100.
+	aBoardtwo:= Board createPersonalizedBoard.
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .	
+	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 82.
+
+	self assert: aShip getPosition equals: 79.
+	self assert:  aShip getLaps equals: 1.
+		
+
 ]
 
 { #category : #tests }

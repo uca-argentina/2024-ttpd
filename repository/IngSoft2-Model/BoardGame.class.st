@@ -149,10 +149,16 @@ BoardGame >> startparttwo [
 	play := self cutIfSomeoneWinparttwo:  playerTurn .
 
 	[ play ] whileFalse: [
+	"preguntar si va a tirar"
+		"a ship checkTurn"
 		board
 			move: (aCollectionOfShips at: playerTurn)
 			withDiceResult:
 			((aCollectionOfShips at: playerTurn) throwDice: dice).
+		"cant play
+		salteo turno
+		gravity"	
+			"metodo q resuelva"
 		play := self cutIfSomeoneWinparttwo:   playerTurn.
 		playerTurn := self changeTurn: playerTurn ].
 
