@@ -95,6 +95,11 @@ Ship >> movesTo: aPosition [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> resolveCurse: anInteger [ 
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> restartFuel [
 	fuel:= maxFuel .
 ]

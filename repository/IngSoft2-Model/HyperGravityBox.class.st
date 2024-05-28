@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+HyperGravityBox >> effectShips: aCollectionOfShips playing: aShip [
+
+	aShip resolveCurse: dieResult.
+]
+
+{ #category : #'as yet unclassified' }
 HyperGravityBox >> getNumberOfDie [
 	^dieResult.
 ]
