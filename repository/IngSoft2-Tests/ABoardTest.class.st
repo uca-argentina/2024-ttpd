@@ -10,6 +10,17 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
+ABoardTest >> testNewMethodForInitializationOfBoard_18 [
+
+	| aBoard aParsecsList |
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	self assert: aBoard getMaxDieResult equals: 40.
+		
+
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenABoardHas100BoxesThen2OfThemIsAtomicBomb_05 [
 
 	| aBoard |

@@ -17,6 +17,11 @@ HyperJumpBox class >> inPlace: aPosition parsecsList: aPaesecList withBoardLengh
 ]
 
 { #category : #'as yet unclassified' }
+HyperJumpBox class >> inPlace: aPosition withBoardLenght: aBoardLength [
+	^self new initializeInPlace: aPosition andBoardGameLength: aBoardLength.
+]
+
+{ #category : #'as yet unclassified' }
 HyperJumpBox >> effectShips: aCollection playing: aShip [
 
 	| parsecs positionsToMove |
@@ -37,6 +42,22 @@ HyperJumpBox >> getParsecLenght [
 { #category : #'as yet unclassified' }
 HyperJumpBox >> getParsecList [
 	^parsecList 
+]
+
+{ #category : #initialization }
+HyperJumpBox >> initializeInPlace: aPosition andBoardGameLength: aBoardLength [
+	| aParsecList aParsecLength aParsecListLength |
+	place := aPosition.
+	aParsecListLength := (2 to: 100) atRandom.
+	aParsecList := OrderedCollection  new.
+	
+	1 to: aParsecListLength do: [:i | aParsecList add: ((1 to: 100) atRandom)].
+	parsecList := (aParsecList asSortedCollection: [ :a :b | a > b ])
+	              asArray.
+	boardLength := aBoardLength.
+	parsecLength := (0 to: aBoardLength*2).
+	parsecBoxProp := (aBoardLength/aParsecLength).
+	parsecNumber := 0.
 ]
 
 { #category : #initialization }
