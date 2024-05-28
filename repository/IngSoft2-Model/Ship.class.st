@@ -99,6 +99,7 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	maxFuel:= amountMaxFuel.
 	laps:= 1.
 	state := Playing new.
+	lastDieResult := 0.
 ]
 
 { #category : #testing }
