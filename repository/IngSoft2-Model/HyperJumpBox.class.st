@@ -17,11 +17,6 @@ HyperJumpBox class >> inPlace: aPosition parsecsList: aPaesecList withBoardLengh
 ]
 
 { #category : #'as yet unclassified' }
-HyperJumpBox class >> inPlace: aPosition withBoardLenght: aBoardLength [
-	^self new initializeInPlace: aPosition andBoardGameLength: aBoardLength.
-]
-
-{ #category : #'as yet unclassified' }
 HyperJumpBox >> effectShips: aCollection playing: aShip [
 
 	| parsecs positionsToMove |

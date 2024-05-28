@@ -30,11 +30,6 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes [
 ]
 
 { #category : #'as yet unclassified' }
-Board class >> withNumberOfBoxes: aNumberOfBoxes andMaxDieResult: aMaxDieResult [ 
-	^self new initializeWithNumberOfBoxes: aNumberOfBoxes andMaxDieResult: aMaxDieResult.
-]
-
-{ #category : #'as yet unclassified' }
 Board class >> withNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: AParsecLength andMaxDieResult: aMaxDieResult [ 
 	^self new initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: AParsecLength andMaxDieResult: aMaxDieResult .
 ]
@@ -286,74 +281,6 @@ Board >> initializePersonalizedBoard [
         noEffectBoxes add: aBox
     ].
 
-]
-
-{ #category : #initialization }
-Board >> initializeWithNumberOfBoxes: aNumberOfBoxes andMaxDieResult: aMaxDieResult [
-
-	| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes numberOfWormHoles |
-	maxDieResult := aMaxDieResult.
-	positions := (2 to: aNumberOfBoxes) asOrderedCollection.
-	mixPositions := positions shuffled.
-	boxes := OrderedCollection new.
-	numberOfBoxes := aNumberOfBoxes - 1.
-	numberOfWormHoles := 2.
-	wormHole := OrderedCollection new.
-	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
-	blackHoleBoxes := OrderedCollection new.
-	numberOfHyperGravityBoxes := aNumberOfBoxes * 0.2.
-	hyperGravityBoxes := OrderedCollection new.
-	numberOfMoonWalkBoxes := aNumberOfBoxes * 0.1.
-	moonWalkBoxes := OrderedCollection new.
-	numberOfHyperJumpBoxes := aNumberOfBoxes * 0.08.
-	hyperJumpBoxes := OrderedCollection new.
-	numberOfAtomicBombBoxes := aNumberOfBoxes * 0.02.
-	atomicBombBoxes := OrderedCollection new.
-	numberOfNormalBoxes := numberOfBoxes - numberOfWormHoles
-	                       - numberOfBlackHoleBoxes
-	                       - numberOfHyperGravityBoxes
-	                       - numberOfMoonWalkBoxes
-	                       - numberOfHyperJumpBoxes
-	                       - numberOfAtomicBombBoxes.
-	noEffectBoxes := OrderedCollection new.
-	aBox := NoEffectBox inPlace: 1.
-	noEffectBoxes add: aBox.
-	boxes add: aBox.
-	1 to: numberOfWormHoles do: [ :i |
-		aBox := WormHoleBox inPlace: (mixPositions at: 1).
-		mixPositions removeFirst.
-		boxes add: aBox.
-		wormHole add: aBox ].
-	1 to: numberOfBlackHoleBoxes do: [ :i |
-		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
-		mixPositions removeFirst.
-		boxes add: aBox.
-		blackHoleBoxes add: aBox ].
-	1 to: numberOfHyperGravityBoxes do: [ :i |
-		aBox := HyperGravityBox inPlace: (mixPositions at: 1) withDieResult: (1 to: maxDieResult) atRandom.
-		mixPositions removeFirst.
-		boxes add: aBox.
-		hyperGravityBoxes add: aBox ].
-	1 to: numberOfMoonWalkBoxes do: [ :i |
-		aBox := MoonWalkBox inPlace: (mixPositions at: 1) .
-		mixPositions removeFirst.
-		boxes add: aBox.
-		moonWalkBoxes add: aBox ].
-	1 to: numberOfHyperJumpBoxes do: [ :i |
-		aBox := HyperJumpBox inPlace: (mixPositions at: 1) withBoardLenght: aNumberOfBoxes.
-		mixPositions removeFirst.
-		boxes add: aBox.
-		hyperJumpBoxes add: aBox ].
-	1 to: numberOfAtomicBombBoxes do: [ :i |
-		aBox := AtomicBombBox inPlace: (mixPositions at: 1).
-		mixPositions removeFirst.
-		boxes add: aBox.
-		atomicBombBoxes add: aBox ].
-	1 to: numberOfNormalBoxes do: [ :i |
-		aBox := NoEffectBox inPlace: (mixPositions at: 1).
-		mixPositions removeFirst.
-		boxes add: aBox.
-		noEffectBoxes add: aBox ]
 ]
 
 { #category : #'as yet unclassified' }

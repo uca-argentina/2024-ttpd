@@ -255,7 +255,7 @@ AShipTest >> testWhenShipRunsOutOfFuelThenTurnsToSkipIs2_15 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
 	aShip consumeFuel: 1000.
-	self assert: (aShip getState) getContTurns equals: 2.
+	self assert: (aShip getState) getContTurns equals: 3.
 ]
 
 { #category : #tests }

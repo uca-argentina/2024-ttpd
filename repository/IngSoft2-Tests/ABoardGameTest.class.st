@@ -220,7 +220,7 @@ ABoardGameTest >> testWhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts_06 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
 	aPersonalizedBoard := Board createPersonalizedBoard.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := Die of: 70.
+	aLoadedDie := Die of: 50.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 2

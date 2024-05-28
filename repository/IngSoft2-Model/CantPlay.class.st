@@ -19,6 +19,7 @@ CantPlay >> checkPlay [
 
 { #category : #'as yet unclassified' }
 CantPlay >> checkTurnState: aShip [ 
+	self updateTurns.
 	turns = 0 ifTrue: [ aShip changeStateToPlay. ^true].
 	^false.
 ]
@@ -30,7 +31,7 @@ CantPlay >> getContTurns [
 
 { #category : #initialization }
 CantPlay >> initializeSkip: aNumberOfTurns [ 
-	turns := aNumberOfTurns.
+	turns := aNumberOfTurns + 1.
 ]
 
 { #category : #'as yet unclassified' }
