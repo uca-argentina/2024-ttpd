@@ -149,3 +149,23 @@ ABoardGameTest >> testWhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts_06 
 		              andwithNumberOfLaps: 2.
 	self assert: aBoardGame start.
 ]
+
+{ #category : #tests }
+ABoardGameTest >> testWhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts_07 [
+
+	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn |
+	turn := 1.
+
+	aBoard := Board withNumberOfBoxes: 100.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 102.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+		
+	nextTurn := aBoardGame changeTurn: turn.
+	self assert: nextTurn equals: 2.
+]
