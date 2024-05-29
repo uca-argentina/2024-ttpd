@@ -30,8 +30,9 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes [
 ]
 
 { #category : #'as yet unclassified' }
-Board class >> withNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: AParsecLength andMaxDieResult: aMaxDieResult [ 
-	^self new initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: AParsecLength andMaxDieResult: aMaxDieResult .
+Board class >> withNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: aParsecLength andMaxDieResult: aMaxDieResult [ 
+	aNumberOfBoxes < 1 ifTrue: [ Error signal: 'A Board must have at least 1 box to be created' ].
+	^self new initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: aParsecLength andMaxDieResult: aMaxDieResult .
 ]
 
 { #category : #'as yet unclassified' }

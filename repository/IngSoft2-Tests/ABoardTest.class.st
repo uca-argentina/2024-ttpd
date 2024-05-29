@@ -173,6 +173,15 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 ]
 
 { #category : #tests }
+ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid_19 [
+
+	self
+		should: [ Board withNumberOfBoxes: 0 withParsecArray: #(1 3 4) aParsecLength: 20 andMaxDieResult: 45 ]
+		raise: Error
+		withMessage: 'A Board must have at least 1 box to be created'
+]
+
+{ #category : #tests }
 ABoardTest >> testWhenAPersonalizedBoardisCreateThenCheckIFTheBoxesAreInPosition_15 [
 
 	| aBoard aBox anotherBox |

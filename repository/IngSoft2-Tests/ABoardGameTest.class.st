@@ -10,6 +10,44 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
+ABoardGameTest >> testABoardGameWillNotStartWithLessThan1Ship_08 [
+
+	| aCollectionOfDice aDie |
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+
+	self
+		should: [
+			BoardGame
+				withShip: 0
+				withBoard: Board createPersonalizedBoard
+				WithDice: aCollectionOfDice
+				andwithNumberOfLaps: 2 ]
+		raise: Error
+		withMessage: 'A Board must have at least 1 ship to be created'
+]
+
+{ #category : #tests }
+ABoardGameTest >> testABoardGameWillNotStartWithLessThan2Laps_09 [
+
+	| aCollectionOfDice aDie |
+	aCollectionOfDice := OrderedCollection new.
+	aDie := Die of: 3.
+	aCollectionOfDice add: aDie.
+
+	self
+		should: [
+			BoardGame
+				withShip: 1
+				withBoard: Board createPersonalizedBoard
+				WithDice: aCollectionOfDice
+				andwithNumberOfLaps: 1 ]
+		raise: Error
+		withMessage: 'A Board must have at least 2 laps to be created' 
+]
+
+{ #category : #tests }
 ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [
 
 	self
@@ -68,7 +106,7 @@ ABoardGameTest >> testWhenABoardGameIsCreatedWithAPersonalizedBoardThenTheGameSt
 		              withBoard: aPersonalizedBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame startparttwo "probado"
+	self assert: aBoardGame start "probado"
 ]
 
 { #category : #tests }
@@ -88,7 +126,7 @@ ABoardGameTest >> testWhenAGameFinishesThenRankingIsShown_07 [
 	expectedRanking add: 2.
 	expectedRanking add: 1.
 	expectedRanking add: 3.
-	aBoardGame startparttwo.
+	aBoardGame start.
 	self assert: aBoardGame showRanking equals: expectedRanking.
 ]
 
@@ -96,19 +134,16 @@ ABoardGameTest >> testWhenAGameFinishesThenRankingIsShown_07 [
 ABoardGameTest >> testWhenAGameHasANumberOfLapsThenTheGameStarts_03 [
 
 	| aBoardGame aBoard aCollectionOfDice aDie |
-	aBoard := Board
-		          withNumberOfBoxes: 3
-		          withWormHoleStaringIn: 1
-		          andEndingIn: 2.
+	aBoard := Board withNumberOfBoxes: 102 withParsecArray: #(3 4 5) aParsecLength: 10 andMaxDieResult: 60.
 	aCollectionOfDice := OrderedCollection new.
-	aDie := Die of: 3.
+	aDie := Die of: 60.
 	aCollectionOfDice add: aDie.
 	aBoardGame := BoardGame
 		              withShip: 4
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 1.
-	self assert: aBoardGame startparttwo ."probado"
+		              andwithNumberOfLaps: 2.
+	self assert: aBoardGame start ."probado"
 ]
 
 { #category : #tests }
@@ -124,28 +159,8 @@ ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Win
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	aBoardGame startparttwo.
-	self assert: aBoardGame winnerIsParttwo equals: 1
-]
-
-{ #category : #tests }
-ABoardGameTest >> testWhenShip1EntersAWormHoleThatEndsInTheFinalPositionThenShip1Wins [
-
-	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
-	aBoard := Board
-		          withNumberOfBoxes: 7
-		          withWormHoleStaringIn: 3
-		          andEndingIn: 7.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 3.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 6
-		              withBoard: aBoard
-		              andWithDice: aCollectionOfDice.
+	aBoardGame start.
 	self assert: aBoardGame winnerIs equals: 1
-	
-"borrarlos"
 ]
 
 { #category : #tests }
@@ -161,5 +176,5 @@ ABoardGameTest >> testWhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts_06 
 		              withBoard: aPersonalizedBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame startparttwo.
+	self assert: aBoardGame start.
 ]

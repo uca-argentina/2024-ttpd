@@ -25,6 +25,9 @@ BoardGame class >> withShip: aNumberOfShips andBoard: aBoard [
 { #category : #'as yet unclassified' }
 BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollectionOfDice andwithNumberOfLaps: numberOfLaps [
 
+	aNumberOfShips < 1 ifTrue: [  Error signal: 'A Board must have at least 1 ship to be created'  ].
+	numberOfLaps < 2 ifTrue: [  Error signal: 'A Board must have at least 2 laps to be created'  ].
+
 	^ self new
 		  initializeWithShips: aNumberOfShips
 		  whithBoard: aBoard
@@ -40,7 +43,7 @@ BoardGame class >> withShip: aNumberOfShips withBoard: aBoard andWithDice: aColl
 	^ self new
 		  initializeWithANumberOfShips: aNumberOfShips
 		  withBoard: aBoard
-		  andWithDice: aCollectionOfDice
+		  andWithDic: aCollectionOfDice
 ]
 
 { #category : #accessing }
@@ -52,20 +55,6 @@ lastPlayer :=aCollectionOfShips size.
 
 
 
-
-]
-
-{ #category : #'as yet unclassified' }
-BoardGame >> cutIfSomeoneWin: playerTurn [
-
-	^(aCollectionOfShips at: playerTurn) getPosition >= board hasBoxes.
-
-]
-
-{ #category : #'as yet unclassified' }
-BoardGame >> cutIfSomeoneWinparttwo: playerTurn [
-
-	^(aCollectionOfShips at: playerTurn) getLaps  >= laps.
 
 ]
 
@@ -85,20 +74,6 @@ BoardGame >> getPositionOfShipAt: anIndexOfShip [
 ]
 
 { #category : #initialization }
-BoardGame >> initializeWithANumberOfShips: aNumberOfShips withBoard: aBoard andWithDice: aCollectionOfDice [
-
-	| numberOfShips numberOfBoxes |
-	numberOfShips := aNumberOfShips.
-	numberOfBoxes := aBoard.
-	aCollectionOfShips := OrderedCollection new.
-	[ numberOfShips ~= 0 ] whileTrue: [
-		aCollectionOfShips add: (Ship create).
-		numberOfShips := numberOfShips - 1 ].
-	board:= aBoard.
-	dice := aCollectionOfDice
-]
-
-{ #category : #initialization }
 BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
 
 	| numberOfShips numberOfBoxes maxFuel |
@@ -113,7 +88,7 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
 	dice := aCollectionOfDice.
-	laps:= aNumberOfLaps.
+	laps := aNumberOfLaps
 ]
 
 { #category : #'as yet unclassified' }
@@ -138,24 +113,6 @@ BoardGame >> showRanking [
 { #category : #accessing }
 BoardGame >> start [
 
-	| playerTurn play |
-	playerTurn := 1.
-	play := self cutIfSomeoneWin: playerTurn .
-
-	[ play ] whileFalse: [
-		board
-			move: (aCollectionOfShips at: playerTurn)
-			withDiceResult:
-			((aCollectionOfShips at: playerTurn) throwDice: dice).
-		play := self cutIfSomeoneWin: playerTurn.
-		playerTurn := self changeTurn: playerTurn ].
-
-	^ self cutIfSomeoneWin
-]
-
-{ #category : #accessing }
-BoardGame >> startparttwo [
-
 	| playerTurn play dieResult |
 	playerTurn := 1.
 	play := (aCollectionOfShips at: playerTurn) victory.
@@ -179,17 +136,6 @@ BoardGame >> startparttwo [
 
 { #category : #'as yet unclassified' }
 BoardGame >> winnerIs [
-	|winner|
-	winner :=aCollectionOfShips at:1.
-	
-	2 to: aCollectionOfShips size do:[:i | |shipActual| shipActual:= aCollectionOfShips at: i.
-		(winner getPosition < shipActual getPosition)ifTrue: [ winner :=shipActual]
-		]. 
-	^ aCollectionOfShips indexOf: winner.
-]
-
-{ #category : #'as yet unclassified' }
-BoardGame >> winnerIsParttwo [
 	|winner|
 	winner :=aCollectionOfShips at:1.
 	aCollectionOfShips do:[:ship| (ship getLaps >= winner getLaps )ifTrue: [ winner := ship ]].
