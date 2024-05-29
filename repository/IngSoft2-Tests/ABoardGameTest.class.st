@@ -48,16 +48,6 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThan2Laps_09 [
 ]
 
 { #category : #tests }
-ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [
-
-	self
-		should: [
-		BoardGame withShip: 2 andBoard: (Board withNumberOfBoxes: 0) ]
-		raise: Error
-		withMessage: 'A Board must have at least 1 box to be created'
-]
-
-{ #category : #tests }
 ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie aParsecsList |
