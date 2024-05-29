@@ -95,18 +95,16 @@ BoardGame >> start [
 	play := (aCollectionOfShips at: playerTurn) victory.
 
 	[ play ] whileFalse: [
-	"preguntar si va a tirar"
-		((aCollectionOfShips at: playerTurn) checkTurn) ifTrue: [   
-		dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
-		board
-			 players: aCollectionOfShips playerTurn: playerTurn withDiceResult: dieResult andLaps: laps.
-		].
-		"cant play
-		salteo turno
-		gravity"	
-			"metodo q resuelva"
+		(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
+			dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
+			board
+				players: aCollectionOfShips
+				playerTurn: playerTurn
+				withDiceResult: dieResult
+				andLaps: laps ].
+
 		play := (aCollectionOfShips at: playerTurn) victory.
-		playerTurn := self changeTurn: playerTurn. ].
+		playerTurn := self changeTurn: playerTurn ].
 
 	^ play
 ]

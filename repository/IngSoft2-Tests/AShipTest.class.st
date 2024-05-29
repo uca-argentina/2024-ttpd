@@ -198,9 +198,10 @@ AShipTest >> testWhenAShipRunsOutOfFuelThenCheckTurnReturnsFalse_17 [
 
 { #category : #tests }
 AShipTest >> testWhenAShipRunsOutOfFuelThenFuelIsRestoredToMax_09 [
-	| aShip aBoard |
+	| aShip aBoard aParsecsList |
 	aShip := Ship createWithMaxFuel: 10.
-	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
 	aBoard move: aShip withDiceResult: 15.
 	self assert: aShip getFuel equals: 10.
 ]
@@ -259,27 +260,30 @@ AShipTest >> testWhenShipDecidesToSkipATurnThenFuelIsRestoresToMaxValue_20 [
 
 { #category : #tests }
 AShipTest >> testWhenShipIsOutOfFuelThenPositionIsUpdatedTo1_08 [
-	| aShip aBoard |
+	| aShip aBoard aParsecsList |
 	aShip := Ship createWithMaxFuel: 10.
-	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
 	aBoard move: aShip withDiceResult: 15.
 	self assert: aShip getPosition equals: 1.
 ]
 
 { #category : #tests }
 AShipTest >> testWhenShipMoves4PositionsThenPositionIsUpdatedTo5_07 [
-	| aShip aBoard |
+	| aShip aBoard aParsecsList |
 	aShip := Ship createWithMaxFuel: 100.
-	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
 	aBoard move: aShip withDiceResult: 4.
 	self assert: aShip getPosition equals: 5.
 ]
 
 { #category : #tests }
 AShipTest >> testWhenShipMovesInBoard4PacesThenFuelIsCosumedBy4_06 [
-	| aShip aBoard |
+	| aShip aBoard aParsecsList |
 	aShip := Ship createWithMaxFuel: 100.
-	aBoard := Board withNumberOfBoxes: 30 withWormHoleStaringIn: 2 andEndingIn: 3.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
 	aBoard move: aShip withDiceResult: 4.
 	self assert: aShip getFuel equals: 96.
 ]
@@ -294,10 +298,11 @@ AShipTest >> testWhenShipRunsOutOfFuelThenTurnsToSkipIs2_15 [
 
 { #category : #tests }
 AShipTest >> testWhenShipWantsToMoveMorePositionsThanTheAmountOfBoxesThenLapsIsUpdated_10 [
-	| aShip aBoard |
+	| aShip aBoard aParsecsList |
 	aShip := Ship createWithMaxFuel: 1000.
-	aBoard := Board withNumberOfBoxes: 10 withWormHoleStaringIn: 2 andEndingIn: 3.
-	aBoard move: aShip withDiceResult: 15.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	aBoard move: aShip withDiceResult: 100.
 	self assert: aShip getLaps equals: 2.
 ]
 
