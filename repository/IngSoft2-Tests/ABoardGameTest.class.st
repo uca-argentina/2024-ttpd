@@ -58,30 +58,11 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneBox [
 ]
 
 { #category : #tests }
-ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_01 [
-
-	self
-		should: [ BoardGame withShip: 0 ]
-		raise: Error
-		withMessage: 'A Board Game should have at least 1 ship to start'
-]
-
-{ #category : #tests }
-ABoardGameTest >> testABoardGameWillNotStartWithLessThanOneShip_02 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 10.
-	self
-		should: [ BoardGame withShip: 0 andBoard: aBoard ]
-		raise: Error
-		withMessage: 'A Board Game should have at least 1 ship to start'
-]
-
-{ #category : #tests }
 ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
 
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := PersonalizedBoard withANumberOfBoxes: 3.
+	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie aParsecsList |
+	aParsecsList := #(5 7 2).
+	aPersonalizedBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 5.
 	aCollectionOfDice add: aLoadedDie.

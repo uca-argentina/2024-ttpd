@@ -11,18 +11,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BoardGame class >> withShip: aNumberOfShips [ 
-	
-	^self new initializeWithShip: aNumberOfShips.
-]
-
-{ #category : #'as yet unclassified' }
-BoardGame class >> withShip: aNumberOfShips andBoard: aBoard [ 
-	aNumberOfShips < 1 ifTrue: [ Error signal: 'A Board Game should have at least 1 ship to start' ]. 
-	^self new initializeWithANumberOfShips: aNumberOfShips andBoard: aBoard.
-]
-
-{ #category : #'as yet unclassified' }
 BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollectionOfDice andwithNumberOfLaps: numberOfLaps [
 
 	aNumberOfShips < 1 ifTrue: [  Error signal: 'A Board must have at least 1 ship to be created'  ].
@@ -33,17 +21,6 @@ BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollect
 		  whithBoard: aBoard
 		  withDice: aCollectionOfDice
 		  andwithNumberOfLaps: numberOfLaps
-]
-
-{ #category : #'as yet unclassified' }
-BoardGame class >> withShip: aNumberOfShips withBoard: aBoard andWithDice: aCollectionOfDice [
-
-	aNumberOfShips < 1 ifTrue: [
-		Error signal: 'A Board Game should have at least 1 ship to start' ].
-	^ self new
-		  initializeWithANumberOfShips: aNumberOfShips
-		  withBoard: aBoard
-		  andWithDic: aCollectionOfDice
 ]
 
 { #category : #accessing }
