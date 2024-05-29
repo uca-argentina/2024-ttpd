@@ -31,6 +31,11 @@ Box >> addShip: aShip [
 ]
 
 { #category : #'as yet unclassified' }
+Box >> effectShips: aCollectionOfShips playing: aShip [ 
+	
+]
+
+{ #category : #'as yet unclassified' }
 Box >> effectsOn [
 
 	^0
@@ -55,21 +60,12 @@ Box >> initializeBox [
 { #category : #initialization }
 Box >> initializeInPlace: aPlace [
 	place := aPlace.
+	
 ]
 
 { #category : #initialization }
 Box >> initializeWithShips: aCollectionOfShips [ 
 	ships := aCollectionOfShips
-]
-
-{ #category : #'as yet unclassified' }
-Box >> moveShipTo [
-	^place
-]
-
-{ #category : #accessing }
-Box >> place [
-	^ place
 ]
 
 { #category : #removing }

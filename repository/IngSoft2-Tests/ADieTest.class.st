@@ -27,6 +27,14 @@ ADieTest >> testDieCannotBeCreatedWithLessThan3Faces [
 ]
 
 { #category : #tests }
+ADieTest >> testWhenADieHasAMaximumValueTheItReturnsFaces_01 [
+
+	| aDie |
+	aDie := Die of: 3.
+	self assert: aDie maximumValue equals: 3.
+]
+
+{ #category : #tests }
 ADieTest >> testWhenDieIsThrownThenValueIsBetween1AndNumberOfFaces [
 
 	| aDie |

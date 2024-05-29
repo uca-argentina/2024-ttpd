@@ -30,6 +30,11 @@ LoadedDieWithSequence >> initializeSequence: aSequence [
     sequence := aSequence
 ]
 
+{ #category : #accessing }
+LoadedDieWithSequence >> maximumValue [
+	^sequence max.
+]
+
 { #category : #'as yet unclassified' }
 LoadedDieWithSequence >> throw [
 

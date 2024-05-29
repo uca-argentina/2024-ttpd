@@ -61,22 +61,6 @@ ABoxTest >> testWhenABoxIsCreatedWithoutAShipThenAShipCanBeAddedToTheBox_06 [
 ]
 
 { #category : #tests }
-ABoxTest >> testWhenABoxIsPlacedInPosition1ThenTheShipMustMoveToPosition1_02 [ 
-
-| aBox |
-aBox := Box inPlace: 1.
-self assert: (aBox moveShipTo ) equals: 1.
-]
-
-{ #category : #tests }
-ABoxTest >> testWhenBoxIsCreatedWithAPositionThenMoveShipToReturnsThePosition_03 [
-
-| aBox |
-aBox := Box inPlace: 5.
-self assert: (aBox moveShipTo ) equals: 5.
-]
-
-{ #category : #tests }
 ABoxTest >> testWhenTheBoxIsCreatedInPlaceLessThan1ThenBoxInvalid_04 [
 
 	self

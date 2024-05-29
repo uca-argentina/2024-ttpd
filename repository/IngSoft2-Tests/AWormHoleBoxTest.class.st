@@ -5,16 +5,7 @@ Class {
 }
 
 { #category : #tests }
-AWormHoleBoxTest >> testWhenAWomHoleExitsInPlace1ThenTheEffectOnEquals1_05 [
-
-	| aWormHoleBox |
-	aWormHoleBox := WormHoleBox inPlace: 1.
-
-	self assert: (aWormHoleBox effectsOn) equals: 1
-]
-
-{ #category : #tests }
-AWormHoleBoxTest >> testWhenAWormHoleBoxInPlace1MovesShipToAnotherWormHoleBoxInPlace2ThenMoveShipToReturns2_02 [
+AWormHoleBoxTest >> testWhenAWormHoleBoxInPlace1ThenTheEffectsOnReturns1 [
 
 	| aWormHoleBox |
 	aWormHoleBox := WormHoleBox inPlace: 1.
@@ -50,4 +41,17 @@ AWormHoleBoxTest >> testWhenAWormHoleIsCreatedInAPlaceThenGetPositionReturnsTheP
 | aWormHoleBox |
 aWormHoleBox := WormHoleBox inPlace: 1.
 self assert: (aWormHoleBox getPosition) equals: 1.
+]
+
+{ #category : #tests }
+AWormHoleBoxTest >> testWhenAWormHoleKnowsItsDestiny_05 [
+
+	| aWormholeBox anotherWormholeBox |
+	aWormholeBox := WormHoleBox inPlace: 2.
+	anotherWormholeBox := WormHoleBox inPlace: 4.
+	aWormholeBox withDestiny: anotherWormholeBox.
+	anotherWormholeBox withDestiny: aWormholeBox.
+
+	self assert: aWormholeBox getDestiny equals: anotherWormholeBox .
+	self assert: anotherWormholeBox getDestiny equals: aWormholeBox .
 ]
