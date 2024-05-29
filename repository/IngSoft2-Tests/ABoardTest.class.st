@@ -61,17 +61,6 @@ ABoardTest >> testWhenABoardHas25BoxesThen2OfThemIsHyperJump_04 [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardHasAWormHoleThenIsWormHoleAtPositionReturnsTrue [ 
-
-	| aBoard |
-	aBoard := Board
-		          withNumberOfBoxes: 5
-		          withWormHoleStaringIn: 3
-		          andEndingIn: 4.
-	self assert: (aBoard isWormHoleAt: 3) equals: true
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedPersonalizedThenIrHas100Boxes_14 [
 
 	| aBoard |
@@ -154,16 +143,6 @@ ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedWithAWormHoleStartingPostition0ThenBoardIsNotCreated [
-
-	self
-		should: [
-		Board withNumberOfBoxes: 5 withWormHoleStaringIn: 0 andEndingIn: 3 ]
-		raise: Error
-		withMessage: 'A WormHole must Start in box 1 or more'
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
 	self
@@ -204,7 +183,7 @@ ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 	aCollectionOfShips:=OrderedCollection  new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: anotherShip .	
-	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 82.
+	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 82 andLaps: 2.
 
 	self assert: aShip getPosition equals: 79.
 	self assert:  aShip getLaps equals: 1.
@@ -222,22 +201,11 @@ ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
 	aCollectionOfShips:=OrderedCollection  new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: anotherShip .	
-	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 104.
+	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 104 andLaps: 2.
 	
 	self assert: aShip getPosition equals: 5.
 	
 	self assert:  aShip getLaps equals: 2.
 		
 
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenTheEndingPositionOfTheHoleIsBiggerThanNumberOfBoxesThenBoardNotCreated [
-
-	self
-		should: [
-		Board withNumberOfBoxes: 5 withWormHoleStaringIn: 1 andEndingIn: 6 ]
-		raise: Error
-		withMessage:
-		'The ending position of the wormHole must be lower than the number of boxes of the board'
 ]
