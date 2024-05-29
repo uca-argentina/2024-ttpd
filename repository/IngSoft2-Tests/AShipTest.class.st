@@ -100,6 +100,40 @@ AShipTest >> testWhenAShipDecreasedItsLapsThenLapsIs0_24 [
 ]
 
 { #category : #tests }
+AShipTest >> testWhenAShipEntersAWormHoleThenItConsumesFuelToDestiny_26 [
+
+	| aShip aWormholeBox anotherWormholeBox aCollectionOfShips |
+	aCollectionOfShips := OrderedCollection new.
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips add: aShip .
+	aWormholeBox := WormHoleBox inPlace: 2.
+	anotherWormholeBox := WormHoleBox inPlace: 4.
+	aWormholeBox withDestiny: anotherWormholeBox.
+	anotherWormholeBox withDestiny: aWormholeBox.
+	aShip moves: 1.
+	aShip consumeFuel: 1.
+	aWormholeBox effectShips: aCollectionOfShips playing: aShip.
+	self assert: aShip getFuel equals: 997.
+]
+
+{ #category : #tests }
+AShipTest >> testWhenAShipEntersAWormHoleThenItMovesToDestiny_25 [
+
+	| aShip aWormholeBox anotherWormholeBox aCollectionOfShips |
+	aCollectionOfShips := OrderedCollection new.
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips add: aShip .
+	aWormholeBox := WormHoleBox inPlace: 2.
+	anotherWormholeBox := WormHoleBox inPlace: 4.
+	aWormholeBox withDestiny: anotherWormholeBox.
+	anotherWormholeBox withDestiny: aWormholeBox.
+	aShip moves: 1.
+	aShip consumeFuel: 1.
+	aWormholeBox effectShips: aCollectionOfShips playing: aShip.
+	self assert: aShip getPosition equals: 4.
+]
+
+{ #category : #tests }
 AShipTest >> testWhenAShipFinishesLapsThenVictory_13 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.

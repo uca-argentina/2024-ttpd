@@ -244,6 +244,10 @@ Board >> initializePersonalizedBoard [
         wormHole add: aBox
     ].
 
+	(wormHole at: 1 )withDestiny: (wormHole at: 2).
+	(wormHole at: 2 )withDestiny: (wormHole at: 1).
+
+
     1 to: positionsForBlackHole size do: [ :i |
         aBox := BlackHoleBox inPlace: (positionsForBlackHole at: i).
         boxes at: (positionsForBlackHole at: i) put: aBox.
@@ -318,6 +322,10 @@ Board >> initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecLis
 		mixPositions removeFirst.
 		boxes add: aBox.
 		wormHole add: aBox ].
+	
+	(wormHole at: 1 )withDestiny: (wormHole at: 2).
+	(wormHole at: 2 )withDestiny: (wormHole at: 1).
+	
 	1 to: numberOfBlackHoleBoxes do: [ :i |
 		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
 		mixPositions removeFirst.
