@@ -14,6 +14,34 @@ AMoonWalkBoxTest >> testWhenAMoonWalkBoxIsCreatedThenANumberOfBoxesToMoveCanBeAs
 ]
 
 { #category : #tests }
+AMoonWalkBoxTest >> testWhenAMoonWalkBoxIsCreatedThenANumberOfPositionsToMoveIsAssignedRandomly_05 [
+
+	| aMoonWalkBox |
+	aMoonWalkBox := MoonWalkBox inPlace: 10.
+	self assert: aMoonWalkBox getnumberOfBoxesToMove > 0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+{ #category : #tests }
 AMoonWalkBoxTest >> testWhenAMoonWalkBoxIsCreatedThenItHasAPlace_01 [
 
 	| aMoonWalkBox |

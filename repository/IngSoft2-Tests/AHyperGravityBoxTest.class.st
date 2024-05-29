@@ -22,6 +22,15 @@ AHyperGravityBoxTest >> testWhenAHyperGravityBoxIsCreatedThenIrHasAPlace_01 [
 ]
 
 { #category : #tests }
+AHyperGravityBoxTest >> testWhenAHyperGravityBoxIsCreatedThenItHasADieResult_07 [
+
+	|aHyperGravityBox |
+	aHyperGravityBox := HyperGravityBox inPlace: 3 withDieResult: 5.
+	self assert: aHyperGravityBox getNumberOfDie equals: 5.
+
+]
+
+{ #category : #tests }
 AHyperGravityBoxTest >> testWhenAShipLandsInAHyperGravityBoxThenItsStateChangesToEffectoBoxState_03 [
 
 	| aShip anotherShip aCollectionOfShips aHyperGravityBox |

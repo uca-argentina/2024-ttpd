@@ -12,7 +12,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #operations }
+{ #category : #'as yet unclassified' }
 Ship class >> create [
 	^self new initializeShip.
 ]

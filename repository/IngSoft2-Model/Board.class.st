@@ -9,7 +9,8 @@ Class {
 		'hyperGravityBoxes',
 		'hyperJumpBoxes',
 		'atomicBombBoxes',
-		'noEffectBoxes'
+		'noEffectBoxes',
+		'maxDieResult'
 	],
 	#classInstVars : [
 		'boxes'
@@ -29,18 +30,9 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes [
 ]
 
 { #category : #'as yet unclassified' }
-Board class >> withNumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
-
-	aNumberOfBoxes < 1 ifTrue: [
-		Error signal: 'A Board must have at least 1 box to be created' ].
-	wormHoleStartPosition < 1 ifTrue: [
-		Error signal: 'A WormHole must Start in box 1 or more' ].
-	wormHoleEndPosition > aNumberOfBoxes ifTrue: [
-		Error signal: 'The ending position of the wormHole must be lower than the number of boxes of the board' ].
-	wormHoleStartPosition > wormHoleEndPosition ifTrue: [
-		Error signal:
-			'A WormHole starting position must be less than the ending position' ].
-	^ self new initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition.
+Board class >> withNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: aParsecLength andMaxDieResult: aMaxDieResult [ 
+	aNumberOfBoxes < 1 ifTrue: [ Error signal: 'A Board must have at least 1 box to be created' ].
+	^self new initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: aParsecLength andMaxDieResult: aMaxDieResult .
 ]
 
 { #category : #'as yet unclassified' }
@@ -100,6 +92,11 @@ Board >> getHyperGravityBoxes [
 Board >> getHyperJumpBoxes [
 
 	^hyperJumpBoxes 
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getMaxDieResult [
+	^maxDieResult .
 ]
 
 { #category : #'as yet unclassified' }
@@ -184,16 +181,6 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 		noEffectBoxes add: aBox ]
 ]
 
-{ #category : #initialize }
-Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes withWormHoleStaringIn: wormHoleStartPosition andEndingIn: wormHoleEndPosition [
-
-	boxes := OrderedCollection new: aNumberOfBoxes.
-	1 to: aNumberOfBoxes do: [ :i | boxes add: Box new ].
-
-	boxes at: wormHoleStartPosition put: (WormHoleBox inPlace:  wormHoleEndPosition).
-	boxes at: wormHoleEndPosition put: (WormHoleBox inPlace: wormHoleStartPosition)
-]
-
 { #category : #'as yet unclassified' }
 Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
 		boxes := OrderedCollection new: aNumberOfBoxes.
@@ -205,7 +192,7 @@ Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
 
 { #category : #initialization }
 Board >> initializePersonalizedBoard [
-    | positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox totalBoxes |
+    | positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox totalBoxes aPaesecList |
 
     totalBoxes := 102. "Por ejemplo, ajusta esto al número total de casillas que desees en el tablero."
     boxes := OrderedCollection new: totalBoxes.
@@ -233,6 +220,10 @@ Board >> initializePersonalizedBoard [
         wormHole add: aBox
     ].
 
+	(wormHole at: 1 )withDestiny: (wormHole at: 2).
+	(wormHole at: 2 )withDestiny: (wormHole at: 1).
+
+
     1 to: positionsForBlackHole size do: [ :i |
         aBox := BlackHoleBox inPlace: (positionsForBlackHole at: i).
         boxes at: (positionsForBlackHole at: i) put: aBox.
@@ -240,7 +231,7 @@ Board >> initializePersonalizedBoard [
     ].
 
     1 to: positionsForHyperGravity size do: [ :i |
-        aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: i).
+        aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: i) withDieResult: 20 .
         boxes at: (positionsForHyperGravity at: i) put: aBox.
         hyperGravityBoxes add: aBox
     ].
@@ -252,7 +243,8 @@ Board >> initializePersonalizedBoard [
     ].
 
     1 to: positionsForHyperJump size do: [ :i |
-        aBox := HyperJumpBox inPlace: (positionsForHyperJump at: i).
+		aPaesecList := #(7 5 2).
+        aBox := HyperJumpBox inPlace: (positionsForHyperJump at: i) parsecsList: aPaesecList withBoardLenght: 102 andParsecLength: 1000 .
         boxes at: (positionsForHyperJump at: i) put: aBox.
         hyperJumpBoxes add: aBox
     ].
@@ -271,10 +263,75 @@ Board >> initializePersonalizedBoard [
 
 ]
 
-{ #category : #accessing }
-Board >> isWormHoleAt: position [
-
-	^ (boxes at: position) isKindOf: WormHoleBox
+{ #category : #'as yet unclassified' }
+Board >> initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: aParsecLength andMaxDieResult: aMaxDieResult [ 
+		| numberOfBlackHoleBoxes numberOfHyperGravityBoxes numberOfNormalBoxes numberOfMoonWalkBoxes numberOfHyperJumpBoxes numberOfAtomicBombBoxes aBox positions mixPositions numberOfBoxes numberOfWormHoles |
+	maxDieResult := aMaxDieResult.
+	positions := (2 to: aNumberOfBoxes) asOrderedCollection.
+	mixPositions := positions shuffled.
+	boxes := OrderedCollection new.
+	numberOfBoxes := aNumberOfBoxes - 1.
+	numberOfWormHoles := 2.
+	wormHole := OrderedCollection new.
+	numberOfBlackHoleBoxes := aNumberOfBoxes * 0.2.
+	blackHoleBoxes := OrderedCollection new.
+	numberOfHyperGravityBoxes := aNumberOfBoxes * 0.2.
+	hyperGravityBoxes := OrderedCollection new.
+	numberOfMoonWalkBoxes := aNumberOfBoxes * 0.1.
+	moonWalkBoxes := OrderedCollection new.
+	numberOfHyperJumpBoxes := aNumberOfBoxes * 0.08.
+	hyperJumpBoxes := OrderedCollection new.
+	numberOfAtomicBombBoxes := aNumberOfBoxes * 0.02.
+	atomicBombBoxes := OrderedCollection new.
+	numberOfNormalBoxes := numberOfBoxes - numberOfWormHoles
+	                       - numberOfBlackHoleBoxes
+	                       - numberOfHyperGravityBoxes
+	                       - numberOfMoonWalkBoxes
+	                       - numberOfHyperJumpBoxes
+	                       - numberOfAtomicBombBoxes.
+	noEffectBoxes := OrderedCollection new.
+	aBox := NoEffectBox inPlace: 1.
+	noEffectBoxes add: aBox.
+	boxes add: aBox.
+	1 to: numberOfWormHoles do: [ :i |
+		aBox := WormHoleBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		wormHole add: aBox ].
+	
+	(wormHole at: 1 )withDestiny: (wormHole at: 2).
+	(wormHole at: 2 )withDestiny: (wormHole at: 1).
+	
+	1 to: numberOfBlackHoleBoxes do: [ :i |
+		aBox := BlackHoleBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		blackHoleBoxes add: aBox ].
+	1 to: numberOfHyperGravityBoxes do: [ :i |
+		aBox := HyperGravityBox inPlace: (mixPositions at: 1) withDieResult: (1 to: maxDieResult) atRandom.
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperGravityBoxes add: aBox ].
+	1 to: numberOfMoonWalkBoxes do: [ :i |
+		aBox := MoonWalkBox inPlace: (mixPositions at: 1) .
+		mixPositions removeFirst.
+		boxes add: aBox.
+		moonWalkBoxes add: aBox ].
+	1 to: numberOfHyperJumpBoxes do: [ :i |
+		aBox := HyperJumpBox inPlace: (mixPositions at: 1) parsecsList: aParsecList  withBoardLenght: aNumberOfBoxes  andParsecLength: aParsecLength.
+		mixPositions removeFirst.
+		boxes add: aBox.
+		hyperJumpBoxes add: aBox ].
+	1 to: numberOfAtomicBombBoxes do: [ :i |
+		aBox := AtomicBombBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		atomicBombBoxes add: aBox ].
+	1 to: numberOfNormalBoxes do: [ :i |
+		aBox := NoEffectBox inPlace: (mixPositions at: 1).
+		mixPositions removeFirst.
+		boxes add: aBox.
+		noEffectBoxes add: aBox ]
 ]
 
 { #category : #accessing }
@@ -296,7 +353,7 @@ Board >> move: aShip withDiceResult: aDiceResult [
 ]
 
 { #category : #accessing }
-Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDiceResult [
+Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDiceResult andLaps: laps [
 
 	| actualPosition aShip aBox |
 	aShip := aCollectionOfShips at: aPlayerTurn.
@@ -304,9 +361,10 @@ Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDi
 	self checkPositionOf: aShip.
 	actualPosition := aShip getPosition.
 	aShip consumeFuel: aDiceResult.
+	aShip checkIfWin: laps.
 	aBox := boxes at: actualPosition.
-
-	aBox effectsOn ~= 0 ifFalse: [ ^ self ].
+	aShip victory ifTrue: [ ^ self ].
 	aBox effectShips: aCollectionOfShips playing: aShip.
-	self checkAfterEffects: aCollectionOfShips
+	self checkAfterEffects: aCollectionOfShips.
+	aShip checkIfWin: laps
 ]

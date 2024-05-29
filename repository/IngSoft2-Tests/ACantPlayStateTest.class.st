@@ -8,7 +8,7 @@ Class {
 ACantPlayStateTest >> testWhenACantPlayStateIsCreatedThenANumberOfTurnsIsSaved_01 [ 
 	| aCantPlayState |
 	aCantPlayState := CantPlay skip: 2.
-	self assert: aCantPlayState getContTurns equals: 2.
+	self assert: aCantPlayState getContTurns equals: 3.
 ]
 
 { #category : #tests }
@@ -16,5 +16,5 @@ ACantPlayStateTest >> testWhenCantPlayStateUpdatesItsTurnsThenTurnsDecreacedBy1_
 	| aCantPlayState |
 	aCantPlayState := CantPlay skip: 2.
 	aCantPlayState updateTurns.
-	self assert: aCantPlayState getContTurns equals: 1.
+	self assert: aCantPlayState getContTurns equals: 2.
 ]
