@@ -5,35 +5,6 @@ Class {
 }
 
 { #category : #tests }
-AShipTest >> testAShipEndsTheCursedTheStateChangesToPlaying_23 [
-
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip endCursed .
-	self assert: (aShip getState isKindOf: Playing)
-]
-
-{ #category : #tests }
-AShipTest >> testAShipIsCursedThenStateChangesToEffectBoxState_22 [
-
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip isCursed.
-	self assert: (aShip getState isKindOf: Jail)
-]
-
-{ #category : #tests }
-AShipTest >> testAShipKnowsItsLastDieResult_21 [
-	| aShip aCollectionOfDice aLoadedDie |
-	aShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 5.
-	aCollectionOfDice add: aLoadedDie.
-	aShip throwDice: aCollectionOfDice.
-	self assert: aShip getLastDieResult equals: 5.
-]
-
-{ #category : #tests }
 AShipTest >> testShipIsCreatedWithAPosition [
 
 	| aShip |
@@ -54,173 +25,6 @@ AShipTest >> testWhen2LoadedDieOf3And4FacesAreThrownThenThePositionOfTheShipIsUp
 	positionsToMove := aShip throwDice: aCollectionOfDice.
 	aShip moves: positionsToMove.
 	self assert: aShip getPosition = 7
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipChangesItStateToPlayThenStateIsKindOfPlaying_18 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip consumeFuel: 1000.
-	aShip changeStateToPlay.
-	self assert: (aShip getState isKindOf: Playing).
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipConsumesFuelThenTheFuelReduces_02 [
-	| aShip |
-	aShip := Ship create.
-	aShip consumeFuel: 50.
-	
-	self assert: (aShip getFuel) equals: 50
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipCreatesWithAnAmountOfMaxFuelThenTheFuelIsMaxFuel_03 [
-
-	| aShip |
-	aShip := Ship createWithMaxFuel: 10.
-
-	self assert: aShip getFuel equals: 10
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipDecidesToSkipOneTurnThenStateChangesToCantPlay_19 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip skipTurn.
-	self assert: (aShip getState isKindOf: CantPlayANumberOfTurns).
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipDecreasedItsLapsThenLapsIs0_24 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip decreaseLaps.
-	self assert: aShip getLaps equals: 0.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipEntersAWormHoleThenItConsumesFuelToDestiny_26 [
-
-	| aShip aWormholeBox anotherWormholeBox aCollectionOfShips |
-	aCollectionOfShips := OrderedCollection new.
-	aShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfShips add: aShip .
-	aWormholeBox := WormHoleBox inPlace: 2.
-	anotherWormholeBox := WormHoleBox inPlace: 4.
-	aWormholeBox withDestiny: anotherWormholeBox.
-	anotherWormholeBox withDestiny: aWormholeBox.
-	aShip moves: 1.
-	aShip consumeFuel: 1.
-	aWormholeBox effectShips: aCollectionOfShips playing: aShip.
-	self assert: aShip getFuel equals: 997.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipEntersAWormHoleThenItMovesToDestiny_25 [
-
-	| aShip aWormholeBox anotherWormholeBox aCollectionOfShips |
-	aCollectionOfShips := OrderedCollection new.
-	aShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfShips add: aShip .
-	aWormholeBox := WormHoleBox inPlace: 2.
-	anotherWormholeBox := WormHoleBox inPlace: 4.
-	aWormholeBox withDestiny: anotherWormholeBox.
-	anotherWormholeBox withDestiny: aWormholeBox.
-	aShip moves: 1.
-	aShip consumeFuel: 1.
-	aWormholeBox effectShips: aCollectionOfShips playing: aShip.
-	self assert: aShip getPosition equals: 4.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipFinishesLapsThenVictory_13 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip updateLaps.
-	aShip checkIfWin: 2.
-	self assert: aShip victory.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipHasAnAmountOfLapsThenGetLapsReturnsLaps_05 [
-
-	| aShip |
-	aShip := Ship createWithMaxFuel: 100.
-	
-	self assert: aShip getLaps equals: 1
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipHasFuelThenGetFuelReturnsIt_01 [
-	| aShip |
-	aShip := Ship create.
-	
-	
-	self assert: (aShip getFuel) equals: 100
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipIsCreatedThenNoVictory_12 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	self deny: aShip victory.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipIsPlayingStateThenTheShipCanPlay_16 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	self assert: aShip checkTurn.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipRestartsTheFuelThenFuelIsMaxFuel_04 [
-
-	| aShip |
-	aShip := Ship createWithMaxFuel: 100.
-	aShip consumeFuel: 50.
-	
-	self assert: aShip getFuel equals: 50.
-	
-	aShip restartFuel.
-
-	self assert: aShip getFuel equals: 100
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipRunsOutOfFuelThenCheckTurnReturnsFalse_17 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip consumeFuel: 1000.
-	self deny: aShip checkTurn.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipRunsOutOfFuelThenFuelIsRestoredToMax_09 [
-	| aShip aBoard aParsecsList |
-	aShip := Ship createWithMaxFuel: 10.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
-	aBoard move: aShip withDiceResult: 15.
-	self assert: aShip getFuel equals: 10.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenAShipRunsOutOfFuelThenNoVictory_14 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip consumeFuel: 1000.
-	self deny: aShip victory.
-]
-
-{ #category : #tests }
-AShipTest >> testWhenLapsIsUpdatedAndTotalLapsToDoIs2ThenStateChangesToWinner_11 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip updateLaps.
-	aShip checkIfWin: 2.
-	self assert: (aShip getState isKindOf: Winner).
 ]
 
 { #category : #tests }
@@ -250,36 +54,68 @@ AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdat
 ]
 
 { #category : #tests }
-AShipTest >> testWhenShipDecidesToSkipATurnThenFuelIsRestoresToMaxValue_20 [
+AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
+
+	| aShip aCollectionOfDice aDie |
+	aCollectionOfDice := OrderedCollection new.
+	aDie := LoadedDie of: 3.
+	aCollectionOfDice add: aDie.
+	aShip := Ship create.
+	self assert: (aShip throwDice: aCollectionOfDice) = 3
+]
+
+{ #category : #tests }
+AShipTest >> test_01_WhenAShipHasFuelThenGetFuelReturnsIt [
 	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip consumeFuel: 200.
-	aShip skipTurn.
-	self assert: aShip getFuel equals: 1000 .
+	aShip := Ship create.
+	
+	
+	self assert: (aShip getFuel) equals: 100
 ]
 
 { #category : #tests }
-AShipTest >> testWhenShipIsOutOfFuelThenPositionIsUpdatedTo1_08 [
-	| aShip aBoard aParsecsList |
+AShipTest >> test_02_WhenAShipConsumesFuelThenTheFuelReduces [
+	| aShip |
+	aShip := Ship create.
+	aShip consumeFuel: 50.
+	
+	self assert: (aShip getFuel) equals: 50
+]
+
+{ #category : #tests }
+AShipTest >> test_03_WhenAShipCreatesWithAnAmountOfMaxFuelThenTheFuelIsMaxFuel [
+
+	| aShip |
 	aShip := Ship createWithMaxFuel: 10.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
-	aBoard move: aShip withDiceResult: 15.
-	self assert: aShip getPosition equals: 1.
+
+	self assert: aShip getFuel equals: 10
 ]
 
 { #category : #tests }
-AShipTest >> testWhenShipMoves4PositionsThenPositionIsUpdatedTo5_07 [
-	| aShip aBoard aParsecsList |
+AShipTest >> test_04_WhenAShipRestartsTheFuelThenFuelIsMaxFuel [
+
+	| aShip |
 	aShip := Ship createWithMaxFuel: 100.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
-	aBoard move: aShip withDiceResult: 4.
-	self assert: aShip getPosition equals: 5.
+	aShip consumeFuel: 50.
+	
+	self assert: aShip getFuel equals: 50.
+	
+	aShip restartFuel.
+
+	self assert: aShip getFuel equals: 100
 ]
 
 { #category : #tests }
-AShipTest >> testWhenShipMovesInBoard4PacesThenFuelIsCosumedBy4_06 [
+AShipTest >> test_05_WhenAShipHasAnAmountOfLapsThenGetLapsReturnsLaps [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 100.
+	
+	self assert: aShip getLaps equals: 1
+]
+
+{ #category : #tests }
+AShipTest >> test_06_WhenShipMovesInBoard4PacesThenFuelIsCosumedBy4 [
 	| aShip aBoard aParsecsList |
 	aShip := Ship createWithMaxFuel: 100.
 	aParsecsList := #(5 7 2).
@@ -289,15 +125,37 @@ AShipTest >> testWhenShipMovesInBoard4PacesThenFuelIsCosumedBy4_06 [
 ]
 
 { #category : #tests }
-AShipTest >> testWhenShipRunsOutOfFuelThenTurnsToSkipIs2_15 [
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	aShip consumeFuel: 1000.
-	self assert: (aShip getState) getContTurns equals: 3.
+AShipTest >> test_07_WhenShipMoves4PositionsThenPositionIsUpdatedTo5 [
+	| aShip aBoard aParsecsList |
+	aShip := Ship createWithMaxFuel: 100.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	aBoard move: aShip withDiceResult: 4.
+	self assert: aShip getPosition equals: 5.
 ]
 
 { #category : #tests }
-AShipTest >> testWhenShipWantsToMoveMorePositionsThanTheAmountOfBoxesThenLapsIsUpdated_10 [
+AShipTest >> test_08_WhenShipIsOutOfFuelThenPositionIsUpdatedTo1 [
+	| aShip aBoard aParsecsList |
+	aShip := Ship createWithMaxFuel: 10.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	aBoard move: aShip withDiceResult: 15.
+	self assert: aShip getPosition equals: 1.
+]
+
+{ #category : #tests }
+AShipTest >> test_09_WhenAShipRunsOutOfFuelThenFuelIsRestoredToMax [
+	| aShip aBoard aParsecsList |
+	aShip := Ship createWithMaxFuel: 10.
+	aParsecsList := #(5 7 2).
+	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	aBoard move: aShip withDiceResult: 15.
+	self assert: aShip getFuel equals: 10.
+]
+
+{ #category : #tests }
+AShipTest >> test_10_WhenShipWantsToMoveMorePositionsThanTheAmountOfBoxesThenLapsIsUpdated [
 	| aShip aBoard aParsecsList |
 	aShip := Ship createWithMaxFuel: 1000.
 	aParsecsList := #(5 7 2).
@@ -307,12 +165,154 @@ AShipTest >> testWhenShipWantsToMoveMorePositionsThanTheAmountOfBoxesThenLapsIsU
 ]
 
 { #category : #tests }
-AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
+AShipTest >> test_11_WhenLapsIsUpdatedAndTotalLapsToDoIs2ThenStateChangesToWinner [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip updateLaps.
+	aShip checkIfWin: 2.
+	self assert: (aShip getState isKindOf: Winner).
+]
 
-	| aShip aCollectionOfDice aDie |
+{ #category : #tests }
+AShipTest >> test_12_WhenAShipIsCreatedThenNoVictory [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	self deny: aShip victory.
+]
+
+{ #category : #tests }
+AShipTest >> test_13_WhenAShipFinishesLapsThenVictory [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip updateLaps.
+	aShip checkIfWin: 2.
+	self assert: aShip victory.
+]
+
+{ #category : #tests }
+AShipTest >> test_14_WhenAShipRunsOutOfFuelThenNoVictory [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	self deny: aShip victory.
+]
+
+{ #category : #tests }
+AShipTest >> test_15WhenShipRunsOutOfFuelThenTurnsToSkipIs2 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	self assert: (aShip getState) getContTurns equals: 3.
+]
+
+{ #category : #tests }
+AShipTest >> test_16_WhenAShipIsPlayingStateThenTheShipCanPlay [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	self assert: aShip checkTurn.
+]
+
+{ #category : #tests }
+AShipTest >> test_17_WhenAShipRunsOutOfFuelThenCheckTurnReturnsFalse [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	self deny: aShip checkTurn.
+]
+
+{ #category : #tests }
+AShipTest >> test_18_WhenAShipChangesItStateToPlayThenStateIsKindOfPlaying [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 1000.
+	aShip changeStateToPlay.
+	self assert: (aShip getState isKindOf: Playing).
+]
+
+{ #category : #tests }
+AShipTest >> test_19_WhenAShipDecidesToSkipOneTurnThenStateChangesToCantPlay [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip skipTurn.
+	self assert: (aShip getState isKindOf: CantPlayANumberOfTurns).
+]
+
+{ #category : #tests }
+AShipTest >> test_20_WhenShipDecidesToSkipATurnThenFuelIsRestoresToMaxValue [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip consumeFuel: 200.
+	aShip skipTurn.
+	self assert: aShip getFuel equals: 1000 .
+]
+
+{ #category : #tests }
+AShipTest >> test_21_AShipKnowsItsLastDieResult [
+	| aShip aCollectionOfDice aLoadedDie |
+	aShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfDice := OrderedCollection new.
-	aDie := LoadedDie of: 3.
-	aCollectionOfDice add: aDie.
-	aShip := Ship create.
-	self assert: (aShip throwDice: aCollectionOfDice) = 3
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.
+	aShip throwDice: aCollectionOfDice.
+	self assert: aShip getLastDieResult equals: 5.
+]
+
+{ #category : #tests }
+AShipTest >> test_22_AShipIsCursedThenStateChangesToEffectBoxState [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip isCursed.
+	self assert: (aShip getState isKindOf: Jail)
+]
+
+{ #category : #tests }
+AShipTest >> test_23_AShipEndsTheCursedTheStateChangesToPlaying [
+
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip endCursed .
+	self assert: (aShip getState isKindOf: Playing)
+]
+
+{ #category : #tests }
+AShipTest >> test_24_WhenAShipDecreasedItsLapsThenLapsIs0 [
+	| aShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	aShip decreaseLaps.
+	self assert: aShip getLaps equals: 0.
+]
+
+{ #category : #tests }
+AShipTest >> test_25_WhenAShipEntersAWormHoleThenItMovesToDestiny [
+
+	| aShip aWormholeBox anotherWormholeBox aCollectionOfShips |
+	aCollectionOfShips := OrderedCollection new.
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips add: aShip .
+	aWormholeBox := WormHoleBox inPlace: 2.
+	anotherWormholeBox := WormHoleBox inPlace: 4.
+	aWormholeBox withDestiny: anotherWormholeBox.
+	anotherWormholeBox withDestiny: aWormholeBox.
+	aShip moves: 1.
+	aShip consumeFuel: 1.
+	aWormholeBox effectShips: aCollectionOfShips playing: aShip.
+	self assert: aShip getPosition equals: 4.
+]
+
+{ #category : #tests }
+AShipTest >> test_26_WhenAShipEntersAWormHoleThenItConsumesFuelToDestiny [
+
+	| aShip aWormholeBox anotherWormholeBox aCollectionOfShips |
+	aCollectionOfShips := OrderedCollection new.
+	aShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips add: aShip .
+	aWormholeBox := WormHoleBox inPlace: 2.
+	anotherWormholeBox := WormHoleBox inPlace: 4.
+	aWormholeBox withDestiny: anotherWormholeBox.
+	anotherWormholeBox withDestiny: aWormholeBox.
+	aShip moves: 1.
+	aShip consumeFuel: 1.
+	aWormholeBox effectShips: aCollectionOfShips playing: aShip.
+	self assert: aShip getFuel equals: 997.
 ]
