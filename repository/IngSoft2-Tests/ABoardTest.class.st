@@ -65,7 +65,7 @@ ABoardTest >> testWhenABoardIsCreatedPersonalizedThenIrHas100Boxes_14 [
 
 	| aBoard |
 	aBoard := Board createPersonalizedBoard.
-	self assert: aBoard hasBoxes equals: 102.
+	self assert: aBoard boardSize equals: 102.
 ]
 
 { #category : #tests }
@@ -139,7 +139,7 @@ ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
 
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 100.
-	self assert: aBoard hasBoxes equals: 100
+	self assert: aBoard boardSize equals: 100
 ]
 
 { #category : #tests }

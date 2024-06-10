@@ -41,6 +41,11 @@ Board class >> withNumberOfBoxesNoEffect: aNumber [
 	^self new initialiceWithANumberOfBoxesNoEffect: aNumber.
 ]
 
+{ #category : #testing }
+Board >> boardSize [
+	^boxes size.
+]
+
 { #category : #accessing }
 Board >> boxes [
 	^ boxes
@@ -107,11 +112,6 @@ Board >> getMoonWalkBoxes [
 { #category : #'as yet unclassified' }
 Board >> getWormHolesBoxes [
 	^wormHole.
-]
-
-{ #category : #testing }
-Board >> hasBoxes [
-	^boxes size.
 ]
 
 { #category : #initialize }
