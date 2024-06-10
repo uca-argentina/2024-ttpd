@@ -19,7 +19,7 @@ AShipTest >> testAShipIsCursedThenStateChangesToEffectBoxState_22 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
 	aShip isCursed.
-	self assert: (aShip getState isKindOf: EffectBoxState)
+	self assert: (aShip getState isKindOf: Jail)
 ]
 
 { #category : #tests }
@@ -88,7 +88,7 @@ AShipTest >> testWhenAShipDecidesToSkipOneTurnThenStateChangesToCantPlay_19 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
 	aShip skipTurn.
-	self assert: (aShip getState isKindOf: CantPlay).
+	self assert: (aShip getState isKindOf: CantPlayANumberOfTurns).
 ]
 
 { #category : #tests }

@@ -1,5 +1,5 @@
 Class {
-	#name : #EffectBoxState,
+	#name : #Jail,
 	#superclass : #State,
 	#instVars : [
 		'expectedResult'
@@ -8,21 +8,21 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-EffectBoxState class >> withExpectedDie: aDieResult [ 
+Jail class >> withExpectedDie: aDieResult [ 
 	^self new initializeWithExpectedDie: aDieResult.
 ]
 
 { #category : #'as yet unclassified' }
-EffectBoxState >> checkTurn: aShip [ 
+Jail >> checkTurn: aShip [ 
 	^false
 ]
 
 { #category : #'as yet unclassified' }
-EffectBoxState >> getExpectedDie [
+Jail >> getExpectedDie [
 	^expectedResult.
 ]
 
 { #category : #initialization }
-EffectBoxState >> initializeWithExpectedDie: aDieResult [ 
+Jail >> initializeWithExpectedDie: aDieResult [ 
 	expectedResult := aDieResult.
 ]

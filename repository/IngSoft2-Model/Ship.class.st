@@ -45,7 +45,7 @@ Ship >> consumeFuel: amount [
 		ifFalse: [
 			fuel := maxFuel.
 			position := 1.
-			state := CantPlay skip: 2 ]
+			state := CantPlayANumberOfTurns skip: 2 ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -104,7 +104,7 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 
 { #category : #testing }
 Ship >> isCursed [
-	state := EffectBoxState new.
+	state := Jail new.
 ]
 
 { #category : #'as yet unclassified' }
@@ -125,7 +125,7 @@ Ship >> restartFuel [
 
 { #category : #'as yet unclassified' }
 Ship >> skipTurn [
-	state := CantPlay skip: 1.
+	state := CantPlayANumberOfTurns skip: 1.
 	fuel := maxFuel.
 ]
 

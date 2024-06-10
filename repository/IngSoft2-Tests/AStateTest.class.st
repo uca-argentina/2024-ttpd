@@ -8,7 +8,7 @@ Class {
 AStateTest >> testACantPlayStateCheckPlayThenReturnsFalse_08 [
 
 	| aState |
-	aState := CantPlay new.
+	aState := CantPlayANumberOfTurns new.
 	self deny: aState checkPlay.
 ]
 
@@ -58,7 +58,7 @@ AStateTest >> testWhenShipConsumesAlItsFuelThenStateChangesToCantPlay_03 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
 	aShip consumeFuel: 1000.
-	self assert: (aShip getState isKindOf: CantPlay)
+	self assert: (aShip getState isKindOf: CantPlayANumberOfTurns)
 ]
 
 { #category : #tests }

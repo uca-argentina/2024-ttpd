@@ -43,7 +43,7 @@ AHyperGravityBoxTest >> testWhenAShipLandsInAHyperGravityBoxThenItsStateChangesT
 	aHyperGravityBox setNumber: 5.
 	aShip moves: 3.
 	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
-	self assert: (aShip getState isKindOf: EffectBoxState).
+	self assert: (aShip getState isKindOf: Jail).
 
 ]
 
