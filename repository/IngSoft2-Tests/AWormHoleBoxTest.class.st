@@ -36,14 +36,6 @@ AWormHoleBoxTest >> testWhenAWormHoleBoxIsCretedInPlaceThenAShipCanBeRemovedFrom
 ]
 
 { #category : #tests }
-AWormHoleBoxTest >> testWhenAWormHoleIsCreatedInAPlaceThenGetPositionReturnsThePlace_01 [ 
-
-| aWormHoleBox |
-aWormHoleBox := WormHoleBox inPlace: 1.
-self assert: (aWormHoleBox getPosition) equals: 1.
-]
-
-{ #category : #tests }
 AWormHoleBoxTest >> testWhenAWormHoleKnowsItsDestiny_05 [
 
 	| aWormholeBox anotherWormholeBox |

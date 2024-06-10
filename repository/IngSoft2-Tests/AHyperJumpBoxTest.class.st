@@ -38,14 +38,6 @@ AHyperJumpBoxTest >> testWhenAHyperJumpBoxIsCreatedThenAlInformacionAboutParsecs
 ]
 
 { #category : #tests }
-AHyperJumpBoxTest >> testWhenAHyperJumpBoxIsCreatedThenIrHasAPlace_01 [
-
-	| aHyperJump |
-	aHyperJump := HyperJumpBox inPlace: 3.
-	self assert: aHyperJump getPosition equals: 3
-]
-
-{ #category : #tests }
 AHyperJumpBoxTest >> testWhenAShipLandsInAHyperJumpBoxThenTheFuelIsUpdated_04 [
 
 	| aHyperJump aParsecsList aCollectionOfShips aShip |

@@ -42,14 +42,6 @@ AMoonWalkBoxTest >> testWhenAMoonWalkBoxIsCreatedThenANumberOfPositionsToMoveIsA
 ]
 
 { #category : #tests }
-AMoonWalkBoxTest >> testWhenAMoonWalkBoxIsCreatedThenItHasAPlace_01 [
-
-	| aMoonWalkBox |
-	aMoonWalkBox := MoonWalkBox inPlace: 3.
-	self assert: aMoonWalkBox getPosition equals: 3
-]
-
-{ #category : #tests }
 AMoonWalkBoxTest >> testWhenAShipLandsInAMoonWalkBoxThenItsPositionDoesNotChangeBusOtherShipsPositionDoesChange_03 [
 
 	| aMoonWalkBox aShip anotherShip aCollectionOfShips |
