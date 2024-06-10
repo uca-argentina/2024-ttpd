@@ -41,16 +41,6 @@ BoardGame >> getLapsToDo [
 	^laps.
 ]
 
-{ #category : #accessing }
-BoardGame >> getPositionOfShipAt: anIndexOfShip [ 
-	| position |
-	position:= ( aCollectionOfShips at: anIndexOfShip) getPosition.
-	
-	^position.
-
-
-]
-
 { #category : #initialization }
 BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
 
@@ -71,7 +61,7 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> passturn [
+BoardGame >> passTurn [
 	(aCollectionOfShips at: playerTurn) skipTurn.
 	playerTurn := self changeTurn: playerTurn 
 ]

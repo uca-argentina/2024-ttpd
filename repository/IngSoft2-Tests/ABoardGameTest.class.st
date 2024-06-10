@@ -206,7 +206,7 @@ ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 
 	aBoardGame playTurn.
 	aBoardGame playTurn.
-	aBoardGame passturn.
+	aBoardGame passTurn.
 	aBoardGame playTurn.
 	
 	self assert: aBoardGame winnerIs equals: 2.
