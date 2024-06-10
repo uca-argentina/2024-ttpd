@@ -5,7 +5,8 @@ Class {
 		'aCollectionOfShips',
 		'board',
 		'dice',
-		'laps'
+		'laps',
+		'playerTurn'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -65,7 +66,33 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
 	dice := aCollectionOfDice.
-	laps := aNumberOfLaps
+	laps := aNumberOfLaps.
+	playerTurn := 1.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> passturn [
+	(aCollectionOfShips at: playerTurn) skipTurn.
+	playerTurn := self changeTurn: playerTurn 
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> playTurn [
+
+	| play dieResult |
+	play := (aCollectionOfShips at: playerTurn) victory.
+
+	play ifFalse: [
+		(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
+			dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
+			board
+				players: aCollectionOfShips
+				playerTurn: playerTurn
+				withDiceResult: dieResult
+				andLaps: laps ].
+
+		play := (aCollectionOfShips at: playerTurn) victory.
+		playerTurn := self changeTurn: playerTurn ]
 ]
 
 { #category : #'as yet unclassified' }
