@@ -87,21 +87,11 @@ BoardGame >> playTurn [
 
 { #category : #'as yet unclassified' }
 BoardGame >> showRanking [
-
-	| ranking firstThree winner second third |
-	ranking := SortedCollection sortBlock: [ :aShip :anotherShip |
-		           aShip getLaps = anotherShip getLaps
-			           ifTrue: [ aShip getPosition > anotherShip getPosition ]
-			           ifFalse: [ aShip getLaps > anotherShip getLaps ] ].
-	aCollectionOfShips do: [ :ship | ranking add: ship ].
-	winner := aCollectionOfShips indexOf: (ranking at: 1).
-	second := aCollectionOfShips indexOf: (ranking at: 2).
-	third := aCollectionOfShips indexOf: (ranking at: 3).
-	firstThree := OrderedCollection new.
-	firstThree add: winner.
-	firstThree add: second.
-	firstThree add: third.
-	^ firstThree
+	| ships sortedShips |
+	ships := aCollectionOfShips.
+	sortedShips := ships asSortedCollection: [ :aShip :anotherShip |
+		               aShip > anotherShip ].
+	^sortedShips collect: [:sortedShip | ships indexOf: sortedShip]
 ]
 
 { #category : #accessing }

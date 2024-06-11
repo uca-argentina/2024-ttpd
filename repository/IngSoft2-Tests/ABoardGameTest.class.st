@@ -114,7 +114,7 @@ ABoardGameTest >> test_07_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts
 { #category : #tests }
 ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie expectedRanking |
+	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie expectedRanking ranking |
 	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #(3 100 5).
@@ -129,6 +129,7 @@ ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 	expectedRanking add: 1.
 	expectedRanking add: 3.
 	aBoardGame start.
+	ranking := aBoardGame showRanking.
 	self assert: aBoardGame showRanking equals: expectedRanking.
 ]
 
