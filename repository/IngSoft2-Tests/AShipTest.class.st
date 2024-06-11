@@ -316,3 +316,35 @@ AShipTest >> test_26_WhenAShipEntersAWormHoleThenItConsumesFuelToDestiny [
 	aWormholeBox effectShips: aCollectionOfShips playing: aShip.
 	self assert: aShip getFuel equals: 997.
 ]
+
+{ #category : #tests }
+AShipTest >> test_27_WhenAShipHasMoreLapsThanAnotherShipThenAShipIsGreaterThanAnotherShip [
+
+	| aShip anotherShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aShip updateLaps.
+	self assert: aShip > anotherShip.
+]
+
+{ #category : #tests }
+AShipTest >> test_28_WhenAShipHasSameLapsButBiggerPositionThanAnotherShipThenAShipIsGreaterThanAnotherShip [
+
+	| aShip anotherShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aShip moves: 5.
+	self assert: aShip > anotherShip.
+]
+
+{ #category : #tests }
+AShipTest >> test_29_WhenAShipHasMoreLapsButLessPositionThenAShipIsGreaterThanAnotherShip [
+
+	| aShip anotherShip |
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aShip moves: 5.
+	aShip updateLaps.
+	anotherShip moves: 10.
+	self assert: aShip > anotherShip.
+]

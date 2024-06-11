@@ -22,6 +22,14 @@ Ship class >> createWithMaxFuel: maxFuel [
 	^self new intitializeWithMaxFuel: maxFuel.
 ]
 
+{ #category : #comparing }
+Ship >> > anotherShip [
+
+	self getLaps = anotherShip getLaps ifTrue: [
+		^ self getPosition > anotherShip getPosition ].
+	^ self getLaps > anotherShip getLaps
+]
+
 { #category : #'as yet unclassified' }
 Ship >> changeStateToPlay [
 	state := Playing new.
