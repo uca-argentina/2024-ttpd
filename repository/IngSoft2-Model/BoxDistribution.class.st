@@ -10,7 +10,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 BoxDistribution class >> of: aBoxType withDistribution: aDistribution [ 
-	^self new instanceOf: aBoxType withDistribution: aDistribution.
+	^self new initializeOf: aBoxType withDistribution: aDistribution.
 ]
 
 { #category : #'as yet unclassified' }
@@ -24,7 +24,7 @@ BoxDistribution >> getEffect [
 ]
 
 { #category : #'as yet unclassified' }
-BoxDistribution >> instanceOf: aBoxType withDistribution: aDistribution [
+BoxDistribution >> initializeOf: aBoxType withDistribution: aDistribution [
 
 	effect := aBoxType.
 	distribution := aDistribution
