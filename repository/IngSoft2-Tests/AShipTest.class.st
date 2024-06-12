@@ -198,7 +198,7 @@ AShipTest >> test_14_WhenAShipRunsOutOfFuelThenNoVictory [
 ]
 
 { #category : #tests }
-AShipTest >> test_15WhenShipRunsOutOfFuelThenTurnsToSkipIs2 [
+AShipTest >> test_15_WhenShipRunsOutOfFuelThenTurnsToSkipIs2 [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
 	aShip consumeFuel: 1000.
