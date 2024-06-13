@@ -23,7 +23,7 @@ AHyperGravityBoxTest >> testWhenAHyperGravityBoxIsCreatedThenItHasADieResult_07 
 ]
 
 { #category : #tests }
-AHyperGravityBoxTest >> testWhenAShipLandsInAHyperGravityBoxThenItsStateChangesToEffectoBoxState_03 [
+AHyperGravityBoxTest >> testWhenAShipLandsInAHyperGravityBoxThenItsStateChangesJailState_03 [
 
 	| aShip anotherShip aCollectionOfShips aHyperGravityBox |
 	aShip:=Ship createWithMaxFuel: 1000.

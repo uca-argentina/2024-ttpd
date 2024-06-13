@@ -13,11 +13,6 @@ Jail class >> withExpectedDie: aDieResult [
 ]
 
 { #category : #'as yet unclassified' }
-Jail >> checkTurn: aShip [ 
-	^false
-]
-
-{ #category : #'as yet unclassified' }
 Jail >> getExpectedDie [
 	^expectedResult.
 ]
