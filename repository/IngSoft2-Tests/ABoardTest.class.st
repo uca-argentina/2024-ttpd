@@ -29,14 +29,6 @@ ABoardTest >> testWhenABoardHas10BoxesThen1OfThemAreMoonWalk_03 [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreBlackHoles_01 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 10.
-	self assert: aBoard getBlackHoleBoxes size equals: 2.
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreHyperGravity_02 [
 
 	| aBoard |
@@ -66,14 +58,6 @@ ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
 	| aBoard|
 	aBoard := Board withNumberOfBoxes: 100.
 	self assert: ((aBoard boxes at: 1) isKindOf: NoEffectBox).
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheBlackHoleBoxesVanBeShown_06 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 10.
-	self assert: ((aBoard getBlackHoleBoxes at: 1) getPosition between: 1 and: 10).
 ]
 
 { #category : #tests }
