@@ -1,5 +1,5 @@
 Class {
-	#name : #CantPlay,
+	#name : #CantPlayANumberOfTurns,
 	#superclass : #State,
 	#instVars : [
 		'turns'
@@ -8,33 +8,33 @@ Class {
 }
 
 { #category : #accessing }
-CantPlay class >> skip: aNumberOfTurns [ 
+CantPlayANumberOfTurns class >> skip: aNumberOfTurns [ 
 	^self new initializeSkip: aNumberOfTurns.
 ]
 
 { #category : #'as yet unclassified' }
-CantPlay >> checkPlay [
+CantPlayANumberOfTurns >> checkPlay [
 	^false
 ]
 
 { #category : #'as yet unclassified' }
-CantPlay >> checkTurnState: aShip [ 
+CantPlayANumberOfTurns >> checkTurnState: aShip [ 
 	self updateTurns.
 	turns = 0 ifTrue: [ aShip changeStateToPlay. ^true].
 	^false.
 ]
 
 { #category : #'as yet unclassified' }
-CantPlay >> getContTurns [
+CantPlayANumberOfTurns >> getContTurns [
 	^turns.
 ]
 
 { #category : #initialization }
-CantPlay >> initializeSkip: aNumberOfTurns [ 
+CantPlayANumberOfTurns >> initializeSkip: aNumberOfTurns [ 
 	turns := aNumberOfTurns + 1.
 ]
 
 { #category : #'as yet unclassified' }
-CantPlay >> updateTurns [
+CantPlayANumberOfTurns >> updateTurns [
 	turns := turns -1.
 ]

@@ -10,18 +10,144 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
-ABoardGameTest >> testABoardGameWillNotStartWithLessThan1Ship_08 [
+ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
 
-	| aCollectionOfDice aDie |
+	| aBoardGame aBoard aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 102.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBoardGame playTurn.
+	self assert: aBoardGame winnerIs equals: 1
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
+
+	| aBoardGame aCollectionOfDice aLoadedDie  boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 1
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	self assert: aBoardGame getLapsToDo equals: 2
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWinner [
+
+	| aBoardGame aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	self assert: aBoardGame winnerIs equals: 1
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_07_WhenTheGameIsAskedToChangeTurnThenTheTurnIsIncremented [
+
+	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn boxDistributions anEffectManager boxes |
+	turn := 1.
+
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 102.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+
+	nextTurn := aBoardGame changeTurn: turn.
+	self assert: nextTurn equals: 2
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
+
+	| aBoardGame aCollectionOfDice aLoadedDie expectedRanking ranking boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #( 3 100 5 ).
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	expectedRanking := OrderedCollection new.
+	expectedRanking add: 2.
+	expectedRanking add: 1.
+	expectedRanking add: 3.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	ranking := aBoardGame showRanking.
+	self assert: aBoardGame showRanking equals: expectedRanking
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_09_ABoardGameWillNotStartWithLessThan1Ship [
+
+	| aCollectionOfDice aDie boxesArray|
 	aCollectionOfDice := OrderedCollection new.
 	aDie := Die of: 3.
 	aCollectionOfDice add: aDie.
-
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
 	self
 		should: [
 			BoardGame
 				withShip: 0
-				withBoard: Board createPersonalizedBoard
+				withBoard: (Board withBoxesArray: boxesArray)
 				WithDice: aCollectionOfDice
 				andwithNumberOfLaps: 2 ]
 		raise: Error
@@ -29,18 +155,21 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThan1Ship_08 [
 ]
 
 { #category : #tests }
-ABoardGameTest >> testABoardGameWillNotStartWithLessThan2Laps_09 [
+ABoardGameTest >> test_10_ABoardGameWillNotStartWithLessThan2Laps [
 
-	| aCollectionOfDice aDie |
+	| aCollectionOfDice aDie boxesArray|
 	aCollectionOfDice := OrderedCollection new.
 	aDie := Die of: 3.
 	aCollectionOfDice add: aDie.
-
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
 	self
 		should: [
 			BoardGame
 				withShip: 1
-				withBoard: Board createPersonalizedBoard
+				withBoard: (Board withBoxesArray: boxesArray)
 				WithDice: aCollectionOfDice
 				andwithNumberOfLaps: 1 ]
 		raise: Error
@@ -48,124 +177,54 @@ ABoardGameTest >> testABoardGameWillNotStartWithLessThan2Laps_09 [
 ]
 
 { #category : #tests }
-ABoardGameTest >> testWhenABoardGameIsCreatedThenItHasANumberOfLapsToDo_05 [
+ABoardGameTest >> test_11_WhenItIsAPlayerTurnThenPlayerChooseToPlay [
 
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie aParsecsList |
-	aParsecsList := #(5 7 2).
-	aPersonalizedBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
+		boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 5.
+	aLoadedDie := LoadedDie of: 100.
 	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 1
-		              withBoard: aPersonalizedBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame getLapsToDo equals: 2.
-]
 
-{ #category : #tests }
-ABoardGameTest >> testWhenABoardGameIsCreatedWithAPersonalizedBoardThenTheGameStarts_04 [
-
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := Board createPersonalizedBoard.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := Die of: 60.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 1
-		              withBoard: aPersonalizedBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start "probado"
-]
-
-{ #category : #tests }
-ABoardGameTest >> testWhenAGameFinishesThenRankingIsShown_07 [
-
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie expectedRanking |
-	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #(3 100 5).
-	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 3
-		              withBoard: aPersonalizedBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	expectedRanking := OrderedCollection new.
-	expectedRanking add: 2.
-	expectedRanking add: 1.
-	expectedRanking add: 3.
-	aBoardGame start.
-	self assert: aBoardGame showRanking equals: expectedRanking.
-]
-
-{ #category : #tests }
-ABoardGameTest >> testWhenAGameHasANumberOfLapsThenTheGameStarts_03 [
-
-	| aBoardGame aBoard aCollectionOfDice aDie |
-	aBoard := Board withNumberOfBoxes: 102 withParsecArray: #(3 4 5) aParsecLength: 10 andMaxDieResult: 60.
-	aCollectionOfDice := OrderedCollection new.
-	aDie := Die of: 60.
-	aCollectionOfDice add: aDie.
-	aBoardGame := BoardGame
-		              withShip: 4
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start ."probado"
-]
 
-{ #category : #tests }
-ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
-
-	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
-	aBoard := Board withNumberOfBoxes: 100.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 102.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	aBoardGame start.
+	aBoardGame playTurn.
 	self assert: aBoardGame winnerIs equals: 1
 ]
 
 { #category : #tests }
-ABoardGameTest >> testWhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts_06 [
+ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := Board createPersonalizedBoard.
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := Die of: 50.
+	aLoadedDie := LoadedDie of: 50.
 	aCollectionOfDice add: aLoadedDie.
+
 	aBoardGame := BoardGame
 		              withShip: 2
-		              withBoard: aPersonalizedBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start.
-]
-
-{ #category : #tests }
-ABoardGameTest >> testWhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts_07 [
-
-	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn |
-	turn := 1.
-
-	aBoard := Board withNumberOfBoxes: 100.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 102.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 3
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-		
-	nextTurn := aBoardGame changeTurn: turn.
-	self assert: nextTurn equals: 2.
+
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame passTurn.
+	aBoardGame playTurn.
+	
+	self assert: aBoardGame winnerIs equals: 2.
+	
 ]

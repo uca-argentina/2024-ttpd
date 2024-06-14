@@ -5,7 +5,8 @@ Class {
 		'aCollectionOfShips',
 		'board',
 		'dice',
-		'laps'
+		'laps',
+		'playerTurn'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -40,16 +41,6 @@ BoardGame >> getLapsToDo [
 	^laps.
 ]
 
-{ #category : #accessing }
-BoardGame >> getPositionOfShipAt: anIndexOfShip [ 
-	| position |
-	position:= ( aCollectionOfShips at: anIndexOfShip) getPosition.
-	
-	^position.
-
-
-]
-
 { #category : #initialization }
 BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
 
@@ -65,48 +56,39 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
 	dice := aCollectionOfDice.
-	laps := aNumberOfLaps
+	laps := aNumberOfLaps.
+	playerTurn := 1.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> passTurn [
+	(aCollectionOfShips at: playerTurn) skipTurn.
+	playerTurn := self changeTurn: playerTurn 
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> playTurn [
+
+	| dieResult |
+	(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
+		dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
+		board
+			players: aCollectionOfShips
+			playerTurn: playerTurn
+			withDiceResult: dieResult
+			andLaps: laps ].
+
+	(aCollectionOfShips at: playerTurn) victory ifFalse: [
+		playerTurn := self changeTurn: playerTurn ]
 ]
 
 { #category : #'as yet unclassified' }
 BoardGame >> showRanking [
-
-	| ranking firstThree winner second third |
-	ranking := SortedCollection sortBlock: [ :aShip :anotherShip |
-		           aShip getLaps = anotherShip getLaps
-			           ifTrue: [ aShip getPosition > anotherShip getPosition ]
-			           ifFalse: [ aShip getLaps > anotherShip getLaps ] ].
-	aCollectionOfShips do: [ :ship | ranking add: ship ].
-	winner := aCollectionOfShips indexOf: (ranking at: 1).
-	second := aCollectionOfShips indexOf: (ranking at: 2).
-	third := aCollectionOfShips indexOf: (ranking at: 3).
-	firstThree := OrderedCollection new.
-	firstThree add: winner.
-	firstThree add: second.
-	firstThree add: third.
-	^ firstThree
-]
-
-{ #category : #accessing }
-BoardGame >> start [
-
-	| playerTurn play dieResult |
-	playerTurn := 1.
-	play := (aCollectionOfShips at: playerTurn) victory.
-
-	[ play ] whileFalse: [
-		(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
-			dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
-			board
-				players: aCollectionOfShips
-				playerTurn: playerTurn
-				withDiceResult: dieResult
-				andLaps: laps ].
-
-		play := (aCollectionOfShips at: playerTurn) victory.
-		playerTurn := self changeTurn: playerTurn ].
-
-	^ play
+	| ships sortedShips |
+	ships := aCollectionOfShips.
+	sortedShips := ships asSortedCollection: [ :aShip :anotherShip |
+		               aShip > anotherShip ].
+	^sortedShips collect: [:sortedShip | ships indexOf: sortedShip]
 ]
 
 { #category : #'as yet unclassified' }

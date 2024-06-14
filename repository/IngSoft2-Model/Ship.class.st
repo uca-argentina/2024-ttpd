@@ -22,6 +22,14 @@ Ship class >> createWithMaxFuel: maxFuel [
 	^self new intitializeWithMaxFuel: maxFuel.
 ]
 
+{ #category : #comparing }
+Ship >> > anotherShip [
+
+	self getLaps = anotherShip getLaps ifTrue: [
+		^ self getPosition > anotherShip getPosition ].
+	^ self getLaps > anotherShip getLaps
+]
+
 { #category : #'as yet unclassified' }
 Ship >> changeStateToPlay [
 	state := Playing new.
@@ -45,7 +53,7 @@ Ship >> consumeFuel: amount [
 		ifFalse: [
 			fuel := maxFuel.
 			position := 1.
-			state := CantPlay skip: 2 ]
+			state := CantPlayANumberOfTurns skip: 2 ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -104,7 +112,7 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 
 { #category : #testing }
 Ship >> isCursed [
-	state := EffectBoxState new.
+	state := Jail new.
 ]
 
 { #category : #'as yet unclassified' }
@@ -125,7 +133,7 @@ Ship >> restartFuel [
 
 { #category : #'as yet unclassified' }
 Ship >> skipTurn [
-	state := CantPlay skip: 1.
+	state := CantPlayANumberOfTurns skip: 1.
 	fuel := maxFuel.
 ]
 

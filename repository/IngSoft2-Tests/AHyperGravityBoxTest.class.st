@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-AHyperGravityBoxTest >> testAHyperGravityBoxHasANumerOfDie_02 [
+AHyperGravityBoxTest >> test_02_AHyperGravityBoxHasANumerOfDie [
 
 	| aHyperGravity |
 	aHyperGravity := HyperGravityBox inPlace: 3.
@@ -14,24 +14,7 @@ AHyperGravityBoxTest >> testAHyperGravityBoxHasANumerOfDie_02 [
 ]
 
 { #category : #tests }
-AHyperGravityBoxTest >> testWhenAHyperGravityBoxIsCreatedThenIrHasAPlace_01 [
-
-	| aHyperGravity |
-	aHyperGravity := HyperGravityBox inPlace: 3.
-	self assert: aHyperGravity getPosition equals: 3
-]
-
-{ #category : #tests }
-AHyperGravityBoxTest >> testWhenAHyperGravityBoxIsCreatedThenItHasADieResult_07 [
-
-	|aHyperGravityBox |
-	aHyperGravityBox := HyperGravityBox inPlace: 3 withDieResult: 5.
-	self assert: aHyperGravityBox getNumberOfDie equals: 5.
-
-]
-
-{ #category : #tests }
-AHyperGravityBoxTest >> testWhenAShipLandsInAHyperGravityBoxThenItsStateChangesToEffectoBoxState_03 [
+AHyperGravityBoxTest >> test_03_WhenAShipLandsInAHyperGravityBoxThenItsStateChangesJailState [
 
 	| aShip anotherShip aCollectionOfShips aHyperGravityBox |
 	aShip:=Ship createWithMaxFuel: 1000.
@@ -43,12 +26,54 @@ AHyperGravityBoxTest >> testWhenAShipLandsInAHyperGravityBoxThenItsStateChangesT
 	aHyperGravityBox setNumber: 5.
 	aShip moves: 3.
 	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
-	self assert: (aShip getState isKindOf: EffectBoxState).
+	self assert: (aShip getState isKindOf: Jail).
 
 ]
 
 { #category : #tests }
-AHyperGravityBoxTest >> testWhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheShipCosumnesFuel_06 [
+AHyperGravityBoxTest >> test_04_WhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheStateChangesToPlaying [
+
+	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.	
+	aHyperGravityBox := HyperGravityBox inPlace: 3.
+	aHyperGravityBox setNumber: 5.
+	aShip moves: 2.
+	aShip throwDice: aCollectionOfDice.
+	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
+	self assert: (aShip getState isKindOf: Playing).
+
+]
+
+{ #category : #tests }
+AHyperGravityBoxTest >> test_05_WhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheShipMoves [
+
+	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
+	aShip:=Ship createWithMaxFuel: 1000.
+	anotherShip :=Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection  new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip .
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	aCollectionOfDice add: aLoadedDie.	
+	aHyperGravityBox := HyperGravityBox inPlace: 3.
+	aHyperGravityBox setNumber: 5.
+	aShip moves: 2.
+	aShip throwDice: aCollectionOfDice.
+	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
+	self assert: aShip getPosition equals: 8.
+
+]
+
+{ #category : #tests }
+AHyperGravityBoxTest >> test_06_WhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheShipCosumnesFuel [
 
 	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
 	aShip:=Ship createWithMaxFuel: 1000.
@@ -70,43 +95,34 @@ AHyperGravityBoxTest >> testWhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxT
 ]
 
 { #category : #tests }
-AHyperGravityBoxTest >> testWhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheShipMoves_05 [
+AHyperGravityBoxTest >> test_07_WhenAHyperGravityBoxIsCreatedThenItHasADieResult [
 
-	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
-	aShip:=Ship createWithMaxFuel: 1000.
-	anotherShip :=Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:=OrderedCollection  new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: anotherShip .
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 5.
-	aCollectionOfDice add: aLoadedDie.	
-	aHyperGravityBox := HyperGravityBox inPlace: 3.
-	aHyperGravityBox setNumber: 5.
-	aShip moves: 2.
-	aShip throwDice: aCollectionOfDice.
-	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
-	self assert: aShip getPosition equals: 8.
+	|aHyperGravityBox |
+	aHyperGravityBox := HyperGravityBox inPlace: 3 withDieResult: 5.
+	self assert: aHyperGravityBox getNumberOfDie equals: 5.
 
 ]
 
 { #category : #tests }
-AHyperGravityBoxTest >> testWhenAShipThrowsTheCorrectNumberInTheHyperGravityBoxThenTheStateChangesToPlaying_04 [
+AHyperGravityBoxTest >> test_08_WhenAShipThrowsAFirstTimeTheIncorrectNumberButASecondTimeTheCorrectNumberThenStateChangesToJailThenToPlaying [
 
-	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aLoadedDie |
-	aShip:=Ship createWithMaxFuel: 1000.
-	anotherShip :=Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:=OrderedCollection  new.
+	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aSequenceDie |
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: anotherShip .
+	aCollectionOfShips add: anotherShip.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 5.
-	aCollectionOfDice add: aLoadedDie.	
-	aHyperGravityBox := HyperGravityBox inPlace: 3.
-	aHyperGravityBox setNumber: 5.
+	aSequenceDie := LoadedDieWithSequence loadedWithSequence: #( 1 5 ).
+	aCollectionOfDice add: aSequenceDie.
+	aHyperGravityBox := HyperGravityBox inPlace: 3 withDieResult: 5.
 	aShip moves: 2.
+	aShip consumeFuel: 2.
 	aShip throwDice: aCollectionOfDice.
-	aHyperGravityBox effectShips: aCollectionOfShips  playing: aShip. 
+	aHyperGravityBox effectShips: aCollectionOfShips playing: aShip.
+	self assert: (aShip getState isKindOf: Jail).
+	aShip throwDice: aCollectionOfDice.
+	aHyperGravityBox effectShips: aCollectionOfShips playing: aShip.
 	self assert: (aShip getState isKindOf: Playing).
-
+	self assert: aShip getFuel equals: 993.
 ]
