@@ -44,5 +44,5 @@ AnEffectManagerTest >> test_03_WhenAEffectManagerGets2DifferentTypesOfBoxesThenT
 	anEffectManager := EffectManager with: boxDistributions.
 	boxes := anEffectManager createFor: 2.
 
-	self assert: (((boxes at: 1) isKindOf: AtomicBombBox) or: ((boxes at: 1) isKindOf: AtomicBombBox)).
+	self assert: (((boxes at: 1) isKindOf: AtomicBombBox) or: ((boxes at: 1) isKindOf: HyperGravityBox)).
 ]
