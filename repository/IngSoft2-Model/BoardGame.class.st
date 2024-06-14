@@ -91,28 +91,6 @@ BoardGame >> showRanking [
 	^sortedShips collect: [:sortedShip | ships indexOf: sortedShip]
 ]
 
-{ #category : #accessing }
-BoardGame >> start [
-
-	| playerTurn play dieResult |
-	playerTurn := 1.
-	play := (aCollectionOfShips at: playerTurn) victory.
-
-	[ play ] whileFalse: [
-		(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
-			dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
-			board
-				players: aCollectionOfShips
-				playerTurn: playerTurn
-				withDiceResult: dieResult
-				andLaps: laps ].
-
-		play := (aCollectionOfShips at: playerTurn) victory.
-		playerTurn := self changeTurn: playerTurn ].
-
-	^ play
-]
-
 { #category : #'as yet unclassified' }
 BoardGame >> winnerIs [
 	|winner|

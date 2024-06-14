@@ -27,29 +27,8 @@ ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Win
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	aBoardGame start.
+	aBoardGame playTurn.
 	self assert: aBoardGame winnerIs equals: 1
-]
-
-{ #category : #tests }
-ABoardGameTest >> test_03_WhenAGameHasANumberOfLapsThenTheGameStarts [
-
-	| aBoardGame aBoard aCollectionOfDice aDie boxDistributions anEffectManager boxes |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
-	aCollectionOfDice := OrderedCollection new.
-	aDie := LoadedDie of: 60.
-	aCollectionOfDice add: aDie.
-	aBoardGame := BoardGame
-		              withShip: 4
-		              withBoard: aBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start
 ]
 
 { #category : #tests }
@@ -147,7 +126,8 @@ ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 	expectedRanking add: 2.
 	expectedRanking add: 1.
 	expectedRanking add: 3.
-	aBoardGame start.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
 	ranking := aBoardGame showRanking.
 	self assert: aBoardGame showRanking equals: expectedRanking
 ]
