@@ -155,26 +155,38 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid_19 [
 { #category : #tests }
 ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 
-	| aBoard aShip anotherShip aCollectionOfShips |
-	aBoard := Board withNumberOfBoxesNoEffect: 100.
-	aShip:=Ship createWithMaxFuel: 1000.
-	anotherShip :=Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:=OrderedCollection  new.
+	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: anotherShip .	
-	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 82 andLaps: 2.
+	aCollectionOfShips add: anotherShip.
+	aBoard
+		players: aCollectionOfShips
+		playerTurn: 1
+		withDiceResult: 82
+		andLaps: 2.
 
-	self assert: aShip getPosition equals: 79.
-	self assert:  aShip getLaps equals: 1.
-		
-
+	self assert: aShip getPosition equals: 83.
+	self assert: aShip getLaps equals: 1
 ]
 
 { #category : #tests }
 ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
 
-	| aBoard aShip anotherShip aCollectionOfShips|
-	aBoard := Board withNumberOfBoxesNoEffect: 100.
+	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aShip:=Ship createWithMaxFuel: 1000.
 	anotherShip :=Ship createWithMaxFuel: 1000.
 	aCollectionOfShips:=OrderedCollection  new.
