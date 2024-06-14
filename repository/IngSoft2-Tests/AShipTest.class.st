@@ -116,52 +116,78 @@ AShipTest >> test_05_WhenAShipHasAnAmountOfLapsThenGetLapsReturnsLaps [
 
 { #category : #tests }
 AShipTest >> test_06_WhenShipMovesInBoard4PacesThenFuelIsCosumedBy4 [
-	| aShip aBoard aParsecsList |
+
+	| aShip aBoard boxDistributions anEffectManager boxes |
 	aShip := Ship createWithMaxFuel: 100.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aBoard move: aShip withDiceResult: 4.
-	self assert: aShip getFuel equals: 96.
+	self assert: aShip getFuel equals: 96
 ]
 
 { #category : #tests }
 AShipTest >> test_07_WhenShipMoves4PositionsThenPositionIsUpdatedTo5 [
-	| aShip aBoard aParsecsList |
+
+	| aShip aBoard boxDistributions anEffectManager boxes |
 	aShip := Ship createWithMaxFuel: 100.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aBoard move: aShip withDiceResult: 4.
-	self assert: aShip getPosition equals: 5.
+	self assert: aShip getPosition equals: 5
 ]
 
 { #category : #tests }
 AShipTest >> test_08_WhenShipIsOutOfFuelThenPositionIsUpdatedTo1 [
-	| aShip aBoard aParsecsList |
+
+	| aShip aBoard boxDistributions anEffectManager boxes |
 	aShip := Ship createWithMaxFuel: 10.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aBoard move: aShip withDiceResult: 15.
-	self assert: aShip getPosition equals: 1.
+	self assert: aShip getPosition equals: 1
 ]
 
 { #category : #tests }
 AShipTest >> test_09_WhenAShipRunsOutOfFuelThenFuelIsRestoredToMax [
-	| aShip aBoard aParsecsList |
+
+	| aShip aBoard aParsecsList boxDistributions anEffectManager boxes |
 	aShip := Ship createWithMaxFuel: 10.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	aParsecsList := #( 5 7 2 ).
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aBoard move: aShip withDiceResult: 15.
-	self assert: aShip getFuel equals: 10.
+	self assert: aShip getFuel equals: 10
 ]
 
 { #category : #tests }
 AShipTest >> test_10_WhenShipWantsToMoveMorePositionsThanTheAmountOfBoxesThenLapsIsUpdated [
-	| aShip aBoard aParsecsList |
+
+	| aShip aBoard boxDistributions anEffectManager boxes |
 	aShip := Ship createWithMaxFuel: 1000.
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aBoard move: aShip withDiceResult: 100.
-	self assert: aShip getLaps equals: 2.
+	self assert: aShip getLaps equals: 2
 ]
 
 { #category : #tests }
