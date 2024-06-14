@@ -61,14 +61,6 @@ ABoardTest >> testWhenABoardHas25BoxesThen2OfThemIsHyperJump_04 [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedPersonalizedThenIrHas100Boxes_14 [
-
-	| aBoard |
-	aBoard := Board createPersonalizedBoard.
-	self assert: aBoard boardSize equals: 102.
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedThen2OfItsBoxesAreWormHoleKind_13 [
 
 	| aBoard |
@@ -161,23 +153,10 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid_19 [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenAPersonalizedBoardisCreateThenCheckIFTheBoxesAreInPosition_15 [
-
-	| aBoard aBox anotherBox |
-	aBoard := Board createPersonalizedBoard.
-	aBox:= aBoard boxes at:3.
-	anotherBox:= aBoard boxes at: 72.
-	
-	self assert: (aBox isKindOf:MoonWalkBox).
-	self deny: (anotherBox isKindOf:AtomicBombBox) 
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 
-	| aBoard aShip anotherShip aCollectionOfShips aBoardtwo |
+	| aBoard aShip anotherShip aCollectionOfShips |
 	aBoard := Board withNumberOfBoxesNoEffect: 100.
-	aBoardtwo:= Board createPersonalizedBoard.
 	aShip:=Ship createWithMaxFuel: 1000.
 	anotherShip :=Ship createWithMaxFuel: 1000.
 	aCollectionOfShips:=OrderedCollection  new.

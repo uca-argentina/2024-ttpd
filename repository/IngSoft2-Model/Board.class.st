@@ -19,11 +19,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Board class >> createPersonalizedBoard [
-	^self new initializePersonalizedBoard.
-]
-
-{ #category : #'as yet unclassified' }
 Board class >> withBoxesArray: aBoxesArray [ 
 	^self new initializeWithBoxesArray: aBoxesArray.
 ]
@@ -193,79 +188,6 @@ Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
 		1 to: 78 do: [ :i | boxes add: Box new ].
 		
 		79 to: aNumberOfBoxes do:[:i | boxes add: BlackHoleBox  new ].
-]
-
-{ #category : #initialization }
-Board >> initializePersonalizedBoard [
-    | positionsForNoEffectBoxes positionsForBlackHole positionsForHyperGravity positionsForMoonWalk positionsForHyperJump positionsForAtomicBomb positionsForWormHole aBox totalBoxes aPaesecList |
-
-    totalBoxes := 102. "Por ejemplo, ajusta esto al número total de casillas que desees en el tablero."
-    boxes := OrderedCollection new: totalBoxes.
-    1 to: totalBoxes do: [:i | boxes add: nil].
-
-    wormHole := OrderedCollection new.
-    blackHoleBoxes := OrderedCollection new.
-    hyperGravityBoxes := OrderedCollection new.
-    moonWalkBoxes := OrderedCollection new.
-    hyperJumpBoxes := OrderedCollection new.
-    atomicBombBoxes := OrderedCollection new.
-    noEffectBoxes := OrderedCollection new.
-
-    positionsForNoEffectBoxes := OrderedCollection withAll: #(1 11 14 17 19 20 23 24 28 30 32 33 34 35 36 39 41 42 81 45 46 47 50 51 52 54 55 56 58 60 62 64 8 66 67 69 70 72 73 75).
-    positionsForBlackHole := OrderedCollection withAll: #(76 77 78 79 80 44 82 83 84 85 86 87 88 89 90 92 93 94 95 97).
-    positionsForHyperGravity := OrderedCollection withAll: #(98 99 100 101 102 5 2 27 4 6 7 65 9 10 12 13 15 16 18 21).
-    positionsForMoonWalk := OrderedCollection withAll: #(22 25 26 3 29 31 37 38 40 43).
-    positionsForHyperJump := OrderedCollection withAll: #(48 49 53 57 59 61 63 68).
-    positionsForAtomicBomb := OrderedCollection withAll: #(71 74).
-    positionsForWormHole := OrderedCollection withAll: #(91 96).
-
-    1 to: positionsForWormHole size do: [ :i |
-        aBox := WormHoleBox inPlace: (positionsForWormHole at: i).
-        boxes at: (positionsForWormHole at: i) put: aBox.
-        wormHole add: aBox
-    ].
-
-	(wormHole at: 1 )withDestiny: (wormHole at: 2).
-	(wormHole at: 2 )withDestiny: (wormHole at: 1).
-
-
-    1 to: positionsForBlackHole size do: [ :i |
-        aBox := BlackHoleBox inPlace: (positionsForBlackHole at: i).
-        boxes at: (positionsForBlackHole at: i) put: aBox.
-        blackHoleBoxes add: aBox
-    ].
-
-    1 to: positionsForHyperGravity size do: [ :i |
-        aBox := HyperGravityBox inPlace: (positionsForHyperGravity at: i) withDieResult: 20 .
-        boxes at: (positionsForHyperGravity at: i) put: aBox.
-        hyperGravityBoxes add: aBox
-    ].
-
-    1 to: positionsForMoonWalk size do: [ :i |
-        aBox := MoonWalkBox inPlace: (positionsForMoonWalk at: i).
-        boxes at: (positionsForMoonWalk at: i) put: aBox.
-        moonWalkBoxes add: aBox
-    ].
-
-    1 to: positionsForHyperJump size do: [ :i |
-		aPaesecList := #(7 5 2).
-        aBox := HyperJumpBox inPlace: (positionsForHyperJump at: i) parsecsList: aPaesecList withBoardLenght: 102 andParsecLength: 1000 .
-        boxes at: (positionsForHyperJump at: i) put: aBox.
-        hyperJumpBoxes add: aBox
-    ].
-
-    1 to: positionsForAtomicBomb size do: [ :i |
-        aBox := AtomicBombBox inPlace: (positionsForAtomicBomb at: i).
-        boxes at: (positionsForAtomicBomb at: i) put: aBox.
-        atomicBombBoxes add: aBox
-    ].
-
-    1 to: positionsForNoEffectBoxes size do: [ :i |
-        aBox := NoEffectBox inPlace: (positionsForNoEffectBoxes at: i).
-        boxes at: (positionsForNoEffectBoxes at: i) put: aBox.
-        noEffectBoxes add: aBox
-    ].
-
 ]
 
 { #category : #initialization }

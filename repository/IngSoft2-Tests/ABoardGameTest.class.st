@@ -43,22 +43,6 @@ ABoardGameTest >> test_03_WhenAGameHasANumberOfLapsThenTheGameStarts [
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_04_WhenABoardGameIsCreatedWithAPersonalizedBoardThenTheGameStarts [
-
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := Board createPersonalizedBoard.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie  of: 60.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 1
-		              withBoard: aPersonalizedBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start
-]
-
-{ #category : #tests }
 ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie aParsecsList |
@@ -142,16 +126,19 @@ ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 { #category : #tests }
 ABoardGameTest >> test_09_ABoardGameWillNotStartWithLessThan1Ship [
 
-	| aCollectionOfDice aDie |
+	| aCollectionOfDice aDie boxesArray|
 	aCollectionOfDice := OrderedCollection new.
 	aDie := Die of: 3.
 	aCollectionOfDice add: aDie.
-
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
 	self
 		should: [
 			BoardGame
 				withShip: 0
-				withBoard: Board createPersonalizedBoard
+				withBoard: (Board withBoxesArray: boxesArray)
 				WithDice: aCollectionOfDice
 				andwithNumberOfLaps: 2 ]
 		raise: Error
@@ -161,16 +148,19 @@ ABoardGameTest >> test_09_ABoardGameWillNotStartWithLessThan1Ship [
 { #category : #tests }
 ABoardGameTest >> test_10_ABoardGameWillNotStartWithLessThan2Laps [
 
-	| aCollectionOfDice aDie |
+	| aCollectionOfDice aDie boxesArray|
 	aCollectionOfDice := OrderedCollection new.
 	aDie := Die of: 3.
 	aCollectionOfDice add: aDie.
-
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
 	self
 		should: [
 			BoardGame
 				withShip: 1
-				withBoard: Board createPersonalizedBoard
+				withBoard: (Board withBoxesArray: boxesArray)
 				WithDice: aCollectionOfDice
 				andwithNumberOfLaps: 1 ]
 		raise: Error
