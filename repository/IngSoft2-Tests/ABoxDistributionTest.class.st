@@ -8,8 +8,8 @@ Class {
 ABoxDistributionTest >> test_01_ABoxHasAnEffectAndADistributionThenItCanBeReturned [
 
 	| aBoxDistribution |
-	aBoxDistribution := BoxDistribution of: 'NoEffectBox' withDistribution: 1.
+	aBoxDistribution := BoxDistribution of: NoEffectBox withDistribution: 1.
 
 	self assert: aBoxDistribution getDistribution equals: 1.
-	self assert: aBoxDistribution getEffect equals: 'NoEffectBox'
+	self assert: aBoxDistribution getEffect equals: NoEffectBox
 ]

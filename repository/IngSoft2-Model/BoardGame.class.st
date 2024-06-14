@@ -69,19 +69,16 @@ BoardGame >> passTurn [
 { #category : #'as yet unclassified' }
 BoardGame >> playTurn [
 
-	| play dieResult |
-	play := (aCollectionOfShips at: playerTurn) victory.
+	| dieResult |
+	(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
+		dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
+		board
+			players: aCollectionOfShips
+			playerTurn: playerTurn
+			withDiceResult: dieResult
+			andLaps: laps ].
 
-	play ifFalse: [
-		(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
-			dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
-			board
-				players: aCollectionOfShips
-				playerTurn: playerTurn
-				withDiceResult: dieResult
-				andLaps: laps ].
-
-		play := (aCollectionOfShips at: playerTurn) victory.
+	(aCollectionOfShips at: playerTurn) victory ifFalse: [
 		playerTurn := self changeTurn: playerTurn ]
 ]
 
