@@ -71,19 +71,8 @@ Board >> checkPositionOf: aShip [
 ]
 
 { #category : #'as yet unclassified' }
-Board >> getHyperJumpBoxes [
-
-	^hyperJumpBoxes 
-]
-
-{ #category : #'as yet unclassified' }
 Board >> getMaxDieResult [
 	^maxDieResult .
-]
-
-{ #category : #'as yet unclassified' }
-Board >> getMoonWalkBoxes [
-	^moonWalkBoxes.
 ]
 
 { #category : #'as yet unclassified' }
