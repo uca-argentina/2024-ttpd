@@ -32,7 +32,7 @@ ABoardGameTest >> test_03_WhenAGameHasANumberOfLapsThenTheGameStarts [
 	| aBoardGame aBoard aCollectionOfDice aDie |
 	aBoard := Board withNumberOfBoxes: 102 withParsecArray: #(3 4 5) aParsecLength: 10 andMaxDieResult: 60.
 	aCollectionOfDice := OrderedCollection new.
-	aDie := Die of: 60.
+	aDie := LoadedDie  of: 60.
 	aCollectionOfDice add: aDie.
 	aBoardGame := BoardGame
 		              withShip: 4
@@ -48,7 +48,7 @@ ABoardGameTest >> test_04_WhenABoardGameIsCreatedWithAPersonalizedBoardThenTheGa
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
 	aPersonalizedBoard := Board createPersonalizedBoard.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := Die of: 60.
+	aLoadedDie := LoadedDie  of: 60.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 1
@@ -81,7 +81,7 @@ ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
 	aPersonalizedBoard := Board createPersonalizedBoard.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := Die of: 50.
+	aLoadedDie := Die of: 70.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 2
