@@ -7,30 +7,27 @@ Class {
 { #category : #tests }
 AnEffectManagerTest >> test_01_WhenAnEffectManagerHasOnly1DistributionThenItCreatesACollectionOfBoxesWithNoEffect [
 
-	| boxDistributions anEffectManager |
+	| boxDistributions anEffectManager boxes |
 	boxDistributions := OrderedCollection new.
 	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 1).
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
 	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 2.
 
-
-	self assert:
-		(((anEffectManager createFor: 2) at: 1) isKindOf: NoEffectBox).
-	self assert:
-		(((anEffectManager createFor: 2) at: 2) isKindOf: NoEffectBox)
+	self assert: ((boxes at: 1) isKindOf: NoEffectBox).
+	self assert: ((boxes at: 2) isKindOf: NoEffectBox)
 ]
 
 { #category : #tests }
 AnEffectManagerTest >> test_02_WhenAnEffectManagerHasOnly1DistributionThenItCreatesACollectionOfBoxesWithAtomicBobEffect [
 
-	| boxDistributions anEffectManager |
+	| boxDistributions anEffectManager boxes|
 	boxDistributions := OrderedCollection new.
 	boxDistributions add:
-		(BoxDistribution of: AtomicBombBox withDistribution: 1).
+		(BoxDistribution of: AtomicBombBox withDistribution: 100).
 	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 2.
 
-	self assert:
-		(((anEffectManager createFor: 2) at: 1) isKindOf: AtomicBombBox).
-	self assert:
-		(((anEffectManager createFor: 2) at: 2) isKindOf: AtomicBombBox)
+	self assert: ((boxes at: 1) isKindOf: AtomicBombBox).
+	self assert: ((boxes at: 2) isKindOf: AtomicBombBox)
 ]

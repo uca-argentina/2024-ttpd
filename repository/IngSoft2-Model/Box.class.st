@@ -24,12 +24,6 @@ Box class >> withShips: aCollectionOfShips [
 	^self new initializeWithShips: aCollectionOfShips.
 ]
 
-{ #category : #removing }
-Box >> = anObject [
-
-	^ (anObject isKindOf: Box) and: [ place = anObject getPosition ]
-]
-
 { #category : #adding }
 Box >> addShip: aShip [
 
