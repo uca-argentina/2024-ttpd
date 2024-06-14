@@ -127,14 +127,6 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfTheHyperJumpBoxesCanBeSho
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedWith5BoxesThenBoardIsValid [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 100.
-	self assert: aBoard boardSize equals: 100
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
 	self
