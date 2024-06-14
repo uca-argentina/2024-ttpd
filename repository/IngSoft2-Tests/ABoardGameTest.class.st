@@ -170,15 +170,20 @@ ABoardGameTest >> test_10_ABoardGameWillNotStartWithLessThan2Laps [
 { #category : #tests }
 ABoardGameTest >> test_11_WhenItIsAPlayerTurnThenPlayerChooseToPlay [
 
-	| aPersonalizedBoard aCollectionOfDice aLoadedDie aBoardGame |
-	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
+		boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 100.
 	aCollectionOfDice add: aLoadedDie.
 
 	aBoardGame := BoardGame
 		              withShip: 3
-		              withBoard: aPersonalizedBoard
+		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 
@@ -189,15 +194,20 @@ ABoardGameTest >> test_11_WhenItIsAPlayerTurnThenPlayerChooseToPlay [
 { #category : #tests }
 ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 
-	| aPersonalizedBoard aCollectionOfDice aLoadedDie aBoardGame |
-	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	aCollectionOfDice add: aLoadedDie.
 
 	aBoardGame := BoardGame
 		              withShip: 2
-		              withBoard: aPersonalizedBoard
+		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 
