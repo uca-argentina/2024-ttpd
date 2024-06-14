@@ -21,14 +21,6 @@ ABoardTest >> testNewMethodForInitializationOfBoard_18 [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedThen2OfItsBoxesAreWormHoleKind_13 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 10.
-	self assert: aBoard getWormHolesBoxes size equals: 2.
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
 
 	| aBoard|

@@ -75,11 +75,6 @@ Board >> getMaxDieResult [
 	^maxDieResult .
 ]
 
-{ #category : #'as yet unclassified' }
-Board >> getWormHolesBoxes [
-	^wormHole.
-]
-
 { #category : #initialize }
 Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 
