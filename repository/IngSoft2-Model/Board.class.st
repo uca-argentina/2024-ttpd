@@ -71,11 +71,6 @@ Board >> checkPositionOf: aShip [
 ]
 
 { #category : #'as yet unclassified' }
-Board >> getHyperGravityBoxes [
-	^hyperGravityBoxes.
-]
-
-{ #category : #'as yet unclassified' }
 Board >> getHyperJumpBoxes [
 
 	^hyperJumpBoxes 

@@ -29,14 +29,6 @@ ABoardTest >> testWhenABoardHas10BoxesThen1OfThemAreMoonWalk_03 [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardHas10BoxesThen2OfThemAreHyperGravity_02 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 10.
-	self assert: aBoard getHyperGravityBoxes size equals: 2.
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardHas25BoxesThen2OfThemIsHyperJump_04 [
 
 	| aBoard |
@@ -66,14 +58,6 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheMoonWalkBoxesCanBeShown
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
 	self assert: ((aBoard getMoonWalkBoxes at: 1) getPosition between: 1 and: 10).
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfTheHyperGravityBoxesCanBeShown_08 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 10.
-	self assert: ((aBoard getHyperGravityBoxes at: 1) getPosition between: 1 and: 10).
 ]
 
 { #category : #tests }
