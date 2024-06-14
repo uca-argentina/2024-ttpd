@@ -35,12 +35,6 @@ Board class >> withNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aP
 	^self new initializewithNumberOfBoxes: aNumberOfBoxes withParsecArray: aParsecList aParsecLength: aParsecLength andMaxDieResult: aMaxDieResult .
 ]
 
-{ #category : #'as yet unclassified' }
-Board class >> withNumberOfBoxesNoEffect: aNumber [ 
-		aNumber< 1 ifTrue: [ Error signal: 'A Board must have at least 1 box to be created' ].
-	^self new initialiceWithANumberOfBoxesNoEffect: aNumber.
-]
-
 { #category : #testing }
 Board >> boardSize [
 	^boxes size.
@@ -179,15 +173,6 @@ Board >> initialiceWithANumberOfBoxes: aNumberOfBoxes [
 		mixPositions removeFirst.
 		boxes add: aBox.
 		noEffectBoxes add: aBox ]
-]
-
-{ #category : #'as yet unclassified' }
-Board >> initialiceWithANumberOfBoxesNoEffect: aNumberOfBoxes [
-		boxes := OrderedCollection new: aNumberOfBoxes.
-	
-		1 to: 78 do: [ :i | boxes add: Box new ].
-		
-		79 to: aNumberOfBoxes do:[:i | boxes add: BlackHoleBox  new ].
 ]
 
 { #category : #initialization }
