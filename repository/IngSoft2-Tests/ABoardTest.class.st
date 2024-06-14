@@ -10,17 +10,6 @@ ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [
 ]
 
 { #category : #tests }
-ABoardTest >> testNewMethodForInitializationOfBoard_18 [
-
-	| aBoard aParsecsList |
-	aParsecsList := #(5 7 2).
-	aBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
-	self assert: aBoard getMaxDieResult equals: 40.
-		
-
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
 
 	| aBoard boxDistributions anEffectManager boxes |
@@ -48,15 +37,6 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 	boxes := anEffectManager createFor: 0.
 	self
 		should: [ Board withBoxesArray: boxes ]
-		raise: Error
-		withMessage: 'A Board must have at least 1 box to be created'
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid_19 [
-
-	self
-		should: [ Board withNumberOfBoxes: 0 withParsecArray: #(1 3 4) aParsecLength: 20 andMaxDieResult: 45 ]
 		raise: Error
 		withMessage: 'A Board must have at least 1 box to be created'
 ]

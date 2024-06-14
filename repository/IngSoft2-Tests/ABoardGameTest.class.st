@@ -34,34 +34,43 @@ ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Win
 { #category : #tests }
 ABoardGameTest >> test_03_WhenAGameHasANumberOfLapsThenTheGameStarts [
 
-	| aBoardGame aBoard aCollectionOfDice aDie |
-	aBoard := Board withNumberOfBoxes: 102 withParsecArray: #(3 4 5) aParsecLength: 10 andMaxDieResult: 60.
+	| aBoardGame aBoard aCollectionOfDice aDie boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
-	aDie := LoadedDie  of: 60.
+	aDie := LoadedDie of: 60.
 	aCollectionOfDice add: aDie.
 	aBoardGame := BoardGame
 		              withShip: 4
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start .
+	self assert: aBoardGame start
 ]
 
 { #category : #tests }
 ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie aParsecsList |
-	aParsecsList := #(5 7 2).
-	aPersonalizedBoard := Board withNumberOfBoxes: 100 withParsecArray: aParsecsList aParsecLength: 1000 andMaxDieResult: 40.
+	| aBoardGame aCollectionOfDice aLoadedDie  boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 5.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 1
-		              withBoard: aPersonalizedBoard
+		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame getLapsToDo equals: 2.
+	self assert: aBoardGame getLapsToDo equals: 2
 ]
 
 { #category : #tests }
