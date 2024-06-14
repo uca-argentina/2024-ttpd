@@ -39,7 +39,7 @@ ABoardGameTest >> test_03_WhenAGameHasANumberOfLapsThenTheGameStarts [
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start ."probado"
+	self assert: aBoardGame start .
 ]
 
 { #category : #tests }
@@ -55,7 +55,7 @@ ABoardGameTest >> test_04_WhenABoardGameIsCreatedWithAPersonalizedBoardThenTheGa
 		              withBoard: aPersonalizedBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start "probado"
+	self assert: aBoardGame start
 ]
 
 { #category : #tests }
@@ -88,7 +88,7 @@ ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts
 		              withBoard: aPersonalizedBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start.
+	self assert: aBoardGame start
 ]
 
 { #category : #tests }
