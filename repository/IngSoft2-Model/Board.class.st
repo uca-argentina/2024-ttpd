@@ -62,11 +62,6 @@ Board >> checkPositionOf: aShip [
 	aShip movesTo: actualPosition
 ]
 
-{ #category : #'as yet unclassified' }
-Board >> getMaxDieResult [
-	^maxDieResult .
-]
-
 { #category : #initialization }
 Board >> initializeWithBoxesArray: aBoxesArray [ 
 	boxes := aBoxesArray.
