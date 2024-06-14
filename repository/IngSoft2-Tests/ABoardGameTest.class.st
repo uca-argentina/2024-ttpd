@@ -62,14 +62,19 @@ ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 { #category : #tests }
 ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWinner [
 
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
+	| aBoardGame aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 2
-		              withBoard: aPersonalizedBoard
+		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 	aBoardGame playTurn.
@@ -78,7 +83,7 @@ ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWi
 	aBoardGame playTurn.
 	aBoardGame playTurn.
 	aBoardGame playTurn.
-	self assert: aBoardGame winnerIs equals: 1.
+	self assert: aBoardGame winnerIs equals: 1
 ]
 
 { #category : #tests }
@@ -104,14 +109,19 @@ ABoardGameTest >> test_07_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts
 { #category : #tests }
 ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 
-	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie expectedRanking ranking |
-	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
+	| aBoardGame aCollectionOfDice aLoadedDie expectedRanking ranking boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #(3 100 5).
+	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #( 3 100 5 ).
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 3
-		              withBoard: aPersonalizedBoard
+		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 	expectedRanking := OrderedCollection new.
@@ -120,7 +130,7 @@ ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 	expectedRanking add: 3.
 	aBoardGame start.
 	ranking := aBoardGame showRanking.
-	self assert: aBoardGame showRanking equals: expectedRanking.
+	self assert: aBoardGame showRanking equals: expectedRanking
 ]
 
 { #category : #tests }
