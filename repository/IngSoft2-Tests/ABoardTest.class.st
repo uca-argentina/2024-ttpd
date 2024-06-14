@@ -23,16 +23,31 @@ ABoardTest >> testNewMethodForInitializationOfBoard_18 [
 { #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
 
-	| aBoard|
-	aBoard := Board withNumberOfBoxes: 100.
-	self assert: ((aBoard boxes at: 1) isKindOf: NoEffectBox).
+	| aBoard boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 40).
+	boxDistributions add:
+		(BoxDistribution of: HyperGravityBox withDistribution: 20).
+	boxDistributions add:
+		(BoxDistribution of: HyperJumpBox withDistribution: 60).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	self assert: ((aBoard boxes at: 1) isKindOf: NoEffectBox)
 ]
 
 { #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
+	| boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 0.
 	self
-		should: [ Board withNumberOfBoxes: 0 ]
+		should: [ Board withBoxesArray: boxes ]
 		raise: Error
 		withMessage: 'A Board must have at least 1 box to be created'
 ]

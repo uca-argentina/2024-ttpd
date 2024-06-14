@@ -12,8 +12,13 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 { #category : #tests }
 ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
 
-	| aBoardGame aBoard aCollectionOfDice aLoadedDie |
-	aBoard := Board withNumberOfBoxes: 100.
+	| aBoardGame aBoard aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 102.
 	aCollectionOfDice add: aLoadedDie.
@@ -87,12 +92,17 @@ ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWi
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_07_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts [
+ABoardGameTest >> test_07_WhenTheGameIsAskedToChangeTurnThenTheTurnIsIncremented [
 
-	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn |
+	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn boxDistributions anEffectManager boxes |
 	turn := 1.
 
-	aBoard := Board withNumberOfBoxes: 100.
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 102.
 	aCollectionOfDice add: aLoadedDie.
@@ -101,9 +111,9 @@ ABoardGameTest >> test_07_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-		
+
 	nextTurn := aBoardGame changeTurn: turn.
-	self assert: nextTurn equals: 2.
+	self assert: nextTurn equals: 2
 ]
 
 { #category : #tests }

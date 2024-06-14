@@ -39,8 +39,9 @@ EffectManager >> calculateCumulativeDistributions [
 EffectManager >> createFor: anAmountOfBoxes [ 
 	| boxes cumulativeDistributions randomValue |
         boxes := OrderedCollection new: anAmountOfBoxes.
+			boxes add: (NoEffectBox inPlace: 1).		
         cumulativeDistributions := self calculateCumulativeDistributions.
-        1 to: anAmountOfBoxes do: [:i |
+        2 to: anAmountOfBoxes do: [:i |
             randomValue := Random new next * 100.
             boxes add: (self boxForRandomValue: randomValue cumulativeDistributions: cumulativeDistributions place: i).
         ].
