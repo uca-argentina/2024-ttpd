@@ -76,19 +76,25 @@ ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameStarts [
+ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWinner [
 
 	| aBoardGame aPersonalizedBoard aCollectionOfDice aLoadedDie |
-	aPersonalizedBoard := Board createPersonalizedBoard.
+	aPersonalizedBoard := Board withNumberOfBoxesNoEffect: 100.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := Die of: 70.
+	aLoadedDie := LoadedDie of: 50.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 2
 		              withBoard: aPersonalizedBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-	self assert: aBoardGame start
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	self assert: aBoardGame winnerIs equals: 1.
 ]
 
 { #category : #tests }
