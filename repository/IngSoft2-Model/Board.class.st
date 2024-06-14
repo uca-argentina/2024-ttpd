@@ -71,12 +71,6 @@ Board >> checkPositionOf: aShip [
 ]
 
 { #category : #'as yet unclassified' }
-Board >> getAtomicBomb [
-
-	^atomicBombBoxes.
-]
-
-{ #category : #'as yet unclassified' }
 Board >> getBlackHoleBoxes [
 
 	^blackHoleBoxes.

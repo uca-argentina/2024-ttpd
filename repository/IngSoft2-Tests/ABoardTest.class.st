@@ -21,14 +21,6 @@ ABoardTest >> testNewMethodForInitializationOfBoard_18 [
 ]
 
 { #category : #tests }
-ABoardTest >> testWhenABoardHas100BoxesThen2OfThemIsAtomicBomb_05 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 100.
-	self assert: aBoard getAtomicBomb size equals: 2.
-]
-
-{ #category : #tests }
 ABoardTest >> testWhenABoardHas10BoxesThen1OfThemAreMoonWalk_03 [
 
 	| aBoard |
@@ -90,24 +82,6 @@ ABoardTest >> testWhenABoardIsCreatedThenThePositionOfTheMoonWalkBoxesCanBeShown
 	| aBoard |
 	aBoard := Board withNumberOfBoxes: 10.
 	self assert: ((aBoard getMoonWalkBoxes at: 1) getPosition between: 1 and: 10).
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfDiferentBoxesShouldBeDiferent_11 [
-
-	| aBoard positionAtomicBombBox positionBlackHoleBox |
-	aBoard := Board withNumberOfBoxes: 100.
-	positionAtomicBombBox := (aBoard getAtomicBomb at: 1) getPosition.
-	positionBlackHoleBox := (aBoard getBlackHoleBoxes at: 1) getPosition.
-	self deny: positionAtomicBombBox = positionBlackHoleBox.
-]
-
-{ #category : #tests }
-ABoardTest >> testWhenABoardIsCreatedThenThePositionsOfTheAtomicBombBoxesCanBeShown_10 [
-
-	| aBoard |
-	aBoard := Board withNumberOfBoxes: 100.
-	self assert: ((aBoard getAtomicBomb at: 1) getPosition between: 1 and: 100).
 ]
 
 { #category : #tests }
