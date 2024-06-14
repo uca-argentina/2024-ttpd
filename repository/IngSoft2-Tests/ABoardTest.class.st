@@ -209,3 +209,32 @@ ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
 		
 
 ]
+
+{ #category : #tests }
+ABoardTest >> test_20_ABoardCanBeCreatedWithAnArrayOfBoxes [
+
+	| aBoard aBoxesArray|
+	aBoxesArray := OrderedCollection new.
+	aBoxesArray add: (NoEffectBox inPlace: 1).
+	aBoxesArray add: (NoEffectBox inPlace: 2).
+	aBoxesArray add: (NoEffectBox inPlace: 3).
+	aBoxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: aBoxesArray.
+	self assert: aBoard boardSize equals: 4.
+]
+
+{ #category : #tests }
+ABoardTest >> test_21_ABoardCanBeCreatedWithAnArrayOfBoxesDoneWithDistributions [
+
+	| boxDistributions anEffectManager boxes aBoard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: AtomicBombBox withDistribution: 80).
+	boxDistributions add:
+		(BoxDistribution of: HyperGravityBox withDistribution: 20).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 50.
+	aBoard := Board withBoxesArray: boxes.
+
+	self assert: aBoard boardSize equals: 50
+]
