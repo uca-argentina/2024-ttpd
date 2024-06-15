@@ -375,3 +375,16 @@ AShipTest >> test_29_WhenAShipHasMoreLapsButLessPositionThenAShipIsGreaterThanAn
 	anotherShip moves: 10.
 	self assert: aShip > anotherShip.
 ]
+
+{ #category : 'tests' }
+AShipTest >> test_30_AShipWithACollectionOfCardsThenItsReturns [
+
+	| aShip aCard aCollectionOfCard |
+	aShip := Ship createWithMaxFuel: 1000.
+	aCard:= OverloadCard new.
+	aShip addCard: aCard.
+	aCollectionOfCard:= OrderedCollection new.
+	aCollectionOfCard add: aCard.
+	
+	self assert: aShip getCards equals: aCollectionOfCard .
+]

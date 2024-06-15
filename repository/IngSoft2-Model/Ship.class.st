@@ -7,7 +7,8 @@ Class {
 		'maxFuel',
 		'laps',
 		'state',
-		'lastDieResult'
+		'lastDieResult',
+		'aCollectionOfCards'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -29,6 +30,11 @@ Ship >> > anotherShip [
 	self getLaps = anotherShip getLaps ifTrue: [
 		^ self getPosition > anotherShip getPosition ].
 	^ self getLaps > anotherShip getLaps
+]
+
+{ #category : 'adding' }
+Ship >> addCard: aCard [ 
+	aCollectionOfCards add: aCard.
 ]
 
 { #category : 'as yet unclassified' }
@@ -67,6 +73,11 @@ Ship >> endCursed [
 	state := Playing new.
 	self moves: lastDieResult.
 	self consumeFuel: lastDieResult.
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> getCards [
+	^aCollectionOfCards 
 ]
 
 { #category : 'as yet unclassified' }
@@ -109,6 +120,7 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	laps:= 1.
 	state := Playing new.
 	lastDieResult := 0.
+	aCollectionOfCards :=OrderedCollection new.
 ]
 
 { #category : 'testing' }
