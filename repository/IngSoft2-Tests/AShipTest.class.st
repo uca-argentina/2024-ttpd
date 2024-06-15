@@ -393,3 +393,66 @@ AShipTest >> test_30_WhenAshipHasActiveOverloadCardThenShipIsAffected [
 
 	self assert: anotherShip getPosition equals: 4.
 ]
+
+{ #category : 'tests' }
+AShipTest >> test_31_WhenAShipHasActiveAccelerationCardThenAllShipsAffected [
+
+	| aShip anotherShip aCard aCollectionOfShips |
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:= OrderedCollection new.
+	aCollectionOfShips add:aShip.
+	aCollectionOfShips add:anotherShip.
+	aCard:= AccelerationCard new.
+	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
+	anotherShip moves: 8.
+	anotherShip browseActiveCards.
+
+
+	self assert: anotherShip getPosition equals: 10.
+
+	self assert: aShip getPosition equals: 1.
+
+	aShip moves: 7.
+	aShip browseActiveCards.
+	self assert: aShip  getPosition equals:9.
+]
+
+{ #category : 'tests' }
+AShipTest >> test_32 [
+
+	| aShip anotherShip aCard aCollectionOfShips |
+	aShip := Ship createWithMaxFuel: 5.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:= OrderedCollection new.
+	aCollectionOfShips add:aShip.
+	aCollectionOfShips add:anotherShip.
+	aCard:= AllyCard new.
+	
+	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
+	aShip consumeFuel: 15.
+	self assert: anotherShip getFuel equals: 990.
+	self assert: aShip getFuel equals: 0.
+	
+
+
+]
+
+{ #category : 'tests' }
+AShipTest >> test_32_WhenAShipRunOutOfFuelAndHasAnAllyThenAllyShareFuel [
+
+	| aShip anotherShip aCard aCollectionOfShips |
+	aShip := Ship createWithMaxFuel: 5.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:= OrderedCollection new.
+	aCollectionOfShips add:aShip.
+	aCollectionOfShips add:anotherShip.
+	aCard:= AllyCard new.
+	
+	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
+	aShip consumeFuel: 15.
+	self assert: anotherShip getFuel equals: 990.
+	self assert: aShip getFuel equals: 0.
+
+
+]

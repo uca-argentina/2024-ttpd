@@ -33,6 +33,11 @@ Ship >> > anotherShip [
 	^ self getLaps > anotherShip getLaps
 ]
 
+{ #category : 'as yet unclassified' }
+Ship >> MyFirstAlly [
+	aCollectionOfActiveCards do:[:aCard| aCard powerMove =0 ifTrue:[ ^(aCard getAlly)] ]
+]
+
 { #category : 'adding' }
 Ship >> addActiveCards: aCard [
 	aCollectionOfActiveCards add:aCard
@@ -54,6 +59,12 @@ Ship >> changeStateToPlay [
 ]
 
 { #category : 'as yet unclassified' }
+Ship >> checkAlly [
+	(aCollectionOfActiveCards isEmpty) ifTrue: [^false ].
+	aCollectionOfActiveCards do:[:aCard| ((aCard powerMove) = 0) ifTrue: [^true ]]
+]
+
+{ #category : 'as yet unclassified' }
 Ship >> checkIfWin: aNumberOfLaps [ 
 	laps >= aNumberOfLaps ifTrue: [state:=Winner new].
 ]
@@ -69,9 +80,24 @@ Ship >> consumeFuel: amount [
 	fuel - amount > 0
 		ifTrue: [ fuel := fuel - amount ]
 		ifFalse: [
-			fuel := maxFuel.
-			position := 1.
-			state := CantPlayANumberOfTurns skip: 2 ]
+			self checkAlly
+				ifTrue: [ self consumeFuelFromAlly: fuel - amount ]
+				ifFalse: [
+					fuel := maxFuel.
+					position := 1.
+					state := CantPlayANumberOfTurns skip: 2 ] ]
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> consumeFuelFromAlly: anAmount [
+	| anAlly anotherFuel |
+	anotherFuel:= anAmount *(-1).
+	anAlly:= self MyFirstAlly.
+	(anAlly getFuel -fuel > 0) ifTrue: [ anAlly consumeFuel: anotherFuel. fuel:=0] ifFalse: [ 
+		fuel := maxFuel.
+					position := 1.
+					state := CantPlayANumberOfTurns skip: 2 
+		 ]
 ]
 
 { #category : 'as yet unclassified' }
