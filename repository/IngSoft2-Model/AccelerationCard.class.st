@@ -1,11 +1,11 @@
 Class {
-	#name : 'OverloadCard',
+	#name : 'AccelerationCard',
 	#superclass : 'CardPermanent',
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-OverloadCard >> powerMove [
-	^-2.
+AccelerationCard >> powerMove [ 
+^1.
 ]
