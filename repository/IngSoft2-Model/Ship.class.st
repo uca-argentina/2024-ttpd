@@ -94,9 +94,8 @@ Ship >> consumeFuelFromAlly: anAmount [
 	anotherFuel:= anAmount *(-1).
 	anAlly:= self MyFirstAlly.
 	(anAlly getFuel -fuel > 0) ifTrue: [ anAlly consumeFuel: anotherFuel. fuel:=0] ifFalse: [ 
-		fuel := maxFuel.
-					position := 1.
-					state := CantPlayANumberOfTurns skip: 2 
+			self runOutOfFuel.
+			anAlly runOutOfFuel.
 		 ]
 ]
 
@@ -190,6 +189,13 @@ Ship >> movesTo: aPosition [
 { #category : 'as yet unclassified' }
 Ship >> restartFuel [
 	fuel:= maxFuel .
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> runOutOfFuel [
+		fuel := maxFuel.
+		position := 1.
+		state := CantPlayANumberOfTurns skip: 2 
 ]
 
 { #category : 'as yet unclassified' }

@@ -419,26 +419,6 @@ AShipTest >> test_31_WhenAShipHasActiveAccelerationCardThenAllShipsAffected [
 ]
 
 { #category : 'tests' }
-AShipTest >> test_32 [
-
-	| aShip anotherShip aCard aCollectionOfShips |
-	aShip := Ship createWithMaxFuel: 5.
-	anotherShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:= OrderedCollection new.
-	aCollectionOfShips add:aShip.
-	aCollectionOfShips add:anotherShip.
-	aCard:= AllyCard new.
-	
-	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
-	aShip consumeFuel: 15.
-	self assert: anotherShip getFuel equals: 990.
-	self assert: aShip getFuel equals: 0.
-	
-
-
-]
-
-{ #category : 'tests' }
 AShipTest >> test_32_WhenAShipRunOutOfFuelAndHasAnAllyThenAllyShareFuel [
 
 	| aShip anotherShip aCard aCollectionOfShips |
@@ -453,6 +433,30 @@ AShipTest >> test_32_WhenAShipRunOutOfFuelAndHasAnAllyThenAllyShareFuel [
 	aShip consumeFuel: 15.
 	self assert: anotherShip getFuel equals: 990.
 	self assert: aShip getFuel equals: 0.
+
+
+]
+
+{ #category : 'tests' }
+AShipTest >> test_33_WhenAshipRunOutOfFuelAndHisAllyToThenBothGoesToPositionOneWithMaxFuelAndWithCantPLayANumberOfTurnsState [
+
+	| aShip anotherShip aCard aCollectionOfShips |
+	aShip := Ship createWithMaxFuel: 5.
+	anotherShip := Ship createWithMaxFuel: 20.
+	aCollectionOfShips:= OrderedCollection new.
+	aCollectionOfShips add:aShip.
+	aCollectionOfShips add:anotherShip.
+	aCard:= AllyCard new.
+	
+	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
+
+	anotherShip consumeFuel: 15.
+	aShip consumeFuel: 15.	
+	self assert: aShip getPosition equals: 1.
+	self assert: anotherShip getPosition equals: 1.
+	self assert: anotherShip getFuel equals: 20.
+	self assert: aShip getFuel equals: 5.
+	
 
 
 ]
