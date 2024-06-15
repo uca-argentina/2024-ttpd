@@ -15,7 +15,7 @@ self assert:aCard powerMove equals: -2.
 
 { #category : 'running' }
 AOverloadCardTest >> test_02_WhenAOverloadCardIsAplyToAShipThentheCardIsAddedToTheCollectionOfActiveCards [
-| aCard aShip anotherShip aCollectionOfShips dieResult aCollectionOfDice aDie |
+| aCard aShip anotherShip aCollectionOfShips aCollectionOfDice aDie |
 aCard:= OverloadCard new.
 
 	aShip := Ship createWithMaxFuel: 1000.
