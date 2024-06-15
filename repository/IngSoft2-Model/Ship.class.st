@@ -83,9 +83,7 @@ Ship >> consumeFuel: amount [
 			self checkAlly
 				ifTrue: [ self consumeFuelFromAlly: fuel - amount ]
 				ifFalse: [
-					fuel := maxFuel.
-					position := 1.
-					state := CantPlayANumberOfTurns skip: 2 ] ]
+					self runOutOfFuel ] ]
 ]
 
 { #category : 'as yet unclassified' }
