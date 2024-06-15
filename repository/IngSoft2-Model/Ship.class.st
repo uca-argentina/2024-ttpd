@@ -8,7 +8,8 @@ Class {
 		'laps',
 		'state',
 		'lastDieResult',
-		'aCollectionOfCards'
+		'aCollectionOfCards',
+		'aCollectionOfActiveCards'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -30,6 +31,11 @@ Ship >> > anotherShip [
 	self getLaps = anotherShip getLaps ifTrue: [
 		^ self getPosition > anotherShip getPosition ].
 	^ self getLaps > anotherShip getLaps
+]
+
+{ #category : 'adding' }
+Ship >> addActiveCards: aCard [
+	aCollectionOfActiveCards add:aCard
 ]
 
 { #category : 'adding' }
@@ -76,6 +82,11 @@ Ship >> endCursed [
 ]
 
 { #category : 'as yet unclassified' }
+Ship >> getActiveCards [
+	^aCollectionOfActiveCards 
+]
+
+{ #category : 'as yet unclassified' }
 Ship >> getCards [
 	^aCollectionOfCards 
 ]
@@ -114,6 +125,7 @@ Ship >> initializeShip [
 
 { #category : 'as yet unclassified' }
 Ship >> intitializeWithMaxFuel: amountMaxFuel [ 
+	| aCard anotherCard |
 	position:= 1.
 	fuel:= amountMaxFuel.
 	maxFuel:= amountMaxFuel.
@@ -121,6 +133,11 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	state := Playing new.
 	lastDieResult := 0.
 	aCollectionOfCards :=OrderedCollection new.
+	aCard:= OverloadCard new.
+	anotherCard:=AccelerationCard new.
+	aCollectionOfCards add: aCard.
+	aCollectionOfCards add: anotherCard .
+	aCollectionOfActiveCards:=OrderedCollection new.
 ]
 
 { #category : 'testing' }
@@ -142,6 +159,14 @@ Ship >> movesTo: aPosition [
 { #category : 'as yet unclassified' }
 Ship >> restartFuel [
 	fuel:= maxFuel .
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> selectCard [
+	| aCard |
+	aCard:= aCollectionOfCards at:1.
+	aCollectionOfCards removeFirst.
+	^aCard.
 ]
 
 { #category : 'as yet unclassified' }

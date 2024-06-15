@@ -229,3 +229,36 @@ ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 	self assert: aBoardGame winnerIs equals: 2.
 	
 ]
+
+{ #category : 'tests' }
+ABoardGameTest >> test_13_WhenABoardGamePlayCardThenTheCardAddedToBoardGame [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard aCard aCollectionOfCards |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	aCollectionOfDice add: aLoadedDie.
+
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+
+	aBoardGame playTurn.
+	aBoardGame playTurn.
+	aBoardGame playCard.
+	
+	
+	aCard:=OverloadCard new.
+
+	aCollectionOfCards:= OrderedCollection new.
+	aCollectionOfCards add: aCard.
+	self assert: ((aBoardGame getCards at:1) isKindOf: OverloadCard ).
+	
+]

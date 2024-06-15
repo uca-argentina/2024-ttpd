@@ -6,7 +6,8 @@ Class {
 		'board',
 		'dice',
 		'laps',
-		'playerTurn'
+		'playerTurn',
+		'aCollectionOfCards'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -38,6 +39,11 @@ lastPlayer :=aCollectionOfShips size.
 ]
 
 { #category : 'as yet unclassified' }
+BoardGame >> getCards [
+^aCollectionOfCards.
+]
+
+{ #category : 'as yet unclassified' }
 BoardGame >> getLapsToDo [
 	^laps.
 ]
@@ -59,12 +65,22 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 	dice := aCollectionOfDice.
 	laps := aNumberOfLaps.
 	playerTurn := 1.
+	aCollectionOfCards:= OrderedCollection new.
 ]
 
 { #category : 'as yet unclassified' }
 BoardGame >> passTurn [
 	(aCollectionOfShips at: playerTurn) skipTurn.
 	playerTurn := self changeTurn: playerTurn 
+]
+
+{ #category : 'as yet unclassified' }
+BoardGame >> playCard [
+	| aCard |
+	aCard:= (aCollectionOfShips at: playerTurn) selectCard.
+	aCollectionOfCards add:aCard.
+	
+	
 ]
 
 { #category : 'as yet unclassified' }
