@@ -44,6 +44,11 @@ Ship >> addCard: aCard [
 ]
 
 { #category : 'as yet unclassified' }
+Ship >> browseActiveCards [
+	aCollectionOfActiveCards do:[:aCard|  self moves: (aCard powerMove)]. 
+]
+
+{ #category : 'as yet unclassified' }
 Ship >> changeStateToPlay [
 	state := Playing new.
 ]

@@ -375,3 +375,21 @@ AShipTest >> test_29_WhenAShipHasMoreLapsButLessPositionThenAShipIsGreaterThanAn
 	anotherShip moves: 10.
 	self assert: aShip > anotherShip.
 ]
+
+{ #category : 'tests' }
+AShipTest >> test_30_WhenAshipHasActiveOverloadCardThenShipIsAffected [
+
+	| aShip anotherShip aCard aCollectionOfShips |
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:= OrderedCollection new.
+	aCollectionOfShips add:aShip.
+	aCollectionOfShips add:anotherShip.
+	aCard:= OverloadCard new.
+	aCard aplyEffectFrom: 1 to: 2  withShips: aCollectionOfShips .
+	anotherShip moves: 5.
+	anotherShip browseActiveCards.
+	
+
+	self assert: anotherShip getPosition equals: 4.
+]
