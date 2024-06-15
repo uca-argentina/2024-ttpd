@@ -1,6 +1,6 @@
 Class {
-	#name : #HyperJumpBox,
-	#superclass : #Box,
+	#name : 'HyperJumpBox',
+	#superclass : 'Box',
 	#instVars : [
 		'parsecList',
 		'boardLength',
@@ -8,15 +8,16 @@ Class {
 		'parsecBoxProp',
 		'parsecNumber'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 HyperJumpBox class >> inPlace: aPosition parsecsList: aPaesecList withBoardLenght: aBoardLength andParsecLength: aParsecLength [ 
 	^self new initializeInPlace: aPosition parsecsList: aPaesecList withBoardLenght: aBoardLength andParsecLength: aParsecLength.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 HyperJumpBox >> effectShips: aCollection playing: aShip [
 
 	| parsecs positionsToMove |
@@ -29,17 +30,17 @@ HyperJumpBox >> effectShips: aCollection playing: aShip [
 	aShip consumeFuel: positionsToMove
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 HyperJumpBox >> getParsecLenght [
 	^parsecLength.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 HyperJumpBox >> getParsecList [
 	^parsecList 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HyperJumpBox >> initializeInPlace: aPosition parsecsList: aParsecList withBoardLenght: aBoardLength andParsecLength: aParsecLength [
 	place := aPosition.
 	parsecList := (aParsecList asSortedCollection: [ :a :b | a > b ])
@@ -50,12 +51,12 @@ HyperJumpBox >> initializeInPlace: aPosition parsecsList: aParsecList withBoardL
 	parsecNumber := 0
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 HyperJumpBox >> parsecBoxProportion [
 	^parsecBoxProp .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 HyperJumpBox >> parsecsToMove [
 	parsecNumber := parsecNumber < parsecList size
 		                ifTrue: [ parsecNumber + 1 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #BoardGame,
-	#superclass : #Object,
+	#name : 'BoardGame',
+	#superclass : 'Object',
 	#instVars : [
 		'aCollectionOfShips',
 		'board',
@@ -8,10 +8,11 @@ Class {
 		'laps',
 		'playerTurn'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollectionOfDice andwithNumberOfLaps: numberOfLaps [
 
 	aNumberOfShips < 1 ifTrue: [  Error signal: 'A Board must have at least 1 ship to be created'  ].
@@ -24,7 +25,7 @@ BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollect
 		  andwithNumberOfLaps: numberOfLaps
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BoardGame >> changeTurn: playerTurn [
 |lastPlayer|
 lastPlayer :=aCollectionOfShips size.
@@ -36,12 +37,12 @@ lastPlayer :=aCollectionOfShips size.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoardGame >> getLapsToDo [
 	^laps.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
 
 	| numberOfShips numberOfBoxes maxFuel |
@@ -60,13 +61,13 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 	playerTurn := 1.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoardGame >> passTurn [
 	(aCollectionOfShips at: playerTurn) skipTurn.
 	playerTurn := self changeTurn: playerTurn 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoardGame >> playTurn [
 
 	| dieResult |
@@ -82,7 +83,7 @@ BoardGame >> playTurn [
 		playerTurn := self changeTurn: playerTurn ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoardGame >> showRanking [
 	| ships sortedShips |
 	ships := aCollectionOfShips.
@@ -91,7 +92,7 @@ BoardGame >> showRanking [
 	^sortedShips collect: [:sortedShip | ships indexOf: sortedShip]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoardGame >> winnerIs [
 	|winner|
 	winner :=aCollectionOfShips at:1.

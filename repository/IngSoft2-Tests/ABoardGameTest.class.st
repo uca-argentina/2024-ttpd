@@ -1,15 +1,16 @@
 Class {
-	#name : #ABoardGameTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'ABoardGameTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [ 
 	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: aMessage ] 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
 
 	| aBoardGame aBoard aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes |
@@ -31,7 +32,7 @@ ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Win
 	self assert: aBoardGame winnerIs equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 
 	| aBoardGame aCollectionOfDice aLoadedDie  boxDistributions anEffectManager boxes aBoard |
@@ -52,7 +53,7 @@ ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 	self assert: aBoardGame getLapsToDo equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWinner [
 
 	| aBoardGame aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes aBoard |
@@ -79,7 +80,7 @@ ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWi
 	self assert: aBoardGame winnerIs equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_07_WhenTheGameIsAskedToChangeTurnThenTheTurnIsIncremented [
 
 	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn boxDistributions anEffectManager boxes |
@@ -104,7 +105,7 @@ ABoardGameTest >> test_07_WhenTheGameIsAskedToChangeTurnThenTheTurnIsIncremented
 	self assert: nextTurn equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 
 	| aBoardGame aCollectionOfDice aLoadedDie expectedRanking ranking boxDistributions anEffectManager boxes aBoard |
@@ -132,7 +133,7 @@ ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 	self assert: aBoardGame showRanking equals: expectedRanking
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_09_ABoardGameWillNotStartWithLessThan1Ship [
 
 	| aCollectionOfDice aDie boxesArray|
@@ -154,7 +155,7 @@ ABoardGameTest >> test_09_ABoardGameWillNotStartWithLessThan1Ship [
 		withMessage: 'A Board must have at least 1 ship to be created'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_10_ABoardGameWillNotStartWithLessThan2Laps [
 
 	| aCollectionOfDice aDie boxesArray|
@@ -176,7 +177,7 @@ ABoardGameTest >> test_10_ABoardGameWillNotStartWithLessThan2Laps [
 		withMessage: 'A Board must have at least 2 laps to be created' 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_11_WhenItIsAPlayerTurnThenPlayerChooseToPlay [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
@@ -200,7 +201,7 @@ ABoardGameTest >> test_11_WhenItIsAPlayerTurnThenPlayerChooseToPlay [
 	self assert: aBoardGame winnerIs equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
