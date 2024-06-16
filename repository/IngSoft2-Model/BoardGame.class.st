@@ -9,7 +9,7 @@ Class {
 		'playerTurn',
 		'aCollectionOfCards'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -50,7 +50,7 @@ BoardGame >> getLapsToDo [
 { #category : #initialization }
 BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
 
-	| numberOfShips numberOfBoxes maxFuel |
+	| numberOfShips numberOfBoxes maxFuel aShip |
 	numberOfShips := aNumberOfShips.
 	numberOfBoxes := aBoard.
 	maxFuel := 0.
@@ -58,13 +58,16 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 	maxFuel := maxFuel * 2.
 	aCollectionOfShips := OrderedCollection new.
 	[ numberOfShips ~= 0 ] whileTrue: [
-		aCollectionOfShips add: (Ship createWithMaxFuel: maxFuel).
+		aShip := Ship createWithMaxFuel: maxFuel.
+		aShip addCard: OverloadCard new.
+		aShip addCard: AccelerationCard new.
+		aCollectionOfShips add: aShip.
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
 	dice := aCollectionOfDice.
 	laps := aNumberOfLaps.
 	playerTurn := 1.
-	aCollectionOfCards:= OrderedCollection new.
+	aCollectionOfCards := OrderedCollection new
 ]
 
 { #category : #'as yet unclassified' }

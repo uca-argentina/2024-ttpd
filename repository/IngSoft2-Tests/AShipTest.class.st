@@ -1,7 +1,7 @@
 Class {
 	#name : #AShipTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #tests }
@@ -458,4 +458,17 @@ AShipTest >> test_33_WhenAshipRunOutOfFuelAndHisAllyToThenBothGoesToPositionOneW
 	
 
 
+]
+
+{ #category : #tests }
+AShipTest >> test_34_WhenAShipCanAddACardToHisColectionOfCards [
+
+	| aShip aCard aCollectionOfCards |
+	aShip := Ship createWithMaxFuel: 5.
+	aCard := AllyCard new.
+	aCollectionOfCards := OrderedCollection new.
+	aCollectionOfCards add: aCard.
+	aShip addCard: aCard.
+
+	self assert: aShip getCards equals: aCollectionOfCards
 ]

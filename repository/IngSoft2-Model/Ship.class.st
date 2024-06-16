@@ -11,7 +11,7 @@ Class {
 		'aCollectionOfCards',
 		'aCollectionOfActiveCards'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -160,10 +160,6 @@ Ship >> intitializeWithMaxFuel: amountMaxFuel [
 	state := Playing new.
 	lastDieResult := 0.
 	aCollectionOfCards :=OrderedCollection new.
-	aCard:= OverloadCard new.
-	anotherCard:=AccelerationCard new.
-	aCollectionOfCards add: aCard.
-	aCollectionOfCards add: anotherCard .
 	aCollectionOfActiveCards:=OrderedCollection new.
 ]
 
