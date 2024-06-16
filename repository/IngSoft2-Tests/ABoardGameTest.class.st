@@ -1,7 +1,7 @@
 Class {
 	#name : #ABoardGameTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #asserting }
@@ -253,11 +253,7 @@ ABoardGameTest >> test_13_WhenABoardGamePlayCardThenTheCardAddedToBoardGame [
 	aBoardGame playTurn.
 	aBoardGame playCard.
 	
-	
-	aCard:=OverloadCard new.
+	self assert: ((aBoardGame getCards at:1) isKindOf: Card ).
 
-	aCollectionOfCards:= OrderedCollection new.
-	aCollectionOfCards add: aCard.
-	self assert: ((aBoardGame getCards at:1) isKindOf: OverloadCard ).
 	
 ]

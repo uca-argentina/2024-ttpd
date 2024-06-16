@@ -50,17 +50,18 @@ BoardGame >> getLapsToDo [
 { #category : #initialization }
 BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
 
-	| numberOfShips numberOfBoxes maxFuel aShip |
+	| numberOfShips numberOfBoxes maxFuel aShip aCardManager|
 	numberOfShips := aNumberOfShips.
 	numberOfBoxes := aBoard.
 	maxFuel := 0.
 	aCollectionOfDice do: [ :die | maxFuel := maxFuel + die maximumValue ].
 	maxFuel := maxFuel * 2.
 	aCollectionOfShips := OrderedCollection new.
+	aCardManager:= CardsManager new.
 	[ numberOfShips ~= 0 ] whileTrue: [
 		aShip := Ship createWithMaxFuel: maxFuel.
-		aShip addCard: OverloadCard new.
-		aShip addCard: AccelerationCard new.
+		aShip addCard: aCardManager createACard.
+		aShip addCard: aCardManager createACard.
 		aCollectionOfShips add: aShip.
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
