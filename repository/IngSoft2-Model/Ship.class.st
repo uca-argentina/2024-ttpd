@@ -81,8 +81,7 @@ Ship >> consumeFuel: amount [
 		ifFalse: [
 			self checkAlly
 				ifTrue: [ self consumeFuelFromAlly: fuel - amount ]
-				ifFalse: [
-					self runOutOfFuel ] ]
+				ifFalse: [ self runOutOfFuel ] ]
 ]
 
 { #category : #'as yet unclassified' }
