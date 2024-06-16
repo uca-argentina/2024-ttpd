@@ -1,10 +1,11 @@
 Class {
-	#name : #AWormHoleBoxTest,
-	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#name : 'AWormHoleBoxTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 AWormHoleBoxTest >> testWhenAWormHoleBoxInPlace1ThenTheEffectsOnReturns1 [
 
 	| aWormHoleBox |
@@ -13,7 +14,7 @@ AWormHoleBoxTest >> testWhenAWormHoleBoxInPlace1ThenTheEffectsOnReturns1 [
 	self assert: aWormHoleBox effectsOn equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 AWormHoleBoxTest >> testWhenAWormHoleBoxIsCretedInPlaceThenAShipCanBeAddedToTheWormHole_03 [
 
 	| aWormholeBox |
@@ -23,7 +24,7 @@ AWormHoleBoxTest >> testWhenAWormHoleBoxIsCretedInPlaceThenAShipCanBeAddedToTheW
 	self assert: aWormholeBox getShips size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 AWormHoleBoxTest >> testWhenAWormHoleBoxIsCretedInPlaceThenAShipCanBeRemovedFromTheWormHoleBox_04 [
 
 	| aWormholeBox aShip |
@@ -35,7 +36,7 @@ AWormHoleBoxTest >> testWhenAWormHoleBoxIsCretedInPlaceThenAShipCanBeRemovedFrom
 	self assert: aWormholeBox getShips size equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 AWormHoleBoxTest >> testWhenAWormHoleKnowsItsDestiny_05 [
 
 	| aWormholeBox anotherWormholeBox |

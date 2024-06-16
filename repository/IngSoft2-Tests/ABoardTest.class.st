@@ -1,15 +1,16 @@
 Class {
-	#name : #ABoardTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'ABoardTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 ABoardTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage [ 
 	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: aMessage ] 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
 
 	| aBoard boxDistributions anEffectManager boxes |
@@ -26,7 +27,7 @@ ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
 	self assert: ((aBoard boxes at: 1) isKindOf: NoEffectBox)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
 	| boxDistributions anEffectManager boxes |
@@ -41,7 +42,7 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 		withMessage: 'A Board must have at least 1 box to be created'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 
 	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
@@ -66,7 +67,7 @@ ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 	self assert: aShip getLaps equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
 
 	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
@@ -90,7 +91,7 @@ ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardTest >> test_20_ABoardCanBeCreatedWithAnArrayOfBoxes [
 
 	| aBoard aBoxesArray|
@@ -103,7 +104,7 @@ ABoardTest >> test_20_ABoardCanBeCreatedWithAnArrayOfBoxes [
 	self assert: aBoard boardSize equals: 4.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardTest >> test_21_ABoardCanBeCreatedWithAnArrayOfBoxesDoneWithDistributions [
 
 	| boxDistributions anEffectManager boxes aBoard |
@@ -119,7 +120,7 @@ ABoardTest >> test_21_ABoardCanBeCreatedWithAnArrayOfBoxesDoneWithDistributions 
 	self assert: aBoard boardSize equals: 50
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ABoardTest >> test_22_ABoardKnowsTheLastBoxThatWasPlayed [
 
 	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |

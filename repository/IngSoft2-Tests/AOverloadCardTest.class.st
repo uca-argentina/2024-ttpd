@@ -1,10 +1,11 @@
 Class {
-	#name : #AOverloadCardTest,
-	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#name : 'AOverloadCardTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 AOverloadCardTest >> test_01_ThePoweMoveOfAOverloadCardIsMinus2 [ 
 | aCard |
 aCard:= OverloadCard new.
@@ -12,7 +13,7 @@ self assert:aCard powerMove equals: -2.
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AOverloadCardTest >> test_02_WhenAOverloadCardIsAplyToAShipThentheCardIsAddedToTheCollectionOfActiveCards [
 | aCard aShip anotherShip aCollectionOfShips aCollectionOfDice aDie |
 aCard:= OverloadCard new.

@@ -1,10 +1,11 @@
 Class {
-	#name : #ACancellationCardTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'ACancellationCardTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 ACancellationCardTest >> test_01_WhenACancellationCardIsApliedThenACardIsRemovedFromACollectionOfActiveCards [
 
 	| aCancellationCard aCard aCollectionOfActiveCards anotherCard |
