@@ -10,12 +10,13 @@ Class {
 		'hyperJumpBoxes',
 		'atomicBombBoxes',
 		'noEffectBoxes',
-		'maxDieResult'
+		'maxDieResult',
+		'lastBoxPlayed'
 	],
 	#classInstVars : [
 		'boxes'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -62,6 +63,11 @@ Board >> checkPositionOf: aShip [
 	aShip movesTo: actualPosition
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> getLastBox [
+	^lastBoxPlayed.
+]
+
 { #category : #initialization }
 Board >> initializeWithBoxesArray: aBoxesArray [ 
 	boxes := aBoxesArray.
@@ -98,6 +104,7 @@ Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDi
 	aBox := boxes at: actualPosition.
 	aShip victory ifTrue: [ ^ self ].
 	aBox effectShips: aCollectionOfShips playing: aShip.
+	lastBoxPlayed := aBox.
 	self checkAfterEffects: aCollectionOfShips.
 	aShip checkIfWin: laps
 ]
