@@ -1,11 +1,10 @@
 Class {
-	#name : 'AnAllyCardTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #AnAllyCardTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 AnAllyCardTest >> test_01_WhenAnAllyCardIsAplyThenBothShipsGetsAnActiveCard [ 
 
 | aCard aShip anotherShip aCollectionOfShips  |
@@ -26,7 +25,7 @@ self assert:((aShip getActiveCards at:1) isKindOf:AllyCard).
 
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 AnAllyCardTest >> test_02_WhenAnAllyCardIsAplyThenBothKnowTheirAlly [
 
 | aCard aShip anotherShip aCollectionOfShips  |

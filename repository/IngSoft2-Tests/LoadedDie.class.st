@@ -1,14 +1,13 @@
 Class {
-	#name : 'LoadedDie',
-	#superclass : 'Object',
+	#name : #LoadedDie,
+	#superclass : #Object,
 	#instVars : [
 		'faces'
 	],
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LoadedDie class >> of: anAmountOfFaces [
 
 	anAmountOfFaces < 3 ifTrue: [
@@ -16,17 +15,17 @@ LoadedDie class >> of: anAmountOfFaces [
 	^ self new initializeOf: anAmountOfFaces
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LoadedDie >> initializeOf: anAmountOfFaces [
 	faces:=  anAmountOfFaces.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LoadedDie >> maximumValue [
 	^faces.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 LoadedDie >> throw [
 
 	^ faces
