@@ -232,7 +232,7 @@ ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 { #category : #tests }
 ABoardGameTest >> test_13_WhenABoardGamePlayCardThenTheCardAddedToBoardGame [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard aCard |
 	boxDistributions := OrderedCollection new.
 	boxDistributions add:
 		(BoxDistribution of: NoEffectBox withDistribution: 100).
@@ -248,10 +248,11 @@ ABoardGameTest >> test_13_WhenABoardGamePlayCardThenTheCardAddedToBoardGame [
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
-
+	aCard := OverloadCard new.
+	(aBoardGame getShipsPlaying at: 1) addCard: aCard.
 	aBoardGame playTurn.
 	aBoardGame playTurn.
-	aBoardGame playCard.
+	aBoardGame playCard: aCard.
 	
 	self assert: ((aBoardGame getCards at:1) isKindOf: Card ).
 
@@ -259,7 +260,7 @@ ABoardGameTest >> test_13_WhenABoardGamePlayCardThenTheCardAddedToBoardGame [
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_14_WhenAnInstantCardIsPlayedByAShipThenItsRemovedFromTheShipHand [
+ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheShipHand [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard aCard |
 	boxDistributions := OrderedCollection new.
@@ -278,7 +279,7 @@ ABoardGameTest >> test_14_WhenAnInstantCardIsPlayedByAShipThenItsRemovedFromTheS
 		              andwithNumberOfLaps: 2.
 	aCard := RepeatCard new.
 	((aBoardGame getShipsPlaying) at: 1)	 addCard: aCard.
-	aBoardGame playInstantCard: 3 from: 1 toShip: 2 inGame: aBoardGame.
+	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
 	
 	self assert: (((aBoardGame getShipsPlaying at: 1) getCards) size = 2).
 

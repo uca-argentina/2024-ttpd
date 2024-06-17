@@ -229,11 +229,8 @@ Ship >> runOutOfFuel [
 ]
 
 { #category : #'as yet unclassified' }
-Ship >> selectCard [
-	| aCard |
-	aCard:= aCollectionOfCards at:1.
-	aCollectionOfCards removeFirst.
-	^aCard.
+Ship >> selectCard: aCard [ 
+	^(aCollectionOfCards detect: [ :each |  each = aCard])
 ]
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #AShipTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #tests }
@@ -485,4 +485,17 @@ AShipTest >> test_35_WhenAShipThrowTheMaxDieResultThenShipWinReward [
 	aDieResult:=	aShip throwDice: aCollectionOfDice.
 	aShip checkReward: aDieResult withMax: 5.
 	self assert: ((aShip getFuel = 4) or: (aShip getMaxFuel =6)).
+]
+
+{ #category : #tests }
+AShipTest >> test_36_Bananna [
+
+	| aShip aCard anotherCard |
+	aShip := Ship createWithMaxFuel: 5.
+
+	aCard := OverloadCard new.
+	anotherCard := AccelerationCard new.
+	aShip addCard: aCard.
+	aShip addCard: anotherCard.
+	self assert: (aShip selectCard: aCard) equals: aCard.
 ]

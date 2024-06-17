@@ -89,16 +89,16 @@ BoardGame >> passTurn [
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playCard [
+BoardGame >> playCard: cardToPlay [
 	| aCard |
-	aCard:= (aCollectionOfShips at: playerTurn) selectCard.
+	aCard:= (aCollectionOfShips at: playerTurn) selectCard: cardToPlay.
 	aCollectionOfCards add:aCard.
 	
 	
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipIndex inGame: aBoardGame [ 
+BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipIndex [
 	| shipPlayingCard |
 	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
 	shipPlayingCard playCard: aCardIndex to: anotherShipIndex playing: self.
