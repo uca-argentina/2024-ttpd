@@ -456,3 +456,33 @@ ABoardGameTest >> test_20_TheGameKnowsTheLastCardBeingPlayed [
 	self assert: ((aBoardGame getLastCard) isKindOf: AllyCard) .
 	
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_21_Banan [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aRedoCard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aPermanentCard := AllyCard new.
+	aRedoCard := RedoCard  new.
+	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
+	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
+	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
+	self assert: ((aBoardGame getShipsPlaying at: 3) getActiveCards size = 1) .
+	
+]

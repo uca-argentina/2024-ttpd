@@ -125,8 +125,22 @@ BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollect
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playRedoCard: anInteger toShipOrCardIndex: anInteger2 [ 
-	self shouldBeImplemented.
+BoardGame >> playRedoCard: aCardIndex fromShip: aShipFromIndex toShipOrCardIndex: toShipOrCardIndex [
+
+	| cardIndex |
+	(aCollectionOfShips at: playerTurn) addCard: lastCard.
+	cardIndex := (aCollectionOfShips at: playerTurn) getCards size.
+	lastCard isPermanent
+		ifTrue: [
+			self
+				playPermanentCard: cardIndex
+				toShipIndex: toShipOrCardIndex
+				inShipCollection: aCollectionOfShips ]
+		ifFalse: [
+			self
+				playInstantCard: cardIndex
+				from: aShipFromIndex
+				toShip: toShipOrCardIndex ]
 ]
 
 { #category : #'as yet unclassified' }
