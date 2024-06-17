@@ -1,11 +1,10 @@
 Class {
-	#name : 'ACardBoxTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #ACardBoxTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 ACardBoxTest >> test_01_WhenACardBoxIsCreatedThenItHasACardManager [
 
 	| aCardManager aCardBox |
@@ -16,7 +15,7 @@ ACardBoxTest >> test_01_WhenACardBoxIsCreatedThenItHasACardManager [
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ACardBoxTest >> test_02_WhenAShipLandsInACardBoxThenACardIsAddedToItsCollectionOfCards [
 
 	| aCardManager aCardBox aShip anotherShip aCollectionOfShips |

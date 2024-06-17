@@ -1,19 +1,18 @@
 Class {
-	#name : 'EffectManager',
-	#superclass : 'Object',
+	#name : #EffectManager,
+	#superclass : #Object,
 	#instVars : [
 		'boxesDistributions'
 	],
-	#category : 'IngSoft2-Model',
-	#package : 'IngSoft2-Model'
+	#category : 'IngSoft2-Model'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 EffectManager class >> with: aBoxDistributionCollection [ 
 	^self new initilizeWith: aBoxDistributionCollection.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 EffectManager >> boxForRandomValue: randomValue cumulativeDistributions: cumulativeDistributions place: aPlace [ 
 	| selectedBox |
         selectedBox := cumulativeDistributions detect: [:each |
@@ -23,7 +22,7 @@ EffectManager >> boxForRandomValue: randomValue cumulativeDistributions: cumulat
   
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 EffectManager >> calculateCumulativeDistributions [
 
 	| cumulativeProbabilities currentSum |
@@ -36,7 +35,7 @@ EffectManager >> calculateCumulativeDistributions [
 	^ cumulativeProbabilities
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 EffectManager >> createFor: anAmountOfBoxes [ 
 	| boxes cumulativeDistributions randomValue |
         boxes := OrderedCollection new: anAmountOfBoxes.
@@ -49,7 +48,7 @@ EffectManager >> createFor: anAmountOfBoxes [
         ^boxes
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 EffectManager >> initilizeWith: aBoxDistributionCollection [ 
 	boxesDistributions := aBoxDistributionCollection.
 ]

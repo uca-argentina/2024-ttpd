@@ -1,11 +1,10 @@
 Class {
-	#name : 'ABoxDistributionTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #ABoxDistributionTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 ABoxDistributionTest >> test_01_ABoxHasAnEffectAndADistributionThenItCanBeReturned [
 
 	| aBoxDistribution |

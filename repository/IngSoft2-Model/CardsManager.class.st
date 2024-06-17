@@ -1,11 +1,10 @@
 Class {
-	#name : 'CardsManager',
-	#superclass : 'Object',
-	#category : 'IngSoft2-Model',
-	#package : 'IngSoft2-Model'
+	#name : #CardsManager,
+	#superclass : #Object,
+	#category : 'IngSoft2-Model'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 CardsManager >> cardsdistribution [
 
 	| cardsDistribution |
@@ -19,7 +18,7 @@ CardsManager >> cardsdistribution [
 	^cardsDistribution.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 CardsManager >> createACard [
 	
 	| aDistributionOfCards randomValue selectedCard |

@@ -1,16 +1,15 @@
 Class {
-	#name : 'ABoxTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #ABoxTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 ABoxTest >> should: aBlockError raise: aClassError withMessage: aMessage [ 
 		self should: aBlockError raise: aClassError withExceptionDo: [ :error | self assert: error messageText equals: aMessage ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ABoxTest >> testWhenABoxAddsAShipThenItCanBeRemoved_07 [
 
 	| aBox aShip |
@@ -22,7 +21,7 @@ ABoxTest >> testWhenABoxAddsAShipThenItCanBeRemoved_07 [
 	self assert: aBox getShips size equals: 0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ABoxTest >> testWhenABoxHasNoEffectOnThenItReturnsNoEffect_08 [
 
 	| aBox |
@@ -31,7 +30,7 @@ ABoxTest >> testWhenABoxHasNoEffectOnThenItReturnsNoEffect_08 [
 	self assert: aBox effectsOn equals: 0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ABoxTest >> testWhenABoxIsCreatedInPlace1ThenPositionIs1_01 [ 
 
 | aBox |
@@ -39,7 +38,7 @@ aBox := Box inPlace: 1.
 self assert: (aBox getPosition) equals: 1.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ABoxTest >> testWhenABoxIsCreatedWithAShipThenBoxHasACollectionOfShips_05 [
 
 	| aBox aShip collectionShips |
@@ -51,7 +50,7 @@ ABoxTest >> testWhenABoxIsCreatedWithAShipThenBoxHasACollectionOfShips_05 [
 	self assert: aBox getShips equals: (OrderedCollection with: aShip)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ABoxTest >> testWhenABoxIsCreatedWithoutAShipThenAShipCanBeAddedToTheBox_06 [
 
 	| aBox |
@@ -61,7 +60,7 @@ ABoxTest >> testWhenABoxIsCreatedWithoutAShipThenAShipCanBeAddedToTheBox_06 [
 	self assert: aBox getShips size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ABoxTest >> testWhenTheBoxIsCreatedInPlaceLessThan1ThenBoxInvalid_04 [
 
 	self

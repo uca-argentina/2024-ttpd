@@ -1,11 +1,10 @@
 Class {
-	#name : 'AnEffectManagerTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #AnEffectManagerTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 AnEffectManagerTest >> test_01_WhenAnEffectManagerHasOnly1DistributionThenItCreatesACollectionOfBoxesWithNoEffect [
 
 	| boxDistributions anEffectManager boxes |
@@ -19,7 +18,7 @@ AnEffectManagerTest >> test_01_WhenAnEffectManagerHasOnly1DistributionThenItCrea
 	self assert: ((boxes at: 2) isKindOf: NoEffectBox)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 AnEffectManagerTest >> test_02_WhenAnEffectManagerHasOnly1DistributionThenItCreatesACollectionOfBoxesWithAtomicBobEffect [
 
 	| boxDistributions anEffectManager boxes|
@@ -32,7 +31,7 @@ AnEffectManagerTest >> test_02_WhenAnEffectManagerHasOnly1DistributionThenItCrea
 	self assert: ((boxes at: 2) isKindOf: AtomicBombBox)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 AnEffectManagerTest >> test_03_WhenAEffectManagerGets2DifferentTypesOfBoxesThenTheBoxesAreCreatedWithOneOfThisTypes [
 
 	| boxDistributions anEffectManager boxes|

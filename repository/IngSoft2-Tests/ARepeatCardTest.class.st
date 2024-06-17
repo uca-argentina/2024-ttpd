@@ -1,11 +1,10 @@
 Class {
-	#name : 'ARepeatCardTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #ARepeatCardTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 ARepeatCardTest >> test_01_WhenARepeatCardAppliesIsPlayedThenABoxEffectsOnAShip [
 
 	| aCard aBox aShip ships |

@@ -1,11 +1,10 @@
 Class {
-	#name : 'ALoadedDieTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #ALoadedDieTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 ALoadedDieTest >> should: aErrorBlock raise: anErrorClass withMessage: anErrorMessage [
 
 	self
@@ -15,7 +14,7 @@ ALoadedDieTest >> should: aErrorBlock raise: anErrorClass withMessage: anErrorMe
 		self assert: error messageText equals: anErrorMessage ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ALoadedDieTest >> testADieCantBeCreatedWithLessThanTwoFaces [
 
 	self
@@ -24,7 +23,7 @@ ALoadedDieTest >> testADieCantBeCreatedWithLessThanTwoFaces [
 		withMessage: 'Faces should be more than 1'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ALoadedDieTest >> testWhenDieHasFiveFacesThenValuesIsFive [
 
 	| aDie |

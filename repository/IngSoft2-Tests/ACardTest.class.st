@@ -1,11 +1,10 @@
 Class {
-	#name : 'ACardTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #ACardTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 ACardTest >> test_01_aCardIsCreated [
 
 
@@ -14,7 +13,7 @@ aCard:= Card new.
 self assert: (aCard isKindOf: Card ).
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 ACardTest >> test_02_aPermanentCardIsCreated [
 
 
@@ -23,7 +22,7 @@ aCard:= PermanentCard new.
 self assert: (aCard isKindOf: PermanentCard ).
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 ACardTest >> test_03_aInstantCardIsCreated [
 
 
@@ -32,7 +31,7 @@ aCard:= InstantCard new.
 self assert: (aCard isKindOf: InstantCard ).
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 ACardTest >> test_04_ACardIsPLayedBySomeone [ 
 	| aCard aShip anotherShip aCollectionOfShips |
 	aCard := Card new.

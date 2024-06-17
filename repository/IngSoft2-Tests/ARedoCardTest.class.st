@@ -1,11 +1,10 @@
 Class {
-	#name : 'ARedoCardTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #ARedoCardTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 ARedoCardTest >> test_01_WhenARedoCardIsActiveThenTheInfoIsSaveInTheCard [
 
 	| aCard aShip anotherShip aCollectionOfShips |

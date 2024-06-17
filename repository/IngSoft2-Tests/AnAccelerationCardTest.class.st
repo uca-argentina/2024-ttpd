@@ -1,18 +1,17 @@
 Class {
-	#name : 'AnAccelerationCardTest',
-	#superclass : 'TestCase',
-	#category : 'IngSoft2-Tests',
-	#package : 'IngSoft2-Tests'
+	#name : #AnAccelerationCardTest,
+	#superclass : #TestCase,
+	#category : 'IngSoft2-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 AnAccelerationCardTest >> test_01_AcellerationCardPowerMoveIs1 [ 
 | aCard |
 aCard:= AccelerationCard new.
 self assert: aCard powerMove equals: 1.
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 AnAccelerationCardTest >> test_02_WhenAnAccelerationCardIsAplyThenAllShipsGetThisCardActive [
 
 | aCard aShip anotherShip aCollectionOfShips  |
