@@ -7,7 +7,8 @@ Class {
 		'dice',
 		'laps',
 		'playerTurn',
-		'aCollectionOfCards'
+		'aCollectionOfCards',
+		'maxDieResult'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -54,6 +55,11 @@ BoardGame >> getLapsToDo [
 ]
 
 { #category : #'as yet unclassified' }
+BoardGame >> getMaxDieResult [
+	^maxDieResult.
+]
+
+{ #category : #'as yet unclassified' }
 BoardGame >> getShipsPlaying [
 	^aCollectionOfShips
 ]
@@ -66,6 +72,7 @@ BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aC
 	numberOfBoxes := aBoard.
 	maxFuel := 0.
 	aCollectionOfDice do: [ :die | maxFuel := maxFuel + die maximumValue ].
+	maxDieResult := maxFuel.
 	maxFuel := maxFuel * 2.
 	aCollectionOfShips := OrderedCollection new.
 	aCardManager:= CardsManager new.
@@ -112,6 +119,7 @@ BoardGame >> playTurn [
 	| dieResult |
 	(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
 		dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
+		(aCollectionOfShips at: playerTurn) checkReward: dieResult withMax: maxDieResult.
 		board
 			players: aCollectionOfShips
 			playerTurn: playerTurn

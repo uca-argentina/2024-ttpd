@@ -315,3 +315,28 @@ ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFro
 	self assert: aBoardGame getCards size = 0.
 	
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_16_ABoardGameKnowsItMaxDieResult [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+
+	self assert: aBoardGame getMaxDieResult equals: 90.
+	
+]
