@@ -8,8 +8,8 @@ Class {
 AShipTest >> testShipIsCreatedWithAPosition [
 
 	| aShip |
-	aShip := Ship create.
-	self assert: (aShip moves: 1) equals: 1
+	aShip := Ship createWithMaxFuel: 1000.
+	self assert: (aShip moves: 1) equals: 2
 ]
 
 { #category : #tests }
@@ -21,10 +21,10 @@ AShipTest >> testWhen2LoadedDieOf3And4FacesAreThrownThenThePositionOfTheShipIsUp
 	anotherDie := LoadedDie of: 4.
 	aCollectionOfDice add: aDie.
 	aCollectionOfDice add: anotherDie.
-	aShip := Ship create.
+	aShip := Ship createWithMaxFuel: 1000.
 	positionsToMove := aShip throwDice: aCollectionOfDice.
 	aShip moves: positionsToMove.
-	self assert: aShip getPosition = 7
+	self assert: aShip getPosition equals: 8
 ]
 
 { #category : #tests }
@@ -47,10 +47,10 @@ AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdat
 	aCollectionOfDice := OrderedCollection new.
 	aDie := LoadedDie of: 3.
 	aCollectionOfDice add: aDie.
-	aShip := Ship create.
+	aShip := Ship createWithMaxFuel: 1000.
 	positionsToMove := aShip throwDice: aCollectionOfDice.
 	aShip moves: positionsToMove.
-	self assert: aShip getPosition = 3
+	self assert: aShip getPosition equals: 4
 ]
 
 { #category : #tests }
@@ -387,7 +387,6 @@ AShipTest >> test_30_WhenAshipHasActiveOverloadCardThenShipIsAffected [
 	aCard:= OverloadCard new.
 	aCard aplyEffectFrom: 1 to: 2  withShips: aCollectionOfShips .
 	anotherShip moves: 5.
-	anotherShip browseActiveCards.
 	
 
 	self assert: anotherShip getPosition equals: 4.
@@ -405,7 +404,6 @@ AShipTest >> test_31_WhenAShipHasActiveAccelerationCardThenAllShipsAffected [
 	aCard:= AccelerationCard new.
 	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
 	anotherShip moves: 8.
-	anotherShip browseActiveCards.
 
 
 	self assert: anotherShip getPosition equals: 10.
@@ -413,7 +411,6 @@ AShipTest >> test_31_WhenAShipHasActiveAccelerationCardThenAllShipsAffected [
 	self assert: aShip getPosition equals: 1.
 
 	aShip moves: 7.
-	aShip browseActiveCards.
 	self assert: aShip  getPosition equals:9.
 ]
 
@@ -512,4 +509,20 @@ AShipTest >> test_37_WhenAShipWantsToRemoveACardFromItsHandThenTheCardIsRemoved 
 	aShip addCard: anotherCard.
 	aShip removeCardFromHand: aCard.
 	self assert: (aShip getCards size) equals: 1.
+]
+
+{ #category : #tests }
+AShipTest >> test_38_banana [
+
+	| aShip aCard anotherCard |
+	aShip := Ship createWithMaxFuel: 100.
+	aCard := OverloadCard new.
+	anotherCard := AccelerationCard new.
+	aShip addCard: aCard.
+	aShip addCard: anotherCard.
+	aShip addActiveCards: anotherCard. 
+	aShip moves: 4.
+	aShip consumeFuel: 4.
+	self assert: aShip getPosition equals: 6.
+
 ]

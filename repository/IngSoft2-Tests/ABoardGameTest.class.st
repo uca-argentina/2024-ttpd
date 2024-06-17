@@ -340,3 +340,33 @@ ABoardGameTest >> test_16_ABoardGameKnowsItMaxDieResult [
 	self assert: aBoardGame getMaxDieResult equals: 90.
 	
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_17_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMovesAffected [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aPermanentCard := AccelerationCard new.
+	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
+	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	(aBoardGame getShipsPlaying at: 1) moves: 89.
+	(aBoardGame getShipsPlaying at: 2) moves: 89.
+	self assert: ((aBoardGame getShipsPlaying at: 1) getPosition) equals: 91.
+	self assert: ((aBoardGame getShipsPlaying at: 2) getPosition) equals: 91.
+	
+]

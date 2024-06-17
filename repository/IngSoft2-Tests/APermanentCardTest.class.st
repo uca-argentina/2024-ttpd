@@ -34,7 +34,7 @@ APermanentCardTest >> test_03_APermamentCardHasPowerMoveThenItReturnsZero [
 ]
 
 { #category : #running }
-APermanentCardTest >> test_04_banann [
+APermanentCardTest >> test_04_APermanentCardCannotBePlayedAsAnIsntantCard [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard |
 	boxDistributions := OrderedCollection new.

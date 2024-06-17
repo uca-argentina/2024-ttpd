@@ -48,11 +48,6 @@ Ship >> addCard: aCard [
 ]
 
 { #category : #'as yet unclassified' }
-Ship >> browseActiveCards [
-	aCollectionOfActiveCards do:[:aCard|  self moves: (aCard powerMove)]. 
-]
-
-{ #category : #'as yet unclassified' }
 Ship >> changeStateToPlay [
 	state := Playing new.
 ]
@@ -189,7 +184,11 @@ Ship >> isCursed [
 
 { #category : #'as yet unclassified' }
 Ship >> moves: aNumber [
-	position := position + aNumber.
+	| pos |
+	pos := 0.
+	aCollectionOfActiveCards isEmpty ifFalse: [  
+	aCollectionOfActiveCards do: [ :card | pos := pos + card powerMove]].
+	position := position + aNumber + pos.
 	^(position).
 ]
 
@@ -205,6 +204,14 @@ Ship >> playCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [
 	aCard canPlayInstantCard.
 	aCard affect: aShipOrCardIndex in: aBoardGame.
 	aCollectionOfCards remove: aCard.
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> playPermanentCard: aCardIndex to: aShipIndex playing: ships [ 
+	| aCard shipAffected |
+	aCard := aCollectionOfCards at: aCardIndex.
+	shipAffected := ships at: aShipIndex.
+	aCard aplyEffectFrom: self to: shipAffected withShips: ships
 ]
 
 { #category : #'as yet unclassified' }

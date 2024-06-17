@@ -114,6 +114,11 @@ BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipInd
 ]
 
 { #category : #'as yet unclassified' }
+BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollection: shipsPlaying [ 
+	(aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
+]
+
+{ #category : #'as yet unclassified' }
 BoardGame >> playTurn [
 
 	| dieResult |
