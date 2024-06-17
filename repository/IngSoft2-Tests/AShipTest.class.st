@@ -488,7 +488,7 @@ AShipTest >> test_35_WhenAShipThrowTheMaxDieResultThenShipWinReward [
 ]
 
 { #category : #tests }
-AShipTest >> test_36_Bananna [
+AShipTest >> test_36_WhenAShipSelectsACardThenTheCardIsSelected [
 
 	| aShip aCard anotherCard |
 	aShip := Ship createWithMaxFuel: 5.
@@ -497,5 +497,19 @@ AShipTest >> test_36_Bananna [
 	anotherCard := AccelerationCard new.
 	aShip addCard: aCard.
 	aShip addCard: anotherCard.
-	self assert: (aShip selectCard: aCard) equals: aCard.
+	self assert: (aShip selectCard:  aCard) equals: aCard.
+]
+
+{ #category : #tests }
+AShipTest >> test_37_WhenAShipWantsToRemoveACardFromItsHandThenTheCardIsRemoved [
+
+	| aShip aCard anotherCard |
+	aShip := Ship createWithMaxFuel: 5.
+
+	aCard := OverloadCard new.
+	anotherCard := AccelerationCard new.
+	aShip addCard: aCard.
+	aShip addCard: anotherCard.
+	aShip removeCardFromHand: aCard.
+	self assert: (aShip getCards size) equals: 1.
 ]

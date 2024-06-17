@@ -4,6 +4,15 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
+{ #category : #'as yet unclassified' }
+CancellationCard >> affect: aCardIndex in: aBoardGame [ 
+	| aCard activeCardsInGame collectionOfShips |
+	activeCardsInGame := aBoardGame getCards.
+	aCard := activeCardsInGame at: aCardIndex.
+	collectionOfShips := aBoardGame getShipsPlaying.
+	self removeCard: aCard from: activeCardsInGame toShips: collectionOfShips
+]
+
 { #category : #removing }
 CancellationCard >> removeCard: aCard from: aCollectionOfActiveCards [ 
 	aCollectionOfActiveCards remove: aCard
@@ -13,5 +22,5 @@ CancellationCard >> removeCard: aCard from: aCollectionOfActiveCards [
 CancellationCard >> removeCard: aCard from: activeCardsInGame toShips: collectionOfShips [
 
 	activeCardsInGame remove: aCard.
-	collectionOfShips do: [ :ship | ship removeCard: aCard].
+	collectionOfShips do: [ :ship | ship removeActiveCard: aCard].
 ]

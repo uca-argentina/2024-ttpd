@@ -199,10 +199,10 @@ Ship >> movesTo: aPosition [
 ]
 
 { #category : #'as yet unclassified' }
-Ship >> playCard: aCardIndex to: aShipIndex playing: aBoardGame [ 
+Ship >> playCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [ 
 	| aCard |
 	aCard := aCollectionOfCards at: aCardIndex.
-	aCard affect: aShipIndex in: aBoardGame.
+	aCard affect: aShipOrCardIndex in: aBoardGame.
 	aCollectionOfCards remove: aCard.
 ]
 
@@ -212,8 +212,17 @@ Ship >> reduceFuel [
 ]
 
 { #category : #removing }
-Ship >> removeCard: aCard [ 
-	aCollectionOfActiveCards remove: aCard.
+Ship >> removeActiveCard: aCard [ 
+	| cardToRemove |
+	cardToRemove := aCollectionOfActiveCards detect: [ :each | each = aCard] ifNone: [nil].
+	cardToRemove = nil ifFalse: [ aCollectionOfActiveCards remove: cardToRemove.]
+]
+
+{ #category : #removing }
+Ship >> removeCardFromHand: aCard [ 
+	| cardToRemove |
+	cardToRemove := aCollectionOfCards detect: [ :each | each = aCard] ifNone: [nil].
+	cardToRemove = nil ifFalse: [ aCollectionOfCards remove: cardToRemove.]
 ]
 
 { #category : #'as yet unclassified' }

@@ -92,6 +92,8 @@ BoardGame >> passTurn [
 BoardGame >> playCard: cardToPlay [
 	| aCard |
 	aCard:= (aCollectionOfShips at: playerTurn) selectCard: cardToPlay.
+	(aCollectionOfShips at: playerTurn) addActiveCards: aCard.
+	(aCollectionOfShips at: playerTurn) removeCardFromHand: aCard.
 	aCollectionOfCards add:aCard.
 	
 	
