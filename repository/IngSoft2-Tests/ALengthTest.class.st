@@ -21,3 +21,11 @@ aParsec := Parsec withValue: 4.
 aLightYear := LightYear withValue: 10.
 self assert: aParsec > aLightYear.
 ]
+
+{ #category : #tests }
+ALengthTest >> test_03_ALenghtObjectCanConvertToParsec [
+
+| aLenght |
+aLenght := Lenght withValue: 4.
+self assert: aLenght convertToParsec equals: 4.
+]
