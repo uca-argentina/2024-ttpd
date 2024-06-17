@@ -31,3 +31,17 @@ ACardTest >> test_03_aInstantCardIsCreated [
 aCard:= InstantCard new.
 self assert: (aCard isKindOf: InstantCard ).
 ]
+
+{ #category : 'running' }
+ACardTest >> test_04_ACardIsPLayedBySomeone [ 
+	| aCard aShip anotherShip aCollectionOfShips |
+	aCard := Card new.
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips:=OrderedCollection new.
+	aCollectionOfShips add:aShip.
+	aCollectionOfShips add:anotherShip.	
+
+	aCard playedBy: aShip.
+	self assert: (aCard getPlayBy isKindOf: Ship).
+]

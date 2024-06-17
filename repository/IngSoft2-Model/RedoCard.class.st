@@ -1,6 +1,17 @@
 Class {
 	#name : 'RedoCard',
-	#superclass : 'InstantCard',
+	#superclass : 'Card',
+	#instVars : [
+		'theThing',
+		'playedBy',
+		'affected'
+	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
+
+{ #category : 'as yet unclassified' }
+RedoCard >> playBy: aShip to: something withShips: aCollection [ 
+	player:=aShip.
+	affected:=something.
+]
