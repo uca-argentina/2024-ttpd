@@ -50,12 +50,12 @@ Board >> checkPositionOf: aShip [
 	| actualPosition |
 	actualPosition := aShip getPosition.
 
-	"Si la posición es mayor que el tamaño del tablero, ajustarla"
+	
 	actualPosition > boxes size ifTrue: [
 		actualPosition := actualPosition - boxes size.
-		aShip updateLaps "Actualizar vueltas de la nave" ].
+		aShip updateLaps ].
 
-	"Si la posición es menor que 1 y la nave está en la vuelta 2 o más, ajustarla"
+	
 	actualPosition < 1 ifTrue: [
 		actualPosition := aShip getLaps >= 2
 			                  ifTrue: [ boxes size + actualPosition ]
