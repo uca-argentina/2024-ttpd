@@ -116,7 +116,7 @@ BoardGame >> playCard: cardToPlay [
 BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipIndex [
 	| shipPlayingCard |
 	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
-	lastCard := shipPlayingCard playCard: aCardIndex to: anotherShipIndex playing: self.
+	lastCard := shipPlayingCard playInstantCard: aCardIndex to: anotherShipIndex playing: self.
 ]
 
 { #category : #'as yet unclassified' }
@@ -125,7 +125,7 @@ BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollect
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playRedoCard: anInteger toShipOrCardIndex: anInteger2 playingGame: aBoardGame [ 
+BoardGame >> playRedoCard: anInteger toShipOrCardIndex: anInteger2 [ 
 	self shouldBeImplemented.
 ]
 

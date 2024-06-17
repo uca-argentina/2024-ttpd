@@ -61,3 +61,11 @@ APermanentCardTest >> test_04_APermanentCardCannotBePlayedAsAnIsntantCard [
 		raise: Error
 		withMessage: 'You cant play a Permanent Card in any turn'
 ]
+
+{ #category : #running }
+APermanentCardTest >> test_05_WhenAPermanentCardIsAskedIfIsPermanentThenTheAnswerIsTrue [
+
+	| aCard |
+	aCard := PermanentCard new.
+	self assert: aCard isPermanent.
+]

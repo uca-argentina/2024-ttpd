@@ -8,3 +8,8 @@ Class {
 InstantCard >> canPlayInstantCard [
 	^true.
 ]
+
+{ #category : #testing }
+InstantCard >> isPermanent [
+	^false
+]

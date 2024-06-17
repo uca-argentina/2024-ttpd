@@ -198,7 +198,7 @@ Ship >> movesTo: aPosition [
 ]
 
 { #category : #'as yet unclassified' }
-Ship >> playCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [ 
+Ship >> playInstantCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [ 
 	| aCard |
 	aCard := aCollectionOfCards at: aCardIndex.
 	aCard canPlayInstantCard.

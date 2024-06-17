@@ -10,6 +10,11 @@ PermanentCard >> canPlayInstantCard [
 
 ]
 
+{ #category : #testing }
+PermanentCard >> isPermanent [
+	^true
+]
+
 { #category : #'as yet unclassified' }
 PermanentCard >> powerMove [ 
 ^0.
