@@ -5,33 +5,11 @@ Class {
 }
 
 { #category : #running }
-AParsectTest >> test_01_AParsecLenghtCanBeSet [
-
-| aParsec |
-aParsec:=Parsec new.
-aParsec lenght:20.
-
-self assert:aParsec getLeght equals:20.
-
-]
-
-{ #category : #running }
 AParsectTest >> test_02_ParsecNotAffectedByConvertToParsec [ 
 
 | aParsec |
 aParsec:=Parsec withValue: 4.
 
 self assert:aParsec convertToParsec equals: 4.
-
-]
-
-{ #category : #running }
-AParsectTest >> test_03_PasecLenghtConvertToLightYearLenght [ 
-
-| aParsec |
-aParsec:=Parsec new.
-aParsec lenght:20.
-
-self assert:aParsec convertToLightYear equals:60.
 
 ]

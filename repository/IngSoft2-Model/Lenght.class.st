@@ -18,26 +18,16 @@ Lenght class >> withValue: aValue [
 
 { #category : #comparing }
 Lenght >> > aParsec [ 
-	^self getValue > aParsec getValue.
+	^self convertToParsec > aParsec convertToParsec.
 ]
 
 { #category : #'as yet unclassified' }
-Lenght >> getLeght [
-	^lenght 
-]
-
-{ #category : #tests }
-Lenght >> getValue [
-	^value.
+Lenght >> convertToParsec [
+	^value
 ]
 
 { #category : #'as yet unclassified' }
 Lenght >> initilizeWithValue: aValue [
 	
 	value := aValue.
-]
-
-{ #category : #'as yet unclassified' }
-Lenght >> lenght: aLenght [
-	lenght:=aLenght.
 ]

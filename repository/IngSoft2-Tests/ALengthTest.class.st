@@ -12,3 +12,12 @@ aParsec := Parsec withValue: 4.
 anotherParsec := Parsec withValue: 3.
 self assert: aParsec > anotherParsec.
 ]
+
+{ #category : #tests }
+ALengthTest >> test_02_WhenAParsecHasLessValueButTheConvertionIsBiggerThenTheParsecIsBetterThanTheLightYear [
+
+| aParsec aLightYear |
+aParsec := Parsec withValue: 4.
+aLightYear := LightYear withValue: 10.
+self assert: aParsec > aLightYear.
+]

@@ -8,9 +8,13 @@ Class {
 AHyperJumpBoxTest >> testAHyperJumbBoxHasAParsec_BoxProportion_02 [
 
 	| aHyperJump aParsecsList |
-	aParsecsList := #(5 7 2).
-	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList withBoardLenght: 100 andParsecLength: 10.
-	self assert: aHyperJump parsecBoxProportion equals: 10.
+	aParsecsList := #( 5 7 2 ).
+	aHyperJump := HyperJumpBox inPlace: 3.
+	aHyperJump
+		addParsecsList: aParsecsList
+		withBoardLenght: 100
+		andParsecLength: 10.
+	self assert: aHyperJump parsecBoxProportion equals: 10
 ]
 
 { #category : #tests }
@@ -18,10 +22,12 @@ AHyperJumpBoxTest >> testAHyperJumpBoxHasAParsecList_07 [
 
 	| aHyperJump aParsecsList expectedList |
 	aParsecsList := #( 5 7 2 ).
-	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList
+	aHyperJump := HyperJumpBox inPlace: 3.
+	aHyperJump
+		addParsecsList: aParsecsList
 		withBoardLenght: 100
 		andParsecLength: 100.
-	expectedList := #(7 5 2).
+	expectedList := #( 7 5 2 ).
 
 	self assert: aHyperJump getParsecList equals: expectedList
 ]
@@ -31,10 +37,12 @@ AHyperJumpBoxTest >> testWhenAHyperJumpBoxIsCreatedThenAlInformacionAboutParsecs
 
 	| aHyperJump aParsecsList |
 	aParsecsList := #( 5 7 2 ).
-	aHyperJump := HyperJumpBox inPlace: 3 parsecsList: aParsecsList
+	aHyperJump := HyperJumpBox inPlace: 3.
+	aHyperJump
+		addParsecsList: aParsecsList
 		withBoardLenght: 100
 		andParsecLength: 10.
-	self assert: aHyperJump getParsecLenght > 0.
+	self assert: aHyperJump getParsecLenght > 0
 ]
 
 { #category : #tests }
