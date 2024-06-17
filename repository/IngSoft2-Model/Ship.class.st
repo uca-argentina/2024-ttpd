@@ -202,6 +202,7 @@ Ship >> movesTo: aPosition [
 Ship >> playCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [ 
 	| aCard |
 	aCard := aCollectionOfCards at: aCardIndex.
+	aCard canPlayInstantCard.
 	aCard affect: aShipOrCardIndex in: aBoardGame.
 	aCollectionOfCards remove: aCard.
 ]
