@@ -204,14 +204,18 @@ Ship >> playCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [
 	aCard canPlayInstantCard.
 	aCard affect: aShipOrCardIndex in: aBoardGame.
 	aCollectionOfCards remove: aCard.
+	^aCard.
 ]
 
 { #category : #'as yet unclassified' }
 Ship >> playPermanentCard: aCardIndex to: aShipIndex playing: ships [ 
-	| aCard shipAffected |
+	| aCard shipAffected cardToRemove |
 	aCard := aCollectionOfCards at: aCardIndex.
 	shipAffected := ships at: aShipIndex.
-	aCard aplyEffectFrom: self to: shipAffected withShips: ships
+	aCard aplyEffectFrom: self to: shipAffected withShips: ships.
+	cardToRemove := aCollectionOfCards at: aCardIndex.
+	aCollectionOfCards remove: cardToRemove.
+	^aCard
 ]
 
 { #category : #'as yet unclassified' }

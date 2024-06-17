@@ -8,7 +8,8 @@ Class {
 		'laps',
 		'playerTurn',
 		'aCollectionOfCards',
-		'maxDieResult'
+		'maxDieResult',
+		'lastCard'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -52,6 +53,11 @@ BoardGame >> getCards [
 { #category : #'as yet unclassified' }
 BoardGame >> getLapsToDo [
 	^laps.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> getLastCard [
+	^lastCard.
 ]
 
 { #category : #'as yet unclassified' }
@@ -110,12 +116,17 @@ BoardGame >> playCard: cardToPlay [
 BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipIndex [
 	| shipPlayingCard |
 	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
-	shipPlayingCard playCard: aCardIndex to: anotherShipIndex playing: self.
+	lastCard := shipPlayingCard playCard: aCardIndex to: anotherShipIndex playing: self.
 ]
 
 { #category : #'as yet unclassified' }
 BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollection: shipsPlaying [ 
-	(aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
+	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> playRedoCard: anInteger toShipOrCardIndex: anInteger2 playingGame: aBoardGame [ 
+	self shouldBeImplemented.
 ]
 
 { #category : #'as yet unclassified' }
