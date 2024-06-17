@@ -1,7 +1,7 @@
 Class {
 	#name : #AParsectTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #running }
@@ -19,10 +19,9 @@ self assert:aParsec getLeght equals:20.
 AParsectTest >> test_02_ParsecNotAffectedByConvertToParsec [ 
 
 | aParsec |
-aParsec:=Parsec new.
-aParsec lenght:20.
+aParsec:=Parsec withValue: 4.
 
-self assert:aParsec convertToParsec equals:20.
+self assert:aParsec convertToParsec equals: 4.
 
 ]
 

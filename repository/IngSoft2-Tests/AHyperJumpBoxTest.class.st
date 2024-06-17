@@ -1,7 +1,7 @@
 Class {
 	#name : #AHyperJumpBoxTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #tests }
@@ -95,4 +95,17 @@ AHyperJumpBoxTest >> testWhenNumberOfParsecsIsBiggerThanBoardLengthThenPositions
 	aShip consumeFuel: 2.
 	aHyperJump effectShips: aCollectionOfShips playing: aShip.
 	self assert: aShip getPosition equals: 4.
+]
+
+{ #category : #tests }
+AHyperJumpBoxTest >> test_09_banana [
+
+	| aHyperJump aParsecsList |
+	aParsecsList := #( 5 7 2 ).
+	aHyperJump := HyperJumpBox inPlace: 3.
+	aHyperJump
+		addParsecsList: aParsecsList
+		withBoardLenght: 100
+		andParsecLength: 10.
+	self assert: aHyperJump getParsecLenght > 0
 ]

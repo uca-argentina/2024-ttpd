@@ -1,7 +1,7 @@
 Class {
 	#name : #ALightYearTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #running }
@@ -18,9 +18,8 @@ self assert: aLightYear getLeght equals:20.
 ALightYearTest >> test_02_LighYearConvertToParsecLenght [
 
 | aLightYear |
-aLightYear :=LightYear new.
-aLightYear lenght:20.
+aLightYear :=LightYear withValue: 5.
 
-self assert: aLightYear convertToParsec equals:(20/3).
+self assert: aLightYear convertToParsec equals:(5/3).
 
 ]
