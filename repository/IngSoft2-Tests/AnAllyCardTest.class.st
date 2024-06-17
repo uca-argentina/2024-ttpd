@@ -1,7 +1,7 @@
 Class {
 	#name : #AnAllyCardTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #running }
@@ -15,7 +15,7 @@ AnAllyCardTest >> test_01_WhenAnAllyCardIsAplyThenBothShipsGetsAnActiveCard [
 	aCollectionOfShips add:aShip.
 	aCollectionOfShips add:anotherShip.	
 
-	aCard aplyEffectFrom: 1 to: 2 withShips: aCollectionOfShips.
+	aCard aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips.
 		
 	
 self assert:((anotherShip getActiveCards at:1) isKindOf:AllyCard).
@@ -36,7 +36,7 @@ AnAllyCardTest >> test_02_WhenAnAllyCardIsAplyThenBothKnowTheirAlly [
 	aCollectionOfShips add:aShip.
 	aCollectionOfShips add:anotherShip.	
 
-	aCard aplyEffectFrom: 1 to: 2 withShips: aCollectionOfShips.
+	aCard aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips.
 		
 	
 self assert:((anotherShip getActiveCards at:1) getAlly isKindOf: Ship ).

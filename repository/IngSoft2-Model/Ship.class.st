@@ -94,7 +94,7 @@ Ship >> consumeFuelFromAlly: anAmount [
 	| anAlly anotherFuel |
 	anotherFuel:= anAmount *(-1).
 	anAlly:= self MyFirstAlly.
-	(anAlly getFuel -fuel > 0) ifTrue: [ anAlly consumeFuel: anotherFuel. fuel:=0] ifFalse: [ 
+	((anAlly getFuel) -anotherFuel > 0) ifTrue: [ anAlly consumeFuel: anotherFuel. fuel:=0] ifFalse: [ 
 			self runOutOfFuel.
 			anAlly runOutOfFuel.
 		 ]

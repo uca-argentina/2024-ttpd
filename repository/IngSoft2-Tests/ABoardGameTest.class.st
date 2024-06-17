@@ -370,3 +370,62 @@ ABoardGameTest >> test_17_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMoves
 	self assert: ((aBoardGame getShipsPlaying at: 2) getPosition) equals: 91.
 	
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_18_WhenAOverloadCardIsPlayedThenAllShipsGetTheirMovesAffected [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aPermanentCard := OverloadCard new.
+	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
+	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	(aBoardGame getShipsPlaying at: 1) moves: 89.
+	(aBoardGame getShipsPlaying at: 2) moves: 89.
+	self assert: ((aBoardGame getShipsPlaying at: 2) getPosition) equals: 88.
+	
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_19_WhenAAllyCardIsPlayedThenAllShipsGetTheirMovesAffected [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aPermanentCard := AllyCard new.
+	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
+	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	(aBoardGame getShipsPlaying at: 1) moves: 200.
+	(aBoardGame getShipsPlaying at: 1) consumeFuel: 200.
+	self assert: ((aBoardGame getShipsPlaying at: 1) getPosition) equals: 201.
+	self assert: ((aBoardGame getShipsPlaying at: 2) getFuel) equals: 160.
+	
+]

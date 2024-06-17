@@ -1,7 +1,7 @@
 Class {
 	#name : #AOverloadCardTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #running }
@@ -25,7 +25,7 @@ aCard:= OverloadCard new.
 	aCollectionOfDice := OrderedCollection new.
 	aDie := LoadedDie of: 3.
 	aCollectionOfDice add: aDie.
-	aCard aplyEffectFrom: 1 to: 2 withShips: aCollectionOfShips.
+	aCard aplyEffectFrom: 1 to: anotherShip withShips: aCollectionOfShips.
 
 	
 self assert:((anotherShip getActiveCards at:1) isKindOf:OverloadCard).

@@ -385,7 +385,7 @@ AShipTest >> test_30_WhenAshipHasActiveOverloadCardThenShipIsAffected [
 	aCollectionOfShips add:aShip.
 	aCollectionOfShips add:anotherShip.
 	aCard:= OverloadCard new.
-	aCard aplyEffectFrom: 1 to: 2  withShips: aCollectionOfShips .
+	aCard aplyEffectFrom: 1 to: anotherShip  withShips: aCollectionOfShips .
 	anotherShip moves: 5.
 	
 
@@ -425,7 +425,7 @@ AShipTest >> test_32_WhenAShipRunOutOfFuelAndHasAnAllyThenAllyShareFuel [
 	aCollectionOfShips add:anotherShip.
 	aCard:= AllyCard new.
 	
-	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
+	aCard aplyEffectFrom: aShip to:  anotherShip withShips: aCollectionOfShips .
 	aShip consumeFuel: 15.
 	self assert: anotherShip getFuel equals: 990.
 	self assert: aShip getFuel equals: 0.
@@ -444,7 +444,7 @@ AShipTest >> test_33_WhenAshipRunOutOfFuelAndHisAllyToThenBothGoesToPositionOneW
 	aCollectionOfShips add:anotherShip.
 	aCard:= AllyCard new.
 	
-	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
+	aCard aplyEffectFrom: aShip to:  anotherShip withShips: aCollectionOfShips .
 
 	anotherShip consumeFuel: 15.
 	aShip consumeFuel: 15.	
@@ -509,20 +509,4 @@ AShipTest >> test_37_WhenAShipWantsToRemoveACardFromItsHandThenTheCardIsRemoved 
 	aShip addCard: anotherCard.
 	aShip removeCardFromHand: aCard.
 	self assert: (aShip getCards size) equals: 1.
-]
-
-{ #category : #tests }
-AShipTest >> test_38_banana [
-
-	| aShip aCard anotherCard |
-	aShip := Ship createWithMaxFuel: 100.
-	aCard := OverloadCard new.
-	anotherCard := AccelerationCard new.
-	aShip addCard: aCard.
-	aShip addCard: anotherCard.
-	aShip addActiveCards: anotherCard. 
-	aShip moves: 4.
-	aShip consumeFuel: 4.
-	self assert: aShip getPosition equals: 6.
-
 ]

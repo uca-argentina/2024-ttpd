@@ -1,13 +1,13 @@
 Class {
 	#name : #OverloadCard,
 	#superclass : #PermanentCard,
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }
 OverloadCard >> aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips [
 	
-	(aCollectionOfShips at:anotherShip) addActiveCards: OverloadCard new.
+	anotherShip addActiveCards: OverloadCard new.
 ]
 
 { #category : #'as yet unclassified' }

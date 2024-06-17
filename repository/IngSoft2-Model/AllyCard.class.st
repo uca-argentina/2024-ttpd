@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'aCollectionOfAlly'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'instance creation' }
@@ -18,14 +18,14 @@ AllyCard class >> with: aShip [
 ]
 
 { #category : #'as yet unclassified' }
-AllyCard >> aplyEffectFrom: aShipIndex to: anotherShipIndex withShips: aCollectionOfShips [
+AllyCard >> aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips [
 
 	| card1 card2 |
-	card1 := AllyCard with: (aCollectionOfShips at: aShipIndex).
-	card2 := AllyCard with: (aCollectionOfShips at: anotherShipIndex).
+	card1 := AllyCard with: aShip.
+	card2 := AllyCard with: anotherShip.
 
-	(aCollectionOfShips at: aShipIndex) addActiveCards: card2.
-	(aCollectionOfShips at: anotherShipIndex) addActiveCards: card1
+	aShip addActiveCards: card2.
+	anotherShip addActiveCards: card1
 ]
 
 { #category : #'as yet unclassified' }
