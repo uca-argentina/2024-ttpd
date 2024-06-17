@@ -14,11 +14,6 @@ CancellationCard >> affect: aCardIndex in: aBoardGame [
 ]
 
 { #category : #removing }
-CancellationCard >> removeCard: aCard from: aCollectionOfActiveCards [ 
-	aCollectionOfActiveCards remove: aCard
-]
-
-{ #category : #removing }
 CancellationCard >> removeCard: aCard from: activeCardsInGame toShips: collectionOfShips [
 
 	activeCardsInGame remove: aCard.
