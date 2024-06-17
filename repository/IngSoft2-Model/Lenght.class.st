@@ -16,9 +16,19 @@ Lenght class >> withValue: aValue [
 	^self new initilizeWithValue: aValue.
 ]
 
+{ #category : #comparing }
+Lenght >> > aParsec [ 
+	^self getValue > aParsec getValue.
+]
+
 { #category : #'as yet unclassified' }
 Lenght >> getLeght [
 	^lenght 
+]
+
+{ #category : #tests }
+Lenght >> getValue [
+	^value.
 ]
 
 { #category : #'as yet unclassified' }

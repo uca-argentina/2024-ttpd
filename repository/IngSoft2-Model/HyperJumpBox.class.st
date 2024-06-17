@@ -30,7 +30,7 @@ HyperJumpBox >> addParsecsList: aParsecList withBoardLenght: aBoardLength andPar
 HyperJumpBox >> effectShips: aCollection playing: aShip [
 
 	| parsecs positionsToMove |
-	parsecs := parsecList at: self parsecsToMove.
+	parsecs := (parsecList at: self parsecsToMove) convertToParsec.
 	positionsToMove := parsecs * parsecBoxProp.
 	positionsToMove := positionsToMove > 0.5
 		                   ifTrue: [ positionsToMove ceiling ]
