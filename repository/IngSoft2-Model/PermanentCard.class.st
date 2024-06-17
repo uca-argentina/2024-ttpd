@@ -10,12 +10,6 @@ PermanentCard >> canPlayInstantCard [
 
 ]
 
-{ #category : #testing }
-PermanentCard >> canPlayInstantCard: aCard [
-	Error signal: 'You cant play a Permanent Card in any turn'.
-
-]
-
 { #category : #'as yet unclassified' }
 PermanentCard >> powerMove [ 
 ^0.
