@@ -56,11 +56,6 @@ HyperJumpBox >> initializeInPlace: aPlace [
 ]
 
 { #category : #'as yet unclassified' }
-HyperJumpBox >> isHyperJumpBox [
-	^true.
-]
-
-{ #category : #'as yet unclassified' }
 HyperJumpBox >> parsecBoxProportion [
 	^parsecBoxProp .
 ]
