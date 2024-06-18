@@ -39,8 +39,8 @@ AnAllyCardTest >> test_02_WhenAnAllyCardIsAplyThenBothKnowTheirAlly [
 	aCard aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips.
 		
 	
-self assert:((anotherShip getActiveCards at:1) getAlly isKindOf: Ship ).
-self assert:((aShip getActiveCards at:1) getAlly isKindOf: Ship).
+self assert:((anotherShip getActiveCards at:1) getAlly = aShip).
+self assert:((aShip getActiveCards at:1) getAlly = anotherShip).
 
 
 

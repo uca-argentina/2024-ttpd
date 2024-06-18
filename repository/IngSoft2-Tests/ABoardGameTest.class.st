@@ -243,36 +243,6 @@ ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheSh
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFromTheShipHand [
-
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard aPermanentCard |
-	boxesArray := OrderedCollection new.
-	boxesArray add: (NoEffectBox  inPlace: 1).
-	boxesArray add: (NoEffectBox inPlace: 2).
-	boxesArray add: (NoEffectBox inPlace: 3).
-	boxesArray add: (NoEffectBox inPlace: 4).
-	aBoard := Board withBoxesArray: boxesArray.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 50.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	aCard := CancellationCard new.
-	aPermanentCard := OverloadCard new.
-	((aBoardGame getShipsPlaying) at: 1)	 addCard: aCard.
-	((aBoardGame getShipsPlaying) at: 1)	 addCard: aPermanentCard.
-	aBoardGame playCard: aPermanentCard.
-	aBoardGame playInstantCard: 3 from: 1 toShip: 1.
-	
-	self assert: (((aBoardGame getShipsPlaying at: 1) getCards) size = 2).
-	self assert: aBoardGame getCards size = 0.
-	
-]
-
-{ #category : #tests }
 ABoardGameTest >> test_16_ABoardGameKnowsItMaxDieResult [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie |

@@ -21,7 +21,7 @@ Box >> addParsecsList: aParsecList withBoardLenght: aBoardLength andParsecLength
 
 { #category : #'as yet unclassified' }
 Box >> effectShips: aCollectionOfShips playing: aShip [ 
-	
+	^true
 ]
 
 { #category : #'as yet unclassified' }

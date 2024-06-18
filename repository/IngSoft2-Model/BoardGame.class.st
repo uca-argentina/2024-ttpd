@@ -118,17 +118,6 @@ BoardGame >> passTurn [
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playCard: cardToPlay [
-	| aCard |
-	aCard:= (aCollectionOfShips at: playerTurn) selectCard: cardToPlay.
-	(aCollectionOfShips at: playerTurn) addActiveCards: aCard.
-	(aCollectionOfShips at: playerTurn) removeCardFromHand: aCard.
-	aCollectionOfCards add:aCard.
-	
-	
-]
-
-{ #category : #'as yet unclassified' }
 BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipIndex [
 	| shipPlayingCard |
 	shipPlayingCard := aCollectionOfShips at: aShipIndex. 

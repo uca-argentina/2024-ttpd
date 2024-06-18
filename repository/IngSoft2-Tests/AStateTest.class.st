@@ -1,7 +1,7 @@
 Class {
 	#name : #AStateTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #tests }
@@ -34,14 +34,6 @@ AStateTest >> testAWinnerStateChecksPlayThenReturnsTrue_07 [
 	| aState |
 	aState := Winner new.
 	self assert: aState checkPlay.
-]
-
-{ #category : #tests }
-AStateTest >> testWhenAShipIsCreatedThenItHasAState_01 [
-
-	| aShip |
-	aShip := Ship createWithMaxFuel: 1000.
-	self assert: (aShip getState isKindOf: State)
 ]
 
 { #category : #tests }

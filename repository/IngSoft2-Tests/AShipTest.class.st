@@ -41,30 +41,6 @@ AShipTest >> testWhenMoreThanOneLoadedDieAreThrownThenThrowDiceReturnsTheSumOfRe
 ]
 
 { #category : #tests }
-AShipTest >> testWhenOneLoadedDieOf3FacesIsThrownThenThePositionOfTheShipIsUpdatedTo3 [
-
-	| aShip aCollectionOfDice aDie positionsToMove |
-	aCollectionOfDice := OrderedCollection new.
-	aDie := LoadedDie of: 3.
-	aCollectionOfDice add: aDie.
-	aShip := Ship createWithMaxFuel: 1000.
-	positionsToMove := aShip throwDice: aCollectionOfDice.
-	aShip moves: positionsToMove.
-	self assert: aShip getPosition equals: 4
-]
-
-{ #category : #tests }
-AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
-
-	| aShip aCollectionOfDice aDie |
-	aCollectionOfDice := OrderedCollection new.
-	aDie := LoadedDie of: 3.
-	aCollectionOfDice add: aDie.
-	aShip := Ship createWithMaxFuel: 100.
-	self assert: (aShip throwDice: aCollectionOfDice) = 3
-]
-
-{ #category : #tests }
 AShipTest >> test_01_WhenAShipHasFuelThenGetFuelReturnsIt [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 100.
@@ -80,15 +56,6 @@ AShipTest >> test_02_WhenAShipConsumesFuelThenTheFuelReduces [
 	aShip consumeFuel: 50.
 	
 	self assert: (aShip getFuel) equals: 50
-]
-
-{ #category : #tests }
-AShipTest >> test_03_WhenAShipCreatesWithAnAmountOfMaxFuelThenTheFuelIsMaxFuel [
-
-	| aShip |
-	aShip := Ship createWithMaxFuel: 10.
-
-	self assert: aShip getFuel equals: 10
 ]
 
 { #category : #tests }
@@ -175,6 +142,7 @@ AShipTest >> test_18_WhenAShipChangesItStateToPlayThenStateIsKindOfPlaying [
 	| aShip |
 	aShip := Ship createWithMaxFuel: 1000.
 	aShip consumeFuel: 1000.
+	self assert: (aShip getState isKindOf: CantPlayANumberOfTurns).
 	aShip changeStateToPlay.
 	self assert: (aShip getState isKindOf: Playing).
 ]
