@@ -4,12 +4,12 @@ Class {
 	#instVars : [
 		'dieResult'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }
-HyperGravityBox class >> inPlace: aPosition withDieResult: aDieResult [ 
-	^self new initializeInPlace: aPosition withDieResult: aDieResult.
+HyperGravityBox class >> inPlace: aPosition [
+	^self new initializeInPlace: aPosition.
 ]
 
 { #category : #'as yet unclassified' }
@@ -24,9 +24,8 @@ HyperGravityBox >> getNumberOfDie [
 ]
 
 { #category : #initialization }
-HyperGravityBox >> initializeInPlace: aPosition withDieResult: aDieResult [ 
+HyperGravityBox >> initializeInPlace: aPosition [
 	place := aPosition.
-	dieResult := aDieResult.
 ]
 
 { #category : #initialization }

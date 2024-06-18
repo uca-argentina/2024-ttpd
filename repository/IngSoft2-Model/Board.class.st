@@ -75,24 +75,6 @@ Board >> initializeWithBoxesArray: aBoxesArray [
 ]
 
 { #category : #accessing }
-Board >> move: aShip withDiceResult: aDiceResult [
-
-	| actualPosition positionsMoved|
-
-	aShip moves: aDiceResult.
-	
-	self checkPositionOf: aShip.
-	actualPosition := aShip getPosition.
-	aShip consumeFuel: aDiceResult .
-
-	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
-			
-		aShip movesTo: (boxes at: actualPosition) effectsOn ].
-	positionsMoved := aDiceResult + (boxes at: actualPosition) effectsOn.
-
-]
-
-{ #category : #accessing }
 Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDiceResult andLaps: laps [
 
 	| actualPosition aShip aBox |

@@ -1,7 +1,7 @@
 Class {
 	#name : #AHyperGravityBoxTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #tests }
@@ -98,7 +98,8 @@ AHyperGravityBoxTest >> test_06_WhenAShipThrowsTheCorrectNumberInTheHyperGravity
 AHyperGravityBoxTest >> test_07_WhenAHyperGravityBoxIsCreatedThenItHasADieResult [
 
 	|aHyperGravityBox |
-	aHyperGravityBox := HyperGravityBox inPlace: 3 withDieResult: 5.
+	aHyperGravityBox := HyperGravityBox inPlace: 3.
+	aHyperGravityBox setNumber: 5.
 	self assert: aHyperGravityBox getNumberOfDie equals: 5.
 
 ]
@@ -115,7 +116,8 @@ AHyperGravityBoxTest >> test_08_WhenAShipThrowsAFirstTimeTheIncorrectNumberButAS
 	aCollectionOfDice := OrderedCollection new.
 	aSequenceDie := LoadedDieWithSequence loadedWithSequence: #( 1 5 ).
 	aCollectionOfDice add: aSequenceDie.
-	aHyperGravityBox := HyperGravityBox inPlace: 3 withDieResult: 5.
+	aHyperGravityBox := HyperGravityBox inPlace: 3.
+	aHyperGravityBox setNumber: 5.
 	aShip moves: 2.
 	aShip consumeFuel: 2.
 	aShip throwDice: aCollectionOfDice.
