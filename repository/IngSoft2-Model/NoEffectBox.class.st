@@ -1,5 +1,5 @@
 Class {
 	#name : #NoEffectBox,
 	#superclass : #Box,
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model'
 }

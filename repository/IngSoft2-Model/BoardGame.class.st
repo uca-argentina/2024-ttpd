@@ -6,7 +6,10 @@ Class {
 		'board',
 		'dice',
 		'laps',
-		'playerTurn'
+		'playerTurn',
+		'aCollectionOfCards',
+		'maxDieResult',
+		'lastCard'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -24,6 +27,22 @@ BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollect
 		  andwithNumberOfLaps: numberOfLaps
 ]
 
+{ #category : #adding }
+BoardGame >> addHyperGravityInformationTo: aBox withDieResult: aDieResult [ 
+	aBox setNumber: aDieResult .
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> addHyperJumpInformationTo: aBox withParsecList: aParsecList withParsecLenght: aParsecLenght [
+
+	aBox addParsecsList: aParsecList withBoardLenght: board boardSize andParsecLength: aParsecLenght
+]
+
+{ #category : #adding }
+BoardGame >> addMoonWalkInformationTo: aBox withBoxesNumber: aNumberOfBoxesToMove [ 
+	aBox numberOfBoxesToMove: aNumberOfBoxesToMove.
+]
+
 { #category : #accessing }
 BoardGame >> changeTurn: playerTurn [
 |lastPlayer|
@@ -37,27 +56,59 @@ lastPlayer :=aCollectionOfShips size.
 ]
 
 { #category : #'as yet unclassified' }
+BoardGame >> getBoard [
+
+	^board.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> getCards [
+^aCollectionOfCards.
+]
+
+{ #category : #'as yet unclassified' }
 BoardGame >> getLapsToDo [
 	^laps.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> getLastCard [
+	^lastCard.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> getMaxDieResult [
+	^maxDieResult.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> getShipsPlaying [
+	^aCollectionOfShips
 ]
 
 { #category : #initialization }
 BoardGame >> initializeWithShips: aNumberOfShips whithBoard: aBoard withDice: aCollectionOfDice andwithNumberOfLaps: aNumberOfLaps [
 
-	| numberOfShips numberOfBoxes maxFuel |
+	| numberOfShips numberOfBoxes maxFuel aShip aCardManager|
 	numberOfShips := aNumberOfShips.
 	numberOfBoxes := aBoard.
 	maxFuel := 0.
 	aCollectionOfDice do: [ :die | maxFuel := maxFuel + die maximumValue ].
+	maxDieResult := maxFuel.
 	maxFuel := maxFuel * 2.
 	aCollectionOfShips := OrderedCollection new.
+	aCardManager:= CardsManager new.
 	[ numberOfShips ~= 0 ] whileTrue: [
-		aCollectionOfShips add: (Ship createWithMaxFuel: maxFuel).
+		aShip := Ship createWithMaxFuel: maxFuel.
+		aShip addCard: aCardManager createACard.
+		aShip addCard: aCardManager createACard.
+		aCollectionOfShips add: aShip.
 		numberOfShips := numberOfShips - 1 ].
 	board := aBoard.
 	dice := aCollectionOfDice.
 	laps := aNumberOfLaps.
 	playerTurn := 1.
+	aCollectionOfCards := OrderedCollection new
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,11 +118,46 @@ BoardGame >> passTurn [
 ]
 
 { #category : #'as yet unclassified' }
+BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShipOrCardIndex: anotherShipIndex [
+	| shipPlayingCard |
+	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
+	lastCard := shipPlayingCard playInstantCard: aCardIndex to: anotherShipIndex playing: self.
+	board checkAfterEffects: aCollectionOfShips .
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollection: shipsPlaying [ 
+	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
+	board checkAfterEffects: aCollectionOfShips.
+	aCollectionOfCards add: lastCard.
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> playRedoCard: aCardIndex fromShip: aShipFromIndex toShipOrCardIndex: toShipOrCardIndex [
+
+	| cardIndex |
+	(aCollectionOfShips at: playerTurn) addCard: lastCard.
+	cardIndex := (aCollectionOfShips at: playerTurn) getCards size.
+	lastCard isPermanent
+		ifTrue: [
+			self
+				playPermanentCard: cardIndex
+				toShipIndex: toShipOrCardIndex
+				inShipCollection: aCollectionOfShips ]
+		ifFalse: [
+			self
+				playInstantCard: cardIndex
+				from: aShipFromIndex
+				toShipOrCardIndex: toShipOrCardIndex ]
+]
+
+{ #category : #'as yet unclassified' }
 BoardGame >> playTurn [
 
 	| dieResult |
 	(aCollectionOfShips at: playerTurn) checkTurn ifTrue: [
 		dieResult := (aCollectionOfShips at: playerTurn) throwDice: dice.
+		(aCollectionOfShips at: playerTurn) checkReward: dieResult withMax: maxDieResult.
 		board
 			players: aCollectionOfShips
 			playerTurn: playerTurn

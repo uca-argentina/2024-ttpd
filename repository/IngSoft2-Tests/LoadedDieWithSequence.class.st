@@ -5,7 +5,7 @@ Class {
 		'faces',
 		'sequence'
 	],
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests'
 }
 
 { #category : #'as yet unclassified' }

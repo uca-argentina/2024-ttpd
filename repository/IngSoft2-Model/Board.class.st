@@ -3,14 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'boxes',
-		'wormHole',
-		'blackHoleBoxes',
-		'moonWalkBoxes',
-		'hyperGravityBoxes',
-		'hyperJumpBoxes',
-		'atomicBombBoxes',
-		'noEffectBoxes',
-		'maxDieResult'
+		'lastBoxPlayed'
 	],
 	#classInstVars : [
 		'boxes'
@@ -21,8 +14,8 @@ Class {
 { #category : #'as yet unclassified' }
 Board class >> withBoxesArray: aBoxesArray [
 
-	aBoxesArray size < 2 ifTrue: [
-		Error signal: 'A Board must have at least 1 box to be created' ].
+	aBoxesArray size < 4 ifTrue: [
+		Error signal: 'A Board must have at least 3 box to be created' ].
 
 	^ self new initializeWithBoxesArray: aBoxesArray
 ]
@@ -48,12 +41,12 @@ Board >> checkPositionOf: aShip [
 	| actualPosition |
 	actualPosition := aShip getPosition.
 
-	"Si la posición es mayor que el tamaño del tablero, ajustarla"
+	
 	actualPosition > boxes size ifTrue: [
 		actualPosition := actualPosition - boxes size.
-		aShip updateLaps "Actualizar vueltas de la nave" ].
+		aShip updateLaps ].
 
-	"Si la posición es menor que 1 y la nave está en la vuelta 2 o más, ajustarla"
+	
 	actualPosition < 1 ifTrue: [
 		actualPosition := aShip getLaps >= 2
 			                  ifTrue: [ boxes size + actualPosition ]
@@ -62,27 +55,15 @@ Board >> checkPositionOf: aShip [
 	aShip movesTo: actualPosition
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> getLastBox [
+	^lastBoxPlayed.
+]
+
 { #category : #initialization }
 Board >> initializeWithBoxesArray: aBoxesArray [ 
 	boxes := aBoxesArray.
-]
-
-{ #category : #accessing }
-Board >> move: aShip withDiceResult: aDiceResult [
-
-	| actualPosition positionsMoved|
-
-	aShip moves: aDiceResult.
-	
-	self checkPositionOf: aShip.
-	actualPosition := aShip getPosition.
-	aShip consumeFuel: aDiceResult .
-
-	(boxes at: actualPosition) effectsOn ~= 0 ifTrue: [
-			
-		aShip movesTo: (boxes at: actualPosition) effectsOn ].
-	positionsMoved := aDiceResult + (boxes at: actualPosition) effectsOn.
-
+	lastBoxPlayed := (aBoxesArray at: 1)
 ]
 
 { #category : #accessing }
@@ -98,6 +79,7 @@ Board >> players: aCollectionOfShips playerTurn: aPlayerTurn withDiceResult: aDi
 	aBox := boxes at: actualPosition.
 	aShip victory ifTrue: [ ^ self ].
 	aBox effectShips: aCollectionOfShips playing: aShip.
+	lastBoxPlayed := aBox.
 	self checkAfterEffects: aCollectionOfShips.
 	aShip checkIfWin: laps
 ]

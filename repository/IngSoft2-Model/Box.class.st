@@ -2,16 +2,10 @@ Class {
 	#name : #Box,
 	#superclass : #Object,
 	#instVars : [
-		'place',
-		'ships'
+		'place'
 	],
 	#category : #'IngSoft2-Model'
 }
-
-{ #category : #operations }
-Box class >> create [
-	^self new initializeBox.
-]
 
 { #category : #'as yet unclassified' }
 Box class >> inPlace: aPlace [ 
@@ -19,42 +13,19 @@ Box class >> inPlace: aPlace [
 	^self new initializeInPlace: aPlace.
 ]
 
-{ #category : #'as yet unclassified' }
-Box class >> withShips: aCollectionOfShips [ 
-	^self new initializeWithShips: aCollectionOfShips.
-]
-
-{ #category : #adding }
-Box >> addShip: aShip [
-
-	ships add: aShip
+{ #category : #testing }
+Box >> addParsecsList: aParsecList withBoardLenght: aBoardLength andParsecLength: aParsecLength [ 
+	Error signal: 'This is not an HyperJumpBox.'
 ]
 
 { #category : #'as yet unclassified' }
 Box >> effectShips: aCollectionOfShips playing: aShip [ 
-	
-]
-
-{ #category : #'as yet unclassified' }
-Box >> effectsOn [
-
-	^0
+	^true
 ]
 
 { #category : #'as yet unclassified' }
 Box >> getPosition [
 	^place.
-]
-
-{ #category : #'as yet unclassified' }
-Box >> getShips [
-	^ships.
-]
-
-{ #category : #initialization }
-Box >> initializeBox [
-
-	ships := OrderedCollection new
 ]
 
 { #category : #initialization }
@@ -63,12 +34,13 @@ Box >> initializeInPlace: aPlace [
 	
 ]
 
-{ #category : #initialization }
-Box >> initializeWithShips: aCollectionOfShips [ 
-	ships := aCollectionOfShips
+{ #category : #testing }
+Box >> numberOfBoxesToMove: aNumberOfBoxesToMove [
+
+	Error signal: 'This is not an MoonWalkBox.'
 ]
 
-{ #category : #removing }
-Box >> removeShip: aShip [ 
-	ships remove: aShip ifAbsent: [ ]
+{ #category : #testing }
+Box >> setNumber: aDieResult [ 
+	Error signal: 'This is not an HyperGravityBox.'
 ]

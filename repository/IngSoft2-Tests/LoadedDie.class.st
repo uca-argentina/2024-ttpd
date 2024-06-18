@@ -22,7 +22,7 @@ LoadedDie >> initializeOf: anAmountOfFaces [
 
 { #category : #accessing }
 LoadedDie >> maximumValue [
-	^faces.
+	^faces+1.
 ]
 
 { #category : #'as yet unclassified' }

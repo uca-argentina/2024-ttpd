@@ -1,7 +1,7 @@
 Class {
 	#name : #ADieTest,
 	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests'
 }
 
 { #category : #asserting }

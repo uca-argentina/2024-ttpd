@@ -5,37 +5,6 @@ Class {
 }
 
 { #category : #tests }
-AWormHoleBoxTest >> testWhenAWormHoleBoxInPlace1ThenTheEffectsOnReturns1 [
-
-	| aWormHoleBox |
-	aWormHoleBox := WormHoleBox inPlace: 1.
-
-	self assert: aWormHoleBox effectsOn equals: 1
-]
-
-{ #category : #tests }
-AWormHoleBoxTest >> testWhenAWormHoleBoxIsCretedInPlaceThenAShipCanBeAddedToTheWormHole_03 [
-
-	| aWormholeBox |
-	aWormholeBox := WormHoleBox inPlace: 2.
-	aWormholeBox addShip: Ship create. 
-
-	self assert: aWormholeBox getShips size equals: 1
-]
-
-{ #category : #tests }
-AWormHoleBoxTest >> testWhenAWormHoleBoxIsCretedInPlaceThenAShipCanBeRemovedFromTheWormHoleBox_04 [
-
-	| aWormholeBox aShip |
-	aShip := Ship create.
-	aWormholeBox := WormHoleBox inPlace: 2.
-	aWormholeBox addShip: aShip.
-	aWormholeBox removeShip: aShip.  
-
-	self assert: aWormholeBox getShips size equals: 0
-]
-
-{ #category : #tests }
 AWormHoleBoxTest >> testWhenAWormHoleKnowsItsDestiny_05 [
 
 	| aWormholeBox anotherWormholeBox |

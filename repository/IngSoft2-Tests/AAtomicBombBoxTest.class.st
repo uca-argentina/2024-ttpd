@@ -1,7 +1,7 @@
 Class {
 	#name : #AAtomicBombBoxTest,
 	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests'
 }
 
 { #category : #tests }

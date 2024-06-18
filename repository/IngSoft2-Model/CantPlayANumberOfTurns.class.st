@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'turns'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model'
 }
 
 { #category : #accessing }
