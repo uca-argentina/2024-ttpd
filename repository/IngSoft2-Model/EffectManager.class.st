@@ -49,61 +49,6 @@ EffectManager >> createFor: anAmountOfBoxes [
 ]
 
 { #category : #'as yet unclassified' }
-EffectManager >> createFor: anAmountOfBoxes andMaxDieResult: aMaxDieResult [
-
-	| boxes cumulativeDistributions randomValue random aParsecList aParsecLength aParsecListSize typeParsec |
-	boxes := OrderedCollection new: anAmountOfBoxes.
-	boxes add: (NoEffectBox inPlace: 1).
-	cumulativeDistributions := self calculateCumulativeDistributions.
-	random := Random new.
-	2 to: anAmountOfBoxes do: [ :i |
-		randomValue := random next * 100.
-		boxes add: (self
-				 boxForRandomValue: randomValue
-				 cumulativeDistributions: cumulativeDistributions
-				 place: i) ].
-	boxes do: [ :box |
-		box isHyperGravityBox ifTrue: [
-			box setNumber: (random nextIntegerBetween: 1 and: aMaxDieResult) ].
-		box isHyperJumpBox ifTrue: [
-			aParsecListSize := random nextIntegerBetween: 1 and: 10.
-			aParsecList := OrderedCollection new: aParsecListSize.
-			aParsecList size timesRepeat: [
-				typeParsec := random nextIntegerBetween: 0 and: 1.
-				typeParsec = 0
-					ifTrue: [ typeParsec := Parsec ]
-					ifFalse: [ typeParsec := LightYear ].
-				aParsecList add:
-					(typeParsec withValue: (random nextIntegerBetween: 1 and: 100)) ].
-			aParsecLength := random nextIntegerBetween: 1 and: 100.
-			box
-				addParsecsList: aParsecList
-				withBoardLenght: anAmountOfBoxes
-				andParsecLength: aParsecLength ]. ].
-	^ boxes
-]
-
-{ #category : #'as yet unclassified' }
-EffectManager >> createFor: anAmountOfBoxes andMaxDieResult: aMaxDieResult andParsecList: aParsecList [
-
-	| boxes cumulativeDistributions randomValue random |
-	boxes := OrderedCollection new: anAmountOfBoxes.
-	boxes add: (NoEffectBox inPlace: 1).
-	cumulativeDistributions := self calculateCumulativeDistributions.
-	random := Random new.
-	2 to: anAmountOfBoxes do: [ :i |
-		randomValue := random next * 100.
-		boxes add: (self
-				 boxForRandomValue: randomValue
-				 cumulativeDistributions: cumulativeDistributions
-				 place: i) ].
-	boxes do: [ :box |
-		box isHyperGravityBox ifTrue: [
-			box setNumber: (random nextIntegerBetween: 1 and: aMaxDieResult ) ] ].
-	^ boxes
-]
-
-{ #category : #'as yet unclassified' }
 EffectManager >> initilizeWith: aBoxDistributionCollection [ 
 	boxesDistributions := aBoxDistributionCollection.
 ]

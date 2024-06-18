@@ -45,18 +45,3 @@ AnEffectManagerTest >> test_03_WhenAEffectManagerGets2DifferentTypesOfBoxesThenT
 
 	self assert: (((boxes at: 2) isKindOf: AtomicBombBox) or: ((boxes at: 2) isKindOf: HyperGravityBox)).
 ]
-
-{ #category : #tests }
-AnEffectManagerTest >> test_04_WhenBoxesAreCretedWithHyperGravityBoxesThenTheSetNumberIsARandomIntFrom1toMaxDieResult [
-
-	| boxDistributions anEffectManager boxes |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: HyperGravityBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-
-
-	boxes := anEffectManager createFor: 50 andMaxDieResult: 20.
-
-	self assert: (boxes at: 2) getNumberOfDie <= 20
-]
