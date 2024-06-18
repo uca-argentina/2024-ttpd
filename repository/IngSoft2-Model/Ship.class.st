@@ -7,7 +7,9 @@ Class {
 		'maxFuel',
 		'laps',
 		'state',
-		'lastDieResult'
+		'lastDieResult',
+		'aCollectionOfCards',
+		'aCollectionOfActiveCards'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -31,13 +33,44 @@ Ship >> > anotherShip [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> MyFirstAlly [
+	aCollectionOfActiveCards do:[:aCard| aCard powerMove =0 ifTrue:[ ^(aCard getAlly)] ]
+]
+
+{ #category : #adding }
+Ship >> addActiveCards: aCard [
+	aCollectionOfActiveCards add:aCard
+]
+
+{ #category : #adding }
+Ship >> addCard: aCard [ 
+	aCollectionOfCards add: aCard.
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> changeStateToPlay [
 	state := Playing new.
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> checkAlly [
+	(aCollectionOfActiveCards isEmpty) ifTrue: [^false ].
+	aCollectionOfActiveCards do:[:aCard| ((aCard powerMove) = 0) ifTrue: [^true ]]
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> checkIfWin: aNumberOfLaps [ 
 	laps >= aNumberOfLaps ifTrue: [state:=Winner new].
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> checkReward: aDieResult withMax: dieResultMax [
+
+	| probabilidad |
+	probabilidad := Random new next.
+	probabilidad <= 0.8
+		ifTrue: [ self increaseMaxFuel]
+		ifFalse: [ self reduceFuel]
 ]
 
 { #category : #'as yet unclassified' }
@@ -51,9 +84,20 @@ Ship >> consumeFuel: amount [
 	fuel - amount > 0
 		ifTrue: [ fuel := fuel - amount ]
 		ifFalse: [
-			fuel := maxFuel.
-			position := 1.
-			state := CantPlayANumberOfTurns skip: 2 ]
+			self checkAlly
+				ifTrue: [ self consumeFuelFromAlly: fuel - amount ]
+				ifFalse: [ self runOutOfFuel ] ]
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> consumeFuelFromAlly: anAmount [
+	| anAlly anotherFuel |
+	anotherFuel:= anAmount *(-1).
+	anAlly:= self MyFirstAlly.
+	((anAlly getFuel) -anotherFuel > 0) ifTrue: [ anAlly consumeFuel: anotherFuel. fuel:=0] ifFalse: [ 
+			self runOutOfFuel.
+			anAlly runOutOfFuel.
+		 ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -66,6 +110,16 @@ Ship >> endCursed [
 	state := Playing new.
 	self moves: lastDieResult.
 	self consumeFuel: lastDieResult.
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> getActiveCards [
+	^aCollectionOfActiveCards 
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> getCards [
+	^aCollectionOfCards 
 ]
 
 { #category : #'as yet unclassified' }
@@ -84,6 +138,11 @@ Ship >> getLastDieResult [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> getMaxFuel [
+	^maxFuel 
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> getPosition [
 	^position.
 ]
@@ -91,6 +150,11 @@ Ship >> getPosition [
 { #category : #'as yet unclassified' }
 Ship >> getState [
 	^state.
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> increaseMaxFuel [
+	maxFuel:=maxFuel +1.
 ]
 
 { #category : #'as yet unclassified' }
@@ -102,12 +166,15 @@ Ship >> initializeShip [
 
 { #category : #'as yet unclassified' }
 Ship >> intitializeWithMaxFuel: amountMaxFuel [ 
+	| aCard anotherCard |
 	position:= 1.
 	fuel:= amountMaxFuel.
 	maxFuel:= amountMaxFuel.
 	laps:= 1.
 	state := Playing new.
 	lastDieResult := 0.
+	aCollectionOfCards :=OrderedCollection new.
+	aCollectionOfActiveCards:=OrderedCollection new.
 ]
 
 { #category : #testing }
@@ -117,7 +184,11 @@ Ship >> isCursed [
 
 { #category : #'as yet unclassified' }
 Ship >> moves: aNumber [
-	position := position + aNumber.
+	| pos |
+	pos := 0.
+	aCollectionOfActiveCards isEmpty ifFalse: [  
+	aCollectionOfActiveCards do: [ :card | pos := pos + card powerMove]].
+	position := position + aNumber + pos.
 	^(position).
 ]
 
@@ -127,8 +198,61 @@ Ship >> movesTo: aPosition [
 ]
 
 { #category : #'as yet unclassified' }
+Ship >> playInstantCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [ 
+	| aCard |
+	aCard := aCollectionOfCards at: aCardIndex.
+	aCard canPlayInstantCard.
+	aCard affect: aShipOrCardIndex in: aBoardGame.
+	aCollectionOfCards remove: aCard.
+	^aCard.
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> playPermanentCard: aCardIndex to: aShipIndex playing: ships [ 
+	| aCard shipAffected cardToRemove |
+	aCard := aCollectionOfCards at: aCardIndex.
+	aCard canPlayPermanentCard.
+	shipAffected := ships at: aShipIndex.
+	aCard aplyEffectFrom: self to: shipAffected withShips: ships.
+	cardToRemove := aCollectionOfCards at: aCardIndex.
+	aCollectionOfCards remove: cardToRemove.
+	^aCard
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> reduceFuel [
+	self consumeFuel: 1
+]
+
+{ #category : #removing }
+Ship >> removeActiveCard: aCard [ 
+	| cardToRemove |
+	cardToRemove := aCollectionOfActiveCards detect: [ :each | each = aCard] ifNone: [nil].
+	cardToRemove = nil ifFalse: [ aCollectionOfActiveCards remove: cardToRemove.]
+]
+
+{ #category : #removing }
+Ship >> removeCardFromHand: aCard [ 
+	| cardToRemove |
+	cardToRemove := aCollectionOfCards detect: [ :each | each = aCard] ifNone: [nil].
+	cardToRemove = nil ifFalse: [ aCollectionOfCards remove: cardToRemove.]
+]
+
+{ #category : #'as yet unclassified' }
 Ship >> restartFuel [
 	fuel:= maxFuel .
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> runOutOfFuel [
+		fuel := maxFuel.
+		position := 1.
+		state := CantPlayANumberOfTurns skip: 2 
+]
+
+{ #category : #'as yet unclassified' }
+Ship >> selectCard: aCard [ 
+	^(aCollectionOfCards detect: [ :each |  each = aCard])
 ]
 
 { #category : #'as yet unclassified' }

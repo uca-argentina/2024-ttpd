@@ -1,7 +1,7 @@
 Class {
 	#name : #ABoardTest,
 	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests'
 }
 
 { #category : #asserting }
@@ -117,4 +117,27 @@ ABoardTest >> test_21_ABoardCanBeCreatedWithAnArrayOfBoxesDoneWithDistributions 
 	aBoard := Board withBoxesArray: boxes.
 
 	self assert: aBoard boardSize equals: 50
+]
+
+{ #category : #tests }
+ABoardTest >> test_22_ABoardKnowsTheLastBoxThatWasPlayed [
+
+	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: NoEffectBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aShip := Ship createWithMaxFuel: 1000.
+	anotherShip := Ship createWithMaxFuel: 1000.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: anotherShip.
+	aBoard
+		players: aCollectionOfShips
+		playerTurn: 1
+		withDiceResult: 82
+		andLaps: 2.
+	self assert: ((aBoard getLastBox) isKindOf: NoEffectBox).
 ]

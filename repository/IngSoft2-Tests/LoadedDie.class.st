@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'faces'
 	],
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests'
 }
 
 { #category : #'instance creation' }

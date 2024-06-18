@@ -5,7 +5,7 @@ Class {
 		'place',
 		'ships'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model'
 }
 
 { #category : #operations }
