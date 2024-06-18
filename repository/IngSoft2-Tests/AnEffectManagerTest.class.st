@@ -26,7 +26,7 @@ AnEffectManagerTest >> test_02_WhenAnEffectManagerHasOnly1DistributionThenItCrea
 	boxDistributions add:
 			(BoxDistribution of: AtomicBombBox withDistribution: 100).
 	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 2.
+	boxes := anEffectManager createFor: 6.
 
 	self assert: (((boxes at: 2) isKindOf: AtomicBombBox) or: ((boxes at: 2) isKindOf: WormHoleBox ))
 ]
@@ -41,7 +41,7 @@ AnEffectManagerTest >> test_03_WhenAEffectManagerGets2DifferentTypesOfBoxesThenT
 	boxDistributions add:
 			(BoxDistribution of: HyperGravityBox withDistribution: 20).
 	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 2.
+	boxes := anEffectManager createFor: 6.
 
 	self assert: (((((boxes at: 2) isKindOf: AtomicBombBox) or: ((boxes at: 2) isKindOf: HyperGravityBox)) or: ((boxes at: 2) isKindOf: WormHoleBox ))).
 ]

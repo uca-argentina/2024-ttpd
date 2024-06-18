@@ -44,7 +44,7 @@ EffectManager >> createFor: anAmountOfBoxes [
 	boxes := OrderedCollection new: anAmountOfBoxes.
 	boxes add: (NoEffectBox inPlace: 1).
 	cumulativeDistributions := self calculateCumulativeDistributions.
-	anIndex := Random new nextIntegerBetween: 2 and: anAmountOfBoxes.
+	anIndex := Random new nextIntegerBetween: 2 and: (anAmountOfBoxes -1).
 	anotherIndex := (random
 		                nextIntegerBetween: anIndex
 		                and: anAmountOfBoxes).
