@@ -26,6 +26,7 @@ HyperGravityBox >> getNumberOfDie [
 { #category : #initialization }
 HyperGravityBox >> initializeInPlace: aPosition [
 	place := aPosition.
+	dieResult := 3.
 ]
 
 { #category : #testing }

@@ -45,6 +45,17 @@ HyperJumpBox >> getParsecList [
 ]
 
 { #category : #'as yet unclassified' }
+HyperJumpBox >> initializeInPlace: aPlace [
+	place := aPlace.
+	parsecList := OrderedCollection new.
+	parsecList add: (Parsec withValue: 7).
+	parsecList add: (Parsec withValue: 5).
+	parsecList add: (Parsec withValue: 2).
+	parsecLength := 100.
+	boardLength := 100.
+]
+
+{ #category : #'as yet unclassified' }
 HyperJumpBox >> isHyperJumpBox [
 	^true.
 ]
