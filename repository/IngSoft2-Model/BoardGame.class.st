@@ -118,7 +118,7 @@ BoardGame >> passTurn [
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipIndex [
+BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShipOrCardIndex: anotherShipIndex [
 	| shipPlayingCard |
 	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
 	lastCard := shipPlayingCard playInstantCard: aCardIndex to: anotherShipIndex playing: self.
@@ -129,6 +129,7 @@ BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipInd
 BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollection: shipsPlaying [ 
 	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
 	board checkAfterEffects: aCollectionOfShips.
+	aCollectionOfCards add: lastCard.
 ]
 
 { #category : #'as yet unclassified' }
@@ -147,7 +148,7 @@ BoardGame >> playRedoCard: aCardIndex fromShip: aShipFromIndex toShipOrCardIndex
 			self
 				playInstantCard: cardIndex
 				from: aShipFromIndex
-				toShip: toShipOrCardIndex ]
+				toShipOrCardIndex: toShipOrCardIndex ]
 ]
 
 { #category : #'as yet unclassified' }

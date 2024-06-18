@@ -235,11 +235,40 @@ ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheSh
 		              andwithNumberOfLaps: 2.
 	aCard := RepeatCard new.
 	((aBoardGame getShipsPlaying) at: 1)	 addCard: aCard.
-	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
+	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 2.
 	
 	self assert: (((aBoardGame getShipsPlaying at: 1) getCards) size = 2).
 
 	
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFromTheShipHand [ 
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard aPermanentCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	aCollectionOfDice add: aLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aCard := CancellationCard new.
+	aPermanentCard := OverloadCard new.
+	((aBoardGame getShipsPlaying) at: 1)	 addCard: aCard.
+	((aBoardGame getShipsPlaying) at: 1)	 addCard: aPermanentCard.
+	aBoardGame playPermanentCard: 4 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 1.
+
+	self assert: (((aBoardGame getShipsPlaying at: 1) getCards) size = 2).
+	self assert: aBoardGame getCards size = 0.
 ]
 
 { #category : #tests }
@@ -444,7 +473,7 @@ ABoardGameTest >> test_22_WhenARedoCardIsPLayedAfterAInstantCardThenTheEffectIsT
 	aRedoCard := RedoCard  new.
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
 	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
-	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
+	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 2.
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
 	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 6) .
 	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 2) .
@@ -483,7 +512,7 @@ ABoardGameTest >> test_23_WhenARedoCardIsPLayedAfterAReDoCardThenTheEffectIsTheO
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
 	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
 	(aBoardGame getShipsPlaying at: 1) addCard: anotherRedoCard.
-	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
+	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 2.
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
 	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 4) .

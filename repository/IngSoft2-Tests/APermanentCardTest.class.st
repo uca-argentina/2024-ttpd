@@ -41,7 +41,7 @@ APermanentCardTest >> test_04_APermanentCardCannotBePlayedAsAnIsntantCard [
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard. 
 	self
 		should: [
-		aBoardGame playInstantCard: 3 from: 1 toShip: 2 ]
+		aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 2 ]
 		raise: Error
 		withMessage: 'You cant play a Permanent Card in any turn'
 ]
