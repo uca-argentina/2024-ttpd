@@ -5,7 +5,7 @@ Class {
 		'position',
 		'destiny'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -25,12 +25,6 @@ WormHoleBox >> effectShips: aCollection playing: aShip [
 ]
 
 { #category : #'as yet unclassified' }
-WormHoleBox >> effectsOn [
-
-	^position
-]
-
-{ #category : #'as yet unclassified' }
 WormHoleBox >> getDestiny [
 	^ destiny .
 ]
@@ -43,7 +37,6 @@ WormHoleBox >> getPosition [
 { #category : #initialization }
 WormHoleBox >> initializeInPlace: aPosition [
 
-	super initializeBox.
 	position := aPosition
 ]
 
