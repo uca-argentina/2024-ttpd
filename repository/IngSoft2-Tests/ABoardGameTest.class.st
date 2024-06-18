@@ -458,7 +458,7 @@ ABoardGameTest >> test_20_TheGameKnowsTheLastCardBeingPlayed [
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_21_Banan [
+ABoardGameTest >> test_21_WhenARedoCardIsPLayedAfterAPermanentCardThenTheEffectIsTheOneOnThePermanentCard [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aRedoCard |
 	boxDistributions := OrderedCollection new.
@@ -484,5 +484,78 @@ ABoardGameTest >> test_21_Banan [
 	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
 	self assert: ((aBoardGame getShipsPlaying at: 3) getActiveCards size = 1) .
+	
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_22_WhenARedoCardIsPLayedAfterAInstantCardThenTheEffectIsTheOneOnTheInstantCard [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aRedoCard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: BlackHoleBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBoardGame playTurn.	
+	aBoardGame playTurn.
+	aBoardGame playTurn.	
+	aPermanentCard := RepeatCard new.
+	aRedoCard := RedoCard  new.
+	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
+	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
+	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
+	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
+	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 87) .
+	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 83) .
+	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 83) .
+	
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_23_WhenARedoCardIsPLayedAfterAReDoCardThenTheEffectIsTheOneOnTheReDoCard [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aRedoCard anotherRedoCard |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: BlackHoleBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 100.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBoardGame playTurn.	
+	aBoardGame playTurn.
+	aBoardGame playTurn.	
+	aPermanentCard := RepeatCard new.
+	aRedoCard := RedoCard  new.
+	anotherRedoCard := RedoCard  new.
+	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
+	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
+	(aBoardGame getShipsPlaying at: 1) addCard: anotherRedoCard.
+	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
+	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
+	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
+	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 87) .
+	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 83) .
+	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 79) .
 	
 ]
