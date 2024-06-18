@@ -46,7 +46,7 @@ EffectManager >> createFor: anAmountOfBoxes [
 	cumulativeDistributions := self calculateCumulativeDistributions.
 	anIndex := Random new nextIntegerBetween: 2 and: (anAmountOfBoxes -1).
 	anotherIndex := (random
-		                nextIntegerBetween: anIndex
+		                nextIntegerBetween: anIndex + 1
 		                and: anAmountOfBoxes).
 	aWormHole := WormHoleBox inPlace: anIndex.
 	anotheWormHole := WormHoleBox inPlace: anotherIndex.
