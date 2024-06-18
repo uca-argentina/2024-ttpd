@@ -2,8 +2,7 @@ Class {
 	#name : #Box,
 	#superclass : #Object,
 	#instVars : [
-		'place',
-		'ships'
+		'place'
 	],
 	#category : #'IngSoft2-Model'
 }

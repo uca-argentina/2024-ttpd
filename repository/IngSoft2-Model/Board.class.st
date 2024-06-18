@@ -3,14 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'boxes',
-		'wormHole',
-		'blackHoleBoxes',
-		'moonWalkBoxes',
-		'hyperGravityBoxes',
-		'hyperJumpBoxes',
-		'atomicBombBoxes',
-		'noEffectBoxes',
-		'maxDieResult',
 		'lastBoxPlayed'
 	],
 	#classInstVars : [
