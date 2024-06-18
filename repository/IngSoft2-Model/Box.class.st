@@ -36,16 +36,6 @@ Box >> initializeInPlace: aPlace [
 ]
 
 { #category : #testing }
-Box >> isHyperGravityBox [
-	^false.
-]
-
-{ #category : #testing }
-Box >> isHyperJumpBox [
-	^false.
-]
-
-{ #category : #testing }
 Box >> numberOfBoxesToMove: aNumberOfBoxesToMove [
 
 	Error signal: 'This is not an MoonWalkBox.'

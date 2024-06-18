@@ -43,10 +43,10 @@ ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 
 	| aBoard aShip anotherShip aCollectionOfShips boxesArray |
 	boxesArray := OrderedCollection new.
-	boxesArray add: (MoonWalkBox inPlace: 1).
-	boxesArray add: (MoonWalkBox inPlace: 2).
-	boxesArray add: (MoonWalkBox inPlace: 3).
-	boxesArray add: (MoonWalkBox inPlace: 4).
+	boxesArray add: (BlackHoleBox inPlace: 1).
+	boxesArray add: (BlackHoleBox inPlace: 2).
+	boxesArray add: (BlackHoleBox inPlace: 3).
+	boxesArray add: (BlackHoleBox inPlace: 4).
 	aBoard := Board withBoxesArray: boxesArray.
 	aShip := Ship createWithMaxFuel: 1000.
 	anotherShip := Ship createWithMaxFuel: 1000.
@@ -59,7 +59,7 @@ ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 		withDiceResult: 3
 		andLaps: 2.
 
-	self assert: aShip getPosition equals: 4.
+	self assert: aShip getPosition equals: 1.
 	self assert: aShip getLaps equals: 1
 ]
 
@@ -85,19 +85,6 @@ ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
 	self assert:  aShip getLaps equals: 2.
 		
 
-]
-
-{ #category : #tests }
-ABoardTest >> test_20_ABoardCanBeCreatedWithAnArrayOfBoxes [
-
-	| aBoard aBoxesArray|
-	aBoxesArray := OrderedCollection new.
-	aBoxesArray add: (NoEffectBox inPlace: 1).
-	aBoxesArray add: (NoEffectBox inPlace: 2).
-	aBoxesArray add: (NoEffectBox inPlace: 3).
-	aBoxesArray add: (NoEffectBox inPlace: 4).
-	aBoard := Board withBoxesArray: aBoxesArray.
-	self assert: aBoard boardSize equals: 4.
 ]
 
 { #category : #tests }

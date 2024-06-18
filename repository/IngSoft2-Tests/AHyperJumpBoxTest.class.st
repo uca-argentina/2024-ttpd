@@ -157,11 +157,3 @@ AHyperJumpBoxTest >> test_09_aHyperJumpKnowsItsAtributes [
 		andParsecLength: 10.
 	self assert: aHyperJump getParsecLenght > 0
 ]
-
-{ #category : #tests }
-AHyperJumpBoxTest >> test_10_WhenAHyperJumpIsAHyperJumpBoxThenItReturnsTrue [
-
-	| aHyperJump |
-	aHyperJump := HyperJumpBox  inPlace: 3.
-	self assert: aHyperJump isHyperJumpBox.
-]
