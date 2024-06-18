@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'boxesDistributions'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'instance creation' }
@@ -46,6 +46,26 @@ EffectManager >> createFor: anAmountOfBoxes [
             boxes add: (self boxForRandomValue: randomValue cumulativeDistributions: cumulativeDistributions place: i).
         ].
         ^boxes
+]
+
+{ #category : #'as yet unclassified' }
+EffectManager >> createFor: anAmountOfBoxes andMaxDieResult: aMaxDieResult andParsecList: aParsecList [
+
+	| boxes cumulativeDistributions randomValue random |
+	boxes := OrderedCollection new: anAmountOfBoxes.
+	boxes add: (NoEffectBox inPlace: 1).
+	cumulativeDistributions := self calculateCumulativeDistributions.
+	random := Random new.
+	2 to: anAmountOfBoxes do: [ :i |
+		randomValue := random next * 100.
+		boxes add: (self
+				 boxForRandomValue: randomValue
+				 cumulativeDistributions: cumulativeDistributions
+				 place: i) ].
+	boxes do: [ :box |
+		box isHyperGravityBox ifTrue: [
+			box setNumber: (random nextIntegerBetween: 1 and: aMaxDieResult ) ] ].
+	^ boxes
 ]
 
 { #category : #'as yet unclassified' }

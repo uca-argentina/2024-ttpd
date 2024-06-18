@@ -1,7 +1,7 @@
 Class {
 	#name : #AnEffectManagerTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #tests }
@@ -44,4 +44,26 @@ AnEffectManagerTest >> test_03_WhenAEffectManagerGets2DifferentTypesOfBoxesThenT
 	boxes := anEffectManager createFor: 2.
 
 	self assert: (((boxes at: 2) isKindOf: AtomicBombBox) or: ((boxes at: 2) isKindOf: HyperGravityBox)).
+]
+
+{ #category : #tests }
+AnEffectManagerTest >> test_04_WhenBoxesAreCretedWithHyperGravityBoxesThenTheSetNumberIsARandomIntFrom1toMaxDieResult [
+
+	| boxDistributions anEffectManager boxes aParsecsList |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: HyperGravityBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	
+	aParsecsList := OrderedCollection new.
+	aParsecsList add: (Parsec withValue: 5).
+	aParsecsList add: (Parsec withValue: 7).
+	aParsecsList add: (Parsec withValue: 2).
+	
+	boxes := anEffectManager
+		         createFor: 50
+		         andMaxDieResult: 20
+		         andParsecList: aParsecsList.
+
+	self assert: (boxes at: 2) getNumberOfDie <= 20
 ]

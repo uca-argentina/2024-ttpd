@@ -128,3 +128,11 @@ AHyperGravityBoxTest >> test_08_WhenAShipThrowsAFirstTimeTheIncorrectNumberButAS
 	self assert: (aShip getState isKindOf: Playing).
 	self assert: aShip getFuel equals: 993.
 ]
+
+{ #category : #tests }
+AHyperGravityBoxTest >> test_09_IfABoxIsHyperGravityThenItReturnsTrue [
+
+	| aHyperGravity |
+	aHyperGravity := HyperGravityBox  inPlace: 3.
+	self assert: aHyperGravity isHyperGravityBox.
+]

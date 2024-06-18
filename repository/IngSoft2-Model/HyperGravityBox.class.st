@@ -28,6 +28,11 @@ HyperGravityBox >> initializeInPlace: aPosition [
 	place := aPosition.
 ]
 
+{ #category : #testing }
+HyperGravityBox >> isHyperGravityBox [
+	^true.
+]
+
 { #category : #initialization }
 HyperGravityBox >> setNumber: aDieResult [ 
 	dieResult := aDieResult.

@@ -29,3 +29,8 @@ Box >> initializeInPlace: aPlace [
 	place := aPlace.
 	
 ]
+
+{ #category : #testing }
+Box >> isHyperGravityBox [
+	^false.
+]

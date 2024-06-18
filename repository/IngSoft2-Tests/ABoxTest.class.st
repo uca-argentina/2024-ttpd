@@ -25,3 +25,11 @@ ABoxTest >> testWhenTheBoxIsCreatedInPlaceLessThan1ThenBoxInvalid_04 [
 		raise: Error
 		withMessage: 'The position of the box must be greater or equal to 1'
 ]
+
+{ #category : #tests }
+ABoxTest >> test_03_ABoxIsNotAnHyperGravityBoxThenItReturns0 [
+
+| aBox |
+aBox := Box inPlace: 1.
+self deny: aBox isHyperGravityBox.
+]
