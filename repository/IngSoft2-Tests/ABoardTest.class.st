@@ -122,13 +122,13 @@ ABoardTest >> test_21_ABoardCanBeCreatedWithAnArrayOfBoxesDoneWithDistributions 
 { #category : #tests }
 ABoardTest >> test_22_ABoardKnowsTheLastBoxThatWasPlayed [
 
-	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aBoard aShip anotherShip aCollectionOfShips boxesArray |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aShip := Ship createWithMaxFuel: 1000.
 	anotherShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips := OrderedCollection new.
@@ -137,7 +137,7 @@ ABoardTest >> test_22_ABoardKnowsTheLastBoxThatWasPlayed [
 	aBoard
 		players: aCollectionOfShips
 		playerTurn: 1
-		withDiceResult: 82
+		withDiceResult: 3
 		andLaps: 2.
 	self assert: ((aBoard getLastBox) isKindOf: NoEffectBox).
 ]

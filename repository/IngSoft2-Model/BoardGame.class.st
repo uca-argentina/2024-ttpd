@@ -133,11 +133,13 @@ BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShip: anotherShipInd
 	| shipPlayingCard |
 	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
 	lastCard := shipPlayingCard playInstantCard: aCardIndex to: anotherShipIndex playing: self.
+	board checkAfterEffects: aCollectionOfShips .
 ]
 
 { #category : #'as yet unclassified' }
 BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollection: shipsPlaying [ 
 	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
+	board checkAfterEffects: aCollectionOfShips.
 ]
 
 { #category : #'as yet unclassified' }

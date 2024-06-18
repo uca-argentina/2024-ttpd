@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'faces'
 	],
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #'instance creation' }
@@ -22,7 +22,7 @@ LoadedDie >> initializeOf: anAmountOfFaces [
 
 { #category : #accessing }
 LoadedDie >> maximumValue [
-	^faces.
+	^faces+1.
 ]
 
 { #category : #'as yet unclassified' }
