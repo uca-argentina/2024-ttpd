@@ -15,11 +15,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Ship class >> create [
-	^self new initializeShip.
-]
-
-{ #category : #'as yet unclassified' }
 Ship class >> createWithMaxFuel: maxFuel [ 
 	^self new intitializeWithMaxFuel: maxFuel.
 ]
@@ -155,13 +150,6 @@ Ship >> getState [
 { #category : #'as yet unclassified' }
 Ship >> increaseMaxFuel [
 	maxFuel:=maxFuel +1.
-]
-
-{ #category : #'as yet unclassified' }
-Ship >> initializeShip [
-
-	position := 0.
-	fuel := 100
 ]
 
 { #category : #'as yet unclassified' }

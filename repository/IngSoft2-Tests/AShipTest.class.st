@@ -36,7 +36,7 @@ AShipTest >> testWhenMoreThanOneLoadedDieAreThrownThenThrowDiceReturnsTheSumOfRe
 	anotherDie := LoadedDie of: 4.
 	aCollectionOfDice add: aDie.
 	aCollectionOfDice add: anotherDie.
-	aShip := Ship create.
+	aShip := Ship createWithMaxFuel: 100.
 	self assert: (aShip throwDice: aCollectionOfDice) equals: 7
 ]
 
@@ -60,14 +60,14 @@ AShipTest >> testWhenThrowingOneLoadedDieOfThreeFacesThenReturnsThree [
 	aCollectionOfDice := OrderedCollection new.
 	aDie := LoadedDie of: 3.
 	aCollectionOfDice add: aDie.
-	aShip := Ship create.
+	aShip := Ship createWithMaxFuel: 100.
 	self assert: (aShip throwDice: aCollectionOfDice) = 3
 ]
 
 { #category : #tests }
 AShipTest >> test_01_WhenAShipHasFuelThenGetFuelReturnsIt [
 	| aShip |
-	aShip := Ship create.
+	aShip := Ship createWithMaxFuel: 100.
 	
 	
 	self assert: (aShip getFuel) equals: 100
@@ -76,7 +76,7 @@ AShipTest >> test_01_WhenAShipHasFuelThenGetFuelReturnsIt [
 { #category : #tests }
 AShipTest >> test_02_WhenAShipConsumesFuelThenTheFuelReduces [
 	| aShip |
-	aShip := Ship create.
+	aShip := Ship createWithMaxFuel: 100.
 	aShip consumeFuel: 50.
 	
 	self assert: (aShip getFuel) equals: 50
