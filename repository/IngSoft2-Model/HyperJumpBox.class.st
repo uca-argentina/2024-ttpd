@@ -14,7 +14,7 @@ Class {
 { #category : #adding }
 HyperJumpBox >> addParsecsList: aParsecList withBoardLenght: aBoardLength andParsecLength: aParsecLength [ 
 	parsecList := (aParsecList asSortedCollection: [ :a :b | a > b ])
-	              asArray.
+	              asOrderedCollection.
 	boardLength := aBoardLength.
 	parsecLength := aParsecLength.
 	parsecBoxProp := aBoardLength / aParsecLength.
@@ -42,6 +42,11 @@ HyperJumpBox >> getParsecLenght [
 { #category : #'as yet unclassified' }
 HyperJumpBox >> getParsecList [
 	^parsecList 
+]
+
+{ #category : #'as yet unclassified' }
+HyperJumpBox >> isHyperJumpBox [
+	^true.
 ]
 
 { #category : #'as yet unclassified' }

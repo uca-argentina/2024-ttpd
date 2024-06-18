@@ -27,7 +27,10 @@ AHyperJumpBoxTest >> testAHyperJumpBoxHasAParsecList_07 [
 		addParsecsList: aParsecsList
 		withBoardLenght: 100
 		andParsecLength: 100.
-	expectedList := #( 7 5 2 ).
+	expectedList := OrderedCollection new.
+	expectedList add: 7.
+	expectedList add: 5.
+	expectedList add: 2.
 
 	self assert: aHyperJump getParsecList equals: expectedList
 ]
@@ -153,4 +156,12 @@ AHyperJumpBoxTest >> test_09_aHyperJumpKnowsItsAtributes [
 		withBoardLenght: 100
 		andParsecLength: 10.
 	self assert: aHyperJump getParsecLenght > 0
+]
+
+{ #category : #tests }
+AHyperJumpBoxTest >> test_10_WhenAHyperJumpIsAHyperJumpBoxThenItReturnsTrue [
+
+	| aHyperJump |
+	aHyperJump := HyperJumpBox  inPlace: 3.
+	self assert: aHyperJump isHyperJumpBox.
 ]

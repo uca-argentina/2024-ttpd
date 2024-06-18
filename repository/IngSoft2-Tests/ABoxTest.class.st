@@ -27,9 +27,17 @@ ABoxTest >> testWhenTheBoxIsCreatedInPlaceLessThan1ThenBoxInvalid_04 [
 ]
 
 { #category : #tests }
-ABoxTest >> test_03_ABoxIsNotAnHyperGravityBoxThenItReturns0 [
+ABoxTest >> test_03_ABoxIsNotAnHyperGravityBoxThenItReturnsFalse [
 
 | aBox |
 aBox := Box inPlace: 1.
 self deny: aBox isHyperGravityBox.
+]
+
+{ #category : #tests }
+ABoxTest >> test_04_ABoxIsNotAnHyperJumpBoxThenItReturnsFalse [
+
+| aBox |
+aBox := Box inPlace: 1.
+self deny: aBox isHyperJumpBox.
 ]

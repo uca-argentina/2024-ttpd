@@ -559,3 +559,62 @@ ABoardGameTest >> test_23_WhenARedoCardIsPLayedAfterAReDoCardThenTheEffectIsTheO
 	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 79) .
 	
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_24_WhenABoardGameAddsInformationtoAHyperJumpBoxThenItIsAdded [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aParsecsList|
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: HyperJumpBox  withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 3.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBox := aBoard boxes at: 3.
+	aParsecsList := OrderedCollection new.
+	aParsecsList add: (Parsec withValue: 7).
+	aParsecsList add: (Parsec withValue: 5).
+	aParsecsList add: (Parsec withValue: 2).
+	aBoardGame addHyperJumpInformationTo: aBox withParsecList: aParsecsList withParsecLenght: 100.
+
+	self assert: aBox getParsecList equals: aParsecsList . 
+	
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_25_WhenABoardGameAddsInformationtoAHyperGravityBoxThenItIsAdded [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aDieResult|
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: HyperGravityBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 3.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBox := aBoard boxes at: 3.
+	aDieResult := 4.
+	aBoardGame addHyperGravityInformationTo: aBox withDieResult: aDieResult.
+
+	self assert: aBox getNumberOfDie equals: aDieResult . 
+	
+]

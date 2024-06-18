@@ -34,3 +34,8 @@ Box >> initializeInPlace: aPlace [
 Box >> isHyperGravityBox [
 	^false.
 ]
+
+{ #category : #testing }
+Box >> isHyperJumpBox [
+	^false.
+]

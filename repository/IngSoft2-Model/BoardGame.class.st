@@ -27,6 +27,17 @@ BoardGame class >> withShip: aNumberOfShips withBoard: aBoard WithDice: aCollect
 		  andwithNumberOfLaps: numberOfLaps
 ]
 
+{ #category : #adding }
+BoardGame >> addHyperGravityInformationTo: aBox withDieResult: aDieResult [ 
+	aBox setNumber: aDieResult .
+]
+
+{ #category : #'as yet unclassified' }
+BoardGame >> addHyperJumpInformationTo: aBox withParsecList: aParsecList withParsecLenght: aParsecLenght [
+
+	aBox addParsecsList: aParsecList withBoardLenght: board boardSize andParsecLength: aParsecLenght
+]
+
 { #category : #accessing }
 BoardGame >> changeTurn: playerTurn [
 |lastPlayer|
