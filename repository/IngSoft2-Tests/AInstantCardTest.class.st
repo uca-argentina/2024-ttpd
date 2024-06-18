@@ -18,9 +18,9 @@ self deny: aCard isPermanent.
 ]
 
 { #category : #tests }
-AInstantCardTest >> test_02_banan [
+AInstantCardTest >> test_02_WhenAInstantCardTriesToPlayAsAPermanentCardThenAErrorIsRaised [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aInstantCard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aInstantCard |
 	boxDistributions := OrderedCollection new.
 	boxDistributions add:
 		(BoxDistribution of: NoEffectBox withDistribution: 100).
