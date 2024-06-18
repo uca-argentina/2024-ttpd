@@ -44,13 +44,13 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 { #category : #tests }
 ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 
-	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aBoard aShip anotherShip aCollectionOfShips boxesArray |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (MoonWalkBox inPlace: 1).
+	boxesArray add: (MoonWalkBox inPlace: 2).
+	boxesArray add: (MoonWalkBox inPlace: 3).
+	boxesArray add: (MoonWalkBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aShip := Ship createWithMaxFuel: 1000.
 	anotherShip := Ship createWithMaxFuel: 1000.
 	aCollectionOfShips := OrderedCollection new.
@@ -59,10 +59,10 @@ ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 	aBoard
 		players: aCollectionOfShips
 		playerTurn: 1
-		withDiceResult: 82
+		withDiceResult: 3
 		andLaps: 2.
 
-	self assert: aShip getPosition equals: 83.
+	self assert: aShip getPosition equals: 4.
 	self assert: aShip getLaps equals: 1
 ]
 

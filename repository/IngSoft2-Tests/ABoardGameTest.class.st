@@ -55,15 +55,15 @@ ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 { #category : #tests }
 ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWinner [
 
-	| aBoardGame aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes aBoard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aBoardGame aCollectionOfDice boxesArray aLoadedDie aBoard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 50.
+	aLoadedDie := LoadedDie of: 3.
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 2
@@ -492,16 +492,19 @@ ABoardGameTest >> test_21_WhenARedoCardIsPLayedAfterAPermanentCardThenTheEffectI
 { #category : #tests }
 ABoardGameTest >> test_22_WhenARedoCardIsPLayedAfterAInstantCardThenTheEffectIsTheOneOnTheInstantCard [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aRedoCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: BlackHoleBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aRedoCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (MoonWalkBox inPlace: 1).
+	boxesArray add: (MoonWalkBox inPlace: 2).
+	boxesArray add: (MoonWalkBox inPlace: 3).
+	boxesArray add: (MoonWalkBox inPlace: 4).
+	boxesArray add: (MoonWalkBox inPlace: 5).
+	boxesArray add: (MoonWalkBox inPlace: 6).
+	boxesArray add: (MoonWalkBox inPlace: 7).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 50.
-	anotherLoadedDie := LoadedDie of: 40.
+	aLoadedDie := LoadedDie of: 5.
+	anotherLoadedDie := LoadedDie of: 4.
 	aCollectionOfDice add: aLoadedDie.
 	aCollectionOfDice add: anotherLoadedDie.
 	aBoardGame := BoardGame
@@ -518,32 +521,34 @@ ABoardGameTest >> test_22_WhenARedoCardIsPLayedAfterAInstantCardThenTheEffectIsT
 	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
 	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
-	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 87) .
-	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 83) .
-	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 83) .
+	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 4) .
+	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 2) .
+	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 1) .
 	
 ]
 
 { #category : #tests }
 ABoardGameTest >> test_23_WhenARedoCardIsPLayedAfterAReDoCardThenTheEffectIsTheOneOnTheReDoCard [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aRedoCard anotherRedoCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: BlackHoleBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aRedoCard anotherRedoCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	boxesArray add: (NoEffectBox inPlace: 5).
+	boxesArray add: (NoEffectBox inPlace: 6).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 50.
-	anotherLoadedDie := LoadedDie of: 40.
+	aLoadedDie := LoadedDie of: 5.
+	anotherLoadedDie := LoadedDie of: 4.
 	aCollectionOfDice add: aLoadedDie.
 	aCollectionOfDice add: anotherLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 3
 		              withBoard: aBoard
 		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
+		              andwithNumberOfLaps: 3.
 	aBoardGame playTurn.	
 	aBoardGame playTurn.
 	aBoardGame playTurn.	
@@ -556,9 +561,9 @@ ABoardGameTest >> test_23_WhenARedoCardIsPLayedAfterAReDoCardThenTheEffectIsTheO
 	aBoardGame playInstantCard: 3 from: 1 toShip: 2.
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
-	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 87) .
-	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 83) .
-	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 79) .
+	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 4) .
+	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 4) .
+	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 4) .
 	
 ]
 

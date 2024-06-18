@@ -20,13 +20,13 @@ self deny: aCard isPermanent.
 { #category : #tests }
 AInstantCardTest >> test_02_WhenAInstantCardTriesToPlayAsAPermanentCardThenAErrorIsRaised [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aInstantCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aInstantCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.

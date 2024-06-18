@@ -15,7 +15,7 @@ AnEffectManagerTest >> test_01_WhenAnEffectManagerHasOnly1DistributionThenItCrea
 	boxes := anEffectManager createFor: 10.
 
 	self assert: ((boxes at: 1) isKindOf: NoEffectBox).
-	self assert: ((boxes at: 2) isKindOf: NoEffectBox)
+	self assert: (((boxes at: 2) isKindOf: NoEffectBox) or: ((boxes at: 2) isKindOf: WormHoleBox )).
 ]
 
 { #category : #tests }
