@@ -11,6 +11,11 @@ PermanentCard >> canPlayInstantCard [
 ]
 
 { #category : #testing }
+PermanentCard >> canPlayPermanentCard [
+	^true
+]
+
+{ #category : #testing }
 PermanentCard >> isPermanent [
 	^true
 ]

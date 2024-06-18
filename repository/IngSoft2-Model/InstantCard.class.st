@@ -10,6 +10,11 @@ InstantCard >> canPlayInstantCard [
 ]
 
 { #category : #testing }
+InstantCard >> canPlayPermanentCard [
+	Error signal: 'You cant play a Instant Card as a permanent card'.
+]
+
+{ #category : #testing }
 InstantCard >> isPermanent [
 	^false
 ]

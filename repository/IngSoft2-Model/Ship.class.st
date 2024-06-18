@@ -211,6 +211,7 @@ Ship >> playInstantCard: aCardIndex to: aShipOrCardIndex playing: aBoardGame [
 Ship >> playPermanentCard: aCardIndex to: aShipIndex playing: ships [ 
 	| aCard shipAffected cardToRemove |
 	aCard := aCollectionOfCards at: aCardIndex.
+	aCard canPlayPermanentCard.
 	shipAffected := ships at: aShipIndex.
 	aCard aplyEffectFrom: self to: shipAffected withShips: ships.
 	cardToRemove := aCollectionOfCards at: aCardIndex.
