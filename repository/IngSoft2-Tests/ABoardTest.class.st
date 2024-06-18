@@ -29,14 +29,11 @@ ABoardTest >> testWhenABoardIsCreatedThenFirstPositionIsAlwaysANoEffectoBox_12 [
 { #category : #tests }
 ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 
-	| boxDistributions anEffectManager boxes |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 2.
+	| boxesArray |
+	boxesArray := OrderedCollection new.
+
 	self
-		should: [ Board withBoxesArray: boxes ]
+		should: [ Board withBoxesArray: boxesArray ]
 		raise: Error
 		withMessage: 'A Board must have at least 3 box to be created'
 ]
@@ -69,21 +66,21 @@ ABoardTest >> testWhenAShipLandsInABlackHoleBoxThenItsPositionIsUpdated_17 [
 { #category : #tests }
 ABoardTest >> testWhenAShipPassToNextLapThenUpdateLapAndPosition_16 [
 
-	| aBoard aShip anotherShip aCollectionOfShips boxDistributions anEffectManager boxes |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aBoard aShip anotherShip aCollectionOfShips boxesArray |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aShip:=Ship createWithMaxFuel: 1000.
 	anotherShip :=Ship createWithMaxFuel: 1000.
 	aCollectionOfShips:=OrderedCollection  new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: anotherShip .	
-	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 104 andLaps: 2.
+	aBoard players: aCollectionOfShips playerTurn: 1 withDiceResult: 6 andLaps: 2.
 	
-	self assert: aShip getPosition equals: 5.
+	self assert: aShip getPosition equals: 3.
 	
 	self assert:  aShip getLaps equals: 2.
 		
@@ -101,22 +98,6 @@ ABoardTest >> test_20_ABoardCanBeCreatedWithAnArrayOfBoxes [
 	aBoxesArray add: (NoEffectBox inPlace: 4).
 	aBoard := Board withBoxesArray: aBoxesArray.
 	self assert: aBoard boardSize equals: 4.
-]
-
-{ #category : #tests }
-ABoardTest >> test_21_ABoardCanBeCreatedWithAnArrayOfBoxesDoneWithDistributions [
-
-	| boxDistributions anEffectManager boxes aBoard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: AtomicBombBox withDistribution: 80).
-	boxDistributions add:
-		(BoxDistribution of: HyperGravityBox withDistribution: 20).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 50.
-	aBoard := Board withBoxesArray: boxes.
-
-	self assert: aBoard boardSize equals: 50
 ]
 
 { #category : #tests }
