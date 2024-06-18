@@ -10,37 +10,17 @@ ABoardGameTest >> should: anErrorBlock raise: anErrorClass withMessage: aMessage
 ]
 
 { #category : #tests }
-ABoardGameTest >> testWhenAGameIsPlayedWithALoadedDieAndShip1MustWinThenShip1Wins [
-
-	| aBoardGame aBoard aCollectionOfDice aLoadedDie boxDistributions anEffectManager boxes |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 102.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	aBoardGame playTurn.
-	self assert: aBoardGame winnerIs equals: 1
-]
-
-{ #category : #tests }
 ABoardGameTest >> test_05_WhenABoardGameIsCreatedThenItHasANumberOfLapsToDo [
 
-	| aBoardGame aCollectionOfDice aLoadedDie  boxDistributions anEffectManager boxes aBoard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aBoardGame aCollectionOfDice aLoadedDie boxesArray aBoard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	boxesArray add: (NoEffectBox inPlace: 5).
+	boxesArray add: (NoEffectBox inPlace: 6).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 5.
 	aCollectionOfDice add: aLoadedDie.
@@ -82,15 +62,17 @@ ABoardGameTest >> test_06_WhenTheGameIsPlayedWithMoreThanOneBoxThenTheGameHasAWi
 { #category : #tests }
 ABoardGameTest >> test_07_WhenTheGameIsAskedToChangeTurnThenTheTurnIsIncremented [
 
-	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn boxDistributions anEffectManager boxes |
+	| turn aBoard aCollectionOfDice aLoadedDie aBoardGame nextTurn boxesArray |
 	turn := 1.
 
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	boxesArray add: (NoEffectBox inPlace: 5).
+	boxesArray add: (NoEffectBox inPlace: 6).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 102.
 	aCollectionOfDice add: aLoadedDie.
@@ -107,15 +89,17 @@ ABoardGameTest >> test_07_WhenTheGameIsAskedToChangeTurnThenTheTurnIsIncremented
 { #category : #tests }
 ABoardGameTest >> test_08_WhenAGameFinishesThenRankingIsShown [
 
-	| aBoardGame aCollectionOfDice aLoadedDie expectedRanking ranking boxDistributions anEffectManager boxes aBoard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aBoardGame aCollectionOfDice aLoadedDie expectedRanking ranking boxesArray aBoard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	boxesArray add: (NoEffectBox inPlace: 5).
+	boxesArray add: (NoEffectBox inPlace: 6).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #( 3 100 5 ).
+	aLoadedDie := LoadedDieWithSequence loadedWithSequence: #( 3 4 5 ).
 	aCollectionOfDice add: aLoadedDie.
 	aBoardGame := BoardGame
 		              withShip: 3
@@ -181,15 +165,15 @@ ABoardGameTest >> test_10_ABoardGameWillNotStartWithLessThan2Laps [
 { #category : #tests }
 ABoardGameTest >> test_11_WhenItIsAPlayerTurnThenPlayerChooseToPlay [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
-		boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 100.
+	aLoadedDie := LoadedDie of: 4.
 	aCollectionOfDice add: aLoadedDie.
 
 	aBoardGame := BoardGame
@@ -205,15 +189,15 @@ ABoardGameTest >> test_11_WhenItIsAPlayerTurnThenPlayerChooseToPlay [
 { #category : #tests }
 ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 50.
+	aLoadedDie := LoadedDie of: 3.
 	aCollectionOfDice add: aLoadedDie.
 
 	aBoardGame := BoardGame
@@ -232,45 +216,15 @@ ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_13_WhenABoardGamePlayCardThenTheCardAddedToBoardGame [
-
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard aCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 50.
-	aCollectionOfDice add: aLoadedDie.
-
-	aBoardGame := BoardGame
-		              withShip: 2
-		              withBoard: aBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 2.
-	aCard := OverloadCard new.
-	(aBoardGame getShipsPlaying at: 1) addCard: aCard.
-	aBoardGame playTurn.
-	aBoardGame playTurn.
-	aBoardGame playCard: aCard.
-	
-	self assert: ((aBoardGame getCards at:1) isKindOf: Card ).
-
-	
-]
-
-{ #category : #tests }
 ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheShipHand [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard aCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	aCollectionOfDice add: aLoadedDie.
@@ -291,13 +245,13 @@ ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheSh
 { #category : #tests }
 ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFromTheShipHand [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard aCard aPermanentCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard aPermanentCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	aCollectionOfDice add: aLoadedDie.
@@ -321,13 +275,13 @@ ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFro
 { #category : #tests }
 ABoardGameTest >> test_16_ABoardGameKnowsItMaxDieResult [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -346,13 +300,13 @@ ABoardGameTest >> test_16_ABoardGameKnowsItMaxDieResult [
 { #category : #tests }
 ABoardGameTest >> test_17_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMovesAffected [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -376,13 +330,13 @@ ABoardGameTest >> test_17_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMoves
 { #category : #tests }
 ABoardGameTest >> test_18_WhenAOverloadCardIsPlayedThenAllShipsGetTheirMovesAffected [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -438,13 +392,13 @@ ABoardGameTest >> test_19_WhenAAllyCardIsPlayedThenAllShipsGetTheirMovesAffected
 { #category : #tests }
 ABoardGameTest >> test_20_TheGameKnowsTheLastCardBeingPlayed [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -465,13 +419,13 @@ ABoardGameTest >> test_20_TheGameKnowsTheLastCardBeingPlayed [
 { #category : #tests }
 ABoardGameTest >> test_21_WhenARedoCardIsPLayedAfterAPermanentCardThenTheEffectIsTheOneOnThePermanentCard [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aPermanentCard aRedoCard |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: NoEffectBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 100.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aRedoCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -658,13 +612,13 @@ ABoardGameTest >> test_26_WhenABoardGameAddsInformationAMoonWalkBoxThenItIsRetur
 { #category : #tests }
 ABoardGameTest >> test_27_WhenANotHyperGravityBoxAskToAddInformationThenAErrorRaise [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aDieResult |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: MoonWalkBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 4.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aBox aDieResult |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (MoonWalkBox   inPlace: 1).
+	boxesArray add: (MoonWalkBox inPlace: 2).
+	boxesArray add: (MoonWalkBox inPlace: 3).
+	boxesArray add: (MoonWalkBox  inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -690,13 +644,13 @@ ABoardGameTest >> test_27_WhenANotHyperGravityBoxAskToAddInformationThenAErrorRa
 { #category : #tests }
 ABoardGameTest >> test_28_WhenANotHyperJumpBoxAskToAddInformationThenAnErrorRaise [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aParsecsList |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: MoonWalkBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 4.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aBox aParsecsList |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (MoonWalkBox  inPlace: 1).
+	boxesArray add: (MoonWalkBox inPlace: 2).
+	boxesArray add: (MoonWalkBox inPlace: 3).
+	boxesArray add: (MoonWalkBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -725,13 +679,13 @@ ABoardGameTest >> test_28_WhenANotHyperJumpBoxAskToAddInformationThenAnErrorRais
 { #category : #tests }
 ABoardGameTest >> test_29_WhenANotMoonWalkBoxAskToAddInformationThenAnErrorRaise [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aBoxNumber |
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: HyperGravityBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 4.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aBox aBoxNumber |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (HyperGravityBox  inPlace: 1).
+	boxesArray add: (HyperGravityBox inPlace: 2).
+	boxesArray add: (HyperGravityBox inPlace: 3).
+	boxesArray add: (HyperGravityBox  inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
