@@ -36,16 +36,36 @@ EffectManager >> calculateCumulativeDistributions [
 ]
 
 { #category : #'as yet unclassified' }
-EffectManager >> createFor: anAmountOfBoxes [ 
-	| boxes cumulativeDistributions randomValue |
-        boxes := OrderedCollection new: anAmountOfBoxes.
-			boxes add: (NoEffectBox inPlace: 1).		
-        cumulativeDistributions := self calculateCumulativeDistributions.
-        2 to: anAmountOfBoxes do: [:i |
-            randomValue := Random new next * 100.
-            boxes add: (self boxForRandomValue: randomValue cumulativeDistributions: cumulativeDistributions place: i).
-        ].
-        ^boxes
+EffectManager >> createFor: anAmountOfBoxes [
+
+	| boxes cumulativeDistributions randomValue random aWormHole anotheWormHole anIndex anotherIndex |
+	
+	random := Random new.
+	boxes := OrderedCollection new: anAmountOfBoxes.
+	boxes add: (NoEffectBox inPlace: 1).
+	cumulativeDistributions := self calculateCumulativeDistributions.
+	anIndex := Random new nextIntegerBetween: 2 and: anAmountOfBoxes.
+	anotherIndex := (random
+		                nextIntegerBetween: anIndex
+		                and: anAmountOfBoxes).
+	aWormHole := WormHoleBox inPlace: anIndex.
+	anotheWormHole := WormHoleBox inPlace: anotherIndex.
+	aWormHole withDestiny: anotheWormHole.
+	anotheWormHole withDestiny: aWormHole.
+
+	2 to: anAmountOfBoxes do: [ :i |
+		i
+			caseOf: {
+					([ anIndex ] -> [ boxes add: aWormHole ]).
+					([ anotherIndex ] -> [ boxes add: anotheWormHole ]) }
+			otherwise: [
+				randomValue := Random new next * 100.
+				boxes add: (self
+						 boxForRandomValue: randomValue
+						 cumulativeDistributions: cumulativeDistributions
+						 place: i) ] ].
+
+	^ boxes
 ]
 
 { #category : #'as yet unclassified' }

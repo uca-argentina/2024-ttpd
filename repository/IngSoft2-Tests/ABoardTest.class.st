@@ -1,7 +1,7 @@
 Class {
 	#name : #ABoardTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #asserting }
@@ -34,11 +34,11 @@ ABoardTest >> testWhenABoardIsCreatedWithLessThan1BoxThenBoardInvalid [
 	boxDistributions add:
 		(BoxDistribution of: NoEffectBox withDistribution: 100).
 	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 0.
+	boxes := anEffectManager createFor: 2.
 	self
 		should: [ Board withBoxesArray: boxes ]
 		raise: Error
-		withMessage: 'A Board must have at least 1 box to be created'
+		withMessage: 'A Board must have at least 3 box to be created'
 ]
 
 { #category : #tests }

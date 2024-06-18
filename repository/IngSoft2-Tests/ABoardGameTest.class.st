@@ -143,6 +143,7 @@ ABoardGameTest >> test_09_ABoardGameWillNotStartWithLessThan1Ship [
 	boxesArray add: (NoEffectBox inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
 	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
 	self
 		should: [
 			BoardGame
@@ -165,6 +166,7 @@ ABoardGameTest >> test_10_ABoardGameWillNotStartWithLessThan2Laps [
 	boxesArray add: (NoEffectBox inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
 	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
 	self
 		should: [
 			BoardGame
@@ -563,13 +565,13 @@ ABoardGameTest >> test_23_WhenARedoCardIsPLayedAfterAReDoCardThenTheEffectIsTheO
 { #category : #tests }
 ABoardGameTest >> test_24_WhenABoardGameAddsInformationtoAHyperJumpBoxThenItIsAdded [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aParsecsList|
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: HyperJumpBox  withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 3.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aBox aParsecsList|
+	boxesArray := OrderedCollection new.
+	boxesArray add: (HyperJumpBox  inPlace: 1).
+	boxesArray add: (HyperJumpBox inPlace: 2).
+	boxesArray add: (HyperJumpBox inPlace: 3).
+	boxesArray add: (HyperJumpBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -594,13 +596,13 @@ ABoardGameTest >> test_24_WhenABoardGameAddsInformationtoAHyperJumpBoxThenItIsAd
 { #category : #tests }
 ABoardGameTest >> test_25_WhenABoardGameAddsInformationtoAHyperGravityBoxThenItIsAdded [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aDieResult|
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: HyperGravityBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 3.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aBox aDieResult|
+	boxesArray := OrderedCollection new.
+	boxesArray add: (HyperGravityBox inPlace: 1).
+	boxesArray add: (HyperGravityBox inPlace: 2).
+	boxesArray add: (HyperGravityBox inPlace: 3).
+	boxesArray add: (HyperGravityBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -622,13 +624,13 @@ ABoardGameTest >> test_25_WhenABoardGameAddsInformationtoAHyperGravityBoxThenItI
 { #category : #tests }
 ABoardGameTest >> test_26_WhenABoardGameAddsInformationAMoonWalkBoxThenItIsReturned [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aBoxNumber|
-	boxDistributions := OrderedCollection new.
-	boxDistributions add:
-		(BoxDistribution of: MoonWalkBox withDistribution: 100).
-	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 3.
-	aBoard := Board withBoxesArray: boxes.
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aBox aBoxNumber|
+	boxesArray := OrderedCollection new.
+	boxesArray add: (MoonWalkBox inPlace: 1).
+	boxesArray add: (MoonWalkBox inPlace: 2).
+	boxesArray add: (MoonWalkBox inPlace: 3).
+	boxesArray add: (MoonWalkBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
 	anotherLoadedDie := LoadedDie of: 40.
@@ -655,7 +657,7 @@ ABoardGameTest >> test_27_WhenANotHyperGravityBoxAskToAddInformationThenAErrorRa
 	boxDistributions add:
 		(BoxDistribution of: MoonWalkBox withDistribution: 100).
 	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 3.
+	boxes := anEffectManager createFor: 4.
 	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
@@ -687,7 +689,7 @@ ABoardGameTest >> test_28_WhenANotHyperJumpBoxAskToAddInformationThenAnErrorRais
 	boxDistributions add:
 		(BoxDistribution of: MoonWalkBox withDistribution: 100).
 	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 3.
+	boxes := anEffectManager createFor: 4.
 	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.
@@ -722,7 +724,7 @@ ABoardGameTest >> test_29_WhenANotMoonWalkBoxAskToAddInformationThenAnErrorRaise
 	boxDistributions add:
 		(BoxDistribution of: HyperGravityBox withDistribution: 100).
 	anEffectManager := EffectManager with: boxDistributions.
-	boxes := anEffectManager createFor: 3.
+	boxes := anEffectManager createFor: 4.
 	aBoard := Board withBoxesArray: boxes.
 	aCollectionOfDice := OrderedCollection new.
 	aLoadedDie := LoadedDie of: 50.

@@ -22,8 +22,8 @@ Class {
 { #category : #'as yet unclassified' }
 Board class >> withBoxesArray: aBoxesArray [
 
-	aBoxesArray size < 2 ifTrue: [
-		Error signal: 'A Board must have at least 1 box to be created' ].
+	aBoxesArray size < 4 ifTrue: [
+		Error signal: 'A Board must have at least 3 box to be created' ].
 
 	^ self new initializeWithBoxesArray: aBoxesArray
 ]
