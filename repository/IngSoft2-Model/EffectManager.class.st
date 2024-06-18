@@ -39,15 +39,12 @@ EffectManager >> calculateCumulativeDistributions [
 EffectManager >> createFor: anAmountOfBoxes [
 
 	| boxes cumulativeDistributions randomValue random aWormHole anotheWormHole anIndex anotherIndex |
-	
 	random := Random new.
 	boxes := OrderedCollection new: anAmountOfBoxes.
 	boxes add: (NoEffectBox inPlace: 1).
 	cumulativeDistributions := self calculateCumulativeDistributions.
-	anIndex := random nextIntegerBetween: 2 and: (anAmountOfBoxes -1).
-	anotherIndex := (random
-		                nextIntegerBetween: anIndex + 1
-		                and: anAmountOfBoxes).
+	anIndex := (2 to: anAmountOfBoxes - 1) atRandom.
+	anotherIndex := (anIndex + 1 to: anAmountOfBoxes) atRandom.
 	aWormHole := WormHoleBox inPlace: anIndex.
 	anotheWormHole := WormHoleBox inPlace: anotherIndex.
 	aWormHole withDestiny: anotheWormHole.

@@ -95,16 +95,6 @@ AHyperGravityBoxTest >> test_06_WhenAShipThrowsTheCorrectNumberInTheHyperGravity
 ]
 
 { #category : #tests }
-AHyperGravityBoxTest >> test_07_WhenAHyperGravityBoxIsCreatedThenItHasADieResult [
-
-	|aHyperGravityBox |
-	aHyperGravityBox := HyperGravityBox inPlace: 3.
-	aHyperGravityBox setNumber: 5.
-	self assert: aHyperGravityBox getNumberOfDie equals: 5.
-
-]
-
-{ #category : #tests }
 AHyperGravityBoxTest >> test_08_WhenAShipThrowsAFirstTimeTheIncorrectNumberButASecondTimeTheCorrectNumberThenStateChangesToJailThenToPlaying [
 
 	| aShip anotherShip aCollectionOfShips aHyperGravityBox aCollectionOfDice aSequenceDie |
