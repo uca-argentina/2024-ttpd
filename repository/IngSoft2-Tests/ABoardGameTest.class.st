@@ -713,3 +713,35 @@ ABoardGameTest >> test_28_WhenANotHyperJumpBoxAskToAddInformationThenAnErrorRais
 		raise: Error
 		withMessage: 'This is not an HyperJumpBox.'
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_29_WhenANotMoonWalkBoxAskToAddInformationThenAnErrorRaise [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aBoxNumber |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: HyperGravityBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 3.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBox := aBoard boxes at: 3.
+	aBoxNumber := 4.
+
+	self
+		should: [
+			aBoardGame
+				addMoonWalkInformationTo: aBox
+				withBoxesNumber: aBoxNumber ]
+		raise: Error
+		withMessage: 'This is not an MoonWalkBox.'
+]

@@ -46,6 +46,12 @@ Box >> isHyperJumpBox [
 ]
 
 { #category : #testing }
+Box >> numberOfBoxesToMove: aNumberOfBoxesToMove [
+
+	Error signal: 'This is not an MoonWalkBox.'
+]
+
+{ #category : #testing }
 Box >> setNumber: aDieResult [ 
 	Error signal: 'This is not an HyperGravityBox.'
 ]
