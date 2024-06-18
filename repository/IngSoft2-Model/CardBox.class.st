@@ -4,12 +4,12 @@ Class {
 	#instVars : [
 		'myCardManager'
 	],
-	#category : 'IngSoft2-Model'
+	#category : #'IngSoft2-Model'
 }
 
 { #category : #'as yet unclassified' }
-CardBox class >> inPlace: aPosition withCardManager: aCardsManager [ 
-	^self new initializeInPlace: aPosition withCardManager: aCardsManager.
+CardBox class >> inPlace: aPosition [
+	^self new initializeInPlace: aPosition.
 ]
 
 { #category : #'as yet unclassified' }
@@ -25,7 +25,7 @@ CardBox >> getCardManager [
 ]
 
 { #category : #initialization }
-CardBox >> initializeInPlace: aPosition withCardManager: aCardsManager [ 
+CardBox >> initializeInPlace: aPosition [
 	place := aPosition.
-	myCardManager := aCardsManager.
+	myCardManager := CardsManager new.
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #ACardBoxTest,
 	#superclass : #TestCase,
-	#category : 'IngSoft2-Tests'
+	#category : #'IngSoft2-Tests'
 }
 
 { #category : #tests }
@@ -9,7 +9,7 @@ ACardBoxTest >> test_01_WhenACardBoxIsCreatedThenItHasACardManager [
 
 	| aCardManager aCardBox |
 	aCardManager := CardsManager new.
-	aCardBox := CardBox inPlace: 4 withCardManager: aCardManager.
+	aCardBox := CardBox inPlace: 4.
 	self assert: ((aCardBox getCardManager) isKindOf: CardsManager). 
 	
 	
@@ -25,7 +25,7 @@ ACardBoxTest >> test_02_WhenAShipLandsInACardBoxThenACardIsAddedToItsCollectionO
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: anotherShip.
 	aCardManager := CardsManager new.
-	aCardBox := CardBox inPlace: 5 withCardManager: aCardManager.
+	aCardBox := CardBox inPlace: 5.
 	aShip moves: 4.
 	aShip consumeFuel: 4.
 	aCardBox effectShips: aCollectionOfShips playing: aShip.
