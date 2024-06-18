@@ -14,6 +14,11 @@ Box class >> inPlace: aPlace [
 	^self new initializeInPlace: aPlace.
 ]
 
+{ #category : #testing }
+Box >> addParsecsList: aParsecList withBoardLenght: aBoardLength andParsecLength: aParsecLength [ 
+	Error signal: 'This is not an HyperJumpBox.'
+]
+
 { #category : #'as yet unclassified' }
 Box >> effectShips: aCollectionOfShips playing: aShip [ 
 	
@@ -38,4 +43,9 @@ Box >> isHyperGravityBox [
 { #category : #testing }
 Box >> isHyperJumpBox [
 	^false.
+]
+
+{ #category : #testing }
+Box >> setNumber: aDieResult [ 
+	Error signal: 'This is not an HyperGravityBox.'
 ]

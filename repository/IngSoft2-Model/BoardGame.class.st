@@ -38,6 +38,11 @@ BoardGame >> addHyperJumpInformationTo: aBox withParsecList: aParsecList withPar
 	aBox addParsecsList: aParsecList withBoardLenght: board boardSize andParsecLength: aParsecLenght
 ]
 
+{ #category : #adding }
+BoardGame >> addMoonWalkInformationTo: aBox withBoxesNumber: aNumberOfBoxesToMove [ 
+	aBox numberOfBoxesToMove: aNumberOfBoxesToMove.
+]
+
 { #category : #accessing }
 BoardGame >> changeTurn: playerTurn [
 |lastPlayer|

@@ -618,3 +618,98 @@ ABoardGameTest >> test_25_WhenABoardGameAddsInformationtoAHyperGravityBoxThenItI
 	self assert: aBox getNumberOfDie equals: aDieResult . 
 	
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_26_WhenABoardGameAddsInformationAMoonWalkBoxThenItIsReturned [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aBoxNumber|
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: MoonWalkBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 3.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBox := aBoard boxes at: 3.
+	aBoxNumber := 4.
+	aBoardGame addMoonWalkInformationTo: aBox withBoxesNumber: aBoxNumber.
+
+	self assert: aBox getnumberOfBoxesToMove equals: aBoxNumber . 
+	
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_27_WhenANotHyperGravityBoxAskToAddInformationThenAErrorRaise [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aDieResult |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: MoonWalkBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 3.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBox := aBoard boxes at: 3.
+	aDieResult := 4.
+
+	self
+		should: [
+			aBoardGame
+				addHyperGravityInformationTo: aBox
+				withDieResult: aDieResult ]
+		raise: Error
+		withMessage: 'This is not an HyperGravityBox.'
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_28_WhenANotHyperJumpBoxAskToAddInformationThenAnErrorRaise [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxDistributions anEffectManager boxes aBoard anotherLoadedDie aBox aParsecsList |
+	boxDistributions := OrderedCollection new.
+	boxDistributions add:
+		(BoxDistribution of: MoonWalkBox withDistribution: 100).
+	anEffectManager := EffectManager with: boxDistributions.
+	boxes := anEffectManager createFor: 3.
+	aBoard := Board withBoxesArray: boxes.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aBox := aBoard boxes at: 3.
+	aParsecsList := OrderedCollection new.
+	aParsecsList add: (Parsec withValue: 7).
+	aParsecsList add: (Parsec withValue: 5).
+	aParsecsList add: (Parsec withValue: 2).
+	self
+		should: [
+			aBoardGame
+				addHyperJumpInformationTo: aBox
+				withParsecList: aParsecsList
+				withParsecLenght: 100 ]
+		raise: Error
+		withMessage: 'This is not an HyperJumpBox.'
+]
