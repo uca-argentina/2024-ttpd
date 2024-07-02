@@ -126,8 +126,8 @@ BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShipOrCardIndex: ano
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollection: shipsPlaying [ 
-	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
+BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex [
+	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: aCollectionOfShips.
 	board checkAfterEffects: aCollectionOfShips.
 	aCollectionOfCards add: lastCard.
 ]
@@ -142,8 +142,7 @@ BoardGame >> playRedoCard: aCardIndex fromShip: aShipFromIndex toShipOrCardIndex
 		ifTrue: [
 			self
 				playPermanentCard: cardIndex
-				toShipIndex: toShipOrCardIndex
-				inShipCollection: aCollectionOfShips ]
+				toShipIndex: toShipOrCardIndex]
 		ifFalse: [
 			self
 				playInstantCard: cardIndex

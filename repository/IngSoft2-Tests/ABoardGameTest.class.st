@@ -264,7 +264,7 @@ ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFro
 	aPermanentCard := OverloadCard new.
 	((aBoardGame getShipsPlaying) at: 1)	 addCard: aCard.
 	((aBoardGame getShipsPlaying) at: 1)	 addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 4 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playPermanentCard: 4 toShipIndex: 2.
 	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 1.
 
 	self assert: (((aBoardGame getShipsPlaying at: 1) getCards) size = 2).
@@ -318,7 +318,7 @@ ABoardGameTest >> test_17_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMoves
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := AccelerationCard new.
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playPermanentCard: 3 toShipIndex: 2.
 	(aBoardGame getShipsPlaying at: 1) moves: 89.
 	(aBoardGame getShipsPlaying at: 2) moves: 89.
 	self assert: ((aBoardGame getShipsPlaying at: 1) getPosition) equals: 91.
@@ -348,7 +348,7 @@ ABoardGameTest >> test_18_WhenAOverloadCardIsPlayedThenAllShipsGetTheirMovesAffe
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := OverloadCard new.
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playPermanentCard: 3 toShipIndex: 2.
 	(aBoardGame getShipsPlaying at: 1) moves: 89.
 	(aBoardGame getShipsPlaying at: 2) moves: 89.
 	self assert: ((aBoardGame getShipsPlaying at: 2) getPosition) equals: 88.
@@ -380,7 +380,7 @@ ABoardGameTest >> test_19_WhenAAllyCardIsPlayedThenAllShipsGetTheirMovesAffected
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := AllyCard new.
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playPermanentCard: 3 toShipIndex: 2.
 	(aBoardGame getShipsPlaying at: 1) moves: 23.
 	(aBoardGame getShipsPlaying at: 1) consumeFuel: 23.
 	self assert: ((aBoardGame getShipsPlaying at: 1) getPosition) equals: 24.
@@ -410,7 +410,7 @@ ABoardGameTest >> test_20_TheGameKnowsTheLastCardBeingPlayed [
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := AllyCard new.
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playPermanentCard: 3 toShipIndex: 2.
 	self assert: ((aBoardGame getLastCard) isKindOf: AllyCard) .
 	
 ]
@@ -439,7 +439,7 @@ ABoardGameTest >> test_21_WhenARedoCardIsPLayedAfterAPermanentCardThenTheEffectI
 	aRedoCard := RedoCard  new.
 	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
 	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2 inShipCollection: (aBoardGame getShipsPlaying).
+	aBoardGame playPermanentCard: 3 toShipIndex: 2.
 	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
 	self assert: ((aBoardGame getShipsPlaying at: 3) getActiveCards size = 1) .
 	

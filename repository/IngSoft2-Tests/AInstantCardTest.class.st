@@ -41,7 +41,7 @@ AInstantCardTest >> test_02_WhenAInstantCardTriesToPlayAsAPermanentCardThenAErro
 	(aBoardGame getShipsPlaying at: 1) addCard: aInstantCard. 
 	self
 		should: [
-		aBoardGame playPermanentCard: 3 toShipIndex: 1 inShipCollection:  (aBoardGame getShipsPlaying)]
+		aBoardGame playPermanentCard: 3 toShipIndex: 1]
 		raise: Error
 		withMessage: 'You cant play a Instant Card as a permanent card'
 ]
