@@ -18,6 +18,18 @@ AllyCard class >> with: aShip [
 ]
 
 { #category : #'as yet unclassified' }
+AllyCard >> affectTo: aShipAlly from: aShip playing: aBoardGame [ 
+	|card1 card2|
+	card1 := AllyCard with: aShipAlly.
+	card2 := AllyCard with: aShip.
+	
+	aShipAlly addActiveCards: card2.
+	aShip addActiveCards: card1.
+	
+	^card1
+]
+
+{ #category : #'as yet unclassified' }
 AllyCard >> aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips [
 
 	| card1 card2 |
