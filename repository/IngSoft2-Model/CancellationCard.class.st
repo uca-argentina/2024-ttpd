@@ -13,6 +13,15 @@ CancellationCard >> affect: aCardIndex in: aBoardGame [
 	self removeCard: aCard from: activeCardsInGame toShips: collectionOfShips
 ]
 
+{ #category : #'as yet unclassified' }
+CancellationCard >> affectTo: aCard from: aShip playing: aBoardGame [ 
+	| shipsPlaying |
+	shipsPlaying := aBoardGame getShipsPlaying.
+	shipsPlaying do: [ :ship | ship removeActiveCard: aCard ].
+	^CancellationCard new.
+	
+]
+
 { #category : #removing }
 CancellationCard >> removeCard: aCard from: activeCardsInGame toShips: collectionOfShips [
 

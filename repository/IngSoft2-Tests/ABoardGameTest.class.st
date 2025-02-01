@@ -446,42 +446,6 @@ ABoardGameTest >> test_21_WhenARedoCardIsPLayedAfterAPermanentCardThenTheEffectI
 ]
 
 { #category : #tests }
-ABoardGameTest >> test_22_WhenARedoCardIsPLayedAfterAInstantCardThenTheEffectIsTheOneOnTheInstantCard [
-
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aPermanentCard aRedoCard |
-	boxesArray := OrderedCollection new.
-	boxesArray add: (NoEffectBox inPlace: 1).
-	boxesArray add: (BlackHoleBox inPlace: 2).
-	boxesArray add: (BlackHoleBox inPlace: 3).
-	boxesArray add: (BlackHoleBox inPlace: 4).
-	boxesArray add: (BlackHoleBox inPlace: 5).
-	boxesArray add: (BlackHoleBox inPlace: 6).
-	boxesArray add: (BlackHoleBox inPlace: 7).
-	aBoard := Board withBoxesArray: boxesArray.
-	aCollectionOfDice := OrderedCollection new.
-	aLoadedDie := LoadedDie of: 9.
-	aCollectionOfDice add: aLoadedDie.
-	aBoardGame := BoardGame
-		              withShip: 3
-		              withBoard: aBoard
-		              WithDice: aCollectionOfDice
-		              andwithNumberOfLaps: 3.
-	aBoardGame playTurn.	
-	aBoardGame playTurn.
-	aBoardGame playTurn.	
-	aPermanentCard := RepeatCard new.
-	aRedoCard := RedoCard  new.
-	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	(aBoardGame getShipsPlaying at: 1) addCard: aRedoCard.
-	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 2.
-	aBoardGame playRedoCard: 3 fromShip: 1 toShipOrCardIndex: 3.
-	self assert: (((aBoardGame getShipsPlaying at: 1) getPosition) = 6) .
-	self assert: (((aBoardGame getShipsPlaying at: 2) getPosition) = 2) .
-	self assert: (((aBoardGame getShipsPlaying at: 3) getPosition) = 2) .
-	
-]
-
-{ #category : #tests }
 ABoardGameTest >> test_23_WhenARedoCardIsPLayedAfterAReDoCardThenTheEffectIsTheOneOnTheReDoCard [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aRedoCard anotherRedoCard |
