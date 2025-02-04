@@ -15,6 +15,6 @@ InstantCard >> canPlayPermanentCard [
 ]
 
 { #category : #testing }
-InstantCard >> isPermanent [
-	^false
+InstantCard >> isInstant [ 
+	^true
 ]

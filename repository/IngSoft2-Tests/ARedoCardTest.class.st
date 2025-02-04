@@ -8,7 +8,6 @@ Class {
 ARedoCardTest >> test_01_banana [
 	
 	|aRedoCard|
-	
 	aRedoCard := RedoCard new.
 	
 ]

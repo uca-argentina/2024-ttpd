@@ -53,3 +53,11 @@ APermanentCardTest >> test_05_WhenAPermanentCardIsAskedIfIsPermanentThenTheAnswe
 	aCard := PermanentCard new.
 	self assert: aCard isPermanent.
 ]
+
+{ #category : #running }
+APermanentCardTest >> test_06_WhenAPermanentCardIsAskedIfIsInstatThenTheAnswerIsFalse [
+
+	| aCard |
+	aCard := PermanentCard new.
+	self deny: aCard isInstant.
+]

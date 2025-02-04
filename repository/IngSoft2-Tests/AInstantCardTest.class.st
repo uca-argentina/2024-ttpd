@@ -18,6 +18,14 @@ self deny: aCard isPermanent.
 ]
 
 { #category : #tests }
+AInstantCardTest >> test_02_WhenAInstantCardIsAskedIfISInstantThenTheAnswerIsTrue [
+
+| aCard |
+aCard := InstantCard new.
+self assert: aCard isInstant.
+]
+
+{ #category : #tests }
 AInstantCardTest >> test_02_WhenAInstantCardTriesToPlayAsAPermanentCardThenAErrorIsRaised [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aInstantCard |
