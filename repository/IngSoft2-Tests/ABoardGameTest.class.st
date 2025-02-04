@@ -767,3 +767,31 @@ ABoardGameTest >> test_32_WhenAAllyCardIsPlayedThenShipsGetTheirMovesAffected_Re
 	self assert: (aShip getPosition) equals: 24.
 	self assert: (anotherShip getFuel) equals: 21.
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_33_TheGameKnowsTheLastCardBeingPlayed_Refactor [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aCard aShip anotherShip |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aCard := AllyCard new.
+	aShip := (aBoardGame getShipsPlaying at: 1).
+	anotherShip := (aBoardGame getShipsPlaying at: 2).
+	aShip addCard: aCard.
+	aBoardGame playCard: aCard fromShip: aShip toTarget: anotherShip.
+	self assert: ((aBoardGame getLastCard) isKindOf: AllyCard) .
+]

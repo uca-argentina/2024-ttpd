@@ -120,6 +120,7 @@ BoardGame >> passTurn [
 { #category : #'as yet unclassified' }
 BoardGame >> playCard: aCard fromShip: aShip toTarget: aTarget [
 	aCard affectTo:  aTarget from: aShip playing: self.
+	lastCard := aCard.
 ]
 
 { #category : #'as yet unclassified' }
