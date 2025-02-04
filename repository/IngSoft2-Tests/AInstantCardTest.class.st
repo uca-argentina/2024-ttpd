@@ -26,7 +26,7 @@ self assert: aCard isInstant.
 ]
 
 { #category : #tests }
-AInstantCardTest >> test_02_WhenAInstantCardTriesToPlayAsAPermanentCardThenAErrorIsRaised [
+AInstantCardTest >> test_03_WhenAInstantCardTriesToPlayAsAPermanentCardThenAErrorIsRaised [
 
 	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aInstantCard |
 	boxesArray := OrderedCollection new.

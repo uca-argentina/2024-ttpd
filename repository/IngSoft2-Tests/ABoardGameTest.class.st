@@ -670,3 +670,100 @@ ABoardGameTest >> test_29_WhenANotMoonWalkBoxAskToAddInformationThenAnErrorRaise
 		raise: Error
 		withMessage: 'This is not an MoonWalkBox.'
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_30_WhenAOverloadCardIsPlayedThenTheShipsMovesGetAffected_Refactor [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aOverloadCard aShip anotherShip |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aOverloadCard := OverloadCard new.
+	aShip := aBoardGame getShipsPlaying at: 1.
+	anotherShip := aBoardGame getShipsPlaying at: 2.
+	aShip addCard: aOverloadCard.
+	aBoardGame playCard: aOverloadCard fromShip: aShip toTarget: anotherShip.
+	aShip moves: 89.
+	anotherShip moves: 89.
+	self assert: (anotherShip getPosition) equals: 88.
+	
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_31_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMovesAffected_Refactor [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie anAcellerationCard aShip anotherShip shipsPlaying |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	anAcellerationCard := AccelerationCard new.
+	aShip := aBoardGame getShipsPlaying at: 1.
+	anotherShip := aBoardGame getShipsPlaying at: 2.
+	aShip addCard: anAcellerationCard.
+	shipsPlaying := aBoardGame getShipsPlaying.
+	aBoardGame playCard: anAcellerationCard  fromShip: aShip  toTarget: shipsPlaying.
+	aShip moves: 89.
+	anotherShip moves: 89.
+	self assert: (aShip getPosition) equals: 91.
+	self assert: (anotherShip getPosition) equals: 91.
+]
+
+{ #category : #tests }
+ABoardGameTest >> test_32_WhenAAllyCardIsPlayedThenShipsGetTheirMovesAffected_Refactor [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie anAllyCard aShip anotherShip |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	boxesArray add: (NoEffectBox inPlace: 5).
+	boxesArray add: (NoEffectBox inPlace: 6).
+	boxesArray add: (NoEffectBox inPlace: 7).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 5.
+	anotherLoadedDie := LoadedDie of: 4.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 2
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	anAllyCard := AllyCard new.
+	aShip := (aBoardGame getShipsPlaying at: 1).
+	aShip addCard: anAllyCard.
+	anotherShip := (aBoardGame getShipsPlaying at: 2).
+	aBoardGame playCard: anAllyCard fromShip: aShip toTarget: anotherShip.
+	aShip moves: 23.
+	aShip consumeFuel: 23.
+	self assert: (aShip getPosition) equals: 24.
+	self assert: (anotherShip getFuel) equals: 21.
+]

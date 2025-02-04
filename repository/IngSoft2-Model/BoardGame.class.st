@@ -118,6 +118,11 @@ BoardGame >> passTurn [
 ]
 
 { #category : #'as yet unclassified' }
+BoardGame >> playCard: aCard fromShip: aShip toTarget: aTarget [
+	aCard affectTo:  aTarget from: aShip playing: self.
+]
+
+{ #category : #'as yet unclassified' }
 BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShipOrCardIndex: anotherShipIndex [
 	| shipPlayingCard |
 	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
