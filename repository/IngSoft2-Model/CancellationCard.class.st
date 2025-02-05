@@ -5,15 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CancellationCard >> affect: aCardIndex in: aBoardGame [ 
-	| aCard activeCardsInGame collectionOfShips |
-	activeCardsInGame := aBoardGame getCards.
-	aCard := activeCardsInGame at: aCardIndex.
-	collectionOfShips := aBoardGame getShipsPlaying.
-	self removeCard: aCard from: activeCardsInGame toShips: collectionOfShips
-]
-
-{ #category : #'as yet unclassified' }
 CancellationCard >> affectTo: aCard from: aShip playing: aBoardGame [ 
 	| shipsPlaying |
 	shipsPlaying := aBoardGame getShipsPlaying.

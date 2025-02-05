@@ -5,18 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-RepeatCard >> affect: aShipIndex in: aBoardGame [
-
-	| collectionOfShips board aBox |
-	collectionOfShips := aBoardGame getShipsPlaying.
-	board := aBoardGame getBoard.
-	aBox := board getLastBox.
-	self applyEffect: aBox toShip: aShipIndex withShipsPlaying: collectionOfShips 
-
-	
-]
-
-{ #category : #'as yet unclassified' }
 RepeatCard >> affectTo: aShip from: aShip2 playing: aBoardGame [ 
 	| collectionOfShips board aBox |
 	collectionOfShips := aBoardGame getShipsPlaying.

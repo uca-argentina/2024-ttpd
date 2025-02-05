@@ -5,17 +5,6 @@ Class {
 }
 
 { #category : #testing }
-PermanentCard >> canPlayInstantCard [
-	Error signal: 'You cant play a Permanent Card in any turn'.
-
-]
-
-{ #category : #testing }
-PermanentCard >> canPlayPermanentCard [
-	^true
-]
-
-{ #category : #testing }
 PermanentCard >> isPermanent [
 	^true
 ]
