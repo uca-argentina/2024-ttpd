@@ -124,13 +124,6 @@ BoardGame >> playCard: aCard fromShip: aShip toTarget: aTarget [
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex [
-	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: aCollectionOfShips.
-	board checkAfterEffects: aCollectionOfShips.
-	aCollectionOfCards add: lastCard.
-]
-
-{ #category : #'as yet unclassified' }
 BoardGame >> playTurn [
 
 	| dieResult |

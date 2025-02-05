@@ -303,7 +303,7 @@ ABoardGameTest >> test_16_ABoardGameKnowsItMaxDieResult [
 { #category : #tests }
 ABoardGameTest >> test_17_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMovesAffected [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aShip anotherShip shipsPlaying |
 	boxesArray := OrderedCollection new.
 	boxesArray add: (NoEffectBox  inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
@@ -321,19 +321,22 @@ ABoardGameTest >> test_17_WhenAAccelerationCardIsPlayedThenAllShipsGetTheirMoves
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := AccelerationCard new.
-	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2.
-	(aBoardGame getShipsPlaying at: 1) moves: 89.
-	(aBoardGame getShipsPlaying at: 2) moves: 89.
-	self assert: ((aBoardGame getShipsPlaying at: 1) getPosition) equals: 91.
-	self assert: ((aBoardGame getShipsPlaying at: 2) getPosition) equals: 91.
+	aShip := (aBoardGame getShipsPlaying at: 1).
+	anotherShip := (aBoardGame getShipsPlaying at: 2).
+	shipsPlaying := aBoardGame getShipsPlaying.
+	aShip addCard: aPermanentCard.
+	aBoardGame playCard: aPermanentCard fromShip: aShip toTarget: shipsPlaying.
+	aShip moves: 89.
+	anotherShip moves: 89.
+	self assert: (aShip getPosition) equals: 91.
+	self assert: (anotherShip getPosition) equals: 91.
 	
 ]
 
 { #category : #tests }
 ABoardGameTest >> test_18_WhenAOverloadCardIsPlayedThenAllShipsGetTheirMovesAffected [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aShip anotherShip |
 	boxesArray := OrderedCollection new.
 	boxesArray add: (NoEffectBox  inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
@@ -351,9 +354,11 @@ ABoardGameTest >> test_18_WhenAOverloadCardIsPlayedThenAllShipsGetTheirMovesAffe
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := OverloadCard new.
-	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2.
-	(aBoardGame getShipsPlaying at: 1) moves: 89.
+	aShip := (aBoardGame getShipsPlaying at: 1).
+	anotherShip := (aBoardGame getShipsPlaying at: 2).
+	aShip addCard: aPermanentCard.
+	aBoardGame playCard: aPermanentCard fromShip: aShip toTarget: anotherShip.
+	aShip moves: 89.
 	(aBoardGame getShipsPlaying at: 2) moves: 89.
 	self assert: ((aBoardGame getShipsPlaying at: 2) getPosition) equals: 88.
 	
@@ -362,7 +367,7 @@ ABoardGameTest >> test_18_WhenAOverloadCardIsPlayedThenAllShipsGetTheirMovesAffe
 { #category : #tests }
 ABoardGameTest >> test_19_WhenAAllyCardIsPlayedThenAllShipsGetTheirMovesAffected [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aShip anotherShip |
 	boxesArray := OrderedCollection new.
 	boxesArray add: (NoEffectBox inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
@@ -383,19 +388,21 @@ ABoardGameTest >> test_19_WhenAAllyCardIsPlayedThenAllShipsGetTheirMovesAffected
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := AllyCard new.
-	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2.
-	(aBoardGame getShipsPlaying at: 1) moves: 23.
-	(aBoardGame getShipsPlaying at: 1) consumeFuel: 23.
-	self assert: ((aBoardGame getShipsPlaying at: 1) getPosition) equals: 24.
-	self assert: ((aBoardGame getShipsPlaying at: 2) getFuel) equals: 21.
+	aShip := (aBoardGame getShipsPlaying at: 1).
+	anotherShip := (aBoardGame getShipsPlaying at: 2).
+	aShip addCard: aPermanentCard.
+	aBoardGame playCard: aPermanentCard fromShip: aShip toTarget: anotherShip.
+	aShip moves: 23.
+	aShip consumeFuel: 23.
+	self assert: (aShip getPosition) equals: 24.
+	self assert: (anotherShip getFuel) equals: 21.
 	
 ]
 
 { #category : #tests }
 ABoardGameTest >> test_20_TheGameKnowsTheLastCardBeingPlayed [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aPermanentCard aShip anotherShip |
 	boxesArray := OrderedCollection new.
 	boxesArray add: (NoEffectBox  inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
@@ -413,8 +420,10 @@ ABoardGameTest >> test_20_TheGameKnowsTheLastCardBeingPlayed [
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 	aPermanentCard := AllyCard new.
-	(aBoardGame getShipsPlaying at: 1) addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 3 toShipIndex: 2.
+	aShip := (aBoardGame getShipsPlaying at: 1).
+	anotherShip := (aBoardGame getShipsPlaying at: 2).
+	aShip addCard: aPermanentCard.
+	aBoardGame playCard: aPermanentCard fromShip: aShip toTarget: anotherShip.
 	self assert: ((aBoardGame getLastCard) isKindOf: AllyCard) .
 	
 ]
