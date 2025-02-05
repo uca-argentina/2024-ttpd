@@ -30,17 +30,6 @@ AllyCard >> affectTo: aShipAlly from: aShip playing: aBoardGame [
 ]
 
 { #category : #'as yet unclassified' }
-AllyCard >> aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips [
-
-	| card1 card2 |
-	card1 := AllyCard with: aShip.
-	card2 := AllyCard with: anotherShip.
-
-	aShip addActiveCards: card2.
-	anotherShip addActiveCards: card1
-]
-
-{ #category : #'as yet unclassified' }
 AllyCard >> getAlly [
 	^ally
 ]

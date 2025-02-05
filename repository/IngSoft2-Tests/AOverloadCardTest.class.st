@@ -14,18 +14,28 @@ self assert:aCard powerMove equals: -2.
 
 { #category : #running }
 AOverloadCardTest >> test_02_WhenAOverloadCardIsAplyToAShipThentheCardIsAddedToTheCollectionOfActiveCards [
-| aCard aShip anotherShip aCollectionOfShips aCollectionOfDice aDie |
+| aCard aShip anotherShip aCollectionOfShips aCollectionOfDice aDie boxesArray aBoard aLoadedDie anotherLoadedDie aBoardGame |
 aCard:= OverloadCard new.
 
-	aShip := Ship createWithMaxFuel: 1000.
-	anotherShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:=OrderedCollection new.
-	aCollectionOfShips add:aShip.
-	aCollectionOfShips add:anotherShip.	
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
 	aCollectionOfDice := OrderedCollection new.
-	aDie := LoadedDie of: 3.
-	aCollectionOfDice add: aDie.
-	aCard aplyEffectFrom: 1 to: anotherShip withShips: aCollectionOfShips.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aShip := aBoardGame getShipsPlaying at: 1.
+	anotherShip := aBoardGame getShipsPlaying at: 2.
+	aCard affectTo: anotherShip from: aShip playing: aBoardGame.
 
 	
 self assert:((anotherShip getActiveCards at:1) isKindOf:OverloadCard).
