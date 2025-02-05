@@ -218,7 +218,7 @@ ABoardGameTest >> test_12_WhenItIsAPlayerTurnThenPlayerChooseToPassTurn [
 { #category : #tests }
 ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheShipHand [
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard aShip anotherShip |
 	boxesArray := OrderedCollection new.
 	boxesArray add: (NoEffectBox  inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
@@ -234,10 +234,12 @@ ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheSh
 		              WithDice: aCollectionOfDice
 		              andwithNumberOfLaps: 2.
 	aCard := RepeatCard new.
-	((aBoardGame getShipsPlaying) at: 1)	 addCard: aCard.
-	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 2.
+	aShip := ((aBoardGame getShipsPlaying) at: 1).
+	anotherShip := ((aBoardGame getShipsPlaying) at: 2).
+	aShip addCard: aCard.
+	aBoardGame playCard: aCard fromShip: aShip toTarget: anotherShip.
 	
-	self assert: (((aBoardGame getShipsPlaying at: 1) getCards) size = 2).
+	self assert: ((aShip getCards) size = 2).
 
 	
 ]
@@ -245,7 +247,7 @@ ABoardGameTest >> test_14_WhenAnRepeatCardIsPlayedByAShipThenItsRemovedFromTheSh
 { #category : #tests }
 ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFromTheShipHand [ 
 
-	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard aPermanentCard |
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard aCard aPermanentCard aShip anotherShip |
 	boxesArray := OrderedCollection new.
 	boxesArray add: (NoEffectBox  inPlace: 1).
 	boxesArray add: (NoEffectBox inPlace: 2).
@@ -262,10 +264,12 @@ ABoardGameTest >> test_15_WhenAnCancellationCardIsPlayedByAShipThenItsRemovedFro
 		              andwithNumberOfLaps: 2.
 	aCard := CancellationCard new.
 	aPermanentCard := OverloadCard new.
-	((aBoardGame getShipsPlaying) at: 1)	 addCard: aCard.
-	((aBoardGame getShipsPlaying) at: 1)	 addCard: aPermanentCard.
-	aBoardGame playPermanentCard: 4 toShipIndex: 2.
-	aBoardGame playInstantCard: 3 from: 1 toShipOrCardIndex: 1.
+	aShip := ((aBoardGame getShipsPlaying) at: 1).
+	anotherShip := ((aBoardGame getShipsPlaying) at: 2).
+	aShip addCard: aCard.
+	aShip addCard: aPermanentCard.
+	aBoardGame playCard: aPermanentCard fromShip: aShip toTarget: anotherShip.
+	aBoardGame playCard: aCard fromShip: aShip toTarget: aPermanentCard.
 
 	self assert: (((aBoardGame getShipsPlaying at: 1) getCards) size = 2).
 	self assert: aBoardGame getCards size = 0.
