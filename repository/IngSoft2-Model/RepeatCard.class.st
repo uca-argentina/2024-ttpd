@@ -22,7 +22,8 @@ RepeatCard >> affectTo: aShip from: aShip2 playing: aBoardGame [
 	collectionOfShips := aBoardGame getShipsPlaying.
 	board := aBoardGame getBoard.
 	aBox := board getLastBox.
-	self applyEffect: aBox toShip: aShip withShipsPlaying: collectionOfShips 
+	self applyEffect: aBox toShip: aShip withShipsPlaying: collectionOfShips.
+	^RepeatCard new. 
 ]
 
 { #category : #'as yet unclassified' }
