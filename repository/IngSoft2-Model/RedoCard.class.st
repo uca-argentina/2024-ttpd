@@ -11,3 +11,8 @@ RedoCard >> affectTo: aTarget from: aShip playing: aBoardGame [
 	aBoardGame playCard: aCard fromShip: aShip toTarget: aTarget.
 	^aCard.
 ]
+
+{ #category : #testing }
+RedoCard >> isRedo [
+	^true
+]

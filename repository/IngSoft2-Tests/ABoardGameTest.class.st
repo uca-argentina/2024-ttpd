@@ -812,3 +812,35 @@ ABoardGameTest >> test_33_TheGameKnowsTheLastCardBeingPlayed_Refactor [
 	aBoardGame playCard: aCard fromShip: aShip toTarget: anotherShip.
 	self assert: ((aBoardGame getLastCard) isKindOf: AllyCard) .
 ]
+
+{ #category : #tests }
+ABoardGameTest >> test_34_WhenAShipTryesToPlayAPermanentCardAndItsNotItsTurnThenAnErrorIsRaised [
+
+	| aCollectionOfDice aLoadedDie aBoardGame boxesArray aBoard anotherLoadedDie aCard aShip anotherShip aPermanentCard |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aPermanentCard := OverloadCard new.
+	aShip := (aBoardGame getShipsPlaying at: 1).
+	anotherShip := (aBoardGame getShipsPlaying at: 2).
+	anotherShip addCard: aPermanentCard.
+	self should: [
+			aBoardGame
+				playCard: aPermanentCard fromShip: anotherShip toTarget: aShip ]
+		raise: Error
+		withMessage: 'You cant play a permanent card when its not your turn.'.
+
+]

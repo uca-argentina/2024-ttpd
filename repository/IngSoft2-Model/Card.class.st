@@ -13,3 +13,8 @@ Card >> isInstant [
 Card >> isPermanent [
 	^false
 ]
+
+{ #category : #testing }
+Card >> isRedo [
+	^false
+]

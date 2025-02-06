@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-ARedoCardTest >> test_01_banana [
+ARedoCardTest >> test_01_aRedoCardIsImplementedBasedOnTheLastCardPlayed [
 	
 	| anOverloadCard aShip anotherShip aBoardGame boxesArray aBoard aCollectionOfDice aLoadedDie anotherLoadedDie shipsPlaying aRedoCard |
 	anOverloadCard := OverloadCard new.
@@ -31,6 +31,6 @@ ARedoCardTest >> test_01_banana [
 	anotherShip := shipsPlaying at: 2. 
 	aBoardGame playCard: anOverloadCard fromShip: aShip toTarget: anotherShip.
 	
-	self assert: ((aRedoCard affectTo: aShip from: anotherShip playing: aBoardGame) isKindOf: OverloadCard). 
+	self assert: ((aRedoCard affectTo: anotherShip from: aShip playing: aBoardGame) isKindOf: OverloadCard). 
 	
 ]

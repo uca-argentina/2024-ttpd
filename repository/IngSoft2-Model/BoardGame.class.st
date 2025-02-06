@@ -119,8 +119,15 @@ BoardGame >> passTurn [
 
 { #category : #'as yet unclassified' }
 BoardGame >> playCard: aCard fromShip: aShip toTarget: aTarget [
-	lastCard := aCard affectTo:  aTarget from: aShip playing: self.
-	aShip removeCardFromHand: aCard.
+    ((aCard isPermanent and: [(aCollectionOfShips indexOf: aShip) = playerTurn]) or: (aCard isInstant or: aCard isRedo))
+        ifTrue: [
+            	lastCard := aCard affectTo:  aTarget from: aShip playing: self.
+				aShip removeCardFromHand: aCard.
+        ]
+        ifFalse: [
+            self error: 'You cant play a permanent card when its not your turn.'
+        ].
+
 ]
 
 { #category : #'as yet unclassified' }
