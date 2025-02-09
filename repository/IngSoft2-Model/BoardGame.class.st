@@ -118,37 +118,16 @@ BoardGame >> passTurn [
 ]
 
 { #category : #'as yet unclassified' }
-BoardGame >> playInstantCard: aCardIndex from: aShipIndex toShipOrCardIndex: anotherShipIndex [
-	| shipPlayingCard |
-	shipPlayingCard := aCollectionOfShips at: aShipIndex. 
-	lastCard := shipPlayingCard playInstantCard: aCardIndex to: anotherShipIndex playing: self.
-	board checkAfterEffects: aCollectionOfShips .
-]
+BoardGame >> playCard: aCard fromShip: aShip toTarget: aTarget [
+    ((aCard isPermanent and: [(aCollectionOfShips indexOf: aShip) = playerTurn]) or: (aCard isInstant or: aCard isRedo))
+        ifTrue: [
+            	lastCard := aCard affectTo:  aTarget from: aShip playing: self.
+				aShip removeCardFromHand: aCard.
+        ]
+        ifFalse: [
+            self error: 'You cant play a permanent card when its not your turn.'
+        ].
 
-{ #category : #'as yet unclassified' }
-BoardGame >> playPermanentCard: aCardIndex toShipIndex: aShipIndex inShipCollection: shipsPlaying [ 
-	lastCard := (aCollectionOfShips at: playerTurn) playPermanentCard: aCardIndex to: aShipIndex playing: shipsPlaying.
-	board checkAfterEffects: aCollectionOfShips.
-	aCollectionOfCards add: lastCard.
-]
-
-{ #category : #'as yet unclassified' }
-BoardGame >> playRedoCard: aCardIndex fromShip: aShipFromIndex toShipOrCardIndex: toShipOrCardIndex [
-
-	| cardIndex |
-	(aCollectionOfShips at: playerTurn) addCard: lastCard.
-	cardIndex := (aCollectionOfShips at: playerTurn) getCards size.
-	lastCard isPermanent
-		ifTrue: [
-			self
-				playPermanentCard: cardIndex
-				toShipIndex: toShipOrCardIndex
-				inShipCollection: aCollectionOfShips ]
-		ifFalse: [
-			self
-				playInstantCard: cardIndex
-				from: aShipFromIndex
-				toShipOrCardIndex: toShipOrCardIndex ]
 ]
 
 { #category : #'as yet unclassified' }

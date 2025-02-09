@@ -5,9 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OverloadCard >> aplyEffectFrom: aShip to: anotherShip withShips: aCollectionOfShips [
+OverloadCard >> affectTo: aShip from: aShip2 playing: aBoardGame [ 
+	| newCard |
+	newCard:= OverloadCard new.
+	aShip addActiveCards: newCard.
+	^newCard
 	
-	anotherShip addActiveCards: OverloadCard new.
 ]
 
 { #category : #'as yet unclassified' }

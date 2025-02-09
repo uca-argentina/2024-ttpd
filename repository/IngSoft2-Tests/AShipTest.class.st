@@ -270,14 +270,28 @@ AShipTest >> test_29_WhenAShipHasMoreLapsButLessPositionThenAShipIsGreaterThanAn
 { #category : #tests }
 AShipTest >> test_30_WhenAshipHasActiveOverloadCardThenShipIsAffected [
 
-	| aShip anotherShip aCard aCollectionOfShips |
-	aShip := Ship createWithMaxFuel: 1000.
-	anotherShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:= OrderedCollection new.
-	aCollectionOfShips add:aShip.
-	aCollectionOfShips add:anotherShip.
+	| aShip anotherShip aCard boxesArray aBoard aCollectionOfDice aLoadedDie anotherLoadedDie aBoardGame shipsPlaying |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	shipsPlaying := aBoardGame getShipsPlaying.
+	aShip := shipsPlaying at: 1.
+	anotherShip := shipsPlaying at: 2. 
 	aCard:= OverloadCard new.
-	aCard aplyEffectFrom: 1 to: anotherShip  withShips: aCollectionOfShips .
+	aCard affectTo: anotherShip from: aShip playing: aBoardGame.
 	anotherShip moves: 5.
 	
 
@@ -287,21 +301,31 @@ AShipTest >> test_30_WhenAshipHasActiveOverloadCardThenShipIsAffected [
 { #category : #tests }
 AShipTest >> test_31_WhenAShipHasActiveAccelerationCardThenAllShipsAffected [
 
-	| aShip anotherShip aCard aCollectionOfShips |
-	aShip := Ship createWithMaxFuel: 1000.
-	anotherShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:= OrderedCollection new.
-	aCollectionOfShips add:aShip.
-	aCollectionOfShips add:anotherShip.
+	| aShip anotherShip aCard boxesArray aBoard aCollectionOfDice aLoadedDie anotherLoadedDie aBoardGame shipsPlaying |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	shipsPlaying := aBoardGame getShipsPlaying.
+	aShip := shipsPlaying at: 1.
+	anotherShip := shipsPlaying at: 2. 
 	aCard:= AccelerationCard new.
-	aCard aplyEffectFrom: 1 to:  2 withShips: aCollectionOfShips .
+	aCard affectTo: shipsPlaying from: aShip playing: aBoardGame. 
 	anotherShip moves: 8.
-
-
 	self assert: anotherShip getPosition equals: 10.
-
 	self assert: aShip getPosition equals: 1.
-
 	aShip moves: 7.
 	self assert: aShip  getPosition equals:9.
 ]
@@ -309,17 +333,30 @@ AShipTest >> test_31_WhenAShipHasActiveAccelerationCardThenAllShipsAffected [
 { #category : #tests }
 AShipTest >> test_32_WhenAShipRunOutOfFuelAndHasAnAllyThenAllyShareFuel [
 
-	| aShip anotherShip aCard aCollectionOfShips |
-	aShip := Ship createWithMaxFuel: 5.
-	anotherShip := Ship createWithMaxFuel: 1000.
-	aCollectionOfShips:= OrderedCollection new.
-	aCollectionOfShips add:aShip.
-	aCollectionOfShips add:anotherShip.
+	| aShip anotherShip aCard boxesArray aBoard aCollectionOfDice aLoadedDie anotherLoadedDie aBoardGame shipsPlaying |
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	shipsPlaying := aBoardGame getShipsPlaying.
+	aShip := shipsPlaying at: 1.
+	anotherShip := shipsPlaying at: 2. 
 	aCard:= AllyCard new.
-	
-	aCard aplyEffectFrom: aShip to:  anotherShip withShips: aCollectionOfShips .
-	aShip consumeFuel: 15.
-	self assert: anotherShip getFuel equals: 990.
+	aCard affectTo: anotherShip from: aShip  playing: aBoardGame.
+	aShip consumeFuel: 190.
+	self assert: anotherShip getFuel equals: 178.
 	self assert: aShip getFuel equals: 0.
 
 
@@ -328,22 +365,34 @@ AShipTest >> test_32_WhenAShipRunOutOfFuelAndHasAnAllyThenAllyShareFuel [
 { #category : #tests }
 AShipTest >> test_33_WhenAshipRunOutOfFuelAndHisAllyToThenBothGoesToPositionOneWithMaxFuelAndWithCantPLayANumberOfTurnsState [
 
-	| aShip anotherShip aCard aCollectionOfShips |
-	aShip := Ship createWithMaxFuel: 5.
-	anotherShip := Ship createWithMaxFuel: 20.
-	aCollectionOfShips:= OrderedCollection new.
-	aCollectionOfShips add:aShip.
-	aCollectionOfShips add:anotherShip.
-	aCard:= AllyCard new.
-	
-	aCard aplyEffectFrom: aShip to:  anotherShip withShips: aCollectionOfShips .
+	| aShip anotherShip aCard aCollectionOfShips boxesArray aBoard aCollectionOfDice aLoadedDie anotherLoadedDie aBoardGame |
+aCard:= AllyCard new.
+	boxesArray := OrderedCollection new.
+	boxesArray add: (NoEffectBox  inPlace: 1).
+	boxesArray add: (NoEffectBox inPlace: 2).
+	boxesArray add: (NoEffectBox inPlace: 3).
+	boxesArray add: (NoEffectBox inPlace: 4).
+	aBoard := Board withBoxesArray: boxesArray.
+	aCollectionOfDice := OrderedCollection new.
+	aLoadedDie := LoadedDie of: 50.
+	anotherLoadedDie := LoadedDie of: 40.
+	aCollectionOfDice add: aLoadedDie.
+	aCollectionOfDice add: anotherLoadedDie.
+	aBoardGame := BoardGame
+		              withShip: 3
+		              withBoard: aBoard
+		              WithDice: aCollectionOfDice
+		              andwithNumberOfLaps: 2.
+	aShip := aBoardGame getShipsPlaying at: 1.
+	anotherShip := aBoardGame getShipsPlaying at: 2.
+	aCard affectTo: anotherShip from: aShip playing: aBoardGame.		
 
 	anotherShip consumeFuel: 15.
 	aShip consumeFuel: 15.	
 	self assert: aShip getPosition equals: 1.
 	self assert: anotherShip getPosition equals: 1.
-	self assert: anotherShip getFuel equals: 20.
-	self assert: aShip getFuel equals: 5.
+	self assert: anotherShip getFuel equals: 169.
+	self assert: aShip getFuel equals: 169.
 	
 
 

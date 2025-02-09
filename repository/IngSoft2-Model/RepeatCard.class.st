@@ -5,20 +5,16 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-RepeatCard >> affect: aShipIndex in: aBoardGame [
-
+RepeatCard >> affectTo: aShip from: aShip2 playing: aBoardGame [ 
 	| collectionOfShips board aBox |
 	collectionOfShips := aBoardGame getShipsPlaying.
 	board := aBoardGame getBoard.
 	aBox := board getLastBox.
-	self applyEffect: aBox toShip: aShipIndex withShipsPlaying: collectionOfShips 
-
-	
+	self applyEffect: aBox toShip: aShip withShipsPlaying: collectionOfShips.
+	^RepeatCard new. 
 ]
 
 { #category : #'as yet unclassified' }
-RepeatCard >> applyEffect: aBox toShip: aShipIndex withShipsPlaying: aCollectionOfShips [
-	| aShip |
-	aShip := aCollectionOfShips at: aShipIndex. 
+RepeatCard >> applyEffect: aBox toShip: aShip withShipsPlaying: aCollectionOfShips [
 	aBox effectShips: aCollectionOfShips playing: aShip.
 ]
